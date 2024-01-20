@@ -9,9 +9,7 @@ function Navbar() {
         <Sidebar></Sidebar>
     </div>
     <div className="navbar-center">
-        <a className="btn btn-ghost text-xl">Holos-techies
-
-</a>
+        <a className="btn btn-ghost text-xl">Holos-techies</a>
     </div>
     <div className="navbar-end">
         <button className="btn btn-ghost btn-circle">
