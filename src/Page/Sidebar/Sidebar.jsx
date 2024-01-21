@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 
 const Sidebar = () => {
 
@@ -20,6 +21,8 @@ const Sidebar = () => {
         <li><a>My Orders</a></li>
         <li><a>Pending Orders</a></li>
         <li><a>Sidebar Item 2</a></li>
+        <li><Link to="/history">Inventory History</Link></li>
+        <li><Link to="/inventoryComplete">Inventory Complete</Link></li>
         
       </ul>
 

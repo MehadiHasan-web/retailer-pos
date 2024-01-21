@@ -1,4 +1,5 @@
 
+import { Link } from 'react-router-dom';
 import Sidebar from './../Sidebar/Sidebar';
 function Navbar() {
   return (
@@ -9,7 +10,7 @@ function Navbar() {
         <Sidebar></Sidebar>
     </div>
     <div className="navbar-center" >
-        <a className="btn btn-ghost text-xl">Holos-techies</a>
+        <Link to="/home" className="btn btn-ghost text-xl">Holos-techies</Link>
     </div>
     <div className="navbar-end" >
         <button className="btn btn-ghost btn-circle">
@@ -30,7 +31,7 @@ function Navbar() {
           </a>
         </li>
         <li><a>Settings</a></li>
-        <li><a>Logout</a></li>
+        <li><Link to="/">Logout</Link></li>
       </ul>
     </div>
 

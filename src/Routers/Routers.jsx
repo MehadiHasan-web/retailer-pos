@@ -3,6 +3,7 @@ import LogIn from "../Page/LogIn/LogIn";
 import DashBoard from './../Layout/Dashboard/Dashboard';
 import Home from "../Page/Dashboard/Home/Home/Home";
 import InventoryHistory from "../Page/History/InventoryHistory";
+import InventoryComplete from "../Page/Dashboard/InventoryComplete/InventoryComplete";
 
 
 const router = createBrowserRouter([
@@ -17,13 +18,18 @@ const router = createBrowserRouter([
       {
         path : '/home',
         element : <Home></Home>
+      },
+      {
+        path : '/history',
+        element: <InventoryHistory></InventoryHistory>
+      },
+      {
+        path : '/inventoryComplete',
+        element : <InventoryComplete></InventoryComplete>
       }
     ]
   },
-  {
-    path : '/history',
-    element: <InventoryHistory></InventoryHistory>
-  }
+  
 ]);
 
 export default router;

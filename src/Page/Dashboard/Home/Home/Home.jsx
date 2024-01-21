@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import './Home.css'
-import Navbar from './../../../Navbar/Navbar';
 import { useState } from 'react';
 import blankImg from '../../../../../public/blankImg.jpg'
 
 import Table from '../Table/Table';
 import Form from '../Form/Form';
+import Title from './../../../../Title/Title';
 
 
 const Home = () => {
@@ -25,12 +25,17 @@ const Home = () => {
     setCardTable([...cardTable, values])
   }
 
+    const deleteData = (data) => {
+      const updatedCardTable = cardTable.filter(value => value.id !== data.id);
+      setCardTable(updatedCardTable);
+    }
+
 
   return (
     <>
-      {/* navbar  */}
-        <Navbar></Navbar>
-      {/* navbar end */}
+      {/* title section start */}
+      <Title pageName={"Home"}></Title>
+      {/* title section end */}
       <div className='container mx-auto'>
         <div className='md:flex justify-center lg:gap-5'>
           <div className='w-full md:w-[60%] lg:w-[60%]  '>
@@ -47,7 +52,7 @@ const Home = () => {
                   card.map((data, index) =>  
                     <div key={index} className=' p-2 flex flex-col justify-between rounded shadow-lg bg-slate-50'>
                       {
-                        data.image ? <img className='w-full h-20 sm:h-24 md:h-20 rounded' src={data.image}></img>: <img src={blankImg} className='w-full h-20 sm:h-24 md:h-20 rounded'></img>
+                        data.image ? <img className='w-full h-20 sm:h-24 md:h-20 lg:h-28 rounded' src={data.image}></img>: <img src={blankImg} className='w-full h-20 sm:h-24 md:h-20 lg:h-28 rounded'></img>
                       }
                     <div>
                       <h2 className='text-sm sm:text-base md:text-sm lg:text-sm font-semibold mx-auto my-1 md:my-1 lg:my-2'>{data.name}</h2>
@@ -71,7 +76,7 @@ const Home = () => {
           <div className='hidden md:block w-full md:w-[40%] lg:w-[40%] md:relative lg:mt-5'>
             <div className=' md:sticky md:top-20 lg:top-24'>
               {/* table section start */}
-              <Table cardTable={cardTable}></Table>
+              <Table cardTable={cardTable} deleteData={deleteData}></Table>
               {/* table section end */}
               {/* form section start */}
               <Form></Form>
@@ -79,7 +84,6 @@ const Home = () => {
             </div>
           </div>
         </div>
-        
       </div>
     </>
   );

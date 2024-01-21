@@ -1,10 +1,12 @@
-import Navbar from "../Navbar/Navbar"
+import Title from "../../Title/Title"
+
 
 function InventoryHistory() {
   return (
     <>
-      {/* navbar  */}
-      <Navbar></Navbar>
+    {/* title section start */}
+    <Title pageName={"Inventory History"}></Title>
+      {/* title section end */}
       {/* table history  */}
       <div>
         <div className="container mx-auto">

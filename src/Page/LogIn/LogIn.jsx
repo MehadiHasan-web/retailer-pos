@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import './LogIn.css'
 import Swal from 'sweetalert2'
+import Title from '../../Title/Title';
 
 const LogIn = () => {
 
@@ -42,6 +43,9 @@ const LogIn = () => {
 
   return (
     <div>
+      {/* title section start */}
+      <Title pageName={"Login"}></Title>
+      {/* title section end */}
       <div className='container mx-auto w-full h-screen'>
         <div className='flex justify-center items-center w-full h-full'>
           <div className='bg-slate-100 rounded-md p-5 lg:w-[450px] lg:h-72'>
