@@ -11,7 +11,6 @@ const Home = () => {
 
   const [card, setCard] = useState([])
   const [cardTable, setCardTable] = useState([])
-  console.log(cardTable)
 
 
   useEffect(() => {
