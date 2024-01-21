@@ -2,9 +2,18 @@
 import './Table.css'
 import { MdDelete } from "react-icons/md";
 import { FiPlus, FiMinus } from "react-icons/fi";
+// import { useState } from 'react';
+
 
 // eslint-disable-next-line react/prop-types
-const Table = ({cardTable}) => {
+const Table = (props) => {
+  const { cardTable, setCardTable } = props;
+
+  const deleteItem = (data) => {
+    const values = cardTable.filter(value => value.id !== data.id)
+    setCardTable(values);
+  };
+
   return (
     <div className="w-full md:h-56 lg:h-72 overflow-y-scroll rounded-md">
     <table className="w-full">
@@ -30,12 +39,13 @@ const Table = ({cardTable}) => {
           </td>
           <td>
             <div className='flex justify-around items-center'>
-            <button><FiPlus className='bg-green-500 text-white md:text-xl lg:text-2xl p-[1px]'></FiPlus></button>
-            <button><FiMinus className='bg-red-500 text-white md:text-xl lg:text-2xl p-[1px]'></FiMinus></button>
+            <button ><FiPlus className='bg-green-500 text-white md:text-xl lg:text-2xl p-[1px]'></FiPlus></button>
+            <button ><FiMinus className='bg-red-500 text-white md:text-xl lg:text-2xl p-[1px]'></FiMinus></button>
             </div>
           </td>
           <td className=''>
-            <MdDelete className='mx-auto bg-red-500 text-white md:text-xl lg:text-2xl p-[1px]'></MdDelete>
+            <MdDelete className='mx-auto bg-red-500 text-white md:text-xl lg:text-2xl p-[1px]' onClick={() => deleteItem(data)}></MdDelete>
+            
           </td>
         </tr>)}
         
