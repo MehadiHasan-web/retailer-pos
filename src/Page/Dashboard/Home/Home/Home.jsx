@@ -37,10 +37,6 @@ const Home = () => {
           <div className='w-full lg:w-[60%]  '>
             <div className='mt-5 mb-5 px-6 sm:px-5 md:px-4 lg:px-2 xl:px-2 2xl:px-0'>
               {/* search section start */}
-              {/* <div className='relative'>
-                <input type="text" className='w-full py-2 border-2 border-black'></input>
-                <IoSearch className='absolute top-2 right-3 text-2xl'></IoSearch>
-              </div> */}
               <div>
               <input type="text" placeholder="Type here" className="input input-bordered input-secondary w-full" />
               </div>

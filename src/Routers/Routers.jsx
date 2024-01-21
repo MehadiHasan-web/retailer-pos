@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import LogIn from "../Page/LogIn/LogIn";
 import DashBoard from './../Layout/Dashboard/Dashboard';
 import Home from "../Page/Dashboard/Home/Home/Home";
+import InventoryHistory from "../Page/History/InventoryHistory";
 
 
 const router = createBrowserRouter([
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
         element : <Home></Home>
       }
     ]
+  },
+  {
+    path : '/history',
+    element: <InventoryHistory></InventoryHistory>
   }
 ]);
 
