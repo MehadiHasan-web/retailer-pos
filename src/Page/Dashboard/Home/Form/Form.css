@@ -1,0 +1,9 @@
+textarea {
+  border-color: transparent;
+  outline: none;
+  
+}
+
+textarea:focus {
+  border-color: transparent;
+}
