@@ -2,10 +2,53 @@
 import './Table.css'
 import { MdDelete } from "react-icons/md";
 import { FiPlus, FiMinus } from "react-icons/fi";
+// import { useState } from 'react';
+import Swal from 'sweetalert2'
+
+
 
 // eslint-disable-next-line react/prop-types
-const Table = ({cardTable}) => {
+const Table = (props) => {
+  const { cardTable, setCardTable } = props;
 
+  // increment Quantity 
+  const incrementQuantity = (data) => {
+    const updatedTable = cardTable.map(value => {
+      if (value.id === data.id) {
+        // Increment the quantity for the specific item
+        return { ...value, quantity: value.quantity + 1 }
+      }
+      return value;
+    })
+    setCardTable(updatedTable);
+  };
+
+  // decrement Quantity
+  const decrementQuantity = (data) => {
+    const updatedTable = cardTable.map((value) => {
+      if (value.id === data.id) {
+        if (value.quantity > 1) {
+          return { ...value, quantity: value.quantity - 1 };
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Sorry, quantity cannot be less than 1!",
+          });
+        }
+      }
+      return value;
+    });
+  
+    setCardTable(updatedTable);
+  };
+  
+
+  // delete item
+  const deleteItem = (data) => {
+    const values = cardTable.filter(value => value.id !== data.id)
+    setCardTable(values);
+  };
 
   return (
     <div className="w-full md:h-56 lg:h-72 overflow-y-scroll rounded-md">
@@ -32,12 +75,13 @@ const Table = ({cardTable}) => {
           </td>
           <td>
             <div className='flex justify-around items-center'>
-            <button><FiPlus className='bg-green-500 text-white md:text-xl lg:text-2xl p-[1px]'></FiPlus></button>
-            <button><FiMinus className='bg-red-500 text-white md:text-xl lg:text-2xl p-[1px]'></FiMinus></button>
+            <button onClick={() => incrementQuantity(data)}><FiPlus className='bg-green-500 text-white md:text-xl lg:text-2xl p-[1px] rounded'></FiPlus></button>
+            <button onClick={() => decrementQuantity(data)}><FiMinus className='bg-red-500 text-white md:text-xl lg:text-2xl p-[1px] rounded'></FiMinus></button>
             </div>
           </td>
           <td className=''>
-            <MdDelete className='mx-auto bg-red-500 text-white md:text-xl lg:text-2xl p-[1px]'></MdDelete>
+            <MdDelete className='mx-auto bg-red-500 text-white md:text-xl lg:text-2xl p-[1px] rounded' onClick={() => deleteItem(data)}></MdDelete>
+            
           </td>
         </tr>)}
         

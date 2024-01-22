@@ -8,7 +8,7 @@ function InventoryHistory() {
     <Title pageName={"Inventory History"}></Title>
       {/* title section end */}
       {/* table history  */}
-      <div>
+      <div >
         <div className="container mx-auto">
        <div className="flex justify-start my-3 ">
        <h2 className="w-34  font-semibold border-b-[1px] border-indigo-500 ">Inventory History:</h2> <span className="ms-2"> Branch Name</span>

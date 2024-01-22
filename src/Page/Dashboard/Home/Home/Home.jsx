@@ -7,7 +7,6 @@ import Table from '../Table/Table';
 import Form from '../Form/Form';
 import Title from './../../../../Title/Title';
 
-
 const Home = () => {
 
   const [card, setCard] = useState([])
@@ -72,10 +71,11 @@ const Home = () => {
           <div className='hidden md:block w-full md:w-[40%] lg:w-[40%] md:relative lg:mt-5'>
             <div className=' md:sticky md:top-20 lg:top-24'>
               {/* table section start */}
-              <Table cardTable={cardTable}></Table>
+              <Table cardTable={cardTable}  setCardTable={setCardTable}></Table>
               {/* table section end */}
               {/* form section start */}
-              <Form></Form>
+
+                  <Form></Form>
               {/* form section end */}
             </div>
           </div>
