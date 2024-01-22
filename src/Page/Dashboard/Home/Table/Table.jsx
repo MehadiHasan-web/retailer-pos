@@ -30,7 +30,6 @@ const Table = (props) => {
         if (value.quantity > 1) {
           return { ...value, quantity: value.quantity - 1 };
         } else {
-          console.log('');
           Swal.fire({
             icon: "error",
             title: "Oops...",
