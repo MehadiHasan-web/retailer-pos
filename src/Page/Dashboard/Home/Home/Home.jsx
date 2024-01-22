@@ -11,6 +11,7 @@ const Home = () => {
 
   const [card, setCard] = useState([])
   const [cardTable, setCardTable] = useState([])
+  const [show, setShow] = useState(false)
 
 
   useEffect(() => {
@@ -74,8 +75,7 @@ const Home = () => {
               <Table cardTable={cardTable}  setCardTable={setCardTable}></Table>
               {/* table section end */}
               {/* form section start */}
-
-                  <Form></Form>
+              <Form></Form>
               {/* form section end */}
             </div>
           </div>
