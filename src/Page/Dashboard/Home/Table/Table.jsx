@@ -68,7 +68,7 @@ const Table = (props) => {
             {++index}
           </td>
           <td className='text-center md:text-sm lg:text-lg'>
-            {data.name}
+            {data.name ? data.name : data.title }
           </td>
           <td className='text-center md:text-sm lg:text-lg'>
             {data.quantity}
