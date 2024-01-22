@@ -2,6 +2,7 @@ import Title from "../../Title/Title"
 import  { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import './InventoryHistory.css'
 
 
 function InventoryHistory() {
@@ -23,7 +24,7 @@ function InventoryHistory() {
             {/* search bar  */}
             <div className="py-2 mb-3 bg-slate-100 rounded-lg">
                <div className="flex justify-center mt-1">
-                <form action="">
+                <form action="" className="md:flex">
                     {/* category  */}
                     <select className="select select-sm select-bordered w-44 max-w-xs rounded-full mx-1 mb-1 " >
                         <option disabled selected>Category</option>
@@ -44,9 +45,7 @@ function InventoryHistory() {
                         <option>Greedo</option>
                     </select>
                     {/* date  */}
-                   
                         <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} className="w-32 overflow-hidden border input input-sm mx-1 mb-1 rounded-full" />
-                    
                     {/* search bar  */}
                     <input type="text" placeholder="Type here" className="input input-bordered input-sm max-w-xs w-52 rounded-full mx-1 mb-1 " />
                     <button type="submit" className="btn btn-outline btn-sm rounded-full mx-3  hover:text-white ">Search</button>
