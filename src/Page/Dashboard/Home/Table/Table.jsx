@@ -4,9 +4,9 @@ import { MdDelete } from "react-icons/md";
 import { FiPlus, FiMinus } from "react-icons/fi";
 
 // eslint-disable-next-line react/prop-types
-const Table = ({cardTable, deleteData}) => {
+const Table = ({cardTable}) => {
 
-  
+
   return (
     <div className="w-full md:h-56 lg:h-72 overflow-y-scroll rounded-md">
     <table className="w-full">
@@ -37,7 +37,7 @@ const Table = ({cardTable, deleteData}) => {
             </div>
           </td>
           <td className=''>
-            <MdDelete onClick={() => {deleteData(data)}} className='mx-auto bg-red-500 text-white md:text-xl lg:text-2xl p-[1px]'></MdDelete>
+            <MdDelete className='mx-auto bg-red-500 text-white md:text-xl lg:text-2xl p-[1px]'></MdDelete>
           </td>
         </tr>)}
         

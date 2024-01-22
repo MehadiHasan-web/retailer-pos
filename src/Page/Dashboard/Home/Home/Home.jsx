@@ -25,10 +25,6 @@ const Home = () => {
     setCardTable([...cardTable, values])
   }
 
-    const deleteData = (data) => {
-      const updatedCardTable = cardTable.filter(value => value.id !== data.id);
-      setCardTable(updatedCardTable);
-    }
 
 
   return (
@@ -76,7 +72,7 @@ const Home = () => {
           <div className='hidden md:block w-full md:w-[40%] lg:w-[40%] md:relative lg:mt-5'>
             <div className=' md:sticky md:top-20 lg:top-24'>
               {/* table section start */}
-              <Table cardTable={cardTable} deleteData={deleteData}></Table>
+              <Table cardTable={cardTable}></Table>
               {/* table section end */}
               {/* form section start */}
               <Form></Form>
