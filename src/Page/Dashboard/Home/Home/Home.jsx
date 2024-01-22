@@ -83,12 +83,12 @@ const Home = () => {
             </div>
           </div>
           <div className='hidden md:block w-full md:w-[40%] lg:w-[40%] md:relative lg:mt-5'>
-            <div className=' md:sticky md:top-20 lg:top-24'>
+            <div className='md:sticky lg:sticky md:top-20 lg:top-24'>
               {/* table section start */}
               <Table cardTable={cardTable}  setCardTable={setCardTable}></Table>
               {/* table section end */}
               {/* form section start */}
-              <Form cardTable={cardTable}  setCardTable={setCardTable}></Form>
+              <Form setCardTable={setCardTable} className="md:absolute lg:absolute right-0 left-0 md:bottom-0 lg:bottom-0 rounded-md"></Form>
               {/* form section end */}
             </div>
           </div>

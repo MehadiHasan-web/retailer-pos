@@ -51,7 +51,7 @@ const Table = (props) => {
   };
 
   return (
-    <div className="w-full md:h-56 lg:h-72 overflow-y-scroll rounded-md">
+    <div className="w-full md:h-56 lg:h-60 overflow-y-scroll rounded-md md:mb-5">
     <table className="w-full">
       {/* head */}
       <thead className='bg-cyan-100 text-dark text-slate-100 h-10  shadow-lg'>                  
