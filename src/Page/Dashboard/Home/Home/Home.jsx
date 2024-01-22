@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import './Home.css'
-import { useState } from 'react';
+import { useState, useEffect  } from 'react';
 import blankImg from '../../../../../public/blankImg.jpg'
 
 import Table from '../Table/Table';
@@ -10,8 +10,13 @@ import Title from './../../../../Title/Title';
 const Home = () => {
 
   const [card, setCard] = useState([])
-  const [cardTable, setCardTable] = useState([])
+  // const [cardTable, setCardTable] = useState([])
+  const initialCardTable = JSON.parse(localStorage.getItem('cardTable')) || [];
+  const [cardTable, setCardTable] = useState(initialCardTable);
 
+  useEffect(() => {
+    localStorage.setItem('cardTable', JSON.stringify(cardTable));
+  }, [cardTable]);
 
   useEffect(() => {
     fetch('card.json')
@@ -20,8 +25,17 @@ const Home = () => {
   },[])
 
   const cardData = (data) => {
-    const values = card.find(value => value.id === data.id)
-    setCardTable([...cardTable, values])
+    // const values = card.find(value => value.id === data.id)
+ 
+    const cardTableItem = cardTable.find(value => value.id === data.id);
+    if (cardTableItem) {
+      const updatedCardTable = cardTable.map(item =>
+        item.id === data.id ? { ...item, quantity: item.quantity + 1 } : item
+      );
+      setCardTable(updatedCardTable);
+    } else {
+      setCardTable([...cardTable, data])
+    }
   }
 
 
@@ -74,7 +88,7 @@ const Home = () => {
               <Table cardTable={cardTable}  setCardTable={setCardTable}></Table>
               {/* table section end */}
               {/* form section start */}
-              <Form></Form>
+              <Form cardTable={cardTable}  setCardTable={setCardTable}></Form>
               {/* form section end */}
             </div>
           </div>
