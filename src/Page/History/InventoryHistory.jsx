@@ -24,30 +24,32 @@ function InventoryHistory() {
             {/* search bar  */}
             <div className="py-2 mb-3 bg-slate-100 rounded-lg">
                <div className="flex justify-center mt-1">
-                <form action="" className="md:flex">
+                <form action="" className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-2  lg:flex md:gap-0 lg:justify-around lg:items-center">
                     {/* category  */}
-                    <select className="select select-sm select-bordered w-44 max-w-xs rounded-full mx-1 mb-1 " >
+                    <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1 " >
                         <option disabled selected>Category</option>
                         <option>Han Solo</option>
                         <option>Greedo</option>
                     </select>
                     {/* subcategory  */}
-                    <select className="select select-sm select-bordered w-44 max-w-xs rounded-full mx-1 mb-1 " >
+                    <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1 " >
                         <option disabled selected>Subcategory?</option>
                         <option>Han Solo</option>
                         <option>Greedo</option>
                     </select>
                     {/* subcategory  */}
                     {/* date end */}
-                    <select className="select select-sm select-bordered w-44 max-w-xs rounded-full mx-1 mb-1  " >
+                    <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1  " >
                         <option disabled selected>Subcategory?</option>
                         <option>Han Solo</option>
                         <option>Greedo</option>
                     </select>
                     {/* date  */}
-                        <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} className="w-32 overflow-hidden border input input-sm mx-1 mb-1 rounded-full" />
+                        <div className="w-full xl:w-44 mx-1 mb-1">
+                        <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} className="w-full overflow-hidden border input input-sm  rounded-full" />
+                        </div>
                     {/* search bar  */}
-                    <input type="text" placeholder="Type here" className="input input-bordered input-sm max-w-xs w-52 rounded-full mx-1 mb-1 " />
+                    <input type="text" placeholder="Type here" className="input input-bordered input-sm max-w-xs w-full xl:w-44 rounded-full mx-1 mb-1 " />
                     <button type="submit" className="btn btn-outline btn-sm rounded-full mx-3  hover:text-white ">Search</button>
                     <button type="button" className="btn btn-outline btn-sm rounded-full mx-1 mb-1  hover:text-white ">Clear filter</button>
 
@@ -161,9 +163,9 @@ function InventoryHistory() {
                 </tfoot>
                 
             </table>
+            </div>
+            </div>
         </div>
-        </div>
-      </div>
     </>
   )
 }
