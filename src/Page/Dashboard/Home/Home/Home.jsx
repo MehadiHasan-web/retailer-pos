@@ -6,6 +6,7 @@ import blankImg from '../../../../../public/blankImg.jpg'
 import Table from '../Table/Table';
 import Form from '../Form/Form';
 import Title from './../../../../Title/Title';
+import Search from '../Search/Search';
 
 const Home = () => {
 
@@ -13,7 +14,6 @@ const Home = () => {
   // const [cardTable, setCardTable] = useState([])
   const initialCardTable = JSON.parse(localStorage.getItem('cardTable')) || [];
   const [cardTable, setCardTable] = useState(initialCardTable);
-  const [searchQuery, setSearchQuery] = useState('');
 
 
   useEffect(() => {
@@ -33,24 +33,10 @@ const Home = () => {
     .then((data) => setCard(data))
   },[])
 
-  // search functionality
-  const filteredProducts = card.filter((card) => {
-    const query = searchQuery && typeof searchQuery === 'string' ? searchQuery.toLowerCase() : '';
-  
-    return card.name.toLowerCase().includes(query);
-  });
-  const handleSearch = (e) => {
-    e.preventDefault();
-    // Perform the search logic here if needed
-    // For example, you can use the filteredProducts array for rendering
-    console.log('Filtered Products:', filteredProducts);
-  };
 
 
-
-  const cardData = (data) => {
-    // const values = card.find(value => value.id === data.id)
- 
+// add  to card or increment functionality
+  const cardData = (data) => { 
     const cardTableItem = cardTable.find(value => value.id === data.id);
     if (cardTableItem) {
       const updatedCardTable = cardTable.map(item =>
@@ -74,29 +60,7 @@ const Home = () => {
           <div className='w-full md:w-[60%] lg:w-[60%]  '>
             <div className='mt-5 mb-5 px-6 sm:px-5 md:px-4 lg:px-2 xl:px-2 2xl:px-0'>
             {/* search bar  */}
-            <div className="py-2 mb-3 bg-slate-100 rounded-lg">
-               <div className="flex justify-center mt-1">
-                <form action="" onSubmit={handleSearch}>
-                    {/* category  */}
-                    <select className="select select-sm select-bordered w-32 max-w-xs rounded-full mx-1 mb-1 " >
-                        <option disabled selected>Category</option>
-                        <option>Han Solo</option>
-                        <option>Greedo</option>
-                    </select>
-                    {/* subcategory  */}
-                    <select className="select select-sm select-bordered w-32 max-w-xs rounded-full mx-1 mb-1 " >
-                        <option disabled selected>Subcategory?</option>
-                        <option>Han Solo</option>
-                        <option>Greedo</option>
-                    </select>
-                    {/* subcategory  */}
-                    <input type="text" placeholder="Type here" className="input input-bordered input-sm max-w-xs w-44 rounded-full mx-1 mb-1 " value={searchQuery.name} onChange={(e) => setSearchQuery({ ...searchQuery, name: e.target.value })}/>
-                    <button type="submit" className="btn btn-outline btn-sm rounded-full mx-3  hover:text-white " >Search</button>
-                    <button type="button" className="btn btn-outline btn-sm rounded-full mx-1 mb-1  hover:text-white ">Clear filter</button>
-
-                </form>
-               </div>
-            </div>
+            <Search card={card} setCard={setCard}></Search>
             {/* search bar end  */}
             
               {/* search section end */}
@@ -128,12 +92,12 @@ const Home = () => {
             </div>
           </div>
           <div className='hidden md:block w-full md:w-[40%] lg:w-[40%] md:relative lg:mt-5'>
-            <div className='md:sticky lg:sticky md:top-20 lg:top-24'>
+            <div className='md:sticky lg:sticky md:top-20 lg:top-24 '>
               {/* table section start */}
-              <Table cardTable={cardTable}  setCardTable={setCardTable}></Table>
+              <Table cardTable={cardTable}  setCardTable={setCardTable} ></Table>
               {/* table section end */}
               {/* form section start */}
-              <Form setCardTable={setCardTable} className="md:absolute lg:absolute right-0 left-0 md:bottom-0 lg:bottom-0 rounded-md"></Form>
+              <Form  cardTable={cardTable}  setCardTable={setCardTable} className="md:absolute lg:absolute right-0 left-0 md:bottom-0 lg:bottom-0 rounded-md "></Form>
               {/* form section end */}
             </div>
           </div>
