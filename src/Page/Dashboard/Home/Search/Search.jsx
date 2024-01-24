@@ -22,17 +22,15 @@ const Search = ({ card, setFilteredCard, }) => {
   const { name } = formData;
 
   const newFilteredCard  = card.filter((item) => {
-    return !name || item.name.toLowerCase().includes(name.toLowerCase());
+    return  !name || item.title.toLowerCase().includes(name.toLowerCase());
   });
   setFilteredCard(newFilteredCard)
 
-//   const newFilteredCard = card.filter((item) => {
-//     const isNameMatch = !name || item?.name.toLowerCase().includes(name.toLowerCase());
-//     const isTitleMatch = !name || item?.title.toLowerCase().includes(title?.toLowerCase());
-//     return isNameMatch || isTitleMatch;
-// });
-
-//   setFilteredCard(newFilteredCard)
+  // const newFilteredCard  = card.filter((item) => {
+  //   return  !name || item.name.toLowerCase().includes(name.toLowerCase());
+  // });
+  // setFilteredCard(newFilteredCard)
+  
 }
 
   const handleSearch = (e) => {
