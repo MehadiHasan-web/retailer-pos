@@ -4,6 +4,8 @@ import DashBoard from './../Layout/Dashboard/Dashboard';
 import Home from "../Page/Dashboard/Home/Home/Home";
 import InventoryHistory from "../Page/History/InventoryHistory";
 import InventoryComplete from "../Page/Dashboard/InventoryComplete/InventoryComplete";
+import PurchaseRequest from "../Page/Purchase Request/PurchaseRequest";
+import MyInventory from "../Page/My Inventory/myInventory";
 
 
 const router = createBrowserRouter([
@@ -26,6 +28,14 @@ const router = createBrowserRouter([
       {
         path : '/inventoryComplete',
         element : <InventoryComplete></InventoryComplete>
+      },
+      {
+        path : '/purchaseRequest',
+        element : <PurchaseRequest></PurchaseRequest>
+      },
+      {
+        path : '/myInventory',
+        element : <MyInventory></MyInventory>
       }
     ]
   },

@@ -64,7 +64,7 @@ const Table = (props) => {
       </thead>
       <tbody className='bg-slate-100'>
         {/* row 1 */}
-        {cardTable.map((data, index) => <tr key={index} className='h-12 hover:bg-slate-300'>
+        {cardTable.map((data, index) => <tr key={index} className='h-10 hover:bg-slate-300'>
           <td className='text-center md:text-sm lg:text-lg'>
             {++index}
           </td>

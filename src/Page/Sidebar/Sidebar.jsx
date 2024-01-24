@@ -23,6 +23,8 @@ const Sidebar = () => {
         <li><a>Sidebar Item 2</a></li>
         <li><Link to="/history">Inventory History</Link></li>
         <li><Link to="/inventoryComplete">Inventory Complete</Link></li>
+        <li><Link to="/purchaseRequest">Purchase Request</Link></li>
+        <li><Link to="/myInventory">My Inventory</Link></li>
         
       </ul>
 
