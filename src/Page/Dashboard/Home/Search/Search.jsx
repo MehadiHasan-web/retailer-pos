@@ -1,33 +1,38 @@
 import { useState  } from 'react';
 
 
-const Search = ({ card, setCard }) => {
+// eslint-disable-next-line react/prop-types
+const Search = ({ card, setFilteredCard, }) => {
 
 
 
-  const initialFormData = {
+  let initialFormData = {
     category: '',
     subcategory: '',
     name: '',
   };
 
-  const [filteredCard, setFilteredCard] = useState([]);
+
   const [formData, setFormData] = useState({initialFormData});
+
   // search functionality
-function filteredProducts(e){
+  const filteredProducts = (e) =>{
   e.preventDefault();
-  // console.log('Category:', formData.category);
-  // console.log('Subcategory:', formData.subcategory);
-  // console.log('Name:', formData.name);
+
   const { name } = formData;
-  // const cardArray = card.card;
 
   const newFilteredCard  = card.filter((item) => {
     return !name || item.name.toLowerCase().includes(name.toLowerCase());
   });
-  
-  setFilteredCard(card);
-  setCard(newFilteredCard)
+  setFilteredCard(newFilteredCard)
+
+//   const newFilteredCard = card.filter((item) => {
+//     const isNameMatch = !name || item?.name.toLowerCase().includes(name.toLowerCase());
+//     const isTitleMatch = !name || item?.title.toLowerCase().includes(title?.toLowerCase());
+//     return isNameMatch || isTitleMatch;
+// });
+
+//   setFilteredCard(newFilteredCard)
 }
 
   const handleSearch = (e) => {
@@ -40,8 +45,8 @@ function filteredProducts(e){
 
   // clear search 
   const handleClear = () => {
-    setCard(filteredCard);
-    setFormData(initialFormData);
+    setFilteredCard([])
+    setFormData({ ...formData, name: '' });
   };
 
 
@@ -67,9 +72,8 @@ function filteredProducts(e){
                     <input type="text" placeholder="Type here" className="input input-bordered input-sm max-w-xs w-44 rounded-full mx-1 mb-1 " name="name" value={formData.name} onChange={handleSearch}/>
                     <button type="submit" className="btn btn-outline btn-sm rounded-full mx-3  hover:text-white " >Search</button>
                     <button type="button" className="btn btn-outline btn-sm rounded-full mx-1 mb-1  hover:text-white " onClick={handleClear}>Clear filter</button>
-
                 </form>
-               </div>
+              </div>
         </div>
     </>
   )

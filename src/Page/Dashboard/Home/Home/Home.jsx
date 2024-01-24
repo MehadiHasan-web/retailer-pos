@@ -2,7 +2,6 @@
 import './Home.css'
 import { useState, useEffect  } from 'react';
 import blankImg from '../../../../../public/blankImg.jpg'
-
 import Table from '../Table/Table';
 import Form from '../Form/Form';
 import Title from './../../../../Title/Title';
@@ -11,27 +10,27 @@ import Search from '../Search/Search';
 const Home = () => {
 
   const [card, setCard] = useState([])
-  // const [cardTable, setCardTable] = useState([])
   const initialCardTable = JSON.parse(localStorage.getItem('cardTable')) || [];
   const [cardTable, setCardTable] = useState(initialCardTable);
+  const [filteredCard, setFilteredCard] = useState([]);
 
 
   useEffect(() => {
     localStorage.setItem('cardTable', JSON.stringify(cardTable));
   }, [cardTable]);
 
-  // useEffect(() => {
-  //   fetch('https://dummyjson.com/products')
-  //     .then((res) => res.json())
-  //     .then((data) => setCard(data.products))
-  //     .catch((error) => console.error('Error fetching data:', error));
-  // }, []);
-
   useEffect(() => {
-    fetch('card.json')
-    .then((res) => res.json())
-    .then((data) => setCard(data))
-  },[])
+    fetch('https://dummyjson.com/products')
+      .then((res) => res.json())
+      .then((data) => setCard((data.products)))
+      .catch((error) => console.error('Error fetching data:', error));
+  }, []);
+
+  // useEffect(() => {
+  //   fetch('card.json')
+  //   .then((res) => res.json())
+  //   .then((data) => setCard(data))
+  // },[])
 
 
 
@@ -60,14 +59,14 @@ const Home = () => {
           <div className='w-full md:w-[60%] lg:w-[60%]  '>
             <div className='mt-5 mb-5 px-6 sm:px-5 md:px-4 lg:px-2 xl:px-2 2xl:px-0'>
             {/* search bar  */}
-            <Search card={card} setCard={setCard}></Search>
+            <Search card={card} filteredCard={filteredCard} setFilteredCard={setFilteredCard} setCard={setCard}></Search>
             {/* search bar end  */}
             
               {/* search section end */}
               {/* card section start */}
               <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-1 sm:gap-2 md:gap-1 lg:gap-2 mt-5'>
                 {
-                  card.map((data, index) =>  
+                  (filteredCard.length > 0 ? filteredCard : card).map((data, index) =>  
                     <div key={index} className=' p-2 flex flex-col justify-between rounded shadow-lg bg-slate-50'>
                       {
                         data.image ? <img className='w-full h-20 sm:h-24 md:h-20 lg:h-28 rounded' src={data.image}></img>: <img src={blankImg} className='w-full h-20 sm:h-24 md:h-20 lg:h-28 rounded'></img>
