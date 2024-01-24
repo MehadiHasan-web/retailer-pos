@@ -18,11 +18,9 @@ const Sidebar = () => {
       <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
        
         <h2 className="text-center mb-8">Title heading</h2>
-        <li><a>My Orders</a></li>
-        <li><a>Pending Orders</a></li>
-        <li><a>Sidebar Item 2</a></li>
         <li><Link to="/history">Inventory History</Link></li>
         <li><Link to="/inventoryComplete">Inventory Complete</Link></li>
+        <li><Link to="/admin">Admin</Link></li>
         
       </ul>
 

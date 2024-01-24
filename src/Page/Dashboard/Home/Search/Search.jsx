@@ -1,7 +1,7 @@
 import { useState  } from 'react';
 
 
-const Search = ({ card, setCard }) => {
+const Search = ({ card, setCard,cardTable }) => {
 
 
 
@@ -26,7 +26,7 @@ function filteredProducts(e){
     return !name || item.name.toLowerCase().includes(name.toLowerCase());
   });
   
-  setFilteredCard(card);
+  // setFilteredCard(card);
   setCard(newFilteredCard)
 }
 
@@ -49,7 +49,7 @@ function filteredProducts(e){
     <>
         <div className="py-2 mb-3 bg-slate-100 rounded-lg">
             <div className="flex justify-center mt-1">
-                <form action="" onSubmit={filteredProducts}>
+                <form action="" onSubmit={filteredProducts} className='flex items-center'>
                     {/* category  */}
                     <select className="select select-sm select-bordered w-32 max-w-xs rounded-full mx-1 mb-1 "  name="category"  onChange={handleSearch} value={formData.category}>
                         <option  selected>Category All</option>
@@ -67,10 +67,52 @@ function filteredProducts(e){
                     <input type="text" placeholder="Type here" className="input input-bordered input-sm max-w-xs w-44 rounded-full mx-1 mb-1 " name="name" value={formData.name} onChange={handleSearch}/>
                     <button type="submit" className="btn btn-outline btn-sm rounded-full mx-3  hover:text-white " >Search</button>
                     <button type="button" className="btn btn-outline btn-sm rounded-full mx-1 mb-1  hover:text-white " onClick={handleClear}>Clear filter</button>
-
+                    <button className="btn btn-outline btn-sm rounded-full mx-1 mb-1 " onClick={()=>document.getElementById('my_modal_3').showModal()}>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 0 0 2.25-2.25V6a2.25 2.25 0 0 0-2.25-2.25H6A2.25 2.25 0 0 0 3.75 6v2.25A2.25 2.25 0 0 0 6 10.5Zm0 9.75h2.25A2.25 2.25 0 0 0 10.5 18v-2.25a2.25 2.25 0 0 0-2.25-2.25H6a2.25 2.25 0 0 0-2.25 2.25V18A2.25 2.25 0 0 0 6 20.25Zm9.75-9.75H18a2.25 2.25 0 0 0 2.25-2.25V6A2.25 2.25 0 0 0 18 3.75h-2.25A2.25 2.25 0 0 0 13.5 6v2.25a2.25 2.25 0 0 0 2.25 2.25Z" />
+                    </svg>
+                    </button>
                 </form>
                </div>
         </div>
+        {/* add new product modal */}              
+        <dialog id="my_modal_3" className="modal">
+          <div className="modal-box">
+            <form method="dialog">
+              {/* if there is a button in form, it will close the modal */}
+              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 border-1 border-black">✕</button>
+            </form>
+            <h3 className="font-bold text-lg">Add New Inventory Request</h3>
+            <form className='mt-3'>
+              <label className="form-control w-full max-w-xs">
+                <div className="label">
+                  <span className="label-text">What is your product name?</span>
+                </div>
+                <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" />           
+              </label>
+              <div className='mt-4 flex justify-start items-center'>
+                <h2 className='font-bold'>Quantity : 3</h2>
+                <div className='ms-4'>
+                  {/* plus */}
+                  <button className="btn btn-circle btn-outline btn-sm mx-1" type='button'>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                  </svg>
+                  </button>
+                  {/* minus */}
+                  <button className="btn btn-circle btn-outline btn-sm mx-1" type='button' >
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />
+                  </svg>
+                  </button>
+                </div> 
+              </div>
+              <div className="flex justify-end">
+              <button className="btn btn-active btn-neutral mt-4 " type='submit'>Save</button>
+              </div>
+            </form>
+          </div>
+        </dialog>
     </>
   )
 }

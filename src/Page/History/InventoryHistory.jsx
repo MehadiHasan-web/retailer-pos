@@ -51,7 +51,7 @@ function InventoryHistory() {
                     {/* search bar  */}
                     <input type="text" placeholder="Type here" className="input input-bordered input-sm max-w-xs w-full xl:w-44 rounded-full mx-1 mb-1 " />
                     <button type="submit" className="btn btn-outline btn-sm rounded-full mx-3  hover:text-white ">Search</button>
-                    <button type="button" className="btn btn-outline btn-sm rounded-full mx-1 mb-1  hover:text-white ">Clear filter</button>
+                    <button type="button" className="btn btn-outline btn-sm rounded-full mx-1 hover:text-white ">Clear filter</button>
 
                 </form>
                </div>
