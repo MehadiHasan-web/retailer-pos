@@ -10,6 +10,7 @@ import Swal from 'sweetalert2'
 // eslint-disable-next-line react/prop-types
 const Table = (props) => {
   const { cardTable, setCardTable } = props;
+  console.log(cardTable)
 
   // increment Quantity 
   const incrementQuantity = (data) => {
@@ -63,7 +64,7 @@ const Table = (props) => {
       </thead>
       <tbody className='bg-slate-100'>
         {/* row 1 */}
-        {cardTable.map((data, index) => <tr key={index} className='h-12 hover:bg-slate-300'>
+        {cardTable.map((data, index) => <tr key={index} className='h-10 hover:bg-slate-300'>
           <td className='text-center md:text-sm lg:text-lg'>
             {++index}
           </td>
@@ -71,7 +72,7 @@ const Table = (props) => {
             {data.name ? data.name : data.title }
           </td>
           <td className='text-center md:text-sm lg:text-lg'>
-            {data.quantity}
+            {data.quantity || data.price}
           </td>
           <td>
             <div className='flex justify-around items-center'>

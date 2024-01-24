@@ -1,33 +1,36 @@
 import { useState  } from 'react';
 
 
-const Search = ({ card, setCard,cardTable }) => {
+// eslint-disable-next-line react/prop-types
+const Search = ({ card, setFilteredCard, }) => {
 
 
 
-  const initialFormData = {
+  let initialFormData = {
     category: '',
     subcategory: '',
     name: '',
   };
 
-  const [filteredCard, setFilteredCard] = useState([]);
+
   const [formData, setFormData] = useState({initialFormData});
+
   // search functionality
-function filteredProducts(e){
+  const filteredProducts = (e) =>{
   e.preventDefault();
-  // console.log('Category:', formData.category);
-  // console.log('Subcategory:', formData.subcategory);
-  // console.log('Name:', formData.name);
+
   const { name } = formData;
-  // const cardArray = card.card;
 
   const newFilteredCard  = card.filter((item) => {
-    return !name || item.name.toLowerCase().includes(name.toLowerCase());
+    return  !name || item.title.toLowerCase().includes(name.toLowerCase());
   });
+  setFilteredCard(newFilteredCard)
+
+  // const newFilteredCard  = card.filter((item) => {
+  //   return  !name || item.name.toLowerCase().includes(name.toLowerCase());
+  // });
+  // setFilteredCard(newFilteredCard)
   
-  // setFilteredCard(card);
-  setCard(newFilteredCard)
 }
 
   const handleSearch = (e) => {
@@ -40,8 +43,8 @@ function filteredProducts(e){
 
   // clear search 
   const handleClear = () => {
-    setCard(filteredCard);
-    setFormData(initialFormData);
+    setFilteredCard([])
+    setFormData({ ...formData, name: '' });
   };
 
 
@@ -73,7 +76,7 @@ function filteredProducts(e){
                     </svg>
                     </button>
                 </form>
-               </div>
+              </div>
         </div>
         {/* add new product modal */}              
         <dialog id="my_modal_3" className="modal">
