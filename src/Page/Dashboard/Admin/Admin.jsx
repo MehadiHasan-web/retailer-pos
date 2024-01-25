@@ -1,6 +1,7 @@
 import Title from "../../../Title/Title"
 import  { useState } from "react";
 import DatePicker from "react-datepicker";
+import { MdDelete } from "react-icons/md";
 
 function Admin() {
     const [startDate, setStartDate] = useState(new Date());
@@ -146,20 +147,49 @@ function Admin() {
                     </table>
                     {/* model  */}                    
                     <dialog id="my_modal_4" className="modal">
-                    <div className="modal-box w-11/12 max-w-5xl">
-                        <div className="flex flex-row">
-                            <div className="basis-5/12 ">
+                    <div className="modal-box w-[90%] max-w-5xl">
+                        <div className="flex flex-col md:flex-row">
+                            <div className="w-full md:w-[45%] order-1">
                                 <h3 className="font-bold text-lg">Hart Hagerty</h3>
                                 
-                                <div className="w-44  rounded mt-6 ">
-                                    <img className="rounded w-full" src="https://th.bing.com/th/id/OIP.9rssJewM8mcVHxy84ucVXgAAAA?rs=1&pid=ImgDetMain" alt="image" />
+                                <div className="w-full  rounded mt-6 ">
+                                    {/* table start */}
+                                    <table className="w-full overflow-y-scroll rounded-md mb-2">
+                                    {/* head */}
+                                    <thead className='bg-cyan-100 text-dark text-slate-100 h-6  shadow-lg'>                  
+                                        <th className='text-slate-600 text-sm'>SL</th>
+                                        <th className='text-slate-600 text-sm'>Product Name</th>
+                                        <th className='text-slate-600 text-sm'>Quantity</th>
+                                        <th className='text-slate-600 text-sm'>Delete</th>
+                                    </thead>
+                                    <tbody className='bg-slate-100'>
+                                        {/* row 1 */}
+                                        <tr className='h-7 hover:bg-slate-300'>
+                                        <td className='text-center text-sm'>
+                                        01
+                                        </td>
+                                        <td className='text-center text-sm'>
+                                        product name
+                                        </td>
+                                        <td className='text-center text-sm'>
+                                            02
+                                        </td>
+                                        <td className=''>
+                                            <MdDelete className='mx-auto bg-red-500 text-white text-xl p-[1px] rounded'></MdDelete>
+                                            
+                                        </td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                    </table>
+                                    {/* table end */}
                                 </div>
                                 <p className="font-semibold">Request Date : <span>20 january</span></p>
                                 <p className="font-semibold">Perches Date: <span>20 january</span></p>
                                 <p className="font-semibold">Quantity : <span>4</span></p>
                             </div>
-                            <div className="divider divider-horizontal divider-info mt-8"> OR </div>
-                            <div className="basis-7/12 ">
+                            <div className="md:divider md:divider-horizontal md:divider-info mt-8 order-2 hidden mb:block"> OR </div>
+                            <div className="w-full md:w-[55%] order-3">
                                 <h2 className="font-bold">Additional Information</h2>
                                 <p  className="text-justify mt-2">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Soluta quia perspiciatis voluptatem consequuntur magni itaque mollitia esse voluptatibus magnam earum, possimus amet iste eum recusandae rerum quis doloribus exercitationem expedita quisquam saepe! Odit rem reiciendis, nemo accusantium veniam quibusdam </p>
                                 <h3 className="mt-3 font-semibold">Attach File</h3>
