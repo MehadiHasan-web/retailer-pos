@@ -166,6 +166,10 @@ function InventoryHistory() {
                                         </td>
                                         <td className='text-center text-sm'>
                                         product name
+                                        <div className="flex justify-center items-center gap-1">
+                                            <span className="text-xs">1/1/24</span>
+                                            <span className="text-success text-xs">pending</span>
+                                        </div>
                                         </td>
                                         <td className='text-center text-sm'>
                                             02
@@ -181,20 +185,27 @@ function InventoryHistory() {
                                             
                                         </td>
                                         </tr>
-                                        
                                     </tbody>
                                     </table>
                                     {/* table end */}
                                 </div>
                                 <p className="font-semibold">Request Date : <span>20 january</span></p>
-                                <p className="font-semibold">Perches Date: <span>20 january</span></p>
                                 <p className="font-semibold">Quantity : <span>4</span></p>
                             </div>
                             <div className="md:divider md:divider-horizontal md:divider-info mt-8 order-2 hidden mb:block"> OR </div>
                             <div className="w-full md:w-[55%] order-3">
                                 <h2 className="font-bold">Additional Information</h2>
-                                <textarea placeholder="Bio" className="textarea textarea-bordered textarea-sm w-full mt-2" ></textarea>
-                                <h3 className="mt-3 font-semibold">Attach File</h3>
+                                <form>
+                                    <textarea placeholder="Bio" className="textarea textarea-bordered textarea-sm w-full mt-2" ></textarea>
+                                    <h3 className="mt-3 font-semibold">Attach File</h3>
+                                    <div className="flex gap-3">
+                                    <input type="file" className="file-input file-input-bordered file-input-md w-3/6" />
+                                    <button type="submit" className="btn btn-md btn-success btn-outline">Update</button>
+                                    
+
+
+                                    </div>
+                                </form>
                                 <div className=" mt-4">
                                     <div>
                                         <button className="btn btn-success btn-md">Download File</button>

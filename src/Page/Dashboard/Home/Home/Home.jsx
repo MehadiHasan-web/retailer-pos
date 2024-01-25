@@ -80,7 +80,7 @@ useEffect(() => {
           <div className='w-full md:w-[60%] lg:w-[60%]  '>
             <div className='mt-5 mb-5 px-6 sm:px-5 md:px-4 lg:px-2 xl:px-2 2xl:px-0'>
             {/* search bar  */}
-            <Search card={card} filteredCard={filteredCard} setFilteredCard={setFilteredCard} setCard={setCard} setCardTable={setCardTable} initialCardTable={initialCardTable}></Search>
+            <Search card={card} filteredCard={filteredCard} setFilteredCard={setFilteredCard} setCard={setCard} cardTable={cardTable} setCardTable={setCardTable} initialCardTable={initialCardTable}></Search>
             {/* search bar end  */}
             
               {/* search section end */}

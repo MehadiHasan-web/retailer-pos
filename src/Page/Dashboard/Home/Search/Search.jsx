@@ -2,7 +2,7 @@ import { useState  } from 'react';
 
 
 // eslint-disable-next-line react/prop-types
-const Search = ({ card, setFilteredCard}) => {
+const Search = ({ cardTable, setCardTable}) => {
 
   let initialFormData = {
     category: '',
@@ -11,18 +11,22 @@ const Search = ({ card, setFilteredCard}) => {
 
 
   const [formData, setFormData] = useState({initialFormData});
+  const [selectedValue, setSelectedValue] = useState("1"); 
   const [addCustomProduct, setCustomProduct] = useState({
+    id: 78,
     name: '',
-    category: '',
-    subcategory: '',
+    category_id: selectedValue,
     quantity: 1
   });
+
+
 
   // search functionality
   const filteredProducts = (e) =>{
   e.preventDefault();
 
     const { name } = formData;
+    // eslint-disable-next-line react/prop-types
     const newFilteredCard  = card.filter((item) => {
       return  !name || item.title.toLowerCase().includes(name.toLowerCase());
     });
@@ -51,8 +55,8 @@ const Search = ({ card, setFilteredCard}) => {
       ...prevProduct,
       quantity: prevProduct.quantity + 1
     }));
-    console.log(addCustomProduct)
   };
+  
   // decrement Quantity
   const decrementQuantity = () => {
     // Ensure that quantity doesn't go below 0
@@ -72,10 +76,17 @@ const Search = ({ card, setFilteredCard}) => {
     }));
   };
 
+  //add name
+  const handleSelectChange = (event) => {
+    setSelectedValue(event.target.value);
+  };
+
+
+  
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    // setCardTable([...cardTable, addCustomProduct])
-    console.log('Form data submitted:', addCustomProduct);
+    setCardTable([...cardTable, addCustomProduct])
   };
 
 
@@ -88,8 +99,8 @@ const Search = ({ card, setFilteredCard}) => {
                     {/* category  */}
                     <select className="select select-sm select-bordered w-full xl:w-36 rounded-full mx-1 mb-1 "  name="category"  onChange={handleSearch} value={formData.category}>
                         <option  selected>Category All</option>
-                        <option value="Han Solo">Han Solo</option>
-                        <option value="Greedo">Greedo</option>
+                        <option value="1">Han Solo</option>
+                        <option value="2">Greedo</option>
                     </select>
                     {/* subcategory  */}
                     <select className="select select-sm select-bordered w-full xl:w-36 rounded-full mx-1 mb-1 " name='subcategory'  onChange={handleSearch} value={formData.subcategory}>
@@ -123,10 +134,11 @@ const Search = ({ card, setFilteredCard}) => {
                 {/* category and subcategory  */}
                 <div className='flex'>
                     {/* category  */}
-                    <select className="select select-sm select-bordered w-full xl:w-36 rounded-full mx-1 mb-1 "  name="category" >
-                        <option  selected>Category All</option>
-                        <option value="Han Solo">Han Solo</option>
-                        <option value="Greedo">Greedo</option>
+                    <select className="select select-sm select-bordered w-full xl:w-36 rounded-full mx-1 mb-1 " value={selectedValue}
+                    onChange={handleSelectChange} name="category_id" >
+                        <option value=""  selected>Category All</option>
+                        <option value="1">Han Solo</option>
+                        <option value="2">Greedo</option>
                     </select>
                 </div>
                 <div className="label">
