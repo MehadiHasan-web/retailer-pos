@@ -19,18 +19,18 @@ const Home = () => {
     localStorage.setItem('cardTable', JSON.stringify(cardTable));
   }, [cardTable]);
 
-  useEffect(() => {
-    fetch('https://dummyjson.com/products')
-      .then((res) => res.json())
-      .then((data) => setCard((data.products)))
-      .catch((error) => console.error('Error fetching data:', error));
-  }, []);
-
   // useEffect(() => {
-  //   fetch('card.json')
-  //   .then((res) => res.json())
-  //   .then((data) => setCard(data))
-  // },[])
+  //   fetch('https://dummyjson.com/products')
+  //     .then((res) => res.json())
+  //     .then((data) => setCard((data.products)))
+  //     .catch((error) => console.error('Error fetching data:', error));
+  // }, []);
+
+  useEffect(() => {
+    fetch('card.json')
+    .then((res) => res.json())
+    .then((data) => setCard(data))
+  },[])
 
 
 
@@ -59,7 +59,7 @@ const Home = () => {
           <div className='w-full md:w-[60%] lg:w-[60%]  '>
             <div className='mt-5 mb-5 px-6 sm:px-5 md:px-4 lg:px-2 xl:px-2 2xl:px-0'>
             {/* search bar  */}
-            <Search card={card} filteredCard={filteredCard} setFilteredCard={setFilteredCard} setCard={setCard}></Search>
+            <Search card={card} filteredCard={filteredCard} setFilteredCard={setFilteredCard} setCard={setCard} setCardTable={setCardTable} initialCardTable={initialCardTable}></Search>
             {/* search bar end  */}
             
               {/* search section end */}

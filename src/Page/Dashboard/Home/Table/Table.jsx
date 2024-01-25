@@ -10,7 +10,6 @@ import Swal from 'sweetalert2'
 // eslint-disable-next-line react/prop-types
 const Table = (props) => {
   const { cardTable, setCardTable } = props;
-  console.log(cardTable)
 
   // increment Quantity 
   const incrementQuantity = (data) => {

@@ -2,9 +2,7 @@ import { useState  } from 'react';
 
 
 // eslint-disable-next-line react/prop-types
-const Search = ({ card, setFilteredCard, }) => {
-
-
+const Search = ({ card, setFilteredCard,cardTable, setCardTable }) => {
 
   let initialFormData = {
     category: '',
@@ -14,25 +12,24 @@ const Search = ({ card, setFilteredCard, }) => {
 
 
   const [formData, setFormData] = useState({initialFormData});
+  const [addCustomProduct, setCustomProduct] = useState({
+    id: '',
+    name: '',
+    quantity: 1
+  });
 
   // search functionality
   const filteredProducts = (e) =>{
   e.preventDefault();
 
-  const { name } = formData;
+    const { name } = formData;
+    const newFilteredCard  = card.filter((item) => {
+      return  !name || item.title.toLowerCase().includes(name.toLowerCase());
+    });
+    setFilteredCard(newFilteredCard)  
+  }
 
-  const newFilteredCard  = card.filter((item) => {
-    return  !name || item.title.toLowerCase().includes(name.toLowerCase());
-  });
-  setFilteredCard(newFilteredCard)
-
-  // const newFilteredCard  = card.filter((item) => {
-  //   return  !name || item.name.toLowerCase().includes(name.toLowerCase());
-  // });
-  // setFilteredCard(newFilteredCard)
-  
-}
-
+  // handle Search 
   const handleSearch = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -46,6 +43,44 @@ const Search = ({ card, setFilteredCard, }) => {
     setFilteredCard([])
     setFormData({ ...formData, name: '' });
   };
+
+  // custom incrementQuantity new product 
+  const incrementQuantity = () => {
+    // Increment the quantity by 1
+    setCustomProduct((prevProduct) => ({
+      ...prevProduct,
+      quantity: prevProduct.quantity + 1
+    }));
+    console.log(addCustomProduct)
+  };
+  // decrement Quantity
+  const decrementQuantity = () => {
+    // Ensure that quantity doesn't go below 0
+    if (addCustomProduct.quantity > 1) {
+      setCustomProduct((prevProduct) => ({
+        ...prevProduct,
+        quantity: prevProduct.quantity - 1
+      }));
+    }
+    console.log(addCustomProduct);
+  };
+
+  // add name 
+  const handleNameChange = (event) => {
+    setCustomProduct((prevProduct) => ({
+      ...prevProduct,
+      name: event.target.value,
+      id: 'new-product'
+    }));
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // setCardTable([...cardTable, addCustomProduct])
+    console.log(cardTable)
+    // console.log('Form data submitted:', addCustomProduct);
+  };
+
 
 
   return (
@@ -86,24 +121,24 @@ const Search = ({ card, setFilteredCard, }) => {
               <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 border-1 border-black">✕</button>
             </form>
             <h3 className="font-bold text-lg">Add New Inventory Request</h3>
-            <form className='mt-3'>
+            <form className='mt-3' onSubmit={handleSubmit}>
               <label className="form-control w-full max-w-xs">
                 <div className="label">
                   <span className="label-text">What is your product name?</span>
                 </div>
-                <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" />           
+                <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" value={addCustomProduct.name} onChange={handleNameChange} />           
               </label>
               <div className='mt-4 flex justify-start items-center'>
-                <h2 className='font-bold'>Quantity : 3</h2>
+                <h2 className='font-bold'>Quantity : {addCustomProduct.quantity}</h2>
                 <div className='ms-4'>
                   {/* plus */}
-                  <button className="btn btn-circle btn-outline btn-sm mx-1" type='button'>
+                  <button className="btn btn-circle btn-outline btn-sm mx-1" type='button' onClick={incrementQuantity}>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                   </svg>
                   </button>
                   {/* minus */}
-                  <button className="btn btn-circle btn-outline btn-sm mx-1" type='button' >
+                  <button className="btn btn-circle btn-outline btn-sm mx-1" type='button' onClick={decrementQuantity}>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />
                   </svg>
