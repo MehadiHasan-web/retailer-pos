@@ -83,15 +83,12 @@ const Home = () => {
                     </div>
                   )
                 }
-
-
-
               </div>
               {/* card section end */}
             </div>
           </div>
           <div className='hidden md:block w-full md:w-[40%] lg:w-[40%] md:relative lg:mt-3'>
-            <div className='md:sticky lg:sticky md:top-20 lg:top-24 '>
+            <div className='md:sticky lg:sticky md:top-20 lg:top-[14%] '>
               {/* table section start */}
               <Table cardTable={cardTable}  setCardTable={setCardTable} ></Table>
               {/* table section end */}

@@ -42,11 +42,23 @@ const Form = ({cardTable,setCardTable}) => {
         {/* content  */}
           <div>
           <form onSubmit={userData}>
-            {/* file section start */}
-            <label className="form-control w-full">
+            <div className='flex justify-between items-center gap-1'>
+              {/* file section start */}
+            <label className="form-control w-full flex-1">
               <input type="file" className="file-input file-input-bordered w-full h-6 lg:h-9 text-sm" name="file"/>
             </label>
              {/* file section end */}
+            {/* file section start */}
+              <label className="form-control w-full flex-1">
+                <select className="select select-bordered select-sm h-6 lg:h-9 w-full max-w-xs">
+                  <option selected>Select controller</option>
+                  <option>Approver</option>
+                  <option>Manager</option>
+                  <option>Admin</option>
+                </select>
+              </label>
+             {/* file section end */}
+            </div>
              {/* textarea section start */}
               <textarea type="text" placeholder="Bio" className="textarea textarea-lg w-full mt-1" name="bio"></textarea>
             {/* textarea section end */}

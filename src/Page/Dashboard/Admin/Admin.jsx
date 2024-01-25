@@ -163,6 +163,17 @@ function Admin() {
                                 <h2 className="font-bold">Additional Information</h2>
                                 <p  className="text-justify mt-2">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Soluta quia perspiciatis voluptatem consequuntur magni itaque mollitia esse voluptatibus magnam earum, possimus amet iste eum recusandae rerum quis doloribus exercitationem expedita quisquam saepe! Odit rem reiciendis, nemo accusantium veniam quibusdam </p>
                                 <h3 className="mt-3 font-semibold">Attach File</h3>
+                                <div className="flex justify-start items-center gap-5 mt-4">
+                                    <div>
+                                    <select className="select select-bordered w-full">
+                                        <option>Approve</option>
+                                        <option>Disable</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                    <button className="btn btn-success btn-md">Download File</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         {/* footer button  */}
