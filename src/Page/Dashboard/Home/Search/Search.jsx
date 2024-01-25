@@ -51,27 +51,27 @@ const Search = ({ card, setFilteredCard, }) => {
   return (
     <>
         <div className="py-2 mb-3 bg-slate-100 rounded-lg">
-            <div className="flex justify-center mt-1">
-                <form action="" onSubmit={filteredProducts} className='flex items-center'>
+            <div className="flex justify-center mt-1 mx-2 xl:mx-0">
+                <form action="" onSubmit={filteredProducts} className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-2 lg:grid-cols-3 xl:flex xl:items-center xl:justify-center xl:gap-0'>
                     {/* category  */}
-                    <select className="select select-sm select-bordered w-32 max-w-xs rounded-full mx-1 mb-1 "  name="category"  onChange={handleSearch} value={formData.category}>
+                    <select className="select select-sm select-bordered w-full xl:w-36 rounded-full mx-1 mb-1 "  name="category"  onChange={handleSearch} value={formData.category}>
                         <option  selected>Category All</option>
                         <option value="Han Solo">Han Solo</option>
                         <option value="Greedo">Greedo</option>
                     </select>
                     {/* subcategory  */}
-                    <select className="select select-sm select-bordered w-32 max-w-xs rounded-full mx-1 mb-1 " name='subcategory'  onChange={handleSearch} value={formData.subcategory}>
+                    <select className="select select-sm select-bordered w-full xl:w-36 rounded-full mx-1 mb-1 " name='subcategory'  onChange={handleSearch} value={formData.subcategory}>
                         <option  selected>Subcategory All</option>
                         <option value="rem">rem</option>
                         <option value="rem2">rem 2</option>
                         {/* <option value={formData.subcategory}>rem 2</option> */}
                     </select>
                     {/* subcategory  */}
-                    <input type="text" placeholder="Type here" className="input input-bordered input-sm max-w-xs w-44 rounded-full mx-1 mb-1 " name="name" value={formData.name} onChange={handleSearch}/>
-                    <button type="submit" className="btn btn-outline btn-sm rounded-full mx-3  hover:text-white " >Search</button>
-                    <button type="button" className="btn btn-outline btn-sm rounded-full mx-1 mb-1  hover:text-white " onClick={handleClear}>Clear filter</button>
-                    <button className="btn btn-outline btn-sm rounded-full mx-1 mb-1 " onClick={()=>document.getElementById('my_modal_3').showModal()}>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                    <input type="text" placeholder="Type here" className="input input-bordered w-full input-sm xl:w-36 rounded-full mx-1 mb-1 " name="name" value={formData.name} onChange={handleSearch}/>
+                    <button type="submit" className="btn btn-outline btn-sm rounded-full  hover:text-white w-full lg:mx-1 xl:w-24" >Search</button>
+                    <button type="button" className="btn btn-outline btn-sm rounded-full mx-1 mb-1 lg:mb-0  hover:text-white w-full xl:w-28" onClick={handleClear}>Clear filter</button>
+                    <button className="btn btn-outline btn-sm rounded-full mx-1 lg:mb-1 flex items-center mt-1" onClick={()=>document.getElementById('my_modal_3').showModal()}>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="lg:w-6 w-full h-6">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 0 0 2.25-2.25V6a2.25 2.25 0 0 0-2.25-2.25H6A2.25 2.25 0 0 0 3.75 6v2.25A2.25 2.25 0 0 0 6 10.5Zm0 9.75h2.25A2.25 2.25 0 0 0 10.5 18v-2.25a2.25 2.25 0 0 0-2.25-2.25H6a2.25 2.25 0 0 0-2.25 2.25V18A2.25 2.25 0 0 0 6 20.25Zm9.75-9.75H18a2.25 2.25 0 0 0 2.25-2.25V6A2.25 2.25 0 0 0 18 3.75h-2.25A2.25 2.25 0 0 0 13.5 6v2.25a2.25 2.25 0 0 0 2.25 2.25Z" />
                     </svg>
                     </button>
