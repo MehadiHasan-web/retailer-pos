@@ -62,7 +62,6 @@ const Search = ({ card, setFilteredCard,cardTable, setCardTable }) => {
         quantity: prevProduct.quantity - 1
       }));
     }
-    console.log(addCustomProduct);
   };
 
   // add name 
