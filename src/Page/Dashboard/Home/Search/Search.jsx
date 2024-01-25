@@ -2,19 +2,19 @@ import { useState  } from 'react';
 
 
 // eslint-disable-next-line react/prop-types
-const Search = ({ card, setFilteredCard,cardTable, setCardTable }) => {
+const Search = ({ card, setFilteredCard}) => {
 
   let initialFormData = {
     category: '',
-    subcategory: '',
     name: '',
   };
 
 
   const [formData, setFormData] = useState({initialFormData});
   const [addCustomProduct, setCustomProduct] = useState({
-    id: '',
     name: '',
+    category: '',
+    subcategory: '',
     quantity: 1
   });
 
@@ -70,15 +70,13 @@ const Search = ({ card, setFilteredCard,cardTable, setCardTable }) => {
     setCustomProduct((prevProduct) => ({
       ...prevProduct,
       name: event.target.value,
-      id: 'new-product'
     }));
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // setCardTable([...cardTable, addCustomProduct])
-    console.log(cardTable)
-    // console.log('Form data submitted:', addCustomProduct);
+    console.log('Form data submitted:', addCustomProduct);
   };
 
 
@@ -123,6 +121,15 @@ const Search = ({ card, setFilteredCard,cardTable, setCardTable }) => {
             <h3 className="font-bold text-lg">Add New Inventory Request</h3>
             <form className='mt-3' onSubmit={handleSubmit}>
               <label className="form-control w-full max-w-xs">
+                {/* category and subcategory  */}
+                <div className='flex'>
+                    {/* category  */}
+                    <select className="select select-sm select-bordered w-full xl:w-36 rounded-full mx-1 mb-1 "  name="category" >
+                        <option  selected>Category All</option>
+                        <option value="Han Solo">Han Solo</option>
+                        <option value="Greedo">Greedo</option>
+                    </select>
+                </div>
                 <div className="label">
                   <span className="label-text">What is your product name?</span>
                 </div>
