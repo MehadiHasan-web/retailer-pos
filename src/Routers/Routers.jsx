@@ -45,34 +45,34 @@ const router = createBrowserRouter([
         element: <MyInventory></MyInventory>
       },
       {
-        path : '/purchaseRequest',
-        element : <PurchaseRequest></PurchaseRequest>
+        path: '/purchaseRequest',
+        element: <PurchaseRequest></PurchaseRequest>
       },
       {
-        path:"/manageInventory",
-        element:<ManageInventory></ManageInventory>,
-        children:[
+        path: "/manageInventory",
+        element: <ManageInventory></ManageInventory>,
+        children: [
           {
-            path:"/manageInventory",
-            element:<CategoryFrom></CategoryFrom>
+            path: "/manageInventory",
+            element: <CategoryFrom></CategoryFrom>
 
           },
           {
-            path:"/manageInventory/subcategory",
-            element:<SubCategory></SubCategory>
+            path: "/manageInventory/subcategory",
+            element: <SubCategory></SubCategory>
 
           },
           {
-            path:"/manageInventory/item",
-            element:<ItemFrom></ItemFrom>
+            path: "/manageInventory/item",
+            element: <ItemFrom></ItemFrom>
 
           },
           {
-            path:"/manageInventory/subItem",
-            element:<SubItemFrom></SubItemFrom>
+            path: "/manageInventory/subItem",
+            element: <SubItemFrom></SubItemFrom>
 
           },
-          
+
         ]
       }
     ]
