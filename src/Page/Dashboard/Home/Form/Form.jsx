@@ -8,6 +8,7 @@ const Form = ({cardTable,setCardTable}) => {
 
   const [userInfo, setUserInfo] = useState([])
 
+
   // clear function 
   const handleClearCardTable = () => {
     setCardTable([]);

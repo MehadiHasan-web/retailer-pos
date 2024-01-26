@@ -81,24 +81,24 @@ const router = createBrowserRouter([
         ]
       },
       {
-        path : '/instituteManagement',
-        element : <InstituteManagement></InstituteManagement>,
-        children : [
+        path: '/instituteManagement',
+        element: <InstituteManagement></InstituteManagement>,
+        children: [
           {
-            path : '/instituteManagement',
-            element : <BranchName></BranchName>
+            path: '/instituteManagement',
+            element: <BranchName></BranchName>
           },
           {
-            path : '/instituteManagement/instituteName',
-            element : <InstituteName></InstituteName>
+            path: '/instituteManagement/instituteName',
+            element: <InstituteName></InstituteName>
           },
           {
-            path : '/instituteManagement/departmentName',
-            element : <DepartmentName></DepartmentName>
+            path: '/instituteManagement/departmentName',
+            element: <DepartmentName></DepartmentName>
           },
         ]
       }
-    ] 
+    ]
   },
 
 ]);
