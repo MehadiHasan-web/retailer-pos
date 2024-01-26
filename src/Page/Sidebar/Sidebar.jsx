@@ -23,6 +23,7 @@ const Sidebar = () => {
         <li><Link to="/admin">Admin</Link></li>
         <li><Link to="/purchaseRequest">Purchase Request</Link></li>
         <li><Link to="/myInventory">My Inventory</Link></li>
+        <li><Link to="/manageInventory">Manage Inventory</Link></li>
         
       </ul>
 

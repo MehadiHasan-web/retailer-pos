@@ -36,6 +36,19 @@ const LogIn = () => {
 
   }
 
+  // eslint-disable-next-line no-undef
+  // const formData = {email, password};
+
+  // useEffect(()=> {
+  //   fetch(``, {
+  //     method : 'POST',
+  //     headers : {'content-type': 'application/json'},
+  //     body : JSON.stringify(formData)
+  //   })
+  //   .then((res) => res.json())
+  //   .then((data) => console.log(data))
+  // },[])
+
 
   return (
     <div>
