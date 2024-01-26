@@ -7,6 +7,11 @@ import InventoryComplete from "../Page/Dashboard/InventoryComplete/InventoryComp
 import Admin from './../Page/Dashboard/Admin/Admin';
 import MyInventory from './../Page/My Inventory/MyInventory';
 import PurchaseRequest from './../Page/Purchase Request/PurchaseRequest';
+import ManageInventory from "../Page/ManageInventory/ManageInventory";
+import CategoryFrom from "../Page/Forms/CategoryFrom";
+import SubCategory from "../Page/Forms/SubCategory";
+import ItemFrom from "../Page/Forms/ItemFrom";
+import SubItemFrom from "../Page/Forms/SubItemFrom";
 
 
 const router = createBrowserRouter([
@@ -41,6 +46,33 @@ const router = createBrowserRouter([
       {
         path : '/purchaseRequest',
         element : <PurchaseRequest></PurchaseRequest>
+      },
+      {
+        path:"/manageInventory",
+        element:<ManageInventory></ManageInventory>,
+        children:[
+          {
+            path:"/manageInventory",
+            element:<CategoryFrom></CategoryFrom>
+
+          },
+          {
+            path:"/manageInventory/subcategory",
+            element:<SubCategory></SubCategory>
+
+          },
+          {
+            path:"/manageInventory/item",
+            element:<ItemFrom></ItemFrom>
+
+          },
+          {
+            path:"/manageInventory/subItem",
+            element:<SubItemFrom></SubItemFrom>
+
+          },
+          
+        ]
       }
     ]
   },
