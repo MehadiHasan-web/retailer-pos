@@ -44,6 +44,8 @@ const Form = ({cardTable,setCardTable}) => {
   }
 console.log(userInfo)
 
+  console.log(userInfo)
+
 
   return (
     <div>

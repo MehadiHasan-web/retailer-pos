@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import './LogIn.css'
 import Swal from 'sweetalert2'
 import Title from '../../Title/Title';
+import { useEffect } from 'react';
 
 const LogIn = () => {
 
@@ -12,6 +13,8 @@ const LogIn = () => {
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
+
+    
 
     if(email === "admin@gmail.com" && password === "111"){
       navigate('/home')
@@ -39,6 +42,19 @@ const LogIn = () => {
     }
 
   }
+
+  // eslint-disable-next-line no-undef
+  // const formData = {email, password};
+
+  // useEffect(()=> {
+  //   fetch(``, {
+  //     method : 'POST',
+  //     headers : {'content-type': 'application/json'},
+  //     body : JSON.stringify(formData)
+  //   })
+  //   .then((res) => res.json())
+  //   .then((data) => console.log(data))
+  // },[])
 
 
   return (

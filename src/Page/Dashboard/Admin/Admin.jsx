@@ -2,6 +2,9 @@ import Title from "../../../Title/Title"
 import  { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import { MdDelete } from "react-icons/md";
+import { FiMinus } from 'react-icons/fi';
+import { FiPlus } from 'react-icons/fi';
+import Swal from "sweetalert2";
 
 function Admin() {
     const [startDate, setStartDate] = useState(new Date());
@@ -13,7 +16,37 @@ function Admin() {
         .then((data) => setAdminData(data))
     },[])
 
-    console.log(adminData)
+      // increment Quantity 
+  const incrementQuantity = (data) => {
+    const updatedTable = adminData.map(value => {
+      if (value.id === data.id) {
+        // Increment the quantity for the specific item
+        return { ...value, quantity: value.quantity + 1 }
+      }
+      return value;
+    })
+    setAdminData(updatedTable);
+  };
+
+  // decrement Quantity
+  const decrementQuantity = (data) => {
+    const updatedTable = adminData.map((value) => {
+      if (value.id === data.id) {
+        if (value.quantity > 1) {
+          return { ...value, quantity: value.quantity - 1 };
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Sorry, quantity cannot be less than 1!",
+          });
+        }
+      }
+      return value;
+    });
+  
+    setAdminData(updatedTable);
+  };
 
   return (
     <div>
@@ -163,7 +196,6 @@ function Admin() {
                         <div className="flex flex-col md:flex-row">
                             <div className="w-full md:w-[45%] order-1">
                                 <h3 className="font-bold text-lg">Hart Hagerty</h3>
-                                
                                 <div className="w-full  rounded mt-6 ">
                                     {/* table start */}
                                     <table className="w-full overflow-y-scroll rounded-md mb-2">
@@ -172,26 +204,34 @@ function Admin() {
                                         <th className='text-slate-600 text-sm'>SL</th>
                                         <th className='text-slate-600 text-sm'>Product Name</th>
                                         <th className='text-slate-600 text-sm'>Quantity</th>
+                                        <th className='text-slate-600 text-sm'>Inc/Dec</th>
                                         <th className='text-slate-600 text-sm'>Delete</th>
                                     </thead>
                                     <tbody className='bg-slate-100'>
                                         {/* row 1 */}
-                                        <tr className='h-7 hover:bg-slate-300'>
-                                        <td className='text-center text-sm'>
-                                        01
-                                        </td>
-                                        <td className='text-center text-sm'>
-                                        product name
-                                        </td>
-                                        <td className='text-center text-sm'>
-                                            02
-                                        </td>
-                                        <td className=''>
-                                            <MdDelete className='mx-auto bg-red-500 text-white text-xl p-[1px] rounded'></MdDelete>
-                                            
-                                        </td>
-                                        </tr>
-                                        
+                                        {
+                                            adminData.map((data, index) => <tr key={index} className='h-7 hover:bg-slate-300'>
+                                            <td className='text-center text-sm'>
+                                            01
+                                            </td>
+                                            <td className='text-center text-sm'>
+                                            product name
+                                            </td>
+                                            <td className='text-center text-sm'>
+                                            {data.quantity}
+                                            </td>
+                                            <td className='text-center text-sm'>
+                                            <div className='flex justify-around items-center'>
+                                                <button ><FiPlus onClick={() => incrementQuantity(data)}className='bg-green-500 text-white text-xl p-[1px] rounded'></FiPlus></button>
+                                                <button><FiMinus onClick={() => decrementQuantity(data)}className='bg-red-500 text-white text-xl p-[1px] rounded'></FiMinus></button>
+                                                </div>
+                                            </td>
+                                            <td className=''>
+                                                <MdDelete className='mx-auto bg-red-500 text-white text-xl p-[1px] rounded'></MdDelete>
+                                                
+                                            </td>
+                                            </tr>)
+                                        }
                                     </tbody>
                                     </table>
                                     {/* table end */}

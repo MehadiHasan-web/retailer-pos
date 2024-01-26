@@ -1,4 +1,4 @@
-import { useState  } from 'react';
+import { useEffect, useState  } from 'react';
 
 
 // eslint-disable-next-line react/prop-types
@@ -18,9 +18,25 @@ const Search = ({ cardTable, setCardTable}) => {
     category_id: selectedValue,
     quantity: 1
   });
+  const [categories, setCategories] = useState([])
+  const [subcategories, setSubcategories] = useState([])
 
 
 
+  // category api fetch
+  useEffect(() => {
+    fetch('category.json')
+    .then((res) => res.json())
+    .then((data) => setCategories(data))
+  },[])
+  // subcategory api fetch
+  useEffect(() => {
+    fetch('subcategory.json')
+    .then((res) => res.json())
+    .then((data) => setSubcategories(data))
+  },[])
+
+  console.log(categories)
   // search functionality
   const filteredProducts = (e) =>{
   e.preventDefault();
@@ -109,14 +125,16 @@ const Search = ({ cardTable, setCardTable}) => {
                     {/* category  */}
                     <select className="select select-sm select-bordered w-full xl:w-36 rounded-full mx-1 mb-1 "  name="category"  onChange={handleSearch} value={formData.category}>
                         <option  selected>Category All</option>
-                        <option value="1">Han Solo</option>
-                        <option value="2">Greedo</option>
+                        {
+                          categories.map((category,idx) => <option key={idx} value="rem">{category.name}</option>)
+                        }
                     </select>
                     {/* subcategory  */}
                     <select className="select select-sm select-bordered w-full xl:w-36 rounded-full mx-1 mb-1 " name='subcategory'  onChange={handleSearch} value={formData.subcategory}>
                         <option  selected>Subcategory All</option>
-                        <option value="rem">rem</option>
-                        <option value="rem2">rem 2</option>
+                        {
+                          subcategories.map((subcategory,idx) => <option key={idx} value="rem">{subcategory.name}</option>)
+                        }
                         {/* <option value={formData.subcategory}>rem 2</option> */}
                     </select>
                     {/* subcategory  */}
@@ -147,8 +165,9 @@ const Search = ({ cardTable, setCardTable}) => {
                     <select className="select select-sm select-bordered w-full xl:w-36 rounded-full mx-1 mb-1 " value={selectedValue}
                     onChange={handleSelectChange} name="category_id" >
                         <option value=""  selected>Category All</option>
-                        <option value="1">Han Solo</option>
-                        <option value="2">Greedo</option>
+                        {
+                          categories.map((category,idx) => <option key={idx} value="rem">{category.name}</option>)
+                        }
                     </select>
                 </div>
                 <div className="label">
