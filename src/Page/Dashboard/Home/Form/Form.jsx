@@ -15,20 +15,20 @@ const Form = ({cardTable,setCardTable}) => {
   };
 
   function sendData(){
-    // axios.post('http://inv.xcode.com/api/v1/inventory/inventory/', userInfo)
-    // .then(response => {
-    //   console.log('Response:', response.data);
-    // })
-    // .catch(error => {
-    //   console.error('Error:', error);
-    // });
-    axios.get('https://inv.xcode.com.bd/api/v1/account/users/')
+    axios.post('http://inv.xcode.com/api/v1/inventory/inventory/', userInfo)
     .then(response => {
       console.log('Response:', response.data);
     })
     .catch(error => {
       console.error('Error:', error);
     });
+    // axios.get('https://inv.xcode.com.bd/api/v1/account/users/?format=json')
+    // .then(response => {
+    //   console.log('Response:', response.data);
+    // })
+    // .catch(error => {
+    //   console.error('Error:', error);
+    // });
     
   }
 
@@ -42,9 +42,7 @@ const Form = ({cardTable,setCardTable}) => {
     setUserInfo([...cardTable, user])
     sendData()
   }
-console.log(userInfo)
 
-  console.log(userInfo)
 
 
   return (
