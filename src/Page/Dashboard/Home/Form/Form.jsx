@@ -16,6 +16,7 @@ const Form = ({cardTable,setCardTable}) => {
 
   // eslint-disable-next-line react/prop-types
   const data = cardTable.map(item => ({ id: item.id, quantity: item.quantity }));
+
   
 
   const userData = (event) => {
@@ -27,6 +28,8 @@ const Form = ({cardTable,setCardTable}) => {
     setUserInfo([...data, user])
     form.target = ''
   }
+
+  console.log(userInfo)
 
 
   return (
