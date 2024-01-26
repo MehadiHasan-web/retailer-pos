@@ -13,7 +13,7 @@ const Search = ({ cardTable, setCardTable}) => {
   const [formData, setFormData] = useState({initialFormData});
   const [selectedValue, setSelectedValue] = useState("1"); 
   const [addCustomProduct, setCustomProduct] = useState({
-    id: 78,
+    id: '',
     name: '',
     category_id: selectedValue,
     quantity: 1
@@ -72,13 +72,14 @@ const Search = ({ cardTable, setCardTable}) => {
   const handleNameChange = (event) => {
     setCustomProduct((prevProduct) => ({
       ...prevProduct,
-      name: event.target.value,
+      id: event.target.value,
+      name:event.target.value
     }));
   };
 
   //add name
   const handleSelectChange = (event) => {
-    setSelectedValue(event.target.value);
+    setSelectedValue(event.target.value);    
   };
 
 
@@ -86,7 +87,16 @@ const Search = ({ cardTable, setCardTable}) => {
 // custom product submit 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const cardTableItem = cardTable.find(value => value.id === addCustomProduct.name);
+
+    if (cardTableItem) {
+      const updatedCardTable = cardTable.map(item =>
+        item.id === cardTableItem.id ? { ...item, quantity: item.quantity + 1 } : item
+      );
+      setCardTable(updatedCardTable);
+    }else{
     setCardTable([...cardTable, addCustomProduct])
+    }
   };
 
 

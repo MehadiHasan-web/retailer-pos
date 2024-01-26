@@ -1,33 +1,48 @@
 import { useState } from 'react';
 import './Form.css'
-
+import axios from 'axios';
 
 // eslint-disable-next-line react/prop-types
 const Form = ({cardTable,setCardTable}) => {
   // const { cardTable, setCardTable } = props;
 
-  const [userInfo, setUserInfo] = useState()
+  const [userInfo, setUserInfo] = useState([])
 
+  // clear function 
   const handleClearCardTable = () => {
     setCardTable([]);
-    // Clear localStorage
     localStorage.removeItem('cardTable');
   };
 
-  // eslint-disable-next-line react/prop-types
-  const data = cardTable.map(item => ({ id: item.id, quantity: item.quantity }));
-
-  
+  function sendData(){
+    // axios.post('http://inv.xcode.com/api/v1/inventory/inventory/', userInfo)
+    // .then(response => {
+    //   console.log('Response:', response.data);
+    // })
+    // .catch(error => {
+    //   console.error('Error:', error);
+    // });
+    axios.get('https://inv.xcode.com.bd/api/v1/account/users/')
+    .then(response => {
+      console.log('Response:', response.data);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+    
+  }
 
   const userData = (event) => {
     event.preventDefault();
     const form = event.target;
     const file = form.file.value;
     const bio = form.bio.value;
-    const user = {file,bio}
-    setUserInfo([...data, user])
-    form.target = ''
+    const position = form.position.value;
+    const user = {file,bio,position}
+    setUserInfo([...cardTable, user])
+    sendData()
   }
+console.log(userInfo)
 
 
   return (
@@ -49,22 +64,22 @@ const Form = ({cardTable,setCardTable}) => {
              {/* file section end */}
             {/* file section start */}
               <label className="form-control w-full flex-1">
-                <select className="select select-bordered select-sm h-6 lg:h-9 w-full max-w-xs">
+                <select className="select select-bordered select-sm h-6 lg:h-9 w-full max-w-xs" name='position'>
                   <option selected>Select controller</option>
-                  <option>Approver</option>
-                  <option>Manager</option>
-                  <option>Admin</option>
+                  <option value={'Approver'}>Approver</option>
+                  <option value={'Manager'}>Manager</option>
+                  <option value={'Admin'}>Admin</option>
                 </select>
               </label>
              {/* file section end */}
             </div>
              {/* textarea section start */}
-              <textarea type="text" placeholder="Bio" className="textarea textarea-lg w-full mt-1" name="bio"></textarea>
+              <textarea type="text" placeholder="Bio" className="textarea textarea-lg w-full mt-1" id='bio' name="bio"></textarea>
             {/* textarea section end */}
           <div className='flex gap-2 mt-1'>       
           <button className='bg-red-500 text-white md:text-sm lg:text-base md:px-2 md:py-1 lg:px-3 lg:py-2 uppercase rounded' type='button' onClick={handleClearCardTable}>Clear All</button>
           <button
-              className='bg-blue-500 text-white md:text-sm lg:text-base md:px-2 md:py-1 lg:px-3 lg:py-2 uppercase rounded' type='submit'>checkout</button>
+              className='bg-blue-500 text-white md:text-sm lg:text-base md:px-2 md:py-1 lg:px-3 lg:py-2 uppercase rounded' type='submit'>Inventory Request</button>
           </div>
         </form> 
           </div>
