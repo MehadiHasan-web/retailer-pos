@@ -7,77 +7,46 @@ import InventoryComplete from "../Page/Dashboard/InventoryComplete/InventoryComp
 import Admin from './../Page/Dashboard/Admin/Admin';
 import MyInventory from './../Page/My Inventory/MyInventory';
 import PurchaseRequest from './../Page/Purchase Request/PurchaseRequest';
-import ManageInventory from "../Page/ManageInventory/ManageInventory";
-import CategoryFrom from "../Page/Forms/CategoryFrom";
-import SubCategory from "../Page/Forms/SubCategory";
-import ItemFrom from "../Page/Forms/ItemFrom";
-import SubItemFrom from "../Page/Forms/SubItemFrom";
+import PrivateRoute from "./PrivateRoute";
 
 
 const router = createBrowserRouter([
 
   {
-    path: "/",
+    path: "/login",
     element: <LogIn></LogIn>,
   },
   {
-    path : '/',
-    element : <DashBoard></DashBoard>,
-    children :[
+    path: '/',
+    element: <PrivateRoute><DashBoard></DashBoard></PrivateRoute>,
+    children: [
       {
-        path : '/home',
-        element : <Home></Home>
+        path: '/',
+        element: <Home></Home>
       },
       {
-        path : '/history',
+        path: '/history',
         element: <InventoryHistory></InventoryHistory>
       },
       {
-        path : '/inventoryComplete',
-        element : <InventoryComplete></InventoryComplete>
+        path: '/inventoryComplete',
+        element: <InventoryComplete></InventoryComplete>
       },
       {
-        path : '/admin',
-        element : <Admin></Admin>
+        path: '/admin',
+        element: <Admin></Admin>
       },
       {
-        path : '/myInventory',
-        element : <MyInventory></MyInventory>
+        path: '/myInventory',
+        element: <MyInventory></MyInventory>
       },
       {
-        path : '/purchaseRequest',
-        element : <PurchaseRequest></PurchaseRequest>
-      },
-      {
-        path:"/manageInventory",
-        element:<ManageInventory></ManageInventory>,
-        children:[
-          {
-            path:"/manageInventory",
-            element:<CategoryFrom></CategoryFrom>
-
-          },
-          {
-            path:"/manageInventory/subcategory",
-            element:<SubCategory></SubCategory>
-
-          },
-          {
-            path:"/manageInventory/item",
-            element:<ItemFrom></ItemFrom>
-
-          },
-          {
-            path:"/manageInventory/subItem",
-            element:<SubItemFrom></SubItemFrom>
-
-          },
-          
-        ]
+        path: '/purchaseRequest',
+        element: <PurchaseRequest></PurchaseRequest>
       }
     ]
   },
-  
+
 ]);
 
 export default router;
