@@ -6,6 +6,8 @@ import Table from '../Table/Table';
 import Form from '../Form/Form';
 import Title from './../../../../Title/Title';
 import Search from '../Search/Search';
+import axios from "axios";
+
 
 const Home = () => {
 
@@ -26,11 +28,24 @@ const Home = () => {
   //     .catch((error) => console.error('Error fetching data:', error));
   // }, []);
 
-  useEffect(() => {
-    fetch('card.json')
-    .then((res) => res.json())
-    .then((data) => setCard(data))
-  },[])
+
+  // import axios
+
+
+// use useEffect hook
+useEffect(() => {
+  axios.get("https://dummyjson.com/products")
+    .then((res) => res.data)    
+    .then((data) => setCard(data.products))
+    .catch((error) => console.error("Error fetching data:", error));
+}, []);
+
+
+  // useEffect(() => {
+  //   fetch('card.json')
+  //   .then((res) => res.json())
+  //   .then((data) => setCard(data))
+  // },[])
 
 
 
@@ -43,7 +58,13 @@ const Home = () => {
       );
       setCardTable(updatedCardTable);
     } else {
-      setCardTable([...cardTable, data])
+      const newData = {
+        id: data.id,
+        name: data.title, //if our have name than use: data.name 
+        quantity: 1
+      };  
+      setCardTable([...cardTable, newData]);
+      console.log(cardTable);
     }
   }
 
@@ -59,7 +80,7 @@ const Home = () => {
           <div className='w-full md:w-[60%] lg:w-[60%]  '>
             <div className='mt-5 mb-5 px-6 sm:px-5 md:px-4 lg:px-2 xl:px-2 2xl:px-0'>
             {/* search bar  */}
-            <Search card={card} filteredCard={filteredCard} setFilteredCard={setFilteredCard} setCard={setCard} cardTable={cardTable} setCardTable={setCardTable} initialCardTable={initialCardTable}></Search>
+            <Search card={card} filteredCard={filteredCard} setFilteredCard={setFilteredCard} setCard={setCard} cardTable={cardTable} setCardTable={setCardTable} initialCardTable={initialCardTable} ></Search>
             {/* search bar end  */}
             
               {/* search section end */}
