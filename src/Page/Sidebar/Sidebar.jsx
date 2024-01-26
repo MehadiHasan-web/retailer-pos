@@ -24,6 +24,7 @@ const Sidebar = () => {
         <li><Link to="/purchaseRequest">Purchase Request</Link></li>
         <li><Link to="/myInventory">My Inventory</Link></li>
         <li><Link to="/manageInventory">Manage Inventory</Link></li>
+        <li><Link to="/instituteManagement">Institute Management</Link></li>
         
       </ul>
 
