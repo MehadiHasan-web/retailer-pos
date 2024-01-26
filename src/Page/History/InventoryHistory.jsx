@@ -1,15 +1,55 @@
 import Title from "../../Title/Title"
-import  { useState } from "react";
+import  { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import './InventoryHistory.css'
 import { MdDelete } from "react-icons/md";
 import { FiMinus, FiPlus } from "react-icons/fi";
+import Swal from "sweetalert2";
 
 
 function InventoryHistory() {
 
     const [startDate, setStartDate] = useState(new Date());
+    const [userData, setUserData] = useState([])
+    useEffect(() => {
+        fetch('card.json')
+        .then((res) => res.json())
+        .then((data) => setUserData(data))
+    },[])
+
+      // increment Quantity 
+  const incrementQuantity = (data) => {
+    const updatedTable = userData.map(value => {
+      if (value.id === data.id) {
+        // Increment the quantity for the specific item
+        return { ...value, quantity: value.quantity + 1 }
+      }
+      return value;
+    })
+    setUserData(updatedTable);
+  };
+
+  // decrement Quantity
+  const decrementQuantity = (data) => {
+    const updatedTable = userData.map((value) => {
+      if (value.id === data.id) {
+        if (value.quantity > 1) {
+          return { ...value, quantity: value.quantity - 1 };
+        } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Sorry, quantity cannot be less than 1!",
+                  });
+            
+        }
+      }
+      return value;
+    });
+  
+    setUserData(updatedTable);
+  };
 
   return (
     <>
@@ -81,25 +121,25 @@ function InventoryHistory() {
                 </tr>
                 </thead>
                 <tbody>
-                    {/* row 1 */}
-                    <tr>
-                        <th>
-                        <label>
-                            <input type="checkbox" className="checkbox checkbox-sm" />
-                        </label>
-                        </th>
+                    {
+                        userData.map((data, index) => <tr key={data.id}>
                         <td>
-                        <div className="flex items-center gap-3">
-                            <div className="avatar">
-                            <div className="mask mask-squircle w-12 h-12">
-                                <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" alt="Avatar Tailwind CSS Component" />
+                            <label>
+                                <input type="checkbox" className="checkbox checkbox-sm" />
+                            </label>
+                        </td>
+                        <td>
+                            <div className="flex items-center gap-1">
+                                <div className="avatar">
+                                <div className="mask mask-squircle w-12 h-12">
+                                    <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" alt="Avatar Tailwind CSS Component" />
+                                </div>
+                                </div>
+                                <div>
+                                <div className="font-bold">Hart Hagerty</div>
+                                <div className="text-sm opacity-50">United States</div>
+                                </div>
                             </div>
-                            </div>
-                            <div>
-                            <div className="font-bold">Hart Hagerty</div>
-                            <div className="text-sm opacity-50">United States</div>
-                            </div>
-                        </div>
                         </td>
                         <td>
                             <p>20 january </p>
@@ -121,7 +161,9 @@ function InventoryHistory() {
                                     </svg>
                                 </button>
                         </td>
-                    </tr>                
+                    </tr>)
+                    }
+
                 </tbody>
                 {/* foot */}
                 <tfoot className="bg-slate-200	">
@@ -160,7 +202,9 @@ function InventoryHistory() {
                                     </thead>
                                     <tbody className='bg-slate-100'>
                                         {/* row 1 */}
-                                        <tr className='h-7 hover:bg-slate-300'>
+                                        {
+                                            userData.map((data) => {
+                                                <tr className='h-7 hover:bg-slate-300'>
                                         <td className='text-center text-sm'>
                                         01
                                         </td>
@@ -172,12 +216,12 @@ function InventoryHistory() {
                                         </div>
                                         </td>
                                         <td className='text-center text-sm'>
-                                            02
+                                        {data.quantity}
                                         </td>
                                         <td className='text-center text-sm'>
                                         <div className='flex justify-around items-center'>
-                                            <button ><FiPlus className='bg-green-500 text-white text-xl p-[1px] rounded'></FiPlus></button>
-                                            <button><FiMinus className='bg-red-500 text-white text-xl p-[1px] rounded'></FiMinus></button>
+                                            <button ><FiPlus onClick={() => incrementQuantity(data)}className='bg-green-500 text-white text-xl p-[1px] rounded'></FiPlus></button>
+                                            <button><FiMinus onClick={() => decrementQuantity(data)}className='bg-red-500 text-white text-xl p-[1px] rounded'></FiMinus></button>
                                             </div>
                                         </td>
                                         <td className=''>
@@ -185,6 +229,8 @@ function InventoryHistory() {
                                             
                                         </td>
                                         </tr>
+                                            })
+                                        }
                                     </tbody>
                                     </table>
                                     {/* table end */}
@@ -201,9 +247,6 @@ function InventoryHistory() {
                                     <div className="flex gap-3">
                                     <input type="file" className="file-input file-input-bordered file-input-md w-3/6" />
                                     <button type="submit" className="btn btn-md btn-success btn-outline">Update</button>
-                                    
-
-
                                     </div>
                                 </form>
                                 <div className=" mt-4">
