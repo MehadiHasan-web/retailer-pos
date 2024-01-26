@@ -7,44 +7,45 @@ import InventoryComplete from "../Page/Dashboard/InventoryComplete/InventoryComp
 import Admin from './../Page/Dashboard/Admin/Admin';
 import MyInventory from './../Page/My Inventory/MyInventory';
 import PurchaseRequest from './../Page/Purchase Request/PurchaseRequest';
+import PrivateRoute from "./PrivateRoute";
 
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/login",
     element: <LogIn></LogIn>,
   },
   {
-    path : '/',
-    element : <DashBoard></DashBoard>,
-    children :[
+    path: '/',
+    element: <PrivateRoute><DashBoard></DashBoard></PrivateRoute>,
+    children: [
       {
-        path : '/home',
-        element : <Home></Home>
+        path: '/',
+        element: <Home></Home>
       },
       {
-        path : '/history',
+        path: '/history',
         element: <InventoryHistory></InventoryHistory>
       },
       {
-        path : '/inventoryComplete',
-        element : <InventoryComplete></InventoryComplete>
+        path: '/inventoryComplete',
+        element: <InventoryComplete></InventoryComplete>
       },
       {
-        path : '/admin',
-        element : <Admin></Admin>
+        path: '/admin',
+        element: <Admin></Admin>
       },
       {
-        path : '/myInventory',
-        element : <MyInventory></MyInventory>
+        path: '/myInventory',
+        element: <MyInventory></MyInventory>
       },
       {
-        path : '/purchaseRequest',
-        element : <PurchaseRequest></PurchaseRequest>
+        path: '/purchaseRequest',
+        element: <PurchaseRequest></PurchaseRequest>
       }
     ]
   },
-  
+
 ]);
 
 export default router;

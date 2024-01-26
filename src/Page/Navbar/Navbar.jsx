@@ -1,7 +1,16 @@
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Sidebar from './../Sidebar/Sidebar';
 function Navbar() {
+
+  const navigate =useNavigate()
+
+  const logout = () => {
+    localStorage.removeItem('token')
+    navigate('/login')
+  }
+
+
   return (
     <>
     <div className="navbar bg-base-100 shadow-sm sticky top-0 z-10">
@@ -31,7 +40,7 @@ function Navbar() {
           </a>
         </li>
         <li><a>Settings</a></li>
-        <li><Link to="/">Logout</Link></li>
+        <li><Link onClick={logout}>Logout</Link></li>
       </ul>
     </div>
 

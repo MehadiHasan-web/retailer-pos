@@ -2,40 +2,36 @@ import { useNavigate } from 'react-router-dom';
 import './LogIn.css'
 import Swal from 'sweetalert2'
 import Title from '../../Title/Title';
+import axios from 'axios';
+import useAuth from '../../hooks/useAuth';
 
 const LogIn = () => {
+  const {setUser} = useAuth()
 
   const navigate = useNavigate()
 
-  const submitData = (event)=>{
+  const submitData = async (event) => {
     event.preventDefault();
     const form = event.target;
-    const email = form.email.value;
+    const username = form.email.value;
     const password = form.password.value;
-
-    if(email === "admin@gmail.com" && password === "111"){
-      navigate('/home')
-      Swal.fire({
-        title: "Good job!",
-        text: "You are logged in successfully",
-        icon: "success"
-      });
-    }
-    else if(email === '' && password === ''){
-      Swal.fire({
-        title: 'Error!',
-        text: 'Sorry can not provide your email and password',
-        icon: 'error',
-        confirmButtonText: 'Ok'
-      })
-    }
-    else{
-      Swal.fire({
-        title: 'Error!',
-        text: 'Sorry you data is incorrect! Please try again',
-        icon: 'error',
-        confirmButtonText: 'Try Again'
-      })
+    const formData = { username, password };
+    console.log(formData)
+    try {
+      const response = await axios.post('http://inv.xcode.com.bd/api/v1/account/login', formData);
+      console.log(response.data);
+      if(response.status === 200) {
+        setUser(response.data)
+        localStorage.setItem('token', response.data.token)
+        navigate('/')
+        Swal.fire({
+          title: "Good job!",
+          text: "You are logged in successfully",
+          icon: "success"
+        });
+      }
+    } catch (error) {
+      console.log(error)
     }
 
   }
@@ -51,8 +47,8 @@ const LogIn = () => {
           <div className='bg-slate-100 rounded-md p-5 lg:w-[450px] lg:h-72'>
             <h1 className='text-center lg:text-3xl mb-5 italic'>LogIn Page</h1>
             <form onSubmit={submitData} className=' space-y-6'>
-              <input type='email' className='w-full border-[1px] border-blue-600 p-3 rounded-md' placeholder='please enter your email' name="email"></input>
-              <input type='password' className='w-full border-[1px] border-blue-600 p-3 rounded-md' placeholder='please enter your password' name="password"></input>
+              <input type='text' className='w-full border-[1px] border-blue-600 p-3 rounded-md' placeholder='please enter your email' name="email" defaultValue={"kminchelle"}></input>
+              <input type='password' className='w-full border-[1px] border-blue-600 p-3 rounded-md' placeholder='please enter your password' name="password" defaultValue={"0lelplR"}></input>
               <input type='submit' value="Submit Data" className='w-full bg-gray-500 p-1 text-white text-lg'></input>
             </form>
           </div>
