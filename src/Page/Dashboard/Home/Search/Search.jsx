@@ -83,7 +83,7 @@ const Search = ({ cardTable, setCardTable}) => {
 
 
   
-
+// custom product submit 
   const handleSubmit = (event) => {
     event.preventDefault();
     setCardTable([...cardTable, addCustomProduct])
