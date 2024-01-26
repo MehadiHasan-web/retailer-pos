@@ -18,7 +18,7 @@ const LogIn = () => {
     const formData = { username, password };
     console.log(formData)
     try {
-      const response = await axios.post('http://inv.xcode.com.bd/api/v1/account/login', formData);
+      const response = await axios.post('http://inv.xcode.com.bd/api/v1/account/login/', formData);
       console.log(response.data);
       if(response.status === 200) {
         setUser(response.data)
