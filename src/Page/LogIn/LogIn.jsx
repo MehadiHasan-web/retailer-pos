@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './LogIn.css'
 import Swal from 'sweetalert2'
 import Title from '../../Title/Title';
@@ -9,6 +9,7 @@ const LogIn = () => {
   const {setUser} = useAuth()
 
   const navigate = useNavigate()
+
 
   const submitData = async (event) => {
     event.preventDefault();

@@ -86,11 +86,11 @@ const router = createBrowserRouter([
         children : [
           {
             path : '/instituteManagement',
-            element : <BranchName></BranchName>
+            element : <InstituteName></InstituteName>
           },
           {
-            path : '/instituteManagement/instituteName',
-            element : <InstituteName></InstituteName>
+            path : '/instituteManagement/branchName',
+            element : <BranchName></BranchName>
           },
           {
             path : '/instituteManagement/departmentName',

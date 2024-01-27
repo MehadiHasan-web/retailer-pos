@@ -1,6 +1,13 @@
+import Title from './../../Title/Title';
+
+
 const SubCategory = () => {
+
   return (
     <div className=" mt-10 ">
+      {/* title section start */}
+      <Title pageName={"SubCategory"}></Title>
+        {/* title section end */}
       <div className=" p-5 rounded-lg shadow-md space-y-5 border-2 lg:w-2/5 mx-auto">
         <h1 className="text-center text-xl font-bold mb-4">Sub-category</h1>
         <div className="card shadow-2xl bg-base-100">
