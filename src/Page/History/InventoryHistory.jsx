@@ -156,23 +156,25 @@ useEffect(() => {
                             <p>20 january </p>
                         </td>
                         <td>
-                            {
+                            {/* {
                                 data.manager_status === 1 ? 'Pending' :
                                 data.manager_status === 2 ? 'hold' :
                                 data.manager_status === 3 ? 'disburse and hold' :
                                 data.manager_status === 4 ? 'disburse and in purchase req' :
                                 data.manager_status === 5 ? 'disbursed' :
                                 'Unknown'
-                            }
+                            } */}
+                            <p>{data.manager_status}</p>
                         </td>
                         <td>
-                            {
+                            {/* {
                                 data.approve_status === 1 ? 'Pending' :
                                 data.approve_status === 2 ? 'Approved' :
                                 data.approve_status === 3 ? 'Return' :
                                 data.approve_status === 4 ? 'Reject' :
                                 'Unknown'
-                            }
+                            } */}
+                            <p>{data.approve_status}</p>
                         </td>
 
                         <td>

@@ -1,16 +1,11 @@
 import { useState } from 'react';
 import Title from './../../Title/Title';
-<<<<<<< HEAD
-=======
-import { useEffect } from 'react';
->>>>>>> 0349602f28081b02b93af1434bb6ab8580250909
 import axios from 'axios';
 
 
 const ItemFrom = () => {
 
   const [itemFormItem, setItemFormItem] = useState([])
-<<<<<<< HEAD
   async function sendData(itemFormValue) {
     try {  
       const response = await axios.post("http://inv.xcode.com.bd/api/v1/inventory/inventory/", itemFormValue, {
@@ -24,32 +19,6 @@ const ItemFrom = () => {
       console.log(error)
     }
   }
-=======
-  const [subItemFormItem, setSubItemFormItem] = useState([])
-
-  useEffect(()=> {
-    axios.get('http://inv.xcode.com.bd/api/v1/inventory/catagorylist/')
-    .then(response => {
-      setItemFormItem(response.data)
-      // console.log('Response:', response.data);
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-  },[])
-
-  useEffect(()=> {
-    axios.get('http://inv.xcode.com.bd/api/v1/inventory/subcatagorylist/')
-    .then(response => {
-      setSubItemFormItem(response.data)
-      // console.log('Response:', response.data);
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-  },[])
-  console.log(subItemFormItem)
->>>>>>> 0349602f28081b02b93af1434bb6ab8580250909
 
 
   const subCategoryData = (event) => {
@@ -62,19 +31,9 @@ const ItemFrom = () => {
     const file = form.file.value;
     const stock = form.stock.value;
     const itemFormValue = {name, categoryId, subCategoryId, image, file, stock}
-<<<<<<< HEAD
     setItemFormItem(itemFormValue)
     sendData(itemFormValue)
     
-=======
-    axios.post('http://inv.xcode.com.bd/api/v1/inventory/subcatagorylist/', itemFormValue)
-    .then(response => {
-      console.log('Response:', response.data);
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
->>>>>>> 0349602f28081b02b93af1434bb6ab8580250909
   }
 
 
