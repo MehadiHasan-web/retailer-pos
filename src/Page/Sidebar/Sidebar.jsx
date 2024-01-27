@@ -39,6 +39,7 @@ const Sidebar = () => {
                 <li><Link to="/instituteManagement">Institute Management</Link></li>
               </>
             }
+            <li><Link to="/createUser">Create User</Link></li>
 
           </ul>
 

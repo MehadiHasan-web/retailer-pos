@@ -30,7 +30,6 @@ const ItemFrom = () => {
       console.error('Error:', error);
     });
   },[])
-  console.log(subItemFormItem)
 
 
   const subCategoryData = (event) => {
