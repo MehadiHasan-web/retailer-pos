@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Form.css'
 import axios from 'axios';
 
@@ -6,11 +6,18 @@ import axios from 'axios';
 const Form = () => {
 
   const [cardTable, setCardTable] = useState([])
+  const [approverList, setApprover] = useState([])
   const user_id = localStorage.getItem('user_id');
+
+  useEffect(() => {
+    axios.get(`http://inv.xcode.com.bd/api/v1/account/approvers/`)
+        .then((res) => res.data)
+        .then((data) => setApprover(data))
+        .catch((error) => console.error("Error fetching data:", error));
+}, []);
+
   async function sendData(userInfo) {
     try {
-    
-
       const response = await axios.post("http://inv.xcode.com.bd/api/v1/inventory/inventory/", userInfo, {
         headers: {
           'Content-Type': 'application/json',
@@ -22,6 +29,7 @@ const Form = () => {
       console.log(error)
     }
   }
+
   
   const userData = (event) => {
     event.preventDefault();
@@ -64,10 +72,13 @@ const Form = () => {
                 {/* file section start */}
                 <label className="form-control w-full flex-1">
                   <select className="select select-bordered select-sm h-6 lg:h-9 w-full max-w-xs" name='position'>
-                    <option selected>Select controller</option>
+                    {/* <option selected>Select controller</option>
                     <option value={'Approver'}>Approver</option>
                     <option value={'Manager'}>Manager</option>
-                    <option value={'Admin'}>Admin</option>
+                    <option value={'Admin'}>Admin</option> */}
+                    {approverList.map((item, index) => (
+                      <option key={index} value={item.id}>{item.username}</option>
+                    ))}
                   </select>
                 </label>
                 {/* file section end */}

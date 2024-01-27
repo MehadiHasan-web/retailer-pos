@@ -76,11 +76,21 @@ function Admin() {
     const takeAction = async (event) => {
         event.preventDefault();
         const form = event.target;
-        const reject = form.reject.value;
-        const approve_status = "pending";
-        const manager_status = "pending";
-        const data = { approve_status, manager_status}
-       
+        // const reject_msg = form.reject_msg.value;
+        // const approve_status =  form.approve_status.value;
+        // const manager_status =  form.manager_status.value;        
+        const approve_status = isApprover ? form.approve_status.value : (is_manager ? form.manager_status.value : null);
+
+        let data = {};
+        
+        if (is_manager) {
+            data.manager_status = form.manager_status.value;
+        } else {
+            data.approve_status = approve_status;
+        }
+        
+        console.log(data);
+        
         const response = await axios.put(`http://inv.xcode.com.bd/api/v1/inventory/inventory/${modalData.id}/`, data);
         
         if (response.status === 200) {
@@ -258,24 +268,29 @@ function Admin() {
 
                                         <h3 className="mt-3 font-semibold">Managerial Actions</h3>
                                         <form onSubmit={takeAction}>
-                                            <textarea className="textarea textarea-bordered my-3 w-full" placeholder="Return Message" name="reject"></textarea>
-                                            <select className="select select-bordered w-full" name="action">
-                                                <option selected>Take Actions</option>
-                                                {isApprover ? (
+                                            <textarea className="textarea textarea-bordered my-3 w-full" placeholder="Return Message" name="reject_msg"></textarea>
+                                            
+                                               
+                                                {isApprover ? (                                                    
                                                     <React.Fragment>
-                                                        <option value={'2'}>Approve {isApprover}</option>
-                                                        <option value={'3'}>Return</option>
-                                                        <option value={'4'}>Reject</option>
+                                                        <select className="select select-bordered w-full" name="approve_status">
+                                                        <option selected>Take Actions</option>
+                                                        <option value={'Approve'}>Approve {isApprover}</option>
+                                                        <option value={'Return'}>Return</option>
+                                                        <option value={'Reject'}>Reject</option>
+                                                        </select>
                                                     </React.Fragment>
                                                 ) : (is_manager ? (
                                                     <React.Fragment>
-                                                        <option value={'partial_disperse'}>Partial Disperse {is_manager}</option>
-                                                        <option value={'disburse'}>Disburse</option>
-                                                        <option value={'hold'}>Hold</option>
+                                                        <select className="select select-bordered w-full" name="manager_status">
+                                                        <option value={'Partial Disperse'}>Partial Disperse</option>
+                                                        <option value={'Disburse'}>Disburse</option>
+                                                        <option value={'Hold'}>Hold</option>
+                                                        </select>
                                                     </React.Fragment>
                                                 ) : null)}
 
-                                            </select>
+                                           
                                             <button className="btn btn-neutral mt-4">Submit</button>
                                         </form>
                                     </div>
