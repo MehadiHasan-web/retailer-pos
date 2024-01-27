@@ -33,7 +33,7 @@ const Home = () => {
 
 
 // use useEffect hook
-useEffect(() => {
+useEffect(() => {  
   axios.get("https://dummyjson.com/products")
     .then((res) => res.data)    
     .then((data) => setCard(data.products))

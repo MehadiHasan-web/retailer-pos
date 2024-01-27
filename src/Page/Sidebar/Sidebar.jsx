@@ -1,5 +1,9 @@
 import { Link } from "react-router-dom"
 
+
+const isApprover = localStorage.getItem('is_approver ');
+const is_manager = localStorage.getItem('is_manager');
+const is_designation = localStorage.getItem('designation');
 const Sidebar = () => {
 
 
@@ -20,11 +24,21 @@ const Sidebar = () => {
         <h2 className="text-center mb-8">Title heading</h2>
         <li><Link to="/history">Inventory History</Link></li>
         <li><Link to="/inventoryComplete">Inventory Complete</Link></li>
-        <li><Link to="/admin">Admin</Link></li>
+        {(isApprover || is_designation || is_manager) && (
+        <li>
+          <Link to="/admin">Admin</Link>
+        </li>
+      )}
+       
         <li><Link to="/purchaseRequest">Purchase Request</Link></li>
         <li><Link to="/myInventory">My Inventory</Link></li>
-        <li><Link to="/manageInventory">Manage Inventory</Link></li>
-        <li><Link to="/instituteManagement">Institute Management</Link></li>
+        {(is_manager || is_designation) && (
+          <li><Link to="/manageInventory">Manage Inventory</Link></li>
+        )}
+        {(isApprover || is_designation || is_manager) && (
+          <li><Link to="/instituteManagement">Institute Management</Link></li>
+        )}
+        
         
       </ul>
 

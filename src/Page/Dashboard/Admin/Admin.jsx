@@ -111,37 +111,6 @@ function Admin() {
                         </tr>
                         </thead>
                         <tbody>
-                            {/* <tr>                       
-                                <td>
-                                <div className="flex items-center gap-3">
-                                    <div className="avatar">
-                                    <div className="mask mask-squircle w-12 h-12">
-                                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" alt="Avatar Tailwind CSS Component" />
-                                    </div>
-                                    </div>
-                                    <div>
-                                    <div className="font-bold">Hart Hagerty</div>
-                                    <div className="text-sm opacity-50">United States</div>
-                                    </div>
-                                </div>
-                                </td>
-                                <td>
-                                    <p>20 january </p>
-                                </td>
-                                <td>
-                                    <p>20 january </p>
-                                </td>
-                                <td>4</td>
-                                <td>Pending</td>
-                                <td>
-                                <button className="btn btn-outline btn-success btn-sm" onClick={()=>document.getElementById('my_modal_4').showModal()}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z" />
-                                    </svg>
-                                </button>
-                                </td>
-                            
-                            </tr>*/}
                             {
                                 adminData.map((tableData, index) => <tr key={tableData.id}>
                                 <td>{++index}</td>                     
@@ -192,9 +161,9 @@ function Admin() {
                     </table>
                     {/* model  */}                    
                     <dialog id="my_modal_4" className="modal">
-                    <div className="modal-box w-[90%] max-w-5xl">
+                    <div className="modal-box w-11/12 max-w-[80%]">
                         <div className="flex flex-col md:flex-row">
-                            <div className="w-full md:w-[45%] order-1">
+                            <div className="w-full md:w-[60%] order-1">
                                 <h3 className="font-bold text-lg">Hart Hagerty</h3>
                                 <div className="w-full  rounded mt-6 ">
                                     {/* table start */}
@@ -236,14 +205,18 @@ function Admin() {
                                     </table>
                                     {/* table end */}
                                 </div>
+                                <div className="mb-4">
+                                    <h2 className="font-bold">Additional Information</h2>
+                                    <p className="text-justify mt-2">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Soluta quia perspiciatis voluptatem consequuntur magni itaque mollitia esse voluptatibus magnam earum, possimus amet iste eum recusandae rerum quis doloribus exercitationem expedita quisquam saepe! Odit rem reiciendis, nemo accusantium veniam quibusdam </p>
+                                    <button className="btn btn-success btn-md mt-4">Download File</button>
+                                </div>
                                 <p className="font-semibold">Request Date : <span>20 january</span></p>
                                 <p className="font-semibold">Perches Date: <span>20 january</span></p>
                                 <p className="font-semibold">Quantity : <span>4</span></p>
                             </div>
                             <div className="md:divider md:divider-horizontal md:divider-info mt-8 order-2 hidden mb:block"> OR </div>
-                            <div className="w-full md:w-[55%] order-3">
-                                <h2 className="font-bold">Additional Information</h2>
-                                <p  className="text-justify mt-2">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Soluta quia perspiciatis voluptatem consequuntur magni itaque mollitia esse voluptatibus magnam earum, possimus amet iste eum recusandae rerum quis doloribus exercitationem expedita quisquam saepe! Odit rem reiciendis, nemo accusantium veniam quibusdam </p>
+                            <div className="w-full md:w-[40%] order-3">                                
+                                
                                 <h3 className="mt-3 font-semibold">Attach File</h3>
                                 <div className="flex justify-start items-center gap-5 mt-4">
                                     <div>
@@ -253,7 +226,7 @@ function Admin() {
                                         </select>
                                     </div>
                                     <div>
-                                    <button className="btn btn-success btn-md">Download File</button>
+                                    
                                     </div>
                                 </div>
                             </div>
