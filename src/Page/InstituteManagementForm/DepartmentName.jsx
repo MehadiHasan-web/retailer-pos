@@ -5,12 +5,24 @@ import axios from 'axios';
 
 const DepartmentName = () => {
 
+  const [BranchName, setBranchName] = useState([])
   const [branchNameItem, setBranchNameItem] = useState([])
 
   useEffect(()=> {
     axios.get('http://inv.xcode.com.bd/api/v1/inventory/branchlist/')
     .then(response => {
       setBranchNameItem(response.data)
+      // console.log('Response:', response.data);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  },[])
+  
+  useEffect(()=> {
+    axios.get('http://inv.xcode.com.bd/api/v1/inventory/institutelist/')
+    .then(response => {
+      setBranchName(response.data)
       // console.log('Response:', response.data);
     })
     .catch(error => {
@@ -25,8 +37,8 @@ const DepartmentName = () => {
     const branch_id = form.branchName.value;
     const name = form.name.value;
     const note = form.note.value;
-    const departmentNameValue = { branch_id,name,note}
-    // setDepartmentNameItem(departmentNameValue)
+    const departmentNameValue = { branch,department,note}
+    // setBranchName(departmentNameValue)
     axios.post('http://inv.xcode.com.bd/api/v1/inventory/departmentlist/', departmentNameValue)
     .then(response => {
       console.log('Response:', response.data);
@@ -36,6 +48,8 @@ const DepartmentName = () => {
     });
     
   }
+
+  console.log(BranchName)
 
 
   return (
@@ -49,21 +63,23 @@ const DepartmentName = () => {
           <form onSubmit={departmentNameData} className="card-body">
           <div className="form-control">
               <label className="label">
-                <span className="label-text">Branch Name:</span>
+                <span className="label-text">Institute Name:</span>
               </label>
               <select className="select select-bordered w-full" name="branchName">
-              {
-                  branchNameItem.map((data, index) => <option key={index} value={data.id}>{data.name}</option>)
+                {
+                  BranchName.map((data, index) => <option key={index} value={data.id}>{data.name}</option>)
                 }
-                
             </select>
             </div>
           <div className="form-control">
               <label className="label">
-                <span className="label-text">Department Name:</span>
+                <span className="label-text">Branch Name:</span>
               </label>
-              <input className="input input-bordered w-full" name="name">
-            </input>
+              <select className="select select-bordered w-full" name="department">
+                {
+                  branchNameItem.map((data, index) => <option key={index} value={data.id}>{data.name}</option>)
+                }
+            </select>
             </div>
             <div className="form-control">
               <label className="label">

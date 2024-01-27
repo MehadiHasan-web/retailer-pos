@@ -6,17 +6,26 @@ import './InventoryHistory.css'
 import { MdDelete } from "react-icons/md";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 
 function InventoryHistory() {
 
     const [startDate, setStartDate] = useState(new Date());
     const [userData, setUserData] = useState([])
-    useEffect(() => {
-        fetch('card.json')
-        .then((res) => res.json())
+    // useEffect(() => {
+    //     fetch('card.json')
+    //     .then((res) => res.json())
+    //     .then((data) => setUserData(data))
+    // },[])
+
+useEffect(() => {
+    const user_id = localStorage.getItem('user_id');
+    axios.get(`http://inv.xcode.com.bd/api/v1/inventory/myinventoryrequest/${user_id}/`)
+        .then((res) => res.data)
         .then((data) => setUserData(data))
-    },[])
+        .catch((error) => console.error("Error fetching data:", error));
+}, []);
 
       // increment Quantity 
   const incrementQuantity = (data) => {
@@ -113,10 +122,9 @@ function InventoryHistory() {
                     </th>
                     <th  className="text-black">Name</th>
                     <th  className="text-black">Request Date</th>
-                    <th  className="text-black">Perches Date</th>
                     <th  className="text-black">Receive Date</th>
-                    <th  className="text-black">Quantity</th>
-                    <th  className="text-black">Status</th>
+                    <th  className="text-black">Manager Status</th>                    
+                    <th  className="text-black">Approver Status</th>
                     <th  className="text-black">Show/Action</th>
                 </tr>
                 </thead>
@@ -136,8 +144,8 @@ function InventoryHistory() {
                                 </div>
                                 </div>
                                 <div>
-                                <div className="font-bold">Hart Hagerty</div>
-                                <div className="text-sm opacity-50">United States</div>
+                                <div className="font-bold">{data.user.username}</div>
+                                <div className="text-sm opacity-50">{data.user.designation}</div>
                                 </div>
                             </div>
                         </td>
@@ -148,12 +156,25 @@ function InventoryHistory() {
                             <p>20 january </p>
                         </td>
                         <td>
-                            <p>20 january </p>
+                            {
+                                data.manager_status === 1 ? 'Pending' :
+                                data.manager_status === 2 ? 'hold' :
+                                data.manager_status === 3 ? 'disburse and hold' :
+                                data.manager_status === 4 ? 'disburse and in purchase req' :
+                                data.manager_status === 5 ? 'disbursed' :
+                                'Unknown'
+                            }
                         </td>
-                        <td>4</td>
                         <td>
-                        <button className="btn btn-outline btn-error btn-xs">Cenacle</button>
+                            {
+                                data.approve_status === 1 ? 'Pending' :
+                                data.approve_status === 2 ? 'Approved' :
+                                data.approve_status === 3 ? 'Return' :
+                                data.approve_status === 4 ? 'Reject' :
+                                'Unknown'
+                            }
                         </td>
+
                         <td>
                         <button className="btn btn-outline btn-success btn-sm" onClick={()=>document.getElementById('my_modal_4').showModal()}>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -173,10 +194,9 @@ function InventoryHistory() {
                     </th>
                     <th  className="text-black">Name</th>
                     <th  className="text-black">Request Date</th>
-                    <th  className="text-black">Perches Date</th>
                     <th  className="text-black">Receive Date</th>
-                    <th  className="text-black">Quantity</th>
-                    <th  className="text-black">Status</th>
+                    <th  className="text-black">Manager Status</th>
+                    <th  className="text-black">Approver Status</th>    
                     <th  className="text-black">Show/Action</th>
                 </tr>
                 </tfoot>
