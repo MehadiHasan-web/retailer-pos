@@ -1,7 +1,27 @@
+import { useState } from 'react';
 import Title from './../../Title/Title';
 
 
 const ItemFrom = () => {
+
+  const [itemFormItem, setItemFormItem] = useState([])
+
+  const subCategoryData = (event) => {
+    event.preventDefault()
+    const form = event.target;
+    const name = form.name.value;
+    const categoryId = form.categoryId.value;
+    const subCategoryId = form.subCategoryId.value;
+    const image = form.image.value;
+    const file = form.file.value;
+    const stock = form.stock.value;
+    const itemFormValue = {name, categoryId, subCategoryId, image, file, stock}
+    setItemFormItem(itemFormValue)
+  }
+
+  console.log(itemFormItem)
+
+
   return (
     <div className="mt-10 ">
       {/* title section start */}
@@ -10,7 +30,7 @@ const ItemFrom = () => {
       <div className=" p-5 rounded-lg shadow-md space-y-5 border-2 lg:w-2/5 mx-auto">
         <h1 className="text-center text-xl font-bold mb-4">Item</h1>
         <div className="card shadow-2xl bg-base-100">
-          <form className="card-body">
+          <form onSubmit={subCategoryData} className="card-body">
             {/* Name field */}
             <div className="form-control">
               <label className="label">
@@ -18,9 +38,9 @@ const ItemFrom = () => {
               </label>
               <input
                 type="text"
-                placeholder="Name"
+                placeholder="enter your name"
                 className="input input-bordered"
-                required
+                name="name"
               />
             </div>
             {/* Category-id field */}
@@ -28,24 +48,22 @@ const ItemFrom = () => {
               <label className="label">
                 <span className="label-text">Category-id:</span>
               </label>
-              <input
-                type="text"
-                placeholder="Type here"
-                className="input input-bordered"
-                required
-              />
+              <select type="number" name="categoryId" className="select select-bordered w-full">
+              <option value={1}>1</option>
+              <option value={2}>2</option>
+              <option value={3}>3</option>
+            </select>
             </div>
             {/* sub-category-id field */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Sub-category-id:</span>
               </label>
-              <input
-                type="text"
-                placeholder="Type here"
-                className="input input-bordered"
-                required
-              />
+              <select type="number" name="subCategoryId" className="select select-bordered w-full">
+              <option value={1}>1</option>
+              <option value={2}>2</option>
+              <option value={3}>3</option>
+            </select>
             </div>
             {/* image field */}
             <div className="form-control">
@@ -54,8 +72,9 @@ const ItemFrom = () => {
               </label>
               <input
                 type="file"
-                className="file-input w-full max-w-xs"
+                className="file-input w-full"
                 accept="image/*"
+                name="image"
               />
             </div>
             {/* File field */}
@@ -65,8 +84,9 @@ const ItemFrom = () => {
               </label>
               <input
                 type="file"
-                className="file-input w-full max-w-xs"
+                className="file-input file-input-bordered w-full"
                 accept=".pdf,.doc,docx"
+                name="file"
               />
             </div>
             {/* stock field */}
@@ -75,14 +95,14 @@ const ItemFrom = () => {
                 <span className="label-text">Stock:</span>
               </label>
               <input
-                type="text"
+                type="number"
                 placeholder="Type here"
                 className="input input-bordered"
-                required
+                name="stock"
               />
             </div>
             <div className="form-control mt-6">
-              <button className="btn btn-primary">Create</button>
+              <button type='submit' className="btn btn-primary">Create</button>
             </div>
           </form>
         </div>
