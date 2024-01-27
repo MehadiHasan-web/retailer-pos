@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import Title from './../../Title/Title';
+import axios from 'axios';
 
 
 const CategoryFrom = () => {
@@ -13,8 +14,14 @@ const CategoryFrom = () => {
     const form = event.target;
     const name = form.name.value;
     const categoryFormValue = { name}
-    setCategoryFormItem(categoryFormValue)
-
+    // setCategoryFormItem(categoryFormValue)
+    axios.post('http://inv.xcode.com.bd/api/v1/inventory/catagorylist/', categoryFormValue)
+    .then(response => {
+      console.log('Response:', response.data);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
     
   }
 
