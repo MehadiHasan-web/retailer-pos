@@ -24,14 +24,6 @@ const Form = ({cardTable,setCardTable}) => {
     .catch(error => {
       console.error('Error:', error);
     });
-  //  https://inv.xcode.com/api/v1/inventory/inventory/
-    // axios.get('https://inv.xcode.com.bd/api/v1/account/users/')
-    // .then(response => {
-    //   console.log('Response:', response.data);
-    // })
-    // .catch(error => {
-    //   console.error('Error:', error);
-    // });
     
   }
 
