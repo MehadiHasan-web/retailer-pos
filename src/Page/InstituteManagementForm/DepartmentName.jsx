@@ -1,19 +1,38 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Title from './../../Title/Title';
+import axios from 'axios';
 
 const DepartmentName = () => {
 
   const [departmentNameItem, setDepartmentNameItem] = useState([])
 
+  useEffect(()=> {
+    axios.get('')
+    .then(response => {
+      setDepartmentNameItem(response.data)
+      // console.log('Response:', response.data);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  },[])
+
   const departmentNameData = (event) => {
     event.preventDefault()
     const form = event.target;
+    const branch = form.branchName.value;
     const department = form.department.value;
     const note = form.note.value;
-    const departmentNameValue = { department,note}
-    setDepartmentNameItem(departmentNameValue)
-
+    const departmentNameValue = { branch,department,note}
+    // setDepartmentNameItem(departmentNameValue)
+    axios.post('', departmentNameValue)
+    .then(response => {
+      console.log('Response:', response.data);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
     
   }
 
@@ -29,6 +48,16 @@ const DepartmentName = () => {
         <h1 className="text-center text-xl font-bold mb-4">Department Name</h1>
         <div className="card shadow-2xl bg-base-100">
           <form onSubmit={departmentNameData} className="card-body">
+          <div className="form-control">
+              <label className="label">
+                <span className="label-text">Branch Name:</span>
+              </label>
+              <select className="select select-bordered w-full" name="branchName">
+                <option value={"normal"}>Normal</option>
+                <option value={"normal1"}>Normal1</option>
+                <option value={"normal2"}>Normal2</option>
+            </select>
+            </div>
           <div className="form-control">
               <label className="label">
                 <span className="label-text">Department Name:</span>
