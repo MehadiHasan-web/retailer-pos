@@ -3,28 +3,13 @@ import './Form.css'
 import axios from 'axios';
 
 // eslint-disable-next-line react/prop-types
-const Form = ({cardTable,setCardTable}) => {
-  // const { cardTable, setCardTable } = props;
+const Form = () => {
 
-  const [userInfo, setUserInfo] = useState([])
+  const [cardTable, setCardTable] = useState([])
 
-
-  // clear function 
-  const handleClearCardTable = () => {
-    setCardTable([]);
-    localStorage.removeItem('cardTable');
-  };
 
   function sendData(userInfo){
-    // console.log(userInfo)
-    axios.post('http://inv.xcode.com.bd/api/v1/inventory/inventory/', userInfo)
-    .then(response => {
-      console.log('Response:', response.data);
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-    
+    console.log(userInfo)
   }
 
   const userData = (event) => {
@@ -34,11 +19,15 @@ const Form = ({cardTable,setCardTable}) => {
     const bio = form.bio.value;
     const position = form.position.value;
     const user = {file,bio,position}
-    setUserInfo([...cardTable, user])
-    sendData(userInfo)   
-    console.log(userInfo)
-  }
+    const initialCardTable = JSON.parse(localStorage.getItem('cardTable')) || [];
+  // // Update cardTable state with the data from localStorage
+  setCardTable(initialCardTable);
 
+  setCardTable((prevCardTable) => [...prevCardTable, user]);
+
+  const updatedCardTable = [...initialCardTable, user];
+  sendData(updatedCardTable);
+  }
 
 
   return (
@@ -73,7 +62,7 @@ const Form = ({cardTable,setCardTable}) => {
               <textarea type="text" placeholder="Bio" className="textarea textarea-lg w-full mt-1" id='bio' name="bio"></textarea>
             {/* textarea section end */}
           <div className='flex gap-2 mt-1'>       
-          <button className='bg-red-500 text-white md:text-sm lg:text-base md:px-2 md:py-1 lg:px-3 lg:py-2 uppercase rounded' type='button' onClick={handleClearCardTable}>Clear All</button>
+          <button className='bg-red-500 text-white md:text-sm lg:text-base md:px-2 md:py-1 lg:px-3 lg:py-2 uppercase rounded' type='button' >Clear All</button>
           <button
               className='bg-blue-500 text-white md:text-sm lg:text-base md:px-2 md:py-1 lg:px-3 lg:py-2 uppercase rounded' type='submit'>Inventory Request</button>
           </div>

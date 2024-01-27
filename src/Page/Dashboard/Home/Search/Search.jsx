@@ -36,7 +36,6 @@ const Search = ({ cardTable, setCardTable}) => {
     .then((data) => setSubcategories(data))
   },[])
 
-  console.log(categories)
   // search functionality
   const filteredProducts = (e) =>{
   e.preventDefault();
