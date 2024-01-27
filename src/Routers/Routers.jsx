@@ -85,12 +85,12 @@ const router = createBrowserRouter([
         element: <InstituteManagement></InstituteManagement>,
         children: [
           {
-            path: '/instituteManagement',
-            element: <BranchName></BranchName>
+            path : '/instituteManagement',
+            element : <InstituteName></InstituteName>
           },
           {
-            path: '/instituteManagement/instituteName',
-            element: <InstituteName></InstituteName>
+            path : '/instituteManagement/branchName',
+            element : <BranchName></BranchName>
           },
           {
             path: '/instituteManagement/departmentName',

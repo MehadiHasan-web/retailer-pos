@@ -19,7 +19,7 @@ function Navbar() {
         <Sidebar></Sidebar>
     </div>
     <div className="navbar-center" >
-        <Link to="/home" className="btn btn-ghost text-xl">Holos-techies</Link>
+        <Link to="/" className="btn btn-ghost text-xl">Holos-techies</Link>
     </div>
     <div className="navbar-end" >
         <button className="btn btn-ghost btn-circle">

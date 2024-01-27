@@ -15,15 +15,17 @@ const Form = ({cardTable,setCardTable}) => {
     localStorage.removeItem('cardTable');
   };
 
-  function sendData(){
-    axios.post('http://inv.xcode.com/api/v1/inventory/inventory/', userInfo)
+  function sendData(userInfo){
+    // console.log(userInfo)
+    axios.post('http://inv.xcode.com.bd/api/v1/inventory/inventory/', userInfo)
     .then(response => {
       console.log('Response:', response.data);
     })
     .catch(error => {
       console.error('Error:', error);
     });
-    // axios.get('https://inv.xcode.com.bd/api/v1/account/users/?format=json')
+  //  https://inv.xcode.com/api/v1/inventory/inventory/
+    // axios.get('https://inv.xcode.com.bd/api/v1/account/users/')
     // .then(response => {
     //   console.log('Response:', response.data);
     // })
@@ -41,7 +43,8 @@ const Form = ({cardTable,setCardTable}) => {
     const position = form.position.value;
     const user = {file,bio,position}
     setUserInfo([...cardTable, user])
-    sendData()
+    sendData(userInfo)   
+    console.log(userInfo)
   }
 
 
