@@ -210,12 +210,17 @@ function Admin() {
                             <div className="w-full md:w-[40%] order-3">                                
                                 
                                 <h3 className="mt-3 font-semibold">Attach File</h3>
-                                <div className="flex justify-start items-center gap-5 mt-4">
+                                <div className=" mt-4">
                                     <div>
-                                    <select className="select select-bordered w-full">
-                                        <option>Approve</option>
-                                        <option>Disable</option>
-                                        </select>
+                                        <form>
+                                            <textarea name="bioData" placeholder="Bio" className="textarea textarea-bordered textarea-md w-full" ></textarea>
+                                            <select name="" className="select select-bordered w-full mt-2">
+                                            <option value={""}>Approve</option>
+                                            <option value={""}>Disable</option>
+                                            </select>
+                                            <button type="submit" className="btn btn-success w-28 mt-2">Submit</button>
+                                        </form>
+                                    
                                     </div>
                                     <div>
                                     

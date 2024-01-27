@@ -1,10 +1,37 @@
 import { useState } from 'react';
 import Title from './../../Title/Title';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 
 const ItemFrom = () => {
 
   const [itemFormItem, setItemFormItem] = useState([])
+  const [subItemFormItem, setSubItemFormItem] = useState([])
+
+  useEffect(()=> {
+    axios.get('http://inv.xcode.com.bd/api/v1/inventory/catagorylist/')
+    .then(response => {
+      setItemFormItem(response.data)
+      // console.log('Response:', response.data);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  },[])
+
+  useEffect(()=> {
+    axios.get('http://inv.xcode.com.bd/api/v1/inventory/subcatagorylist/')
+    .then(response => {
+      setSubItemFormItem(response.data)
+      // console.log('Response:', response.data);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  },[])
+  console.log(subItemFormItem)
+
 
   const subCategoryData = (event) => {
     event.preventDefault()
@@ -16,10 +43,15 @@ const ItemFrom = () => {
     const file = form.file.value;
     const stock = form.stock.value;
     const itemFormValue = {name, categoryId, subCategoryId, image, file, stock}
-    setItemFormItem(itemFormValue)
+    axios.post('http://inv.xcode.com.bd/api/v1/inventory/subcatagorylist/', itemFormValue)
+    .then(response => {
+      console.log('Response:', response.data);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
   }
 
-  console.log(itemFormItem)
 
 
   return (
@@ -49,9 +81,9 @@ const ItemFrom = () => {
                 <span className="label-text">Category-id:</span>
               </label>
               <select type="number" name="categoryId" className="select select-bordered w-full">
-              <option value={1}>1</option>
-              <option value={2}>2</option>
-              <option value={3}>3</option>
+              {
+                itemFormItem.map((data,index) => <option key={index} value={data.id}>{data.name}</option>)
+              }
             </select>
             </div>
             {/* sub-category-id field */}
@@ -60,9 +92,9 @@ const ItemFrom = () => {
                 <span className="label-text">Sub-category-id:</span>
               </label>
               <select type="number" name="subCategoryId" className="select select-bordered w-full">
-              <option value={1}>1</option>
-              <option value={2}>2</option>
-              <option value={3}>3</option>
+              {
+                subItemFormItem.map((data,index) => <option key={index} value={data.id}>{data.name}</option>)
+              }
             </select>
             </div>
             {/* image field */}

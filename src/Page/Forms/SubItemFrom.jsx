@@ -1,10 +1,22 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Title from './../../Title/Title';
+import axios from 'axios';
 
 const SubItemFrom = () => {
 
   const [subItemFormItem, setItemFormItem] = useState([])
+
+  useEffect(()=> {
+    axios.get('http://inv.xcode.com.bd/api/v1/inventory/itemlist/')
+    .then(response => {
+      setItemFormItem(response.data)
+      // console.log('Response:', response.data);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  },[])
 
   const subItemFormData = (event) => {
     event.preventDefault()
@@ -15,7 +27,13 @@ const SubItemFrom = () => {
     const file = form.file.value;
     const stock = form.stock.value;
     const categoryFormValue = {name, itemName, image, file, stock}
-    setItemFormItem(categoryFormValue)
+    axios.post('http://inv.xcode.com.bd/api/v1/inventory/subitemlist/', categoryFormValue)
+    .then(response => {
+      console.log('Response:', response.data);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
 
     
   }
@@ -49,9 +67,10 @@ const SubItemFrom = () => {
                 <span className="label-text">Item-name:</span>
               </label>
               <select type="text" name="itemName" className="select select-bordered w-full">
+                {
+                  subItemFormItem.map((data, index) => <option key={index} value={data.id}>{data.name}</option>)
+                }
               <option value={"one"}>one</option>
-              <option value={"two"}>two</option>
-              <option value={"three"}>three</option>
             </select>
             </div>
            

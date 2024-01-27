@@ -4,9 +4,12 @@ import Title from './../../Title/Title';
 import axios from 'axios';
 import { useEffect } from 'react';
 
+
 const BranchName = () => {
 
   const [branchNameItem, setBranchNameItem] = useState([])
+  
+  
 
   useEffect(()=> {
     axios.get('http://inv.xcode.com.bd/api/v1/inventory/institutelist/')
@@ -87,7 +90,7 @@ const BranchName = () => {
               />
             </div>
             <div className="form-control mt-6">
-              <button type='submit' className="btn btn-primary">Create</button>
+              <button  type='submit' className="btn btn-primary">Create</button>
             </div>
           </form>
         </div>
