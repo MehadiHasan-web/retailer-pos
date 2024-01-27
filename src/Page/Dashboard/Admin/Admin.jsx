@@ -11,20 +11,21 @@ function Admin() {
     const [startDate, setStartDate] = useState(new Date());
     const [adminData, setAdminData] = useState([])
 
-    const isApprover = localStorage.getItem('is_approver');
-    const is_manager = localStorage.getItem('is_manager');
-    useEffect(() => {
-        fetch('card.json')
-        .then((res) => res.json())
-        .then((data) => setAdminData(data))
-    },[])
-
+    const isApprover = localStorage.getItem('is_approver') === 'true';
+    const is_manager = localStorage.getItem('is_manager')=== 'true';
+    // const adminAndManager = isApprover || is_manager;
     // useEffect(() => {
-    //     axios.get("https://dummyjson.com/products")
-    //       .then((res) => res.data)
-    //       .then((data) => setAdminData(data.products))
-    //       .catch((error) => console.error("Error fetching data:", error));
-    //   }, []);
+    //     fetch('card.json')
+    //     .then((res) => res.json())
+    //     .then((data) => setAdminData(data))
+    // },[])
+
+    useEffect(() => {
+        axios.get("http://inv.xcode.com.bd/api/v1/inventory/inventory/")
+          .then((res) => res.data)
+          .then((data) => setAdminData(data))
+          .catch((error) => console.error("Error fetching data:", error));
+      }, []);
 
       // increment Quantity 
   const incrementQuantity = (data) => {
@@ -57,6 +58,22 @@ function Admin() {
   
     setAdminData(updatedTable);
   };
+  const takeAction = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const reject = form.reject.value;
+    const action = form.action.value;
+    const data = { action, reject }
+    const initialCardTable = JSON.parse(localStorage.getItem('cardTable')) || [];
+    // // Update cardTable state with the data from localStorage
+    setCardTable(initialCardTable);
+
+    setCardTable((prevCardTable) => [...prevCardTable, user]);
+
+    const updatedCardTable = [...initialCardTable, user];
+    sendData(updatedCardTable);
+    console.log(user)
+  }
 
   return (
     <div>
@@ -220,10 +237,10 @@ function Admin() {
                             <div className="md:divider md:divider-horizontal md:divider-info mt-8 order-2 hidden mb:block"> OR </div>
                             <div className="w-full md:w-[40%] order-3">                                
                                 
-                            <h3 className="mt-3 font-semibold">Attach File</h3>
-                            <form action="">
-                                <textarea className="textarea textarea-bordered my-3 w-full" placeholder="Return Message"></textarea>
-                                <select className="select select-bordered w-full">
+                            <h3 className="mt-3 font-semibold">Managerial Actions</h3>
+                            <form  onSubmit={takeAction}>
+                                <textarea className="textarea textarea-bordered my-3 w-full" placeholder="Return Message" name="reject"></textarea>
+                                <select className="select select-bordered w-full" name="action">
                                     <option selected>Take Actions</option>                                    
                                     {isApprover ? (
                                         <React.Fragment>
@@ -237,7 +254,7 @@ function Admin() {
                                         <option value={'disburse'}>Disburse</option>
                                         <option value={'hold'}>Hold</option>
                                         </React.Fragment>
-                                    ) : null)}
+                                    ) : null)}       
                                   
                                 </select>
                                 <button className="btn btn-neutral mt-4">Submit</button>
