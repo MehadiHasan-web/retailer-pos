@@ -24,6 +24,9 @@ const LogIn = () => {
       if(response.status === 200) {
         setUser(response.data)
         localStorage.setItem('token', response.data.token)
+        localStorage.setItem('is_approver', response.data.is_approver)
+        localStorage.setItem('is_manager', response.data.is_manager)
+        localStorage.setItem('designation', response.data.designation)
         navigate('/')
         Swal.fire({
           title: "Good job!",
