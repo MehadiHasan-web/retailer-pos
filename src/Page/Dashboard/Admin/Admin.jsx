@@ -104,8 +104,6 @@ function Admin() {
                             <th  className="text-black">#</th>
                             <th  className="text-black">Name</th>
                             <th  className="text-black">Request Date</th>
-                            <th  className="text-black">Perches Date</th>
-                            <th  className="text-black">Quantity</th>
                             <th  className="text-black">Status</th>
                             <th  className="text-black">Show/Actions</th>
                         </tr>
@@ -129,10 +127,6 @@ function Admin() {
                                 <td>
                                     <p>20 january </p>
                                 </td>
-                                <td>
-                                    <p>20 january </p>
-                                </td>
-                                <td>{tableData.quantity}</td>
                                 <td>Pending</td>
                                 <td>
                                 <button className="btn btn-outline btn-success btn-sm" onClick={()=>document.getElementById('my_modal_4').showModal()}>
@@ -151,8 +145,6 @@ function Admin() {
                             <th  className="text-black">#</th>
                             <th  className="text-black">Name</th>
                             <th  className="text-black">Request Date</th>
-                            <th  className="text-black">Perches Date</th>
-                            <th  className="text-black">Quantity</th>
                             <th  className="text-black">Status</th>
                             <th  className="text-black">Show/Actions</th>
                         </tr>

@@ -54,36 +54,36 @@ const router = createBrowserRouter([
         element: <PurchaseRequest></PurchaseRequest>
       },
       {
-        path:"/manageInventory",
-        element:<ManageInventory></ManageInventory>,
-        children:[
+        path: "/manageInventory",
+        element: <ManageInventory></ManageInventory>,
+        children: [
           {
-            path:"/manageInventory",
-            element:<CategoryFrom></CategoryFrom>
+            path: "/manageInventory",
+            element: <CategoryFrom></CategoryFrom>
 
           },
           {
-            path:"/manageInventory/subcategory",
-            element:<SubCategory></SubCategory>
+            path: "/manageInventory/subcategory",
+            element: <SubCategory></SubCategory>
 
           },
           {
-            path:"/manageInventory/item",
-            element:<ItemFrom></ItemFrom>
+            path: "/manageInventory/item",
+            element: <ItemFrom></ItemFrom>
 
           },
           {
-            path:"/manageInventory/subItem",
-            element:<SubItemFrom></SubItemFrom>
+            path: "/manageInventory/subItem",
+            element: <SubItemFrom></SubItemFrom>
 
           },
-          
+
         ]
       },
       {
-        path : '/instituteManagement',
-        element : <InstituteManagement></InstituteManagement>,
-        children : [
+        path: '/instituteManagement',
+        element: <InstituteManagement></InstituteManagement>,
+        children: [
           {
             path : '/instituteManagement',
             element : <InstituteName></InstituteName>
@@ -93,12 +93,12 @@ const router = createBrowserRouter([
             element : <BranchName></BranchName>
           },
           {
-            path : '/instituteManagement/departmentName',
-            element : <DepartmentName></DepartmentName>
+            path: '/instituteManagement/departmentName',
+            element: <DepartmentName></DepartmentName>
           },
         ]
       }
-    ] 
+    ]
   },
 
 ]);
