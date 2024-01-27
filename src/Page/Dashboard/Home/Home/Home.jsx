@@ -60,7 +60,7 @@ const Home = () => {
     } else {
       const newData = {
         id: data.id,
-        name: data.name, //if our have name than use: data.name 
+        name: data.name,
         quantity: 1
       };
       setCardTable([...cardTable, newData]);

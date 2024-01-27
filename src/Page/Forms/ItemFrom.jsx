@@ -1,10 +1,25 @@
 import { useState } from 'react';
 import Title from './../../Title/Title';
+import axios from 'axios';
 
 
 const ItemFrom = () => {
 
   const [itemFormItem, setItemFormItem] = useState([])
+  async function sendData(itemFormValue) {
+    try {  
+      const response = await axios.post("http://inv.xcode.com.bd/api/v1/inventory/inventory/", itemFormValue, {
+        headers: {
+          'Content-Type': 'application/json',
+          // 'user_id': user_id,
+        },
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
 
   const subCategoryData = (event) => {
     event.preventDefault()
@@ -17,6 +32,8 @@ const ItemFrom = () => {
     const stock = form.stock.value;
     const itemFormValue = {name, categoryId, subCategoryId, image, file, stock}
     setItemFormItem(itemFormValue)
+    sendData(itemFormValue)
+    
   }
 
   console.log(itemFormItem)
@@ -30,7 +47,7 @@ const ItemFrom = () => {
       <div className=" p-5 rounded-lg shadow-md space-y-5 border-2 lg:w-2/5 mx-auto">
         <h1 className="text-center text-xl font-bold mb-4">Item</h1>
         <div className="card shadow-2xl bg-base-100">
-          <form onSubmit={subCategoryData} className="card-body">
+          <form onSubmit={subCategoryData} className="card-body" >
             {/* Name field */}
             <div className="form-control">
               <label className="label">
