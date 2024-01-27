@@ -1,10 +1,7 @@
-
-import { useState } from 'react';
 import Title from './../../Title/Title';
+import axios from 'axios';
 
 const InstituteName = () => {
-
-  const [instituteNameItem, setInstituteNameItem] = useState([])
 
   const instituteNameData = (event) => {
     event.preventDefault()
@@ -12,10 +9,16 @@ const InstituteName = () => {
     const name = form.name.value;
     const note = form.note.value;
     const instituteNameValue = {name, note}
-    setInstituteNameItem(instituteNameValue)
+    // setInstituteNameItem(instituteNameValue)
+    axios.post('http://inv.xcode.com.bd/api/v1/inventory/institutelist/', instituteNameValue)
+    .then(response => {
+      console.log('Response:', response.data);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
   }
 
-  console.log(instituteNameItem)
 
   return (
     <div className="mt-10 ">{/* title section start */}

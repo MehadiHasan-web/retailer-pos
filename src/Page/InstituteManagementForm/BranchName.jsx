@@ -1,22 +1,42 @@
 
 import { useState } from 'react';
 import Title from './../../Title/Title';
+import axios from 'axios';
+import { useEffect } from 'react';
 
 const BranchName = () => {
 
   const [branchNameItem, setBranchNameItem] = useState([])
 
+  useEffect(()=> {
+    axios.get('http://inv.xcode.com.bd/api/v1/inventory/institutelist/')
+    .then(response => {
+      setBranchNameItem(response.data)
+      // console.log('Response:', response.data);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  },[])
+
   const branchNameData = (event) => {
     event.preventDefault()
     const form = event.target;
-    const institute = form.institute.value;
+    const Institute = form.institute.value;
+    const name = form.name.value;
     const note = form.note.value;
     const location = form.location.value;
-    const branchNameValue = { institute,note,location}
-    setBranchNameItem(branchNameValue)
+    const branchNameValue = { Institute,name,note,location}
+    // setBranchNameItem(branchNameValue)
+    axios.post('http://inv.xcode.com.bd/api/v1/inventory/branchlist/', branchNameValue)
+    .then(response => {
+      console.log('Response:', response.data);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
   }
 
-  console.log(branchNameItem)
 
   
 
@@ -35,10 +55,19 @@ const BranchName = () => {
                 <span className="label-text">Institute Name:</span>
               </label>
               <select className="select select-bordered w-full" name="institute">
-                <option value={"normal"}>Normal</option>
-                <option value={"normal1"}>Normal1</option>
-                <option value={"normal2"}>Normal2</option>
+                {
+                  branchNameItem.map((data, index) => <option key={index} value={data.id}>{data.name}</option>)
+                }
+                
             </select>
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Name:</span>
+              </label>
+              <input placeholder="enter your name" type="text"
+                className="input input-bordered"
+                name="name"></input>
             </div>
             <div className="form-control">
               <label className="label">
