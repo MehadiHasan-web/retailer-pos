@@ -34,9 +34,9 @@ const Home = () => {
 
   // use useEffect hook
   useEffect(() => {
-    axios.get("https://dummyjson.com/products")
+    axios.get("http://inv.xcode.com.bd/api/v1/inventory/itemlist/")
       .then((res) => res.data)
-      .then((data) => setCard(data.products))
+      .then((data) => setCard(data))
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
 
@@ -60,7 +60,7 @@ const Home = () => {
     } else {
       const newData = {
         id: data.id,
-        name: data.title, //if our have name than use: data.name 
+        name: data.name, //if our have name than use: data.name 
         quantity: 1
       };
       setCardTable([...cardTable, newData]);
@@ -96,7 +96,7 @@ const Home = () => {
                         data.image ? <img className='w-full h-20 sm:h-24 md:h-20 lg:h-28 rounded' src={data.image}></img> : <img src={blankImg} className='w-full h-20 sm:h-24 md:h-20 lg:h-28 rounded'></img>
                       }
                       <div>
-                        <h2 className='text-sm sm:text-base md:text-sm lg:text-sm font-semibold mx-auto my-1 md:my-1 lg:my-2'>{data.name ? data.name : data.title}</h2>
+                        <h2 className='text-sm sm:text-base md:text-sm lg:text-sm font-semibold mx-auto my-1 md:my-1 lg:my-2'>{data.name ? data.name : data.name}</h2>
                         <p className='text-sm sm:text-base md:text-sm'>Stock : {data.stock === 0 ? 'stock out' : data.stock}</p>
                         <button onClick={() => cardData(data)} className='btn  w-full mt-1 md:mt-2 h-4 sm:h-4 md:h-1'>
                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">

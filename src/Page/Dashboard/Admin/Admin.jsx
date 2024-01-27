@@ -1,20 +1,31 @@
 import Title from "../../../Title/Title"
-import  { useEffect, useState } from "react";
+import  React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import { MdDelete } from "react-icons/md";
 import { FiMinus } from 'react-icons/fi';
 import { FiPlus } from 'react-icons/fi';
 import Swal from "sweetalert2";
+import axios from "axios";
 
 function Admin() {
     const [startDate, setStartDate] = useState(new Date());
     const [adminData, setAdminData] = useState([])
 
+    const isApprover = localStorage.getItem('is_approver') === 'true';
+    const is_manager = localStorage.getItem('is_manager')=== 'true';
+    // const adminAndManager = isApprover || is_manager;
+    // useEffect(() => {
+    //     fetch('card.json')
+    //     .then((res) => res.json())
+    //     .then((data) => setAdminData(data))
+    // },[])
+
     useEffect(() => {
-        fetch('card.json')
-        .then((res) => res.json())
-        .then((data) => setAdminData(data))
-    },[])
+        axios.get("http://inv.xcode.com.bd/api/v1/inventory/inventory/")
+          .then((res) => res.data)
+          .then((data) => setAdminData(data))
+          .catch((error) => console.error("Error fetching data:", error));
+      }, []);
 
       // increment Quantity 
   const incrementQuantity = (data) => {
@@ -47,6 +58,22 @@ function Admin() {
   
     setAdminData(updatedTable);
   };
+  const takeAction = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const reject = form.reject.value;
+    const action = form.action.value;
+    const data = { action, reject }
+    const initialCardTable = JSON.parse(localStorage.getItem('cardTable')) || [];
+    // // Update cardTable state with the data from localStorage
+    setCardTable(initialCardTable);
+
+    setCardTable((prevCardTable) => [...prevCardTable, user]);
+
+    const updatedCardTable = [...initialCardTable, user];
+    sendData(updatedCardTable);
+    console.log(user)
+  }
 
   return (
     <div>
@@ -171,12 +198,13 @@ function Admin() {
                                     <tbody className='bg-slate-100'>
                                         {/* row 1 */}
                                         {
-                                            adminData.map((data, index) => <tr key={index} className='h-7 hover:bg-slate-300'>
+                                            adminData.map((data, index) => <tr key={index} className='h-7 hover:bg-slate-300 mb-2'>
                                             <td className='text-center text-sm'>
-                                            01
+                                            {index+1}
                                             </td>
-                                            <td className='text-center text-sm'>
-                                            product name
+                                            <td className=' text-sm text-center'>
+                                                <h3 className="font-semibold"> {data.title}</h3>
+                                                <div><span className="text-success">Pending</span> <span>1 january 2024</span></div>
                                             </td>
                                             <td className='text-center text-sm'>
                                             {data.quantity}
@@ -209,23 +237,28 @@ function Admin() {
                             <div className="md:divider md:divider-horizontal md:divider-info mt-8 order-2 hidden mb:block"> OR </div>
                             <div className="w-full md:w-[40%] order-3">                                
                                 
-                                <h3 className="mt-3 font-semibold">Attach File</h3>
-                                <div className=" mt-4">
-                                    <div>
-                                        <form>
-                                            <textarea name="bioData" placeholder="Bio" className="textarea textarea-bordered textarea-md w-full" ></textarea>
-                                            <select name="" className="select select-bordered w-full mt-2">
-                                            <option value={""}>Approve</option>
-                                            <option value={""}>Disable</option>
-                                            </select>
-                                            <button type="submit" className="btn btn-success w-28 mt-2">Submit</button>
-                                        </form>
-                                    
-                                    </div>
-                                    <div>
-                                    
-                                    </div>
-                                </div>
+                            <h3 className="mt-3 font-semibold">Managerial Actions</h3>
+                            <form  onSubmit={takeAction}>
+                                <textarea className="textarea textarea-bordered my-3 w-full" placeholder="Return Message" name="reject"></textarea>
+                                <select className="select select-bordered w-full" name="action">
+                                    <option selected>Take Actions</option>                                    
+                                    {isApprover ? (
+                                        <React.Fragment>
+                                        <option value={'approve'}>Approve {isApprover}</option>
+                                        <option value={'return'}>Return</option>
+                                        <option value={'reject'}>Reject</option>
+                                        </React.Fragment>
+                                    ) : (is_manager ? (
+                                        <React.Fragment>
+                                        <option value={'partial_disperse'}>Partial Disperse {is_manager}</option>
+                                        <option value={'disburse'}>Disburse</option>
+                                        <option value={'hold'}>Hold</option>
+                                        </React.Fragment>
+                                    ) : null)}       
+                                  
+                                </select>
+                                <button className="btn btn-neutral mt-4">Submit</button>
+                            </form>
                             </div>
                         </div>
                         {/* footer button  */}

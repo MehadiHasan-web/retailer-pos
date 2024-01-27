@@ -6,15 +6,15 @@ import axios from 'axios';
 const Form = () => {
 
   const [cardTable, setCardTable] = useState([])
-
+  const user_id = localStorage.getItem('user_id');
   async function sendData(userInfo) {
     try {
-      const user_id = localStorage.getItem('user_id');
+    
 
       const response = await axios.post("http://inv.xcode.com.bd/api/v1/inventory/inventory/", userInfo, {
         headers: {
           'Content-Type': 'application/json',
-          'user_id': user_id,
+          // 'user_id': user_id,
         },
       });
       console.log(response.data);
@@ -22,14 +22,15 @@ const Form = () => {
       console.log(error)
     }
   }
-
+  
   const userData = (event) => {
     event.preventDefault();
     const form = event.target;
     const file = form.file.value;
     const bio = form.bio.value;
+    const user_id = form.user_id.value;
     const position = form.position.value;
-    const user = { file, bio, position }
+    const user = { user_id, file, bio, position }
     const initialCardTable = JSON.parse(localStorage.getItem('cardTable')) || [];
     // // Update cardTable state with the data from localStorage
     setCardTable(initialCardTable);
@@ -38,8 +39,8 @@ const Form = () => {
 
     const updatedCardTable = [...initialCardTable, user];
     sendData(updatedCardTable);
+    console.log(user)
   }
-
 
   return (
     <div>
@@ -53,6 +54,8 @@ const Form = () => {
           <div>
             <form onSubmit={userData}>
               <div className='flex justify-between items-center gap-1'>
+                {/* user id  */}
+                <input type="number" hidden name='user_id' value={user_id} />
                 {/* file section start */}
                 <label className="form-control w-full flex-1">
                   <input type="file" className="file-input file-input-bordered w-full h-6 lg:h-9 text-sm" name="file" />
