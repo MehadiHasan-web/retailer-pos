@@ -1,5 +1,7 @@
 import Title from './../../Title/Title';
 import axios from 'axios';
+// import { toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
 
 const InstituteName = () => {
 
@@ -13,6 +15,7 @@ const InstituteName = () => {
     axios.post('http://inv.xcode.com.bd/api/v1/inventory/institutelist/', instituteNameValue)
     .then(response => {
       console.log('Response:', response.data);
+      // var notify = () => toast("Wow so easy !");
     })
     .catch(error => {
       console.error('Error:', error);
@@ -47,6 +50,7 @@ const InstituteName = () => {
             </div>
             <div className="form-control mt-6">
               <button type='submit' className="btn btn-primary">Create</button>
+              {/* <button onClick={notify} type='submit' className="btn btn-primary">Create</button> */}
             </div>
           </form>
         </div>

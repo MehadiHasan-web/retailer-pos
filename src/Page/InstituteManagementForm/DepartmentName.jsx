@@ -30,11 +30,12 @@ const DepartmentName = () => {
     });
   },[])
 
+
   const departmentNameData = (event) => {
     event.preventDefault()
     const form = event.target;
-    const branch = form.branchName.value;
-    const department = form.department.value;
+    const branch_id = form.branchName.value;
+    const name = form.name.value;
     const note = form.note.value;
     const departmentNameValue = { branch,department,note}
     // setBranchName(departmentNameValue)

@@ -28,17 +28,16 @@ const SubCategory = () => {
     const form = event.target;
     const name = form.name.value;
     const subcat = form.id.value;
-    const categoryFormValue = {name, subcat}
+    const subCategoryFormValue = {name, subcat}
     // setCategoryItem(categoryFormValue)    
     // sendSubcategory(subCategoryItem);
-    axios.post('http://inv.xcode.com.bd/api/v1/inventory/subcatagorylist/', categoryFormValue)
+    axios.post('http://inv.xcode.com.bd/api/v1/inventory/subcatagorylist/', subCategoryFormValue)
     .then(response => {
       console.log('Response:', response.data);
     })
     .catch(error => {
       console.error('Error:', error);
     });
-    console.log(categoryFormValue)
   }
 
   
