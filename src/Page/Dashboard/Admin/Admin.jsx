@@ -12,7 +12,7 @@ function Admin() {
     const [adminData, setAdminData] = useState([])
     const [modalData, setModalData] = useState({});
 
-    console.log(modalData.items)
+    console.log(modalData)
     const isApprover = localStorage.getItem('is_approver') === 'true';
     const is_manager = localStorage.getItem('is_manager') === 'true';
     
@@ -26,12 +26,7 @@ function Admin() {
         const user_id = localStorage.getItem('user_id');
         console.log(user_id);
     
-        axios.get("http://inv.xcode.com.bd/api/v1/inventory/inventory/", {
-            Headers: {
-                'User-Agent': user_id,
-                'hallow': true,
-            }
-        })
+        axios.get(`http://inv.xcode.com.bd/api/v1/inventory/inventory/?user_id=${user_id}`)
         .then((res) => res.data)
         .then((data) => setAdminData(data))
         .catch((error) => console.error("Error fetching data:", error));
@@ -98,7 +93,6 @@ function Admin() {
             data.approve_status = approve_status;
         }
         
-        console.log(data);
         
         const response = await axios.put(`http://inv.xcode.com.bd/api/v1/inventory/inventory/${modalData.id}/`, data);
         
@@ -179,13 +173,9 @@ function Admin() {
                                         <td>{tableData.id}</td>
                                         <td>
                                             <div className="flex items-center gap-3">
-                                                <div className="avatar">
-                                                    <div className="mask mask-squircle w-12 h-12">
-                                                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" alt="Avatar Tailwind CSS Component" />
-                                                    </div>
-                                                </div>
+                                                
                                                 <div>
-                                                    <div className="font-bold">{tableData.name}</div>
+                                                <div className="font-bold">{tableData.user.username}</div>
                                                 </div>
                                             </div>
                                         </td>
@@ -221,7 +211,7 @@ function Admin() {
                             <div className="modal-box w-11/12 max-w-[80%]">
                                 <div className="flex flex-col md:flex-row">
                                     <div className="w-full md:w-[60%] order-1">
-                                        <h3 className="font-bold text-lg">Hart Hagerty</h3>
+                                    <h3 className="font-bold text-lg">{modalData?.user?.username}</h3>
                                         <div className="w-full  rounded mt-6 ">
                                             {/* table start */}
                                             <table className="w-full overflow-y-scroll rounded-md mb-2">
@@ -230,8 +220,8 @@ function Admin() {
                                                     <th className='text-slate-600 text-sm'>SL</th>
                                                     <th className='text-slate-600 text-sm'>Product Name</th>
                                                     <th className='text-slate-600 text-sm'>Quantity</th>
-                                                    <th className='text-slate-600 text-sm'>Inc/Dec</th>
-                                                    <th className='text-slate-600 text-sm'>Delete</th>
+                                                    {/* <th className='text-slate-600 text-sm'>Inc/Dec</th>
+                                                    <th className='text-slate-600 text-sm'>Delete</th> */}
                                                 </thead>
                                                 <tbody className='bg-slate-100'>
                                                     {/* row 1 */}
@@ -241,13 +231,12 @@ function Admin() {
                                                                 {index + 1}
                                                             </td>
                                                             <td className=' text-sm text-center'>
-                                                                <h3 className="font-semibold"> {data.title}</h3>
-                                                                <div><span className="text-success">Pending</span> <span>1 january 2024</span></div>
+                                                                <h3 className="font-semibold"> {data.item.name}</h3>
                                                             </td>
                                                             <td className='text-center text-sm'>
                                                                 {data.quantity}
                                                             </td>
-                                                            <td className='text-center text-sm'>
+                                                            {/* <td className='text-center text-sm'>
                                                                 <div className='flex justify-around items-center'>
                                                                     <button ><FiPlus onClick={() => incrementQuantity(data)} className='bg-green-500 text-white text-xl p-[1px] rounded'></FiPlus></button>
                                                                     <button><FiMinus onClick={() => decrementQuantity(data)} className='bg-red-500 text-white text-xl p-[1px] rounded'></FiMinus></button>
@@ -256,7 +245,7 @@ function Admin() {
                                                             <td className=''>
                                                                 <MdDelete className='mx-auto bg-red-500 text-white text-xl p-[1px] rounded'></MdDelete>
 
-                                                            </td>
+                                                            </td> */}
                                                         </tr>)
                                                     }
                                                 </tbody>
@@ -265,26 +254,22 @@ function Admin() {
                                         </div>
                                         <div className="mb-4">
                                             <h2 className="font-bold">Additional Information</h2>
-                                            <p className="text-justify mt-2">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Soluta quia perspiciatis voluptatem consequuntur magni itaque mollitia esse voluptatibus magnam earum, possimus amet iste eum recusandae rerum quis doloribus exercitationem expedita quisquam saepe! Odit rem reiciendis, nemo accusantium veniam quibusdam </p>
+                                            <p className="text-justify mt-2">{modalData?.note}</p>
                                             <button className="btn btn-success btn-md mt-4">Download File</button>
                                         </div>
                                         <p className="font-semibold">Request Date : <span>20 january</span></p>
-                                        <p className="font-semibold">Perches Date: <span>20 january</span></p>
-                                        <p className="font-semibold">Quantity : <span>4</span></p>
                                     </div>
                                     <div className="md:divider md:divider-horizontal md:divider-info mt-8 order-2 hidden mb:block"> OR </div>
                                     <div className="w-full md:w-[40%] order-3">
 
                                         <h3 className="mt-3 font-semibold">Managerial Actions</h3>
                                         <form onSubmit={takeAction}>
-                                            <textarea className="textarea textarea-bordered my-3 w-full" placeholder="Return Message" name="reject_msg"></textarea>
-                                            
-                                               
+                                            <textarea className="textarea textarea-bordered my-3 w-full" placeholder="Return Message" name="reject_msg"></textarea>   
                                                 {isApprover ? (                                                    
                                                     <React.Fragment>
                                                         <select className="select select-bordered w-full" name="approve_status">
                                                         <option selected>Take Actions</option>
-                                                        <option value={'Approve'}>Approve {isApprover}</option>
+                                                        <option value={'Approve'}>approved</option>
                                                         <option value={'Return'}>Return</option>
                                                         <option value={'Reject'}>Reject</option>
                                                         </select>
@@ -293,13 +278,11 @@ function Admin() {
                                                     <React.Fragment>
                                                         <select className="select select-bordered w-full" name="manager_status">
                                                         <option value={'Partial Disperse'}>Partial Disperse</option>
-                                                        <option value={'Disburse'}>Disburse</option>
+                                                        <option value={'Disburse'}>disbursed</option>
                                                         <option value={'Hold'}>Hold</option>
                                                         </select>
                                                     </React.Fragment>
                                                 ) : null)}
-
-                                           
                                             <button className="btn btn-neutral mt-4">Submit</button>
                                         </form>
                                     </div>

@@ -263,7 +263,7 @@ const openModal = async (data) => {
                                             {/* table end */}
                                         </div>
                                 <p className="font-semibold">Request Date : <span>20 january</span></p>
-                                <p className="font-semibold">Quantity : <span>4</span></p>
+                                <p className="text-justify mt-2">{modalData.note}</p>
                             </div>
                             <div className="md:divider md:divider-horizontal md:divider-info mt-8 order-2 hidden mb:block"> OR </div>
                             <div className="w-full md:w-[55%] order-3">
