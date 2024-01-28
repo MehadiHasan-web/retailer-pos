@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import Title from './../../Title/Title';
-import { useEffect } from 'react';
 import axios from 'axios';
 
 
@@ -78,7 +77,7 @@ const ItemFrom = () => {
             {/* Category-id field */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Category-id:</span>
+                <span className="label-text">Category:</span>
               </label>
               <select type="number" name="categoryId" className="select select-bordered w-full">
               {
@@ -89,7 +88,7 @@ const ItemFrom = () => {
             {/* sub-category-id field */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Sub-category-id:</span>
+                <span className="label-text">Sub Category:</span>
               </label>
               <select type="number" name="subCategoryId" className="select select-bordered w-full">
               {

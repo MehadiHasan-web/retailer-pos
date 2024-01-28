@@ -1,6 +1,5 @@
 import axios from 'axios';
 import Title from '../../Title/Title'
-import './PurchaseRequest.css'
 import { useEffect, useState } from 'react';
 
 const PurchaseRequest = () => {

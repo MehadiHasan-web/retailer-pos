@@ -25,21 +25,28 @@ const Sidebar = () => {
 
             <h2 className="text-center mb-8">Title heading</h2>
 
-            <li><Link to="/history">Inventory History</Link></li>
+            {is_manager && <li><Link to="/dashboard">Dashboard</Link></li>}
             <li><Link to="/inventoryComplete">Inventory Complete</Link></li>
             {
-              adminAndManager && <li><Link to="/admin">Admin</Link></li>
+              is_manager && <li><Link to="/inventoryRequest">Inventory Request</Link></li>
             }
-            <li><Link to="/purchaseRequest">Purchase Request</Link></li>
+            {
+              is_manager && <li><Link to="/purchaseManagement">Purchase Management</Link></li>
+            }
+            {
+              isApprover && <li><Link to="/appointments">Appointments</Link></li>
+            }
             <li><Link to="/myInventory">My Inventory</Link></li>
             {
               adminAndManager &&
               <>
-                <li><Link to="/manageInventory">Manage Inventory</Link></li>
-                <li><Link to="/instituteManagement">Institute Management</Link></li>
+                {
+                  is_manager && <li><Link to="/manageInventory">Manage Inventory</Link></li>
+                }
+                {/* <li><Link to="/instituteManagement">Institute Management</Link></li> */}
               </>
             }
-            <li><Link to="/createUser">Create User</Link></li>
+            {/* <li><Link to="/createUser">Create User</Link></li> */}
 
           </ul>
 

@@ -7,10 +7,11 @@ import { FiPlus } from 'react-icons/fi';
 import Swal from "sweetalert2";
 import axios from "axios";
 
-function Admin() {
+function InventoryRequest() {
     const [startDate, setStartDate] = useState(new Date());
     const [adminData, setAdminData] = useState([])
     const [modalData, setModalData] = useState({});
+    console.log(adminData)
 
     console.log(modalData.items)
     const isApprover = localStorage.getItem('is_approver') === 'true';
@@ -171,12 +172,9 @@ function Admin() {
                                         <td>
                                             <div className="flex items-center gap-3">
                                                 <div className="avatar">
-                                                    <div className="mask mask-squircle w-12 h-12">
-                                                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" alt="Avatar Tailwind CSS Component" />
+                                                    <div className="mask mask-squircle w-full h-12">
+                                                        {tableData.user.username}
                                                     </div>
-                                                </div>
-                                                <div>
-                                                    <div className="font-bold">{tableData.name}</div>
                                                 </div>
                                             </div>
                                         </td>
@@ -311,4 +309,4 @@ function Admin() {
     )
 }
 
-export default Admin
+export default InventoryRequest

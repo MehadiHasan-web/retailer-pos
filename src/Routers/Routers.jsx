@@ -2,11 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import LogIn from "../Page/LogIn/LogIn";
 import DashBoard from './../Layout/Dashboard/Dashboard';
 import Home from "../Page/Dashboard/Home/Home/Home";
-import InventoryHistory from "../Page/History/InventoryHistory";
 import InventoryComplete from "../Page/Dashboard/InventoryComplete/InventoryComplete";
-import Admin from './../Page/Dashboard/Admin/Admin';
 import MyInventory from './../Page/My Inventory/MyInventory';
-import PurchaseRequest from './../Page/Purchase Request/PurchaseRequest';
 import PrivateRoute from "./PrivateRoute";
 import InstituteManagement from './../Page/InstituteManagement/InstituteManagement';
 import BranchName from './../Page/InstituteManagementForm/BranchName';
@@ -18,6 +15,12 @@ import SubCategory from './../Page/Forms/SubCategory';
 import ItemFrom from './../Page/Forms/ItemFrom';
 import SubItemFrom from './../Page/Forms/SubItemFrom';
 import CreateUser from "../Page/CreateUser/CreateUser";
+import Dashboard from "../Page/Dashboards/Dashboard";
+import InventoryRequest from "../Page/Dashboard/InventoryRequest/InventoryRequest";
+import PurchaseManagement from "../Page/PurchaseManagement/PurchaseManagement";
+import Appointments from "../Page/Dashboard/Appointments/Appointments";
+import PurchaseRequestHistory from "../Page/PurchaseManagement/PurchaseRequestHistory";
+import PurchaseRequest from "../Page/PurchaseManagement/PurchaseRequest";
 
 
 const router = createBrowserRouter([
@@ -35,24 +38,39 @@ const router = createBrowserRouter([
         element: <Home></Home>
       },
       {
-        path: '/history',
-        element: <InventoryHistory></InventoryHistory>
+        path: '/dashboard',
+        element: <Dashboard></Dashboard>
       },
       {
         path: '/inventoryComplete',
         element: <InventoryComplete></InventoryComplete>
       },
       {
-        path: '/admin',
-        element: <Admin></Admin>
+        path: '/inventoryRequest',
+        element: <InventoryRequest></InventoryRequest>
+      },
+      {
+        path: '/appointments',
+        element: <Appointments></Appointments>
       },
       {
         path: '/myInventory',
         element: <MyInventory></MyInventory>
       },
       {
-        path: '/purchaseRequest',
-        element: <PurchaseRequest></PurchaseRequest>
+        path: '/purchaseManagement',
+        element: <PurchaseManagement></PurchaseManagement>,
+        children : [
+          {
+            path : '/purchaseManagement',
+            element : <PurchaseRequest></PurchaseRequest>
+          },
+          {
+            path : '/purchaseManagement/purchaseHistory',
+            element : <PurchaseRequestHistory></PurchaseRequestHistory>
+          }
+          
+        ]
       },
       {
         path: "/manageInventory",

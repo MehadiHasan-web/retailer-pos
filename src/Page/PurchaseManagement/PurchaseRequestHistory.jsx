@@ -1,17 +1,15 @@
 import Title from "../../Title/Title"
 import  { useEffect, useState } from "react";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import './InventoryHistory.css'
 import { MdDelete } from "react-icons/md";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import Swal from "sweetalert2";
 import axios from "axios";
 
 
-function InventoryHistory() {
 
-    const [startDate, setStartDate] = useState(new Date());
+function PurchaseRequestHistory() {
+  
     const [userData, setUserData] = useState([])
     // useEffect(() => {
     //     fetch('card.json')
@@ -63,51 +61,14 @@ useEffect(() => {
   return (
     <>
     {/* title section start */}
-    <Title pageName={"Inventory History"}></Title>
+    <Title pageName={"Purchase Request History"}></Title>
       {/* title section end */}
       {/* table history  */}
       <div >
         <div className="container mx-auto px-12">
        <div className="flex justify-start my-3 ">
-       <h2 className="w-34  font-semibold border-b-[1px] border-indigo-500 ">Inventory History:</h2> <span className="ms-2"> Branch Name</span>
+       <h2 className="w-34  font-semibold border-b-[1px] border-indigo-500 ">Purchase Request History:</h2> <span className="ms-2"> Branch Name</span>
        </div>
-
-            {/* search bar  */}
-            <div className="py-2 mb-3 bg-slate-100 rounded-lg">
-               <div className="flex justify-center mt-1">
-                <form action="" className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-2  lg:flex md:gap-0 lg:justify-around lg:items-center">
-                    {/* category  */}
-                    <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1 " >
-                        <option disabled selected>Category</option>
-                        <option>Han Solo</option>
-                        <option>Greedo</option>
-                    </select>
-                    {/* subcategory  */}
-                    <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1 " >
-                        <option disabled selected>Subcategory?</option>
-                        <option>Han Solo</option>
-                        <option>Greedo</option>
-                    </select>
-                    {/* subcategory  */}
-                    {/* date end */}
-                    <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1  " >
-                        <option disabled selected>Subcategory?</option>
-                        <option>Han Solo</option>
-                        <option>Greedo</option>
-                    </select>
-                    {/* date  */}
-                        <div className="w-full xl:w-44 mx-1 mb-1">
-                        <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} className="w-full overflow-hidden border input input-sm  rounded-full" />
-                        </div>
-                    {/* search bar  */}
-                    <input type="text" placeholder="Type here" className="input input-bordered input-sm max-w-xs w-full xl:w-44 rounded-full mx-1 mb-1 " />
-                    <button type="submit" className="btn btn-outline btn-sm rounded-full mx-3  hover:text-white ">Search</button>
-                    <button type="button" className="btn btn-outline btn-sm rounded-full mx-1 hover:text-white ">Clear filter</button>
-
-                </form>
-               </div>
-            </div>
-            {/* search bar end  */}
        
         <div className="overflow-x-auto  shadow-lg rounded">
             <table className="table">
@@ -297,4 +258,4 @@ useEffect(() => {
   )
 }
 
-export default InventoryHistory
+export default PurchaseRequestHistory;
