@@ -161,6 +161,7 @@ function InventoryRequest() {
                                     <th className="text-black">#</th>
                                     <th className="text-black">Name</th>
                                     <th className="text-black">Request Date</th>
+                                    <th className="text-black">Approver Name</th>
                                     <th className="text-black">Status</th>
                                     <th className="text-black">Show/Actions</th>
                                 </tr>
@@ -180,6 +181,8 @@ function InventoryRequest() {
                                         <td>
                                             <p>20 january </p>
                                         </td>
+                                       <td>  <p>{tableData.approver.username} </p></td>
+
                                         <td>Pending</td>
                                         <td onClick={() => openModal(tableData.id)}>
                                             <button className="btn btn-outline btn-success btn-sm" onClick={() => document.getElementById('my_modal_4').showModal()}>
@@ -198,6 +201,7 @@ function InventoryRequest() {
                                     <th className="text-black">#</th>
                                     <th className="text-black">Name</th>
                                     <th className="text-black">Request Date</th>
+                                    <th className="text-black">Approver Name</th>
                                     <th className="text-black">Status</th>
                                     <th className="text-black">Show/Actions</th>
                                 </tr>

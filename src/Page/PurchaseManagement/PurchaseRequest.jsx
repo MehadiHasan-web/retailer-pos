@@ -58,7 +58,7 @@ const PurchaseRequest = () => {
           </div>
         </div>
         <div className='form-control'>
-          <textarea type="text" placeholder="Bio" name="bio" className="textarea textarea-bordered textarea-md w-full " ></textarea>
+          <textarea type="text" placeholder="Note" name="bio" className="textarea textarea-bordered textarea-md w-full " ></textarea>
         </div>
         <div className='form-control'>
           <input type="file" name="fileData" className="file-input file-input-bordered file-input-md w-full" />

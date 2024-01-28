@@ -2,17 +2,26 @@ import { useEffect, useState } from 'react';
 import Title from '../../Title/Title';
 import './MyInventory.css';
 import blankImg from '../../../public/blankImg.jpg';
+import axios from 'axios';
 
 const MyInventory = () => {
 
   const [card, setCard] = useState([])
 
 
+  // useEffect(() => {
+  //   fetch('card.json')
+  //   .then((res) => res.json())
+  //   .then((data) => setCard(data))
+  // },[])
   useEffect(() => {
-    fetch('card.json')
-    .then((res) => res.json())
-    .then((data) => setCard(data))
-  },[])
+    const user_id = localStorage.getItem('user_id');
+    axios.get(`http://inv.xcode.com.bd/api/v1/inventory/myinventory/${user_id}/`)
+        .then((res) => res.data)
+        .then((data) => setCard(data))
+        .catch((error) => console.error("Error fetching data:", error));
+}, []);
+console.log(card)
 
   return (
     <>
@@ -64,7 +73,7 @@ const MyInventory = () => {
                     }
                   <div className='pl-2'>
                     <h2 className='text-sm sm:text-base md:text-sm lg:text-sm font-semibold mx-auto my-1 md:my-1 lg:my-2'>{data.name ? data.name : data.title}</h2>
-                    <p className='text-sm sm:text-base md:text-sm'>Stock : {data.stock === 0 ? 'stock out' : data.stock}</p>
+                    {/* <p className='text-sm sm:text-base md:text-sm'>Stock : {data.stock === 0 ? 'stock out' : data.stock}</p> */}
                   </div>
                   </div>
                 )
