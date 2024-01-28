@@ -6,29 +6,34 @@ import { FiMinus } from 'react-icons/fi';
 import { FiPlus } from 'react-icons/fi';
 import Swal from "sweetalert2";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
-function Appointments() {
+function InventoryRequest() {
     const [startDate, setStartDate] = useState(new Date());
     const [adminData, setAdminData] = useState([])
     const [modalData, setModalData] = useState({});
     console.log(adminData)
 
-    console.log(modalData.items)
+    console.log(modalData)
     const isApprover = localStorage.getItem('is_approver') === 'true';
     const is_manager = localStorage.getItem('is_manager') === 'true';
+    
     // const adminAndManager = isApprover || is_manager;
     // useEffect(() => {
     //     fetch('card.json')
     //     .then((res) => res.json())
     //     .then((data) => setAdminData(data))
     // },[])
-
     useEffect(() => {
-        axios.get("http://inv.xcode.com.bd/api/v1/inventory/inventory/")
-            .then((res) => res.data)
-            .then((data) => setAdminData(data))
-            .catch((error) => console.error("Error fetching data:", error));
+        const user_id = localStorage.getItem('user_id');
+        console.log(user_id);
+    
+        axios.get(`http://inv.xcode.com.bd/api/v1/inventory/inventory/?user_id=${user_id}`)
+        .then((res) => res.data)
+        .then((data) => setAdminData(data))
+        .catch((error) => console.error("Error fetching data:", error));
     }, []);
+    
 
 
     const openModal = async (data) => {
@@ -90,18 +95,13 @@ function Appointments() {
             data.approve_status = approve_status;
         }
         
-        console.log(data);
         
         const response = await axios.put(`http://inv.xcode.com.bd/api/v1/inventory/inventory/${modalData.id}/`, data);
         
         if (response.status === 200) {
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'Inventory has been approved',
-                showConfirmButton: false,
-                timer: 1500
-            })
+            toast.success("Successfully created");
+        }else {
+            toast.error("Try again")
         }
     }
 
@@ -171,10 +171,9 @@ function Appointments() {
                                         <td>{tableData.id}</td>
                                         <td>
                                             <div className="flex items-center gap-3">
-                                                <div className="avatar">
-                                                    <div className="mask mask-squircle w-full h-12">
-                                                        {tableData.user.username}
-                                                    </div>
+                                                
+                                                <div>
+                                                <div className="font-bold">{tableData.user.username}</div>
                                                 </div>
                                             </div>
                                         </td>
@@ -210,7 +209,7 @@ function Appointments() {
                             <div className="modal-box w-11/12 max-w-[80%]">
                                 <div className="flex flex-col md:flex-row">
                                     <div className="w-full md:w-[60%] order-1">
-                                        <h3 className="font-bold text-lg">Hart Hagerty</h3>
+                                    <h3 className="font-bold text-lg">{modalData?.user?.username}</h3>
                                         <div className="w-full  rounded mt-6 ">
                                             {/* table start */}
                                             <table className="w-full overflow-y-scroll rounded-md mb-2">
@@ -219,8 +218,8 @@ function Appointments() {
                                                     <th className='text-slate-600 text-sm'>SL</th>
                                                     <th className='text-slate-600 text-sm'>Product Name</th>
                                                     <th className='text-slate-600 text-sm'>Quantity</th>
-                                                    <th className='text-slate-600 text-sm'>Inc/Dec</th>
-                                                    <th className='text-slate-600 text-sm'>Delete</th>
+                                                    {/* <th className='text-slate-600 text-sm'>Inc/Dec</th>
+                                                    <th className='text-slate-600 text-sm'>Delete</th> */}
                                                 </thead>
                                                 <tbody className='bg-slate-100'>
                                                     {/* row 1 */}
@@ -230,13 +229,12 @@ function Appointments() {
                                                                 {index + 1}
                                                             </td>
                                                             <td className=' text-sm text-center'>
-                                                                <h3 className="font-semibold"> {data.title}</h3>
-                                                                <div><span className="text-success">Pending</span> <span>1 january 2024</span></div>
+                                                                <h3 className="font-semibold"> {data.item.name}</h3>
                                                             </td>
                                                             <td className='text-center text-sm'>
                                                                 {data.quantity}
                                                             </td>
-                                                            <td className='text-center text-sm'>
+                                                            {/* <td className='text-center text-sm'>
                                                                 <div className='flex justify-around items-center'>
                                                                     <button ><FiPlus onClick={() => incrementQuantity(data)} className='bg-green-500 text-white text-xl p-[1px] rounded'></FiPlus></button>
                                                                     <button><FiMinus onClick={() => decrementQuantity(data)} className='bg-red-500 text-white text-xl p-[1px] rounded'></FiMinus></button>
@@ -245,7 +243,7 @@ function Appointments() {
                                                             <td className=''>
                                                                 <MdDelete className='mx-auto bg-red-500 text-white text-xl p-[1px] rounded'></MdDelete>
 
-                                                            </td>
+                                                            </td> */}
                                                         </tr>)
                                                     }
                                                 </tbody>
@@ -254,41 +252,44 @@ function Appointments() {
                                         </div>
                                         <div className="mb-4">
                                             <h2 className="font-bold">Additional Information</h2>
-                                            <p className="text-justify mt-2">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Soluta quia perspiciatis voluptatem consequuntur magni itaque mollitia esse voluptatibus magnam earum, possimus amet iste eum recusandae rerum quis doloribus exercitationem expedita quisquam saepe! Odit rem reiciendis, nemo accusantium veniam quibusdam </p>
+                                            <p className="text-justify mt-2">{modalData?.note}</p>
                                             <button className="btn btn-success btn-md mt-4">Download File</button>
                                         </div>
                                         <p className="font-semibold">Request Date : <span>20 january</span></p>
-                                        <p className="font-semibold">Perches Date: <span>20 january</span></p>
-                                        <p className="font-semibold">Quantity : <span>4</span></p>
                                     </div>
                                     <div className="md:divider md:divider-horizontal md:divider-info mt-8 order-2 hidden mb:block"> OR </div>
                                     <div className="w-full md:w-[40%] order-3">
 
-                                        <h3 className="mt-3 font-semibold">Managerial Actions</h3>
+                                      
+                                        {isApprover ? (                                                    
+                                                    <React.Fragment>
+                                                          <h3 className="mt-3 font-semibold">Approver Actions</h3>
+                                                    </React.Fragment>
+                                                ) : (is_manager ? (
+                                                    <React.Fragment>
+                                                          <h3 className="mt-3 font-semibold">Managerial Actions</h3>
+                                                    </React.Fragment>
+                                                ) : null)}
                                         <form onSubmit={takeAction}>
-                                            <textarea className="textarea textarea-bordered my-3 w-full" placeholder="Return Message" name="reject_msg"></textarea>
-                                            
-                                               
+                                            <textarea className="textarea textarea-bordered my-3 w-full" placeholder="Return Message" name="reject_msg"></textarea>   
                                                 {isApprover ? (                                                    
                                                     <React.Fragment>
                                                         <select className="select select-bordered w-full" name="approve_status">
                                                         <option selected>Take Actions</option>
-                                                        <option value={'Approve'}>Approve {isApprover}</option>
-                                                        <option value={'Return'}>Return</option>
-                                                        <option value={'Reject'}>Reject</option>
+                                                        <option value={'Approved'}>Approve</option>
+                                                        <option value={'Returned'}>Return</option>
+                                                        <option value={'Rejected'}>Reject</option>
                                                         </select>
                                                     </React.Fragment>
                                                 ) : (is_manager ? (
                                                     <React.Fragment>
                                                         <select className="select select-bordered w-full" name="manager_status">
-                                                        <option value={'Partial Disperse'}>Partial Disperse</option>
-                                                        <option value={'Disburse'}>Disburse</option>
+                                                        <option value={'Partial Disbursed'}>Partial Disburse</option>
+                                                        <option value={'Disbursed'}>Disburse</option>
                                                         <option value={'Hold'}>Hold</option>
                                                         </select>
                                                     </React.Fragment>
                                                 ) : null)}
-
-                                           
                                             <button className="btn btn-neutral mt-4">Submit</button>
                                         </form>
                                     </div>
@@ -299,6 +300,7 @@ function Appointments() {
                                         {/* if there is a button, it will close the modal */}
                                         <button className="btn">Close</button>
                                     </form>
+                                    <ToastContainer position="bottom-right"/>
                                 </div>
                             </div>
                         </dialog>
@@ -309,4 +311,4 @@ function Appointments() {
     )
 }
 
-export default Appointments;
+export default InventoryRequest

@@ -19,6 +19,7 @@ import PurchaseManagement from "../Page/PurchaseManagement/PurchaseManagement";
 import Appointments from "../Page/Dashboard/Appointments/Appointments";
 import PurchaseRequestHistory from "../Page/PurchaseManagement/PurchaseRequestHistory";
 import PurchaseRequest from "../Page/PurchaseManagement/PurchaseRequest";
+import MyInventory from './../Page/My Inventory/MyInventory';
 
 
 const router = createBrowserRouter([
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: '/appointments',
         element: <Appointments></Appointments>
+      },
+      {
+        path: '/myInventory',
+        element: <MyInventory></MyInventory>
       },
       {
         path: '/purchaseManagement',

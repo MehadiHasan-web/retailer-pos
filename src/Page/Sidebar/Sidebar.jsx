@@ -25,7 +25,8 @@ const Sidebar = () => {
 
             <h2 className="text-center mb-8">Title heading</h2>
 
-            {is_manager && <li><Link to="/dashboard">Dashboard</Link></li>}
+             <li><Link to="/dashboard">Dashboard</Link></li>
+             <li><Link to="/">Create Inventory History</Link></li>
 
             {
               is_manager && <li><Link to="/inventoryRequest">Inventory Request</Link></li>
