@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Title from './../../Title/Title';
 import axios from 'axios';
 
@@ -19,6 +19,32 @@ const ItemFrom = () => {
       console.log(error)
     }
   }
+
+  const [subItemFormItem, setSubItemFormItem] = useState([])
+
+  useEffect(()=> {
+    axios.get('http://inv.xcode.com.bd/api/v1/inventory/catagorylist/')
+    .then(response => {
+      setItemFormItem(response.data)
+      // console.log('Response:', response.data);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  },[])
+
+  useEffect(()=> {
+    axios.get('http://inv.xcode.com.bd/api/v1/inventory/subcatagorylist/')
+    .then(response => {
+      setSubItemFormItem(response.data)
+      // console.log('Response:', response.data);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  },[])
+  console.log(subItemFormItem)
+
 
 
   const subCategoryData = (event) => {

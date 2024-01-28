@@ -17,6 +17,7 @@ import CategoryFrom from './../Page/Forms/CategoryFrom';
 import SubCategory from './../Page/Forms/SubCategory';
 import ItemFrom from './../Page/Forms/ItemFrom';
 import SubItemFrom from './../Page/Forms/SubItemFrom';
+import CreateUser from "../Page/CreateUser/CreateUser";
 
 
 const router = createBrowserRouter([
@@ -97,6 +98,10 @@ const router = createBrowserRouter([
             element: <DepartmentName></DepartmentName>
           },
         ]
+      },
+      {
+        path : '/createUser',
+        element : <CreateUser></CreateUser>
       }
     ]
   },
