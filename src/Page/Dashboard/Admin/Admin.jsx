@@ -6,6 +6,7 @@ import { FiMinus } from 'react-icons/fi';
 import { FiPlus } from 'react-icons/fi';
 import Swal from "sweetalert2";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
 function Admin() {
     const [startDate, setStartDate] = useState(new Date());
@@ -97,13 +98,9 @@ function Admin() {
         const response = await axios.put(`http://inv.xcode.com.bd/api/v1/inventory/inventory/${modalData.id}/`, data);
         
         if (response.status === 200) {
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'Inventory has been approved',
-                showConfirmButton: false,
-                timer: 1500
-            })
+            toast.success("Successfully created");
+        }else {
+            toast.error("Try again")
         }
     }
 
@@ -293,6 +290,7 @@ function Admin() {
                                         {/* if there is a button, it will close the modal */}
                                         <button className="btn">Close</button>
                                     </form>
+                                    <ToastContainer position="bottom-right"/>
                                 </div>
                             </div>
                         </dialog>

@@ -26,10 +26,10 @@ const Form = () => {
         },
       });
       console.log(response.data);
-       toast("Successfully created");
+       toast.success("Successfully created");
 
     } catch (error) {
-      toast(`${error.message} .Try again`);
+      toast.error(`${error.message} .Try again`);
     }
   }
 
@@ -87,7 +87,7 @@ const Form = () => {
                 {/* file section end */}
               </div>
               {/* textarea section start */}
-              <textarea type="text" placeholder="Bio" className="textarea textarea-lg w-full mt-1" id='bio' name="bio"></textarea>
+              <textarea type="text" placeholder="Note" className="textarea textarea-lg w-full mt-1" id='bio' name="bio"></textarea>
               {/* textarea section end */}
               <div className='flex gap-2 mt-1'>
                 <button className='bg-red-500 text-white md:text-sm lg:text-base md:px-2 md:py-1 lg:px-3 lg:py-2 uppercase rounded' type='button' >Clear All</button>

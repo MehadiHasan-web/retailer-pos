@@ -31,11 +31,11 @@ const SubItemFrom = () => {
     axios.post('http://inv.xcode.com.bd/api/v1/inventory/subitemlist/', categoryFormValue)
     .then(response => {
       console.log('Response:', response.data);
-      toast("Successfully created");
+      toast.success("Successfully created");
     })
     .catch(error => {
       console.error('Error:', error);
-      toast(`${error.message} .Try again`);
+      toast.error(`${error.message} .Try again`);
     });
 
     
