@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import Title from './../../Title/Title';
-import { useEffect } from 'react';
 import axios from 'axios';
 
 

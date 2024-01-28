@@ -15,19 +15,28 @@ function Admin() {
     console.log(modalData.items)
     const isApprover = localStorage.getItem('is_approver') === 'true';
     const is_manager = localStorage.getItem('is_manager') === 'true';
+    
     // const adminAndManager = isApprover || is_manager;
     // useEffect(() => {
     //     fetch('card.json')
     //     .then((res) => res.json())
     //     .then((data) => setAdminData(data))
     // },[])
-
     useEffect(() => {
-        axios.get("http://inv.xcode.com.bd/api/v1/inventory/inventory/")
-            .then((res) => res.data)
-            .then((data) => setAdminData(data))
-            .catch((error) => console.error("Error fetching data:", error));
+        const user_id = localStorage.getItem('user_id');
+        console.log(user_id);
+    
+        axios.get("http://inv.xcode.com.bd/api/v1/inventory/inventory/", {
+            Headers: {
+                'User-Agent': user_id,
+                'hallow': true,
+            }
+        })
+        .then((res) => res.data)
+        .then((data) => setAdminData(data))
+        .catch((error) => console.error("Error fetching data:", error));
     }, []);
+    
 
 
     const openModal = async (data) => {

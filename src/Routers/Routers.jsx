@@ -3,7 +3,7 @@ import LogIn from "../Page/LogIn/LogIn";
 import DashBoard from './../Layout/Dashboard/Dashboard';
 import Home from "../Page/Dashboard/Home/Home/Home";
 import InventoryHistory from "../Page/History/InventoryHistory";
-import InventoryComplete from "../Page/Dashboard/InventoryComplete/InventoryComplete";
+// import InventoryComplete from "../Page/Dashboard/InventoryComplete/InventoryComplete";
 import Admin from './../Page/Dashboard/Admin/Admin';
 import MyInventory from './../Page/My Inventory/MyInventory';
 import PurchaseRequest from './../Page/Purchase Request/PurchaseRequest';
@@ -37,10 +37,6 @@ const router = createBrowserRouter([
       {
         path: '/history',
         element: <InventoryHistory></InventoryHistory>
-      },
-      {
-        path: '/inventoryComplete',
-        element: <InventoryComplete></InventoryComplete>
       },
       {
         path: '/admin',

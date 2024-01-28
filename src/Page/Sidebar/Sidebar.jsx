@@ -26,7 +26,6 @@ const Sidebar = () => {
             <h2 className="text-center mb-8">Title heading</h2>
 
             <li><Link to="/history">Inventory History</Link></li>
-            <li><Link to="/inventoryComplete">Inventory Complete</Link></li>
             {
               adminAndManager && <li><Link to="/admin">Admin</Link></li>
             }

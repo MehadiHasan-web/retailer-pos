@@ -28,11 +28,11 @@ const LogIn = () => {
         localStorage.setItem('is_manager', response.data.is_manager)
         localStorage.setItem('user_id', response.data.user_id)
         navigate('/')
-        Swal.fire({
-          title: "Good job!",
-          text: "You are logged in successfully",
-          icon: "success"
-        });
+        // Swal.fire({
+        //   title: "Good job!",
+        //   text: "You are logged in successfully",
+        //   icon: "success"
+        // });
       }
     } catch (error) {
       console.log(error)
