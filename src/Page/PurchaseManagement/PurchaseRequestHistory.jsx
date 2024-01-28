@@ -104,7 +104,7 @@ useEffect(() => {
                             </div>
                         </td>
                         <td>
-                            <p>20 january </p>
+                            <p>{data.quantity} </p>
                         </td>
                         <td>
                             {/* {
@@ -125,15 +125,19 @@ useEffect(() => {
                                 data.approve_status === 4 ? 'Reject' :
                                 'Unknown'
                             } */}
-                            <p>{data.approve_status}</p>
+                            <p>dsd {data.approve_status}</p>
                         </td>
 
                         <td>
-                        <select className="select select-sm select-bordered w-full xl:w-36 rounded-full mx-1 mb-1 "  name="status"  >
-                            <option  selected>Take Action</option>
-                            <option  value={'pending'}>Pending</option>
-                            <option  value={'purchased'}>Purchased</option>
-                        </select>
+                            <form action="" className="flex">
+                            <select className="select select-sm select-bordered  xl:w-24 rounded-full mx-1 mb-1 "  name="status"  >
+                                <option  selected>Take Action</option>
+                                <option  value={'pending'}>Pending</option>
+                                <option  value={'purchased'}>Purchased</option>
+                            </select>
+                            <button className="btn btn-neutral btn-sm ms-2">Save</button>
+                            </form>
+ 
                         </td>
                     </tr>)
                     }
