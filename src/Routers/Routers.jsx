@@ -2,8 +2,6 @@ import { createBrowserRouter } from "react-router-dom";
 import LogIn from "../Page/LogIn/LogIn";
 import DashBoard from './../Layout/Dashboard/Dashboard';
 import Home from "../Page/Dashboard/Home/Home/Home";
-import InventoryComplete from "../Page/Dashboard/InventoryComplete/InventoryComplete";
-import MyInventory from './../Page/My Inventory/MyInventory';
 import PrivateRoute from "./PrivateRoute";
 import InstituteManagement from './../Page/InstituteManagement/InstituteManagement';
 import BranchName from './../Page/InstituteManagementForm/BranchName';
@@ -42,20 +40,12 @@ const router = createBrowserRouter([
         element: <Dashboard></Dashboard>
       },
       {
-        path: '/inventoryComplete',
-        element: <InventoryComplete></InventoryComplete>
-      },
-      {
         path: '/inventoryRequest',
         element: <InventoryRequest></InventoryRequest>
       },
       {
         path: '/appointments',
         element: <Appointments></Appointments>
-      },
-      {
-        path: '/myInventory',
-        element: <MyInventory></MyInventory>
       },
       {
         path: '/purchaseManagement',

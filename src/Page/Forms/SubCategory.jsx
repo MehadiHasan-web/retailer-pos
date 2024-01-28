@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Title from './../../Title/Title';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 const SubCategory = () => {
@@ -34,9 +35,11 @@ const SubCategory = () => {
     axios.post('http://inv.xcode.com.bd/api/v1/inventory/subcatagorylist/', subCategoryFormValue)
     .then(response => {
       console.log('Response:', response.data);
+      toast.success("Successfully created");
     })
     .catch(error => {
       console.error('Error:', error);
+      toast.error(`${error.message} .Try again`);
     });
   }
 
@@ -79,6 +82,7 @@ const SubCategory = () => {
             <div className="form-control mt-6">
               <button type='submit' className="btn btn-primary">Create</button>
             </div>
+            <ToastContainer position="bottom-right"/>
           </form>
         </div>
       </div>
