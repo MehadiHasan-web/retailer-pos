@@ -262,23 +262,32 @@ function Admin() {
                                     <div className="md:divider md:divider-horizontal md:divider-info mt-8 order-2 hidden mb:block"> OR </div>
                                     <div className="w-full md:w-[40%] order-3">
 
-                                        <h3 className="mt-3 font-semibold">Managerial Actions</h3>
+                                      
+                                        {isApprover ? (                                                    
+                                                    <React.Fragment>
+                                                          <h3 className="mt-3 font-semibold">Approver Actions</h3>
+                                                    </React.Fragment>
+                                                ) : (is_manager ? (
+                                                    <React.Fragment>
+                                                          <h3 className="mt-3 font-semibold">Managerial Actions</h3>
+                                                    </React.Fragment>
+                                                ) : null)}
                                         <form onSubmit={takeAction}>
                                             <textarea className="textarea textarea-bordered my-3 w-full" placeholder="Return Message" name="reject_msg"></textarea>   
                                                 {isApprover ? (                                                    
                                                     <React.Fragment>
                                                         <select className="select select-bordered w-full" name="approve_status">
                                                         <option selected>Take Actions</option>
-                                                        <option value={'Approve'}>approved</option>
-                                                        <option value={'Return'}>Return</option>
-                                                        <option value={'Reject'}>Reject</option>
+                                                        <option value={'Approved'}>Approve</option>
+                                                        <option value={'Returned'}>Return</option>
+                                                        <option value={'Rejected'}>Reject</option>
                                                         </select>
                                                     </React.Fragment>
                                                 ) : (is_manager ? (
                                                     <React.Fragment>
                                                         <select className="select select-bordered w-full" name="manager_status">
-                                                        <option value={'Partial Disperse'}>Partial Disperse</option>
-                                                        <option value={'Disburse'}>disbursed</option>
+                                                        <option value={'Partial Disbursed'}>Partial Disburse</option>
+                                                        <option value={'Disbursed'}>Disburse</option>
                                                         <option value={'Hold'}>Hold</option>
                                                         </select>
                                                     </React.Fragment>

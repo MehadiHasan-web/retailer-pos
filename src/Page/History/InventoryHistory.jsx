@@ -151,7 +151,7 @@ const openModal = async (data) => {
                                 <input type="checkbox" className="checkbox checkbox-sm" />
                             </label>
                         </td>
-                        <td>{index+1}</td>
+                        <td>{data.id}</td>
                         <td>
                             <div className="flex items-center gap-1">                               
                                 <div>
@@ -290,8 +290,7 @@ const openModal = async (data) => {
                                 <button className="btn">Close</button>
                             </form>
                         </div>
-                        <h1 className="text-center">This is Title</h1>
-                        <p className="text-center">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores sint quas aut autem doloribus excepturi.</p>
+                       
                     </div>
                     </dialog>
             {/* modal section end */}
