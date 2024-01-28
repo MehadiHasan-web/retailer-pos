@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer } from "react-toastify";
+
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -14,7 +15,7 @@ const InstituteManagement = () => {
                 </ul>
             </div>
             <Outlet></Outlet>
-            <ToastContainer />
+            <ToastContainer/>
         </div>
   );
 };

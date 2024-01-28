@@ -1,5 +1,6 @@
 
-import { useState } from 'react';
+
+import { ToastContainer, toast } from 'react-toastify';
 import Title from './../../Title/Title';
 import axios from 'axios';
 
@@ -7,7 +8,7 @@ import axios from 'axios';
 const CategoryFrom = () => {
 
 
-  const [categoryFormItem, setCategoryFormItem] = useState([])
+  
 
   const categoryFormData = (event) => {
     event.preventDefault()
@@ -18,14 +19,15 @@ const CategoryFrom = () => {
     axios.post('http://inv.xcode.com.bd/api/v1/inventory/catagorylist/', categoryFormValue)
     .then(response => {
       console.log('Response:', response.data);
+      toast("Successfully created");
     })
     .catch(error => {
       console.error('Error:', error);
+      toast(`${error.message} .Try again`);
     });
     
   }
 
-  console.log(categoryFormItem)
 
   return (
     <div className="mt-10 ">
@@ -50,6 +52,7 @@ const CategoryFrom = () => {
             <div className="form-control mt-6">
               <button type="submit" className="btn btn-primary">Create</button>
             </div>
+            <ToastContainer position="bottom-right"/>
           </form>
         </div>
       </div>
