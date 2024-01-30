@@ -24,7 +24,7 @@ const InstituteManagement = () => {
     <Menu as="div" className="relative inline-block text-left">
       <div>
         <Menu.Button className="inline-flex w-full justify-between  rounded-md  text-sm ">
-          Manage Inventory
+          Institute Management
           <ChevronDownIcon
             className="h-5 w-5 text-gray-400"
             aria-hidden="true"
@@ -46,55 +46,43 @@ const InstituteManagement = () => {
             <Menu.Item>
               {({ active }) => (
                 <NavLink
-                  to="/manageInventory/category"
+                  to="/instituteManagement/instituteName"
                   className={classNames(
                     active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                     "block px-4 py-2 text-sm"
                   )}
                 >
-                  Category
+                 Institute Name
                 </NavLink>
               )}
             </Menu.Item>
             <Menu.Item>
               {({ active }) => (
                 <NavLink
-                  to="/manageInventory/subcategory"
+                  to="/instituteManagement/branchName"
                   className={classNames(
                     active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                     "block px-4 py-2 text-sm"
                   )}
                 >
-                  Sub Category
+                 Branch Name
                 </NavLink>
               )}
             </Menu.Item>
             <Menu.Item>
               {({ active }) => (
                 <NavLink
-                  to="/manageInventory/item"
+                  to="/instituteManagement/departmentName"
                   className={classNames(
                     active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                     "block px-4 py-2 text-sm"
                   )}
                 >
-                  Item
+                  Department Name
                 </NavLink>
               )}
             </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <NavLink
-                  to="/manageInventory/subitem"
-                  className={classNames(
-                    active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "block px-4 py-2 text-sm"
-                  )}
-                >
-                  Sub Item
-                </NavLink>
-              )}
-            </Menu.Item>
+            
           </div>
         </Menu.Items>
       </Transition>

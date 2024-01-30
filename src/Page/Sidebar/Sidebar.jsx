@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom"
 import ManageInventory from "../ManageInventory/ManageInventory";
+import PurchaseManagement from "../PurchaseManagement/PurchaseManagement";
+import InstituteManagement from "../InstituteManagement/InstituteManagement";
 
 
 
@@ -33,7 +35,7 @@ const Sidebar = () => {
               is_manager && <li><Link to="/inventoryRequest">Inventory Request</Link></li>
             }
             {
-              is_manager && <li><Link to="/purchaseManagement">Purchase Management</Link></li>
+              is_manager && <li><PurchaseManagement></PurchaseManagement></li>
             }
             {
               isApprover && <li><Link to="/appointments">Appointments</Link></li>
@@ -45,7 +47,7 @@ const Sidebar = () => {
                 {
                   is_manager && <li><ManageInventory></ManageInventory></li>
                 }
-                {/* <li><Link to="/instituteManagement">Institute Management</Link></li> */}
+                  {/* <li><InstituteManagement></InstituteManagement></li> */}
               </>
             }
             {/* <li><Link to="/createUser">Create User</Link></li> */}

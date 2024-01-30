@@ -51,19 +51,12 @@ const router = createBrowserRouter([
         element: <MyInventory></MyInventory>
       },
       {
-        path: '/purchaseManagement',
-        element: <PurchaseManagement></PurchaseManagement>,
-        children : [
-          {
-            path : '/purchaseManagement',
-            element : <PurchaseRequest></PurchaseRequest>
-          },
-          {
-            path : '/purchaseManagement/purchaseHistory',
-            element : <PurchaseRequestHistory></PurchaseRequestHistory>
-          },
-          
-        ]
+        path : '/purchaseManagement/purchaseRequest',
+        element : <PurchaseRequest></PurchaseRequest>
+      },
+      {
+        path : '/purchaseManagement/purchaseHistory',
+        element : <PurchaseRequestHistory></PurchaseRequestHistory>
       },
       {
         path: "/manageInventory/subcategory",
