@@ -3,11 +3,9 @@ import LogIn from "../Page/LogIn/LogIn";
 import DashBoard from './../Layout/Dashboard/Dashboard';
 import Home from "../Page/Dashboard/Home/Home/Home";
 import PrivateRoute from "./PrivateRoute";
-import InstituteManagement from './../Page/InstituteManagement/InstituteManagement';
 import BranchName from './../Page/InstituteManagementForm/BranchName';
 import InstituteName from './../Page/InstituteManagementForm/InstituteName';
 import DepartmentName from './../Page/InstituteManagementForm/DepartmentName';
-import ManageInventory from './../Page/ManageInventory/ManageInventory';
 import CategoryFrom from './../Page/Forms/CategoryFrom';
 import SubCategory from './../Page/Forms/SubCategory';
 import ItemFrom from './../Page/Forms/ItemFrom';
@@ -63,54 +61,42 @@ const router = createBrowserRouter([
           {
             path : '/purchaseManagement/purchaseHistory',
             element : <PurchaseRequestHistory></PurchaseRequestHistory>
-          }
+          },
           
         ]
       },
       {
-        path: "/manageInventory",
-        element: <ManageInventory></ManageInventory>,
-        children: [
-          {
-            path: "/manageInventory",
-            element: <CategoryFrom></CategoryFrom>
+        path: "/manageInventory/subcategory",
+        element: <SubCategory></SubCategory>
 
-          },
-          {
-            path: "/manageInventory/subcategory",
-            element: <SubCategory></SubCategory>
-
-          },
-          {
-            path: "/manageInventory/item",
-            element: <ItemFrom></ItemFrom>
-
-          },
-          {
-            path: "/manageInventory/subItem",
-            element: <SubItemFrom></SubItemFrom>
-
-          },
-
-        ]
       },
       {
-        path: '/instituteManagement',
-        element: <InstituteManagement></InstituteManagement>,
-        children: [
-          {
-            path : '/instituteManagement',
-            element : <InstituteName></InstituteName>
-          },
-          {
-            path : '/instituteManagement/branchName',
-            element : <BranchName></BranchName>
-          },
-          {
-            path: '/instituteManagement/departmentName',
-            element: <DepartmentName></DepartmentName>
-          },
-        ]
+        path: "/manageInventory/category",
+        element: <CategoryFrom></CategoryFrom>
+
+      },
+      
+      {
+        path: "/manageInventory/item",
+        element: <ItemFrom></ItemFrom>
+
+      },
+      {
+        path: "/manageInventory/subItem",
+        element: <SubItemFrom></SubItemFrom>
+
+      },
+      {
+        path : '/instituteManagement/instituteName',
+        element : <InstituteName></InstituteName>
+      },
+      {
+        path : '/instituteManagement/branchName',
+        element : <BranchName></BranchName>
+      },
+      {
+        path: '/instituteManagement/departmentName',
+        element: <DepartmentName></DepartmentName>
       },
       {
         path : '/createUser',
