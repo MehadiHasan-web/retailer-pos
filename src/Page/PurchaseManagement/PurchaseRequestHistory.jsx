@@ -8,18 +8,16 @@ import axios from "axios";
 
 
 
+
+
 function PurchaseRequestHistory() {
   
     const [userData, setUserData] = useState([])
-    // useEffect(() => {
-    //     fetch('card.json')
-    //     .then((res) => res.json())
-    //     .then((data) => setUserData(data))
-    // },[])
+    const [selectedOption, setSelectedOption] = useState({ id: '', value: ''});
 
 useEffect(() => {
     const user_id = localStorage.getItem('user_id');
-    axios.get(`http://inv.xcode.com.bd/api/v1/inventory/purchase/`)
+    axios.get('http://inv.xcode.com.bd/api/v1/inventory/purchase/')
         .then((res) => res.data)
         .then((data) => setUserData(data))
         .catch((error) => console.error("Error fetching data:", error));
@@ -58,6 +56,22 @@ useEffect(() => {
     setUserData(updatedTable);
   };
 
+function openModal(){
+    document.getElementById('my_modal_3').showModal()
+}
+console.log(selectedOption)
+//    selector onchange event 
+const handleChange = (id, value) => {
+    setSelectedOption({ id, value }); 
+    if(value === "Completed"){
+        openModal()
+    }    
+};
+
+  function sendData(){
+    alert('Nothing selected')
+  }
+
   return (
     <>
     {/* title section start */}
@@ -70,97 +84,80 @@ useEffect(() => {
        <h2 className="w-34  font-semibold border-b-[1px] border-indigo-500 ">Purchase Request History:</h2> <span className="ms-2"> Branch Name</span>
        </div>
        
-        <div className="overflow-x-auto  shadow-lg rounded">
-            <table className="table">
-                {/* head */}
-                <thead className="bg-slate-200	">
-                <tr>
-                    <th className="text-black">
-                    Select
-                    {/* <label>
-                        <input type="checkbox" className="checkbox checkbox-sm" />
-                    </label> */}
-                    </th>
-                    <th  className="text-black">Item Name</th>
-                    <th  className="text-black">Quantity</th>
-                    <th  className="text-black">Receive Date</th>
-                    <th  className="text-black">Status</th>          
-                    <th  className="text-black">Show/Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                    {
-                        userData.map((data, index) => <tr key={data.id}>
-                        <td>
-                            <label>
-                                <input type="checkbox" className="checkbox checkbox-sm" />
-                            </label>
-                        </td>
-                        <td>
-                            <div className="flex items-center gap-1">
-                                <div>
-                                <div className="font-bold">{data.item}</div>
+            <div className="overflow-x-auto  shadow-lg rounded">
+                <table className="table">
+                    {/* head */}
+                    <thead className="bg-slate-200	">
+                    <tr>
+                        <th  className="text-black">Item Name</th>
+                        <th  className="text-black">Quantity</th>
+                        <th  className="text-black">Receive Date</th>
+                        <th  className="text-black">Status</th>          
+                        <th  className="text-black">Show/Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            userData.map((data, index) => <tr key={data.id}>
+
+                            <td>
+                                <div className="flex items-center gap-1">
+                                    <div>
+                                    <div className="font-bold">{data.item}</div>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td>
-                            <p>{data.quantity} </p>
-                        </td>
-                        <td>
-                            {/* {
-                                data.manager_status === 1 ? 'Pending' :
-                                data.manager_status === 2 ? 'hold' :
-                                data.manager_status === 3 ? 'disburse and hold' :
-                                data.manager_status === 4 ? 'disburse and in purchase req' :
-                                data.manager_status === 5 ? 'disbursed' :
-                                'Unknown'
-                            } */}
-                            <p>{data.status}</p>
-                        </td>
-                        <td>
-                            {/* {
-                                data.approve_status === 1 ? 'Pending' :
-                                data.approve_status === 2 ? 'Approved' :
-                                data.approve_status === 3 ? 'Return' :
-                                data.approve_status === 4 ? 'Reject' :
-                                'Unknown'
-                            } */}
-                            <p>dsd {data.approve_status}</p>
-                        </td>
+                            </td>
+                            <td>
+                                <p>{data.quantity} </p>
+                            </td>
+                            <td>                            
+                                <p> 1 january 2024</p>
+                            </td>
+                            <td>                           
+                                <p>{data.status}</p>
+                            </td>
 
-                        <td>
-                            <form action="" className="flex">
-                            <select className="select select-sm select-bordered  xl:w-24 rounded-full mx-1 mb-1 "  name="status"  >
-                                <option  selected>Take Action</option>
-                                <option  value={'pending'}>Pending</option>
-                                <option  value={'purchased'}>Purchased</option>
-                            </select>
-                            <button className="btn btn-neutral btn-sm ms-2">Save</button>
-                            </form>
- 
-                        </td>
-                    </tr>)
-                    }
+                            <td>
+                                <select  id={data.id}  className="select select-sm select-bordered  xl:w-24 rounded-full mx-1 mb-1 "  name="status"  onChange={() => handleChange(event.target.id, event.target.value) } >
+                                    <option  selected>Take Action</option>
+                                    <option value={'Pending'}>Pending</option>
+                                    <option   value={'Completed'}>Complete</option>
+                                </select> 
+                            </td>
+                        </tr>)
+                        }
 
-                </tbody>
-                {/* foot */}
-                <tfoot className="bg-slate-200	">
-                <tr>
-                    <th  className="text-black">
-                    <button className="btn btn-outline btn-sm">Delate</button>
-                    </th>
-                    <th  className="text-black">Item Name</th>
-                    <th  className="text-black">Quantity</th>
-                    <th  className="text-black">Receive Date</th>
-                    <th  className="text-black">Status</th>          
-                    <th  className="text-black">Show/Action</th>
-                </tr>
-                </tfoot>
-                
-            </table>
-
+                    </tbody>
+                    {/* foot */}
+                    <tfoot className="bg-slate-200	">
+                    <tr>
+                        <th  className="text-black">Item Name</th>
+                        <th  className="text-black">Quantity</th>
+                        <th  className="text-black">Receive Date</th>
+                        <th  className="text-black">Status</th>          
+                        <th  className="text-black">Show/Action</th>
+                    </tr>
+                    </tfoot>                
+                </table>
+                {/* modal  */}
+                <dialog id="my_modal_3" className="modal">
+                    <div className="modal-box">
+                        <form method="dialog" >
+                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                        </form>
+                        <h3 className="font-bold text-lg">Hello!</h3>
+                        <div>
+                        <form action="" className="my-2" onSubmit={sendData()}>
+                            <textarea className="textarea textarea-bordered w-full" placeholder="Write something"></textarea>
+                            <input type="file" className="file-input file-input-bordered w-full mt-2" />
+                            <button className="btn btn-neutral float-end mt-2">Done</button>
+                        </form>
+                        </div>
+                    </div>
+                </dialog>
+                {/* modal end  */}
             </div>
-            </div>
+        </div>
         </div>
     </>
   )

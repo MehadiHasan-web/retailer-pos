@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Title from '../../Title/Title'
 import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 const PurchaseRequest = () => {
 
@@ -28,11 +29,13 @@ const PurchaseRequest = () => {
     const purchaseValue = {item_id,quantity,note}
     axios.post('http://inv.xcode.com.bd/api/v1/inventory/purchase/', purchaseValue)
     .then(response => {
-      console.log('Response:', response.data);
+      console.log(response.data.msg); 
+      toast.success("Successfully created");
     })
     .catch(error => {
       console.error('Error:', error);
-    });
+      toast.error(`${error.message}. Try again`);
+    });  
   }
 
   return (
