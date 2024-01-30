@@ -1,14 +1,15 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './LogIn.css'
-import Swal from 'sweetalert2'
 import Title from '../../Title/Title';
 import axios from 'axios';
 import useAuth from '../../hooks/useAuth';
+import { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 
 const LogIn = () => {
   const {setUser} = useAuth()
-
   const navigate = useNavigate()
+  let [errorMessage, setErrorMessage] = useState(null)
 
 
   const submitData = async (event) => {
@@ -17,10 +18,9 @@ const LogIn = () => {
     const username = form.email.value;
     const password = form.password.value;
     const formData = { username, password };
-    console.log(formData)
     try {
       const response = await axios.post('http://inv.xcode.com.bd/api/v1/account/login/', formData);
-      console.log(response.data);
+
       if(response.status === 200) {
         setUser(response.data)
         localStorage.setItem('token', response.data.token)
@@ -28,16 +28,14 @@ const LogIn = () => {
         localStorage.setItem('is_manager', response.data.is_manager)
         localStorage.setItem('user_id', response.data.user_id)
         navigate('/dashboard')
-        // Swal.fire({
-        //   title: "Good job!",
-        //   text: "You are logged in successfully",
-        //   icon: "success"
-        // });
       }
     } catch (error) {
-      console.log(error)
+      if(error.response.status === 400){
+        setErrorMessage(error.response.data.non_field_errors[0])
+      }else if(error.response.status === 404){
+        toast.error('network error');
+      }
     }
-
   }
 
 
@@ -48,16 +46,18 @@ const LogIn = () => {
       {/* title section end */}
       <div className='container mx-auto w-full h-screen'>
         <div className='flex justify-center items-center w-full h-full'>
-          <div className='bg-slate-100 rounded-md p-5 lg:w-[450px] lg:h-72'>
-            <h1 className='text-center lg:text-3xl mb-5 italic'>NTRCA</h1>
-            <form onSubmit={submitData} className=' space-y-6'>
+          <div className='bg-slate-100 rounded-md p-5 lg:w-[450px] lg:h-80'>
+            <h1 className='text-center lg:text-3xl mb-4 font-bold'>NTRCA</h1>
+            <form onSubmit={submitData} className=' space-y-5'>
               <input type='text' className='w-full border-[1px] border-blue-600 p-3 rounded-md' placeholder='please enter your email' name="email" defaultValue={"kminchelle"}></input>
               <input type='password' className='w-full border-[1px] border-blue-600 p-3 rounded-md' placeholder='please enter your password' name="password" defaultValue={"0lelplR"}></input>
               <input type='submit' value="Login" className='btn w-full bg-gray-500 p-1 text-white text-lg'></input>
+              <p className='my-4 text-red-600 text-center'>{errorMessage}</p>
             </form>
           </div>
         </div>
       </div>
+      <ToastContainer></ToastContainer>
     </div>
   );
 };
