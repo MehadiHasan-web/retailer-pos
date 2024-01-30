@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 import './Form.css'
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // eslint-disable-next-line react/prop-types
-const Form = () => {
+const Form = ({clearData}) => {
 
   const [cardTable, setCardTable] = useState([])
   const [approverList, setApprover] = useState([])
@@ -17,6 +18,8 @@ const Form = () => {
         .catch((error) => console.error("Error fetching data:", error));
   }, []);
 
+  
+
   async function sendData(userInfo) {
     try {
       const response = await axios.post("http://inv.xcode.com.bd/api/v1/inventory/inventory/", userInfo, {
@@ -25,8 +28,7 @@ const Form = () => {
           // 'user_id': user_id,
         },
       });
-       toast.success("Successfully created");
-
+      toast.success("Successfully created");
     } catch (error) {
       toast.error(`${error.message} .Try again`);
     }
@@ -42,7 +44,7 @@ const Form = () => {
     const position = form.position.value;
     const user = { user_id, file, bio, position }
     const initialCardTable = JSON.parse(localStorage.getItem('cardTable')) || [];
-    // // Update cardTable state with the data from localStorage
+
     setCardTable(initialCardTable);
 
     setCardTable((prevCardTable) => [...prevCardTable, user]);
@@ -52,11 +54,7 @@ const Form = () => {
     console.log(user)
   }
 
-  // clear setCardTable 
-  function clearCard(){
-    console.log(cardTable)
-    setCardTable('');
-  }
+  
   
   return (
     <div>
@@ -95,8 +93,8 @@ const Form = () => {
               <textarea type="text" placeholder="Note" className="textarea textarea-lg w-full mt-1" id='bio' name="bio"></textarea>
               {/* textarea section end */}
               <div className='flex gap-2 mt-1'>
-                <button className='bg-red-500 text-white md:text-sm lg:text-base md:px-2 md:py-1 lg:px-3 lg:py-2 uppercase rounded' type='button' onClick={clearCard}>Clear All</button>
-                <button 
+                <button className='bg-red-500 text-white md:text-sm lg:text-base md:px-2 md:py-1 lg:px-3 lg:py-2 uppercase rounded' type='button' onClick={clearData}>Clear All</button>
+                <button
                   className='bg-blue-500 text-white md:text-sm lg:text-base md:px-2 md:py-1 lg:px-3 lg:py-2 uppercase rounded' type='submit'>Inventory Request</button>
                   <ToastContainer position="bottom-right"/>
               </div>
@@ -105,7 +103,7 @@ const Form = () => {
         </div>
       </div>
 
-
+      
     </div>
   );
 };

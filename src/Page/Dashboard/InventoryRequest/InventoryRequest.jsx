@@ -59,6 +59,8 @@ function InventoryRequest() {
         setAdminData(updatedTable);
     };
 
+    const [set, setSet] = useState({})
+
 
     // decrement Quantity
     const decrementQuantity = (data) => {
