@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import ManageInventory from "../ManageInventory/ManageInventory";
 
 
 
@@ -42,7 +43,7 @@ const Sidebar = () => {
               adminAndManager &&
               <>
                 {
-                  is_manager && <li><Link to="/manageInventory">Manage Inventory</Link></li>
+                  is_manager && <li><ManageInventory></ManageInventory></li>
                 }
                 {/* <li><Link to="/instituteManagement">Institute Management</Link></li> */}
               </>
