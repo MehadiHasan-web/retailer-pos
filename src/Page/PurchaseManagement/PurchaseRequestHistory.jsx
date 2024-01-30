@@ -5,6 +5,7 @@ import { MdDelete } from "react-icons/md";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 
 
@@ -13,7 +14,7 @@ import axios from "axios";
 function PurchaseRequestHistory() {
   
     const [userData, setUserData] = useState([])
-    const [selectedOption, setSelectedOption] = useState({ id: '', value: ''});
+    const [selectedOption, setSelectedOption] = useState([]);
 
 useEffect(() => {
     const user_id = localStorage.getItem('user_id');
@@ -68,8 +69,26 @@ const handleChange = (id, value) => {
     }    
 };
 
-  function sendData(){
-    alert('Nothing selected')
+  const sendData = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const comment = form.comment.value;
+    const id = selectedOption.id;
+    const status = selectedOption.value;
+    const data = {comment, status }
+    
+    axios.put(`http://inv.xcode.com.bd/api/v1/inventory/purchase/details/${id}/`, data)
+    .then(response => {
+      console.log('PUT request successful:', response.data.message);      
+      if(response.data.message){
+        toast.success("Updated Successfully");
+      }
+    })
+    .catch(error => {
+      console.error('Error performing PUT request:', error);
+      // Handle error
+    });
+
   }
 
   return (
@@ -147,10 +166,10 @@ const handleChange = (id, value) => {
                         </form>
                         <h3 className="font-bold text-lg">Hello!</h3>
                         <div>
-                        <form action="" className="my-2" onSubmit={sendData()}>
-                            <textarea className="textarea textarea-bordered w-full" placeholder="Write something"></textarea>
-                            <input type="file" className="file-input file-input-bordered w-full mt-2" />
-                            <button className="btn btn-neutral float-end mt-2">Done</button>
+                        <form action="" className="my-2" onSubmit={sendData}>
+                            <textarea name="comment" className="textarea textarea-bordered w-full" placeholder="Write something"></textarea>
+                            <input name="file" type="file" className="file-input file-input-bordered w-full mt-2" />
+                            <button type="submit" className="btn btn-neutral float-end mt-2">Done</button>
                         </form>
                         </div>
                     </div>

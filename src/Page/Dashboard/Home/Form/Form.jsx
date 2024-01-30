@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './Form.css'
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
-
+import 'react-toastify/dist/ReactToastify.css';
 // eslint-disable-next-line react/prop-types
 const Form = () => {
 
@@ -98,14 +98,14 @@ const Form = () => {
                 <button className='bg-red-500 text-white md:text-sm lg:text-base md:px-2 md:py-1 lg:px-3 lg:py-2 uppercase rounded' type='button' onClick={clearCard}>Clear All</button>
                 <button 
                   className='bg-blue-500 text-white md:text-sm lg:text-base md:px-2 md:py-1 lg:px-3 lg:py-2 uppercase rounded' type='submit'>Inventory Request</button>
-                  <ToastContainer position="bottom-right"/>
+                  
               </div>
             </form>
           </div>
         </div>
       </div>
 
-
+      <ToastContainer position="bottom-right"/>
     </div>
   );
 };
