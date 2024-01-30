@@ -21,17 +21,7 @@ const Home = () => {
     localStorage.setItem('cardTable', JSON.stringify(cardTable));
   }, [cardTable]);
 
-  // useEffect(() => {
-  //   fetch('https://dummyjson.com/products')
-  //     .then((res) => res.json())
-  //     .then((data) => setCard((data.products)))
-  //     .catch((error) => console.error('Error fetching data:', error));
-  // }, []);
-
-
-  // import axios
-
-
+  
   // use useEffect hook
   useEffect(() => {
     axios.get("http://inv.xcode.com.bd/api/v1/inventory/itemlist/")
@@ -86,7 +76,6 @@ const Home = () => {
               <Search card={card} filteredCard={filteredCard} setFilteredCard={setFilteredCard} setCard={setCard} cardTable={cardTable} setCardTable={setCardTable} initialCardTable={initialCardTable} ></Search>
               {/* search bar end  */}
 
-              {/* search section end */}
               {/* card section start */}
               <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-1 sm:gap-2 md:gap-1 lg:gap-2 mt-5'>
                 {
