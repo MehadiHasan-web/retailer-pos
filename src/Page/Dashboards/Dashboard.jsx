@@ -14,11 +14,7 @@ function Dashboard() {
     const [startDate, setStartDate] = useState(new Date());
     const [userData, setUserData] = useState([])
     const [modalData, setModalData] = useState({});
-    // useEffect(() => {
-    //     fetch('card.json')
-    //     .then((res) => res.json())
-    //     .then((data) => setUserData(data))
-    // },[])
+
 
 useEffect(() => {
     const user_id = localStorage.getItem('user_id');
@@ -128,12 +124,6 @@ const openModal = async (data) => {
                 {/* head */}
                 <thead className="bg-slate-200	">
                 <tr>
-                    <th className="text-black">
-                    Select
-                    {/* <label>
-                        <input type="checkbox" className="checkbox checkbox-sm" />
-                    </label> */}
-                    </th>
                     <th  className="text-black">SL</th>
                     <th  className="text-black">Name</th>
                     <th  className="text-black">Request Date</th>
@@ -145,12 +135,7 @@ const openModal = async (data) => {
                 </thead>
                 <tbody>
                     {
-                        userData.map((data, index) => <tr key={data.id}>
-                        <td>
-                            <label>
-                                <input type="checkbox" className="checkbox checkbox-sm" />
-                            </label>
-                        </td>
+                        userData.map((data, index) => <tr key={data.id}>                       
                         <td>{data.id}</td>
                         <td>
                             <div className="flex items-center gap-1">                               
@@ -202,9 +187,6 @@ const openModal = async (data) => {
                 {/* foot */}
                 <tfoot className="bg-slate-200	">
                 <tr>
-                    <th  className="text-black">
-                    <button className="btn btn-outline btn-sm">Delate</button>
-                    </th>
                     <th  className="text-black">SL</th>
                     <th  className="text-black">Name</th>
                     <th  className="text-black">Request Date</th>

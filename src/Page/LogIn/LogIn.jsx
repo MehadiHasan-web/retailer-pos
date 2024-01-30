@@ -53,7 +53,7 @@ const LogIn = () => {
             <form onSubmit={submitData} className=' space-y-6'>
               <input type='text' className='w-full border-[1px] border-blue-600 p-3 rounded-md' placeholder='please enter your email' name="email" defaultValue={"kminchelle"}></input>
               <input type='password' className='w-full border-[1px] border-blue-600 p-3 rounded-md' placeholder='please enter your password' name="password" defaultValue={"0lelplR"}></input>
-              <input type='submit' value="Login" className='btn w-full bg-gray-500 p-1 text-white text-lg'></input>
+              <input type='submit' value="Login" className='btn w-full bg-gray-500 p-1 text-white hover:text-black text-lg'></input>
             </form>
           </div>
         </div>

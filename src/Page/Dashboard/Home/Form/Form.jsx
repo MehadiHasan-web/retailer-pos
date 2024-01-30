@@ -15,7 +15,7 @@ const Form = () => {
         .then((res) => res.data)
         .then((data) => setApprover(data))
         .catch((error) => console.error("Error fetching data:", error));
-}, []);
+  }, []);
 
   async function sendData(userInfo) {
     try {
@@ -25,7 +25,6 @@ const Form = () => {
           // 'user_id': user_id,
         },
       });
-      console.log(response.data);
        toast.success("Successfully created");
 
     } catch (error) {
@@ -33,7 +32,7 @@ const Form = () => {
     }
   }
 
-  
+  // from handeling
   const userData = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -53,6 +52,12 @@ const Form = () => {
     console.log(user)
   }
 
+  // clear setCardTable 
+  function clearCard(){
+    console.log(cardTable)
+    setCardTable('');
+  }
+  
   return (
     <div>
       <div className="collapse bg-slate-200">
@@ -90,7 +95,7 @@ const Form = () => {
               <textarea type="text" placeholder="Note" className="textarea textarea-lg w-full mt-1" id='bio' name="bio"></textarea>
               {/* textarea section end */}
               <div className='flex gap-2 mt-1'>
-                <button className='bg-red-500 text-white md:text-sm lg:text-base md:px-2 md:py-1 lg:px-3 lg:py-2 uppercase rounded' type='button' >Clear All</button>
+                <button className='bg-red-500 text-white md:text-sm lg:text-base md:px-2 md:py-1 lg:px-3 lg:py-2 uppercase rounded' type='button' onClick={clearCard}>Clear All</button>
                 <button 
                   className='bg-blue-500 text-white md:text-sm lg:text-base md:px-2 md:py-1 lg:px-3 lg:py-2 uppercase rounded' type='submit'>Inventory Request</button>
                   <ToastContainer position="bottom-right"/>
