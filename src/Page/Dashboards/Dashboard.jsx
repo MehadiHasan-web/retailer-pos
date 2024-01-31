@@ -11,6 +11,7 @@ function Dashboard() {
 
     const [startDate, setStartDate] = useState(new Date());
     const [userData, setUserData] = useState([])
+    console.log(userData)
     const [modalData, setModalData] = useState({});
     const [selectedOption, setSelectedOption] = useState(1); // 1 == all data, 2==approve, 3==pending
     const [filteredData, setFilteredData] = useState([]);
@@ -37,39 +38,6 @@ function Dashboard() {
             console.error('Error fetching data:', error);
 
         }
-    };
-
-    // increment Quantity 
-    const incrementQuantity = (data) => {
-        const updatedTable = userData.map(value => {
-            if (value.id === data.id) {
-                // Increment the quantity for the specific item
-                return { ...value, quantity: value.quantity + 1 }
-            }
-            return value;
-        })
-        setUserData(updatedTable);
-    };
-
-    // decrement Quantity
-    const decrementQuantity = (data) => {
-        const updatedTable = userData.map((value) => {
-            if (value.id === data.id) {
-                if (value.quantity > 1) {
-                    return { ...value, quantity: value.quantity - 1 };
-                } else {
-                    Swal.fire({
-                        icon: "error",
-                        title: "Oops...",
-                        text: "Sorry, quantity cannot be less than 1!",
-                    });
-
-                }
-            }
-            return value;
-        });
-
-        setUserData(updatedTable);
     };
 
     // handle search
@@ -109,7 +77,7 @@ useEffect(() => {
 
 
 
-    // Handle search inpuFt change
+    // Handle search input change
     const handleSearchInputChange = (e) => {
         setSearchText(e.target.value);
     };

@@ -9,9 +9,11 @@ function InventoryRequest() {
     const [startDate, setStartDate] = useState(new Date());
     const [adminData, setAdminData] = useState([])
     const [modalData, setModalData] = useState({});
-    console.log(adminData)
+    const [selectedOption, setSelectedOption] = useState(1); // 1 == all data, 2==approve, 3==pending
+    const [filteredData, setFilteredData] = useState([]);
+    const [searchText, setSearchText] = useState("");
 
-    console.log(modalData)
+
     const isApprover = localStorage.getItem('is_approver') === 'true';
     const is_manager = localStorage.getItem('is_manager') === 'true';
 
@@ -96,6 +98,45 @@ function InventoryRequest() {
         }
     }
 
+    useEffect(() => {
+        let filteredResults = adminData;
+
+        if (selectedOption === 2) {
+            filteredResults = filteredResults.filter((item) => item.approve_status === "Approved");
+        } else if (selectedOption === 3) {
+            filteredResults = filteredResults.filter((item) => item.approve_status === "pending");
+        }
+
+        // Applying the search filter
+        if (searchText.trim() !== "") {
+            filteredResults = filteredResults.filter((item) =>
+                item.user.username.toLowerCase().includes(searchText.toLowerCase())
+            );
+        }
+
+        setFilteredData(filteredResults);
+    }, [selectedOption, adminData, searchText]);
+
+    // handle Select
+    const handleSelectChange = (e) => {
+        e.preventDefault();
+        console.log(e.target.value);
+        const newSelectedOption = parseInt(e.target.value);
+        setSelectedOption(newSelectedOption);
+    }
+
+     // Handle search input change
+     const handleSearchInputChange = (e) => {
+        setSearchText(e.target.value);
+    };
+
+    // clear search
+    const handleClearSearch = (e) => {
+        e.preventDefault();
+        setSearchText("");
+    }
+
+
     return (
         <div>
             <Title pageName={"Inventory Complete"}></Title>
@@ -112,32 +153,33 @@ function InventoryRequest() {
                         <div className="flex justify-center mt-1">
                             <form action="" className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-2  lg:flex md:gap-0 lg:justify-around lg:items-center">
                                 {/* category  */}
-                                <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1 " >
+                                {/* <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1 " >
                                     <option disabled selected>Category</option>
                                     <option>Han Solo</option>
                                     <option>Greedo</option>
-                                </select>
+                                </select> */}
                                 {/* subcategory  */}
-                                <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1 " >
+                                {/* <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1 " >
                                     <option disabled selected>Subcategory?</option>
                                     <option>Han Solo</option>
                                     <option>Greedo</option>
-                                </select>
+                                </select> */}
                                 {/* subcategory  */}
                                 {/* date end */}
-                                <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1  " >
-                                    <option disabled selected>Subcategory?</option>
-                                    <option>Han Solo</option>
-                                    <option>Greedo</option>
+                                <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1  "
+                                    onChange={handleSelectChange}>
+                                    <option value={1}>All Application</option>
+                                    <option value={2}>Complete Application</option>
+                                    <option value={3}>Pending Application</option>
                                 </select>
                                 {/* date  */}
                                 <div className="w-full xl:w-44 mx-1 mb-1">
                                     <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} className="w-full overflow-hidden border input input-sm  rounded-full" />
                                 </div>
                                 {/* search bar  */}
-                                <input type="text" placeholder="Type here" className="input input-bordered input-sm max-w-xs w-full xl:w-44 rounded-full mx-1 mb-1 " />
-                                <button type="submit" className="btn btn-outline btn-sm rounded-full mx-3  hover:text-white ">Search</button>
-                                <button type="button" className="btn btn-outline btn-sm rounded-full mx-1  hover:text-white ">Clear filter</button>
+                                <input value={searchText} onChange={handleSearchInputChange} type="text" placeholder="Type here" className="input input-bordered input-sm max-w-xs w-full xl:w-44 rounded-full mx-1 mb-1 " />
+
+                                <button onClick={handleClearSearch} type="button" className="btn btn-outline btn-sm rounded-full mx-1  hover:text-white ">Clear filter</button>
 
                             </form>
                         </div>
@@ -152,13 +194,14 @@ function InventoryRequest() {
                                     <th className="text-black">#</th>
                                     <th className="text-black">Name</th>
                                     <th className="text-black">Request Date</th>
-                                    <th className="text-black">Status</th>
+                                    <th className="text-black">Approver Status</th>
+                                    <th className="text-black">Manager Status</th>
                                     <th className="text-black">Show/Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
-                                    adminData.map((tableData, index) => <tr key={tableData.id}>
+                                    filteredData.map((tableData, index) => <tr key={tableData.id}>
                                         <td>{tableData.id}</td>
                                         <td>
                                             <div className="flex items-center gap-3">
@@ -168,11 +211,16 @@ function InventoryRequest() {
                                                 </div>
                                             </div>
                                         </td>
+
                                         <td>
                                             <p>20 january </p>
                                         </td>
-                                        <td>{tableData.approve_status
-                                        }</td>
+                                        <td>
+                                            {tableData.approve_status
+                                            }
+                                        </td>
+                                        <td>
+                                            {tableData.manager_status}</td>
                                         <td onClick={() => openModal(tableData.id)}>
                                             <button className="btn btn-outline btn-success btn-sm" onClick={() => document.getElementById('my_modal_4').showModal()}>
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
