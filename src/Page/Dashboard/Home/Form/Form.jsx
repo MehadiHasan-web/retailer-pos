@@ -4,11 +4,11 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // eslint-disable-next-line react/prop-types
-const Form = ({clearData}) => {
-
+const Form = ({setCard}) => {
   const [cardTable, setCardTable] = useState([])
   const [approverList, setApprover] = useState([])
   const user_id = localStorage.getItem('user_id');
+  
 
   useEffect(() => {
     axios.get(`http://inv.xcode.com.bd/api/v1/account/approvers/`)
@@ -16,6 +16,11 @@ const Form = ({clearData}) => {
         .then((data) => setApprover(data))
         .catch((error) => console.error("Error fetching data:", error));
   }, []);
+
+  const clearData = () => {
+    setCard([])
+    setCardTable([])
+  }
 
   
 
@@ -45,14 +50,12 @@ const Form = ({clearData}) => {
     const initialCardTable = JSON.parse(localStorage.getItem('cardTable')) || [];
 
     setCardTable(initialCardTable);
-
     setCardTable((prevCardTable) => [...prevCardTable, user]);
-
     const updatedCardTable = [...initialCardTable, user];
     sendData(updatedCardTable);
-    console.log(user)
   }
 
+  
   
   
   return (
