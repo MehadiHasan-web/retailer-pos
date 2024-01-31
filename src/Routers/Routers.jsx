@@ -55,7 +55,7 @@ const router = createBrowserRouter([
         element : <PurchaseRequest></PurchaseRequest>
       },
       {
-        path : '/purchaseManagement/purchaseHistory',
+        path : '/purchaseManagement/purchaseRequestHistory',
         element : <PurchaseRequestHistory></PurchaseRequestHistory>
       },
       {
