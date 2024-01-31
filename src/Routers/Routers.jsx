@@ -47,7 +47,7 @@ const router = createBrowserRouter([
         element: <InventoryRequest></InventoryRequest>
       },
       {
-        path: '/appointments',
+        path: '/applications',
         element: <Appointments></Appointments>
       },
       {

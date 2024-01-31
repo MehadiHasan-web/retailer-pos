@@ -24,6 +24,7 @@ const LogIn = () => {
       if(response.status === 200) {
         setUser(response.data)
         localStorage.setItem('token', response.data.token)
+        localStorage.setItem('is_admin', response.data.is_admin)
         localStorage.setItem('is_approver', response.data.is_approver)
         localStorage.setItem('is_manager', response.data.is_manager)
         localStorage.setItem('user_id', response.data.user_id)

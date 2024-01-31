@@ -51,52 +51,52 @@ const CreateUser = () => {
             {/* Name field */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text">name:</span>
+                <span className="label-text">Name:</span>
               </label>
               <input
                 type="text"
-                placeholder="enter your name"
+                placeholder="Enter your name"
                 className="input input-bordered"
                 name="userName"
               />
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">email:</span>
+                <span className="label-text">Email:</span>
               </label>
               <input
                 type="email"
-                placeholder="enter your email"
+                placeholder="Enter your email"
                 className="input input-bordered"
                 name="email"
               />
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">designation:</span>
+                <span className="label-text">Eesignation:</span>
               </label>
               <input
                 type="text"
-                placeholder="enter your designation"
+                placeholder="Enter your designation"
                 className="input input-bordered"
                 name="designation"
               />
             </div>
             <div className="form-control">
             <label className="label cursor-pointer">
-              <span className="label-text">approver</span> 
+              <span className="label-text">Approver</span> 
               <input onClick={() => setApprover(!approver)} type="checkbox" className={`${approver === true ? 'toggle' : 'toggle'}`} checked={approver}/>
             </label>
             </div>
             <div className="form-control">
             <label className="label cursor-pointer">
-              <span className="label-text">manager</span> 
+              <span className="label-text">Manager</span> 
               <input onClick={() => setManager(!manager)} type="checkbox" className={`${manager === true ? 'toggle' : 'toggle'}`} checked={manager}/>
             </label>
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">password:</span>
+                <span className="label-text">Password:</span>
               </label>
               <input
                 type="password"

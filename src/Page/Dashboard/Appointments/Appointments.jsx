@@ -1,9 +1,6 @@
 import Title from "../../../Title/Title"
 import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
-import { MdDelete } from "react-icons/md";
-import { FiMinus } from 'react-icons/fi';
-import { FiPlus } from 'react-icons/fi';
 import Swal from "sweetalert2";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -12,29 +9,24 @@ function InventoryRequest() {
     const [startDate, setStartDate] = useState(new Date());
     const [adminData, setAdminData] = useState([])
     const [modalData, setModalData] = useState({});
-    console.log(adminData)
+    const [selectedOption, setSelectedOption] = useState(1); // 1 == all data, 2==approve, 3==pending
+    const [filteredData, setFilteredData] = useState([]);
+    const [searchText, setSearchText] = useState("");
 
-    console.log(modalData)
+
     const isApprover = localStorage.getItem('is_approver') === 'true';
     const is_manager = localStorage.getItem('is_manager') === 'true';
-    
-    // const adminAndManager = isApprover || is_manager;
-    // useEffect(() => {
-    //     fetch('card.json')
-    //     .then((res) => res.json())
-    //     .then((data) => setAdminData(data))
-    // },[])
+
+
     useEffect(() => {
         const user_id = localStorage.getItem('user_id');
         console.log(user_id);
-    
-        axios.get(`http://inv.xcode.com.bd/api/v1/inventory/inventory/?user_id=${user_id}`)
-        .then((res) => res.data)
-        .then((data) => setAdminData(data))
-        .catch((error) => console.error("Error fetching data:", error));
-    }, []);
-    
 
+        axios.get(`http://inv.xcode.com.bd/api/v1/inventory/inventory/?user_id=${user_id}`)
+            .then((res) => res.data)
+            .then((data) => setAdminData(data))
+            .catch((error) => console.error("Error fetching data:", error));
+    }, []);
 
     const openModal = async (data) => {
         console.log(data);
@@ -43,7 +35,7 @@ function InventoryRequest() {
             setModalData(response.data);
         } catch (error) {
             console.error('Error fetching data:', error);
-       
+
         }
     };
 
@@ -79,6 +71,7 @@ function InventoryRequest() {
 
         setAdminData(updatedTable);
     };
+
     const takeAction = async (event) => {
         event.preventDefault();
         const form = event.target;
@@ -88,22 +81,61 @@ function InventoryRequest() {
         const approve_status = isApprover ? form.approve_status.value : (is_manager ? form.manager_status.value : null);
 
         let data = {};
-        
+
         if (is_manager) {
             data.manager_status = form.manager_status.value;
         } else {
             data.approve_status = approve_status;
         }
-        
-        
+
+
         const response = await axios.put(`http://inv.xcode.com.bd/api/v1/inventory/inventory/${modalData.id}/`, data);
-        
+
         if (response.status === 200) {
             toast.success("Successfully created");
-        }else {
+        } else {
             toast.error("Try again")
         }
     }
+
+    useEffect(() => {
+        let filteredResults = adminData;
+
+        if (selectedOption === 2) {
+            filteredResults = filteredResults.filter((item) => item.approve_status === "Approved");
+        } else if (selectedOption === 3) {
+            filteredResults = filteredResults.filter((item) => item.approve_status === "pending");
+        }
+
+        // Applying the search filter
+        if (searchText.trim() !== "") {
+            filteredResults = filteredResults.filter((item) =>
+                item.user.username.toLowerCase().includes(searchText.toLowerCase())
+            );
+        }
+
+        setFilteredData(filteredResults);
+    }, [selectedOption, adminData, searchText]);
+
+    // handle Select
+    const handleSelectChange = (e) => {
+        e.preventDefault();
+        console.log(e.target.value);
+        const newSelectedOption = parseInt(e.target.value);
+        setSelectedOption(newSelectedOption);
+    }
+
+     // Handle search input change
+     const handleSearchInputChange = (e) => {
+        setSearchText(e.target.value);
+    };
+
+    // clear search
+    const handleClearSearch = (e) => {
+        e.preventDefault();
+        setSearchText("");
+    }
+
 
     return (
         <div>
@@ -121,32 +153,33 @@ function InventoryRequest() {
                         <div className="flex justify-center mt-1">
                             <form action="" className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-2  lg:flex md:gap-0 lg:justify-around lg:items-center">
                                 {/* category  */}
-                                <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1 " >
+                                {/* <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1 " >
                                     <option disabled selected>Category</option>
                                     <option>Han Solo</option>
                                     <option>Greedo</option>
-                                </select>
+                                </select> */}
                                 {/* subcategory  */}
-                                <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1 " >
+                                {/* <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1 " >
                                     <option disabled selected>Subcategory?</option>
                                     <option>Han Solo</option>
                                     <option>Greedo</option>
-                                </select>
+                                </select> */}
                                 {/* subcategory  */}
                                 {/* date end */}
-                                <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1  " >
-                                    <option disabled selected>Subcategory?</option>
-                                    <option>Han Solo</option>
-                                    <option>Greedo</option>
+                                <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1  "
+                                    onChange={handleSelectChange}>
+                                    <option value={1}>All Application</option>
+                                    <option value={2}>Complete Application</option>
+                                    <option value={3}>Pending Application</option>
                                 </select>
                                 {/* date  */}
                                 <div className="w-full xl:w-44 mx-1 mb-1">
                                     <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} className="w-full overflow-hidden border input input-sm  rounded-full" />
                                 </div>
                                 {/* search bar  */}
-                                <input type="text" placeholder="Type here" className="input input-bordered input-sm max-w-xs w-full xl:w-44 rounded-full mx-1 mb-1 " />
-                                <button type="submit" className="btn btn-outline btn-sm rounded-full mx-3  hover:text-white ">Search</button>
-                                <button type="button" className="btn btn-outline btn-sm rounded-full mx-1  hover:text-white ">Clear filter</button>
+                                <input value={searchText} onChange={handleSearchInputChange} type="text" placeholder="Type here" className="input input-bordered input-sm max-w-xs w-full xl:w-44 rounded-full mx-1 mb-1 " />
+
+                                <button onClick={handleClearSearch} type="button" className="btn btn-outline btn-sm rounded-full mx-1  hover:text-white ">Clear filter</button>
 
                             </form>
                         </div>
@@ -161,26 +194,33 @@ function InventoryRequest() {
                                     <th className="text-black">#</th>
                                     <th className="text-black">Name</th>
                                     <th className="text-black">Request Date</th>
-                                    <th className="text-black">Status</th>
+                                    <th className="text-black">Approver Status</th>
+                                    <th className="text-black">Manager Status</th>
                                     <th className="text-black">Show/Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
-                                    adminData.map((tableData, index) => <tr key={tableData.id}>
+                                    filteredData.map((tableData, index) => <tr key={tableData.id}>
                                         <td>{tableData.id}</td>
                                         <td>
                                             <div className="flex items-center gap-3">
-                                                
+
                                                 <div>
-                                                <div className="font-bold">{tableData.user.username}</div>
+                                                    <div className="font-bold">{tableData.user.username}</div>
                                                 </div>
                                             </div>
                                         </td>
+
                                         <td>
                                             <p>20 january </p>
                                         </td>
-                                        <td>Pending</td>
+                                        <td>
+                                            {tableData.approve_status
+                                            }
+                                        </td>
+                                        <td>
+                                            {tableData.manager_status}</td>
                                         <td onClick={() => openModal(tableData.id)}>
                                             <button className="btn btn-outline btn-success btn-sm" onClick={() => document.getElementById('my_modal_4').showModal()}>
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -209,7 +249,7 @@ function InventoryRequest() {
                             <div className="modal-box w-11/12 max-w-[80%]">
                                 <div className="flex flex-col md:flex-row">
                                     <div className="w-full md:w-[60%] order-1">
-                                    <h3 className="font-bold text-lg">{modalData?.user?.username}</h3>
+                                        <h3 className="font-bold text-lg">{modalData?.user?.username}</h3>
                                         <div className="w-full  rounded mt-6 ">
                                             {/* table start */}
                                             <table className="w-full overflow-y-scroll rounded-md mb-2">
@@ -260,36 +300,36 @@ function InventoryRequest() {
                                     <div className="md:divider md:divider-horizontal md:divider-info mt-8 order-2 hidden mb:block"> OR </div>
                                     <div className="w-full md:w-[40%] order-3">
 
-                                      
-                                        {isApprover ? (                                                    
-                                                    <React.Fragment>
-                                                          <h3 className="mt-3 font-semibold">Approver Actions</h3>
-                                                    </React.Fragment>
-                                                ) : (is_manager ? (
-                                                    <React.Fragment>
-                                                          <h3 className="mt-3 font-semibold">Managerial Actions</h3>
-                                                    </React.Fragment>
-                                                ) : null)}
+
+                                        {isApprover ? (
+                                            <React.Fragment>
+                                                <h3 className="mt-3 font-semibold">Approver Actions</h3>
+                                            </React.Fragment>
+                                        ) : (is_manager ? (
+                                            <React.Fragment>
+                                                <h3 className="mt-3 font-semibold">Managerial Actions</h3>
+                                            </React.Fragment>
+                                        ) : null)}
                                         <form onSubmit={takeAction}>
-                                            <textarea className="textarea textarea-bordered my-3 w-full" placeholder="Return Message" name="reject_msg"></textarea>   
-                                                {isApprover ? (                                                    
-                                                    <React.Fragment>
-                                                        <select className="select select-bordered w-full" name="approve_status">
+                                            <textarea className="textarea textarea-bordered my-3 w-full" placeholder="Return Message" name="reject_msg"></textarea>
+                                            {isApprover ? (
+                                                <React.Fragment>
+                                                    <select className="select select-bordered w-full" name="approve_status">
                                                         <option selected>Take Actions</option>
                                                         <option value={'Approved'}>Approve</option>
                                                         <option value={'Returned'}>Return</option>
                                                         <option value={'Rejected'}>Reject</option>
-                                                        </select>
-                                                    </React.Fragment>
-                                                ) : (is_manager ? (
-                                                    <React.Fragment>
-                                                        <select className="select select-bordered w-full" name="manager_status">
+                                                    </select>
+                                                </React.Fragment>
+                                            ) : (is_manager ? (
+                                                <React.Fragment>
+                                                    <select className="select select-bordered w-full" name="manager_status">
                                                         <option value={'Partial Disbursed'}>Partial Disburse</option>
                                                         <option value={'Disbursed'}>Disburse</option>
                                                         <option value={'Hold'}>Hold</option>
-                                                        </select>
-                                                    </React.Fragment>
-                                                ) : null)}
+                                                    </select>
+                                                </React.Fragment>
+                                            ) : null)}
                                             <button className="btn btn-neutral mt-4">Submit</button>
                                         </form>
                                     </div>
@@ -300,7 +340,7 @@ function InventoryRequest() {
                                         {/* if there is a button, it will close the modal */}
                                         <button className="btn">Close</button>
                                     </form>
-                                    <ToastContainer position="bottom-right"/>
+                                    <ToastContainer position="bottom-right" />
                                 </div>
                             </div>
                         </dialog>
