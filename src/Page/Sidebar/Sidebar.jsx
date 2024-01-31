@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import ManageInventory from "../ManageInventory/ManageInventory";
 import PurchaseManagement from "../PurchaseManagement/PurchaseManagement";
-import InstituteManagement from "../InstituteManagement/InstituteManagement";
+
 
 
 
@@ -51,6 +51,9 @@ const Sidebar = () => {
               </>
             }
             {/* <li><Link to="/createUser">Create User</Link></li> */}
+            {
+              is_manager && <li><Link to="/allUserInventory">All UserInventory</Link></li>
+            }
 
           </ul>
 

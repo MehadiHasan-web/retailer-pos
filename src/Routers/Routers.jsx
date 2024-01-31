@@ -19,6 +19,8 @@ import PurchaseRequestHistory from "../Page/PurchaseManagement/PurchaseRequestHi
 import PurchaseRequest from "../Page/PurchaseManagement/PurchaseRequest";
 import MyInventory from './../Page/My Inventory/MyInventory';
 import ErrorPage from "../Page/ErrorPage/ErrorPage";
+import AllUserInventory from "../Page/AllUserInventory/AllUserInventory";
+import UserInventory from "../Page/UserInventory/UserInventory";
 
 
 const router = createBrowserRouter([
@@ -82,6 +84,10 @@ const router = createBrowserRouter([
 
       },
       {
+        path : '/manageInventory/allUserInventory',
+        element : <AllUserInventory></AllUserInventory>
+      },
+      {
         path : '/instituteManagement/instituteName',
         element : <InstituteName></InstituteName>
       },
@@ -96,7 +102,13 @@ const router = createBrowserRouter([
       {
         path : '/createUser',
         element : <CreateUser></CreateUser>
-      }
+      },
+      
+      {
+        path : '/userInventory',
+        element : <UserInventory></UserInventory>
+      },
+      
     ]
   },
 
