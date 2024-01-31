@@ -18,6 +18,7 @@ import Appointments from "../Page/Dashboard/Appointments/Appointments";
 import PurchaseRequestHistory from "../Page/PurchaseManagement/PurchaseRequestHistory";
 import PurchaseRequest from "../Page/PurchaseManagement/PurchaseRequest";
 import MyInventory from './../Page/My Inventory/MyInventory';
+import ErrorPage from "../Page/ErrorPage/ErrorPage";
 
 
 const router = createBrowserRouter([
@@ -29,6 +30,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <PrivateRoute><DashBoard></DashBoard></PrivateRoute>,
+    errorElement : <ErrorPage></ErrorPage>,
     children: [
       {
         path: '/',
