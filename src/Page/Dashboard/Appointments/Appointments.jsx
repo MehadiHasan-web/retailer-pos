@@ -165,13 +165,14 @@ function InventoryRequest() {
 
                                                 <div>
                                                     <div className="font-bold">{tableData.user.username}</div>
-                                             </div>
+                                                </div>
                                             </div>
                                         </td>
                                         <td>
                                             <p>20 january </p>
                                         </td>
-                                        <td>Pending</td>
+                                        <td>{tableData.approve_status
+                                        }</td>
                                         <td onClick={() => openModal(tableData.id)}>
                                             <button className="btn btn-outline btn-success btn-sm" onClick={() => document.getElementById('my_modal_4').showModal()}>
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
