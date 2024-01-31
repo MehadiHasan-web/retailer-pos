@@ -39,7 +39,7 @@ const Sidebar = () => {
               is_manager && <li><PurchaseManagement></PurchaseManagement></li>
             }
             {
-              isApprover && <li><Link to="/appointments">Appointments</Link></li>
+              isApprover && <li><Link to="/applications">Applications</Link></li>
             }
             <li><Link to="/myInventory">My Inventory</Link></li>
             {
