@@ -16,6 +16,10 @@ const Home = () => {
   const [cardTable, setCardTable] = useState(initialCardTable);
   const [filteredCard, setFilteredCard] = useState([]);
 
+  const clearData = () => {
+    setCardTable([])
+  }
+
 
   useEffect(() => {
     localStorage.setItem('cardTable', JSON.stringify(cardTable));
@@ -106,7 +110,7 @@ const Home = () => {
               <Table cardTable={cardTable} setCardTable={setCardTable} ></Table>
               {/* table section end */}
               {/* form section start */}
-              <Form cardTable={cardTable} setCardTable={setCardTable} className="md:absolute lg:absolute right-0 left-0 md:bottom-0 lg:bottom-0 rounded-md"></Form>
+              <Form clearData={clearData} cardTable={cardTable} setCardTable={setCardTable} className="md:absolute lg:absolute right-0 left-0 md:bottom-0 lg:bottom-0 rounded-md"></Form>
               {/* form section end */}
             </div>
           </div>

@@ -5,7 +5,8 @@ import { MdDelete } from "react-icons/md";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import Swal from "sweetalert2";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -65,7 +66,7 @@ console.log(selectedOption)
 const handleChange = (id, value) => {
     setSelectedOption({ id, value }); 
     if(value === "Completed"){
-        openModal()
+      openModal()
     }    
 };
 
@@ -178,6 +179,7 @@ const handleChange = (id, value) => {
             </div>
         </div>
         </div>
+        <ToastContainer position="bottom-right"/>
     </>
   )
 }
