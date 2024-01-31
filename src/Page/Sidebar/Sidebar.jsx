@@ -9,6 +9,7 @@ const Sidebar = () => {
 
   const isApprover = localStorage.getItem('is_approver') === 'true';
   const is_manager = localStorage.getItem('is_manager') === 'true';
+  const is_admin = localStorage.getItem('is_admin') === 'true';
 
   const adminAndManager = isApprover || is_manager;
 
@@ -50,8 +51,9 @@ const Sidebar = () => {
                   {/* <li><InstituteManagement></InstituteManagement></li> */}
               </>
             }
-            {/* <li><Link to="/createUser">Create User</Link></li> */}
-
+            {
+              is_admin && <li><Link to="/createUser">Create User</Link></li>
+            }
           </ul>
 
         </div>
