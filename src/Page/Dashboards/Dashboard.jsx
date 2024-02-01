@@ -8,7 +8,6 @@ import axios from "axios";
 
 
 function Dashboard() {
-
     const [startDate, setStartDate] = useState(new Date());
     const [userData, setUserData] = useState([])
     console.log(userData)
@@ -17,14 +16,18 @@ function Dashboard() {
     const [filteredData, setFilteredData] = useState([]);
     const [searchText, setSearchText] = useState("");
 
+    console.log(loading)
+   
 
 
     useEffect(() => {
+       
         const user_id = localStorage.getItem('user_id');
         axios.get(`http://inv.xcode.com.bd/api/v1/inventory/myinventoryrequest/${user_id}/`)
             .then((res) => res.data)
             .then((data) => setUserData(data))
             .catch((error) => console.error("Error fetching data:", error));
+            
     }, []);
 
     // open modal 
