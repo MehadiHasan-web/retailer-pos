@@ -16,7 +16,6 @@ function Dashboard() {
     const [filteredData, setFilteredData] = useState([]);
     const [searchText, setSearchText] = useState("");
 
-    console.log(loading)
    
 
 
