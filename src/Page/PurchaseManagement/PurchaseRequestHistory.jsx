@@ -1,5 +1,5 @@
 import Title from "../../Title/Title"
-import  { useEffect, useState } from "react";
+import  { useContext, useEffect, useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import { MdDelete } from "react-icons/md";
 import { FiMinus, FiPlus } from "react-icons/fi";
@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AuthContext } from './../../Providers/AuthProvider';
 
 
 
@@ -16,14 +17,15 @@ function PurchaseRequestHistory() {
   
     const [userData, setUserData] = useState([])
     const [selectedOption, setSelectedOption] = useState([]);
+    const {baseURL} = useContext(AuthContext)
 
 useEffect(() => {
     const user_id = localStorage.getItem('user_id');
-    axios.get('http://inv.xcode.com.bd/api/v1/inventory/purchase/')
+    axios.get(`${baseURL}/purchase/`)
         .then((res) => res.data)
         .then((data) => setUserData(data))
         .catch((error) => console.error("Error fetching data:", error));
-}, []);
+}, [baseURL]);
 
       // increment Quantity 
   const incrementQuantity = (data) => {
@@ -78,7 +80,7 @@ const handleChange = (id, value) => {
     const status = selectedOption.value;
     const data = {comment, status }
     
-    axios.put(`http://inv.xcode.com.bd/api/v1/inventory/purchase/details/${id}/`, data)
+    axios.put(`${baseURL}/purchase/details/${id}/`, data)
     .then(response => {
       console.log('PUT request successful:', response.data.message);      
       if(response.data.message){

@@ -1,15 +1,17 @@
 
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Title from './../../Title/Title';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
+import { AuthContext } from './../../Providers/AuthProvider';
 
 const SubItemFrom = () => {
 
   const [subItemFormItem, setItemFormItem] = useState([])
+  const {baseURL} = useContext(AuthContext)
 
   useEffect(()=> {
-    axios.get('http://inv.xcode.com.bd/api/v1/inventory/itemlist/')
+    axios.get(`${baseURL}/itemlist/`)
     .then(response => {
       setItemFormItem(response.data)
       // console.log('Response:', response.data);
@@ -17,7 +19,7 @@ const SubItemFrom = () => {
     .catch(error => {
       console.error('Error:', error);
     });
-  },[])
+  },[baseURL])
 
   const subItemFormData = (event) => {
     event.preventDefault()
@@ -28,7 +30,7 @@ const SubItemFrom = () => {
     const file = form.file.value;
     const stock = form.stock.value;
     const categoryFormValue = {name, itemName, image, file, stock}
-    axios.post('http://inv.xcode.com.bd/api/v1/inventory/subitemlist/', categoryFormValue)
+    axios.post(`${baseURL}/subitemlist/`, categoryFormValue)
     .then(response => {
       console.log('Response:', response.data);
       toast.success("Successfully created");
@@ -76,7 +78,6 @@ const SubItemFrom = () => {
               <option value={"one"}>one</option>
             </select>
             </div>
-           
             {/* image field */}
             <div className="form-control">
               <label className="label">

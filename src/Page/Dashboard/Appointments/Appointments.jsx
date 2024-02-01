@@ -1,9 +1,10 @@
 import Title from "../../../Title/Title"
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import { AuthContext } from './../../../Providers/AuthProvider';
 
 function InventoryRequest() {
     const [startDate, setStartDate] = useState(new Date());
@@ -12,6 +13,7 @@ function InventoryRequest() {
     const [selectedOption, setSelectedOption] = useState(1); // 1 == all data, 2==approve, 3==pending
     const [filteredData, setFilteredData] = useState([]);
     const [searchText, setSearchText] = useState("");
+    const {baseURL} = useContext(AuthContext)
 
 
     const isApprover = localStorage.getItem('is_approver') === 'true';
@@ -22,16 +24,16 @@ function InventoryRequest() {
         const user_id = localStorage.getItem('user_id');
         console.log(user_id);
 
-        axios.get(`http://inv.xcode.com.bd/api/v1/inventory/inventory/?user_id=${user_id}`)
+        axios.get(`${baseURL}/inventory/?user_id=${user_id}`)
             .then((res) => res.data)
             .then((data) => setAdminData(data))
             .catch((error) => console.error("Error fetching data:", error));
-    }, []);
+    }, [baseURL]);
 
     const openModal = async (data) => {
         console.log(data);
         try {
-            const response = await axios.get(`http://inv.xcode.com.bd/api/v1/inventory/inventory/${data}/`);
+            const response = await axios.get(`${baseURL}/inventory/${data}/`);
             setModalData(response.data);
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -89,7 +91,7 @@ function InventoryRequest() {
         }
 
 
-        const response = await axios.put(`http://inv.xcode.com.bd/api/v1/inventory/inventory/${modalData.id}/`, data);
+        const response = await axios.put(`${baseURL}/inventory/${modalData.id}/`, data);
 
         if (response.status === 200) {
             toast.success("Successfully created");

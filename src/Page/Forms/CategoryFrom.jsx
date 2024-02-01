@@ -3,11 +3,13 @@
 import { ToastContainer, toast } from 'react-toastify';
 import Title from './../../Title/Title';
 import axios from 'axios';
+import { useContext } from 'react';
+import { AuthContext } from './../../Providers/AuthProvider';
 
 
 const CategoryFrom = () => {
 
-
+  const {baseURL} = useContext(AuthContext)
   
 
   const categoryFormData = (event) => {
@@ -16,7 +18,7 @@ const CategoryFrom = () => {
     const name = form.name.value;
     const categoryFormValue = { name}
     // setCategoryFormItem(categoryFormValue)
-    axios.post('http://inv.xcode.com.bd/api/v1/inventory/catagorylist/', categoryFormValue)
+    axios.post(`${baseURL}/catagorylist/`, categoryFormValue)
     .then(response => {
       console.log('Response:', response.data);
       toast.success("Successfully created");

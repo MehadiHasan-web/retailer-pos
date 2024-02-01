@@ -1,9 +1,10 @@
 import Title from "../../Title/Title"
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { AuthContext } from './../../Providers/AuthProvider';
 
 
 
@@ -16,22 +17,23 @@ function Dashboard() {
     const [selectedOption, setSelectedOption] = useState(1); // 1 == all data, 2==approve, 3==pending
     const [filteredData, setFilteredData] = useState([]);
     const [searchText, setSearchText] = useState("");
+    const {baseURL} = useContext(AuthContext)
 
 
 
     useEffect(() => {
         const user_id = localStorage.getItem('user_id');
-        axios.get(`http://inv.xcode.com.bd/api/v1/inventory/myinventoryrequest/${user_id}/`)
+        axios.get(`${baseURL}/myinventoryrequest/${user_id}/`)
             .then((res) => res.data)
             .then((data) => setUserData(data))
             .catch((error) => console.error("Error fetching data:", error));
-    }, []);
+    }, [baseURL]);
 
     // open modal 
     const openModal = async (data) => {
         console.log(data);
         try {
-            const response = await axios.get(`http://inv.xcode.com.bd/api/v1/inventory/inventory/${data}/`);
+            const response = await axios.get(`${baseURL}/inventory/${data}/`);
             setModalData(response.data);
             console.log(response.data)
         } catch (error) {

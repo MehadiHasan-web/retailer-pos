@@ -7,9 +7,13 @@ import Form from '../Form/Form';
 import Title from './../../../../Title/Title';
 import Search from '../Search/Search';
 import axios from "axios";
+import { useContext } from 'react';
+import { AuthContext } from './../../../../Providers/AuthProvider';
 
 
 const Home = () => {
+
+  const {baseURL} = useContext(AuthContext)
 
   const [card, setCard] = useState([])
   const initialCardTable = JSON.parse(localStorage.getItem('cardTable')) || [];
@@ -26,11 +30,13 @@ const Home = () => {
   
   // use useEffect hook
   useEffect(() => {
-    axios.get("http://inv.xcode.com.bd/api/v1/inventory/itemlist/")
+    // axios.get("http://inv.xcode.com.bd/api/v1/inventory/itemlist/")
+    axios.get(`${baseURL}/itemlist/`)
       .then((res) => res.data)
       .then((data) => setCard(data))
       .catch((error) => console.error("Error fetching data:", error));
-  }, []);
+  }, [baseURL]);
+
 
 
   // useEffect(() => {

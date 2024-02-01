@@ -1,19 +1,21 @@
 
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Title from './../../Title/Title';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
+import { AuthContext } from './../../Providers/AuthProvider';
 
 
 const BranchName = () => {
 
   const [branchNameItem, setBranchNameItem] = useState([])
+  const {baseURL} = useContext(AuthContext)
   
   
 
   useEffect(()=> {
-    axios.get('http://inv.xcode.com.bd/api/v1/inventory/institutelist/')
+    axios.get(`${baseURL}/institutelist/`)
     .then(response => {
       setBranchNameItem(response.data)
       // console.log('Response:', response.data);
@@ -21,7 +23,7 @@ const BranchName = () => {
     .catch(error => {
       console.error('Error:', error);
     });
-  },[])
+  },[baseURL])
 
   const branchNameData = (event) => {
     event.preventDefault()
@@ -32,7 +34,7 @@ const BranchName = () => {
     const location = form.location.value;
     const branchNameValue = { Institute,name,note,location}
     // setBranchNameItem(branchNameValue)
-    axios.post('http://inv.xcode.com.bd/api/v1/inventory/branchlist/', branchNameValue)
+    axios.post(`${baseURL}/branchlist/`, branchNameValue)
     .then(response => {
       console.log('Response:', response.data);
       toast.success("Successfully created");
