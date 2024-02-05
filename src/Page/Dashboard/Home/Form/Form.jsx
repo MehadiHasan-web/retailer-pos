@@ -3,19 +3,22 @@ import './Form.css'
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useContext } from 'react';
+import { AuthContext } from './../../../../Providers/AuthProvider';
 // eslint-disable-next-line react/prop-types
 const Form = ({setCard}) => {
   const [cardTable, setCardTable] = useState([])
   const [approverList, setApprover] = useState([])
   const user_id = localStorage.getItem('user_id');
+  const {baseURL, accountURL} = useContext(AuthContext)
   
 
   useEffect(() => {
-    axios.get(`http://inv.xcode.com.bd/api/v1/account/approvers/`)
+    axios.get(`${accountURL}/approvers/`)
         .then((res) => res.data)
         .then((data) => setApprover(data))
         .catch((error) => console.error("Error fetching data:", error));
-  }, []);
+  }, [accountURL]);
 
   const clearData = () => {
     setCard([])
@@ -26,7 +29,7 @@ const Form = ({setCard}) => {
 
   async function sendData(userInfo) {
     try {
-      const response = await axios.post("http://inv.xcode.com.bd/api/v1/inventory/inventory/", userInfo, {
+      const response = await axios.post(`${baseURL}/inventory/`, userInfo, {
         headers: {
           'Content-Type': 'application/json',
           // 'user_id': user_id,

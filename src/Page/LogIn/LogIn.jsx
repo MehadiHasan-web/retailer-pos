@@ -5,11 +5,14 @@ import axios from 'axios';
 import useAuth from '../../hooks/useAuth';
 import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
+import { useContext } from 'react';
+import { AuthContext } from '../../Providers/AuthProvider';
 
 const LogIn = () => {
   const {setUser} = useAuth()
   const navigate = useNavigate()
   let [errorMessage, setErrorMessage] = useState(null)
+  const {accountURL} = useContext(AuthContext)
 
 
   const submitData = async (event) => {
@@ -19,7 +22,7 @@ const LogIn = () => {
     const password = form.password.value;
     const formData = { username, password };
     try {
-      const response = await axios.post('http://inv.xcode.com.bd/api/v1/account/login/', formData);
+      const response = await axios.post(`${accountURL}/login/`, formData);
 
       if(response.status === 200) {
         setUser(response.data)

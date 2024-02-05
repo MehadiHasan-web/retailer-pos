@@ -20,7 +20,7 @@ function Navbar() {
         <Sidebar></Sidebar>
     </div>
     <div className="navbar-center" >
-        <Link to="/" className="btn btn-ghost text-xl">NTRCA Store Inventory Management Software</Link>
+        <Link to="/" className="btn btn-ghost text-xl">NTRCA Store </Link>
     </div>
     <div className="navbar-end" >
 

@@ -1,8 +1,9 @@
 import axios from "axios";
 import Title from "../../Title/Title";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
+import { AuthContext } from "../../Providers/AuthProvider";
 
 
 const CreateUser = () => {
@@ -11,6 +12,7 @@ const CreateUser = () => {
   const [manager, setManager] = useState(true);
 
   const navigate = useNavigate()
+  const {accountURL} = useContext(AuthContext)
 
   const createUserData = (event) => {
     event.preventDefault();
@@ -23,7 +25,7 @@ const CreateUser = () => {
     const password = form.password.value;
     const createUserValue = {username, email, designation, is_approver, is_manager, password}
     console.log(createUserValue)
-    axios.post('http://inv.xcode.com.bd/api/v1/account/createaccount/', createUserValue)
+    axios.post(`${accountURL}/createaccount/`, createUserValue)
     Swal.fire({
       title: "Good job!",
       text: "You User Is Created",

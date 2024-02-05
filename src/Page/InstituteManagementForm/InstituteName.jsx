@@ -1,8 +1,12 @@
 import { ToastContainer, toast } from 'react-toastify';
 import Title from './../../Title/Title';
 import axios from 'axios';
+import { useContext } from 'react';
+import { AuthContext } from '../../Providers/AuthProvider';
 
 const InstituteName = () => {
+
+  const {baseURL} = useContext(AuthContext)
 
   const instituteNameData = (event) => {
     event.preventDefault()
@@ -11,7 +15,7 @@ const InstituteName = () => {
     const note = form.note.value;
     const instituteNameValue = {name, note}
     // setInstituteNameItem(instituteNameValue)
-    axios.post('http://inv.xcode.com.bd/api/v1/inventory/institutelist/', instituteNameValue)
+    axios.post(`${baseURL}/institutelist/`, instituteNameValue)
     .then(response => {
       console.log('Response:', response.data);
       toast.success("Successfully created");

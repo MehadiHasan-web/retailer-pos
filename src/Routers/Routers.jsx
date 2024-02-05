@@ -13,7 +13,6 @@ import SubItemFrom from './../Page/Forms/SubItemFrom';
 import CreateUser from "../Page/CreateUser/CreateUser";
 import Dashboard from "../Page/Dashboards/Dashboard";
 import InventoryRequest from "../Page/Dashboard/InventoryRequest/InventoryRequest";
-import PurchaseManagement from "../Page/PurchaseManagement/PurchaseManagement";
 import Appointments from "../Page/Dashboard/Appointments/Appointments";
 import PurchaseRequestHistory from "../Page/PurchaseManagement/PurchaseRequestHistory";
 import PurchaseRequest from "../Page/PurchaseManagement/PurchaseRequest";

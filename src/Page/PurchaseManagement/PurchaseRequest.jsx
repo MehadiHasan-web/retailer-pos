@@ -1,17 +1,19 @@
 import axios from "axios";
 import Title from "../../Title/Title";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import { AuthContext } from './../../Providers/AuthProvider';
 
 const PurchaseRequest = () => {
   const [itemList, setItemList] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
   console.log(itemList);
+  const {baseURL} = useContext(AuthContext)
 
   // category api fetch
   useEffect(() => {
     axios
-      .get("http://inv.xcode.com.bd/api/v1/inventory/catagorylist")
+      .get(`${baseURL}/catagorylist/`)
       .then((response) => {
         setCategoryList(response.data);
         // console.log('Response:', response.data);
@@ -19,12 +21,12 @@ const PurchaseRequest = () => {
       .catch((error) => {
         console.error("Error:", error);
       });
-  }, []);
+  }, [baseURL]);
 
   // Item list api fetch
   useEffect(() => {
     axios
-      .get("http://inv.xcode.com.bd/api/v1/inventory/itemlist/")
+      .get(`${baseURL}/itemlist/`)
       .then((response) => {
         setItemList(response.data);
         // console.log('Response:', response.data);
@@ -32,7 +34,7 @@ const PurchaseRequest = () => {
       .catch((error) => {
         console.error("Error:", error);
       });
-  }, []);
+  }, [baseURL]);
 
   const purchaseRequestData = (event) => {
     event.preventDefault();
@@ -44,7 +46,7 @@ const PurchaseRequest = () => {
     // const fileData = form.fileData.value;
     const purchaseValue = { category_id, item_id, quantity, note };
     axios
-      .post("http://inv.xcode.com.bd/api/v1/inventory/purchase/", purchaseValue)
+      .post(`${baseURL}/purchase/`, purchaseValue)
       .then((response) => {
         console.log(response.data.msg);
         toast.success("Request Successfully ");

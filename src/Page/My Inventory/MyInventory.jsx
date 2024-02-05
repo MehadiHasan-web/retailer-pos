@@ -1,12 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Title from '../../Title/Title';
 import './MyInventory.css';
 import blankImg from '../../../public/blankImg.jpg';
 import axios from 'axios';
+import { AuthContext } from './../../Providers/AuthProvider';
 
 const MyInventory = () => {
 
   const [card, setCard] = useState([])
+  const {baseURL} = useContext(AuthContext)
 
 
   // useEffect(() => {
@@ -16,11 +18,11 @@ const MyInventory = () => {
   // },[])
   useEffect(() => {
     const user_id = localStorage.getItem('user_id');
-    axios.get(`http://inv.xcode.com.bd/api/v1/inventory/myinventory/${user_id}/`)
+    axios.get(`${baseURL}/myinventory/${user_id}/`)
         .then((res) => res.data)
         .then((data) => setCard(data))
         .catch((error) => console.error("Error fetching data:", error));
-}, []);
+}, [baseURL]);
 console.log(card)
 
   return (
@@ -57,7 +59,7 @@ console.log(card)
                     <button type="button" className="btn btn-outline btn-sm rounded-full mx-1 hover:text-white ">Clear filter</button>
 
                 </form>
-               </div>
+              </div>
             </div>
             {/* search bar end  */}
       <div className='md:flex justify-center lg:gap-5'>
