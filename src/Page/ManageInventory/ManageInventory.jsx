@@ -7,7 +7,7 @@ const ManageInventory = () => {
   // const [isShow,setIsShow] = useState(false)
   // console.log(isShow);
   return (
-    <div className="collapse p-0 ">
+    <div className="collapse navlink p-0 ">
       <input type="checkbox" />
       <div className="collapse-title flex gap-10">
         Inventory Management

@@ -1,7 +1,7 @@
 /* Remove focus, hover, and active color for the collapse component */
-.collapse:focus,
-.collapse:hover,
-.collapse:active {
+.navlink:focus,
+.navlink:hover,
+.navlink:active {
   outline: none; /* Remove default focus outline */
   background-color: transparent !important; /* Set background color to transparent */
 }
