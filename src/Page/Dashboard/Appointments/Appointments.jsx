@@ -154,19 +154,7 @@ function InventoryRequest() {
                     <div className="py-2 mb-3 bg-slate-100 rounded-lg">
                         <div className="flex justify-center mt-1">
                             <form action="" className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-2  lg:flex md:gap-0 lg:justify-around lg:items-center">
-                                {/* category  */}
-                                {/* <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1 " >
-                                    <option disabled selected>Category</option>
-                                    <option>Han Solo</option>
-                                    <option>Greedo</option>
-                                </select> */}
-                                {/* subcategory  */}
-                                {/* <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1 " >
-                                    <option disabled selected>Subcategory?</option>
-                                    <option>Han Solo</option>
-                                    <option>Greedo</option>
-                                </select> */}
-                                {/* subcategory  */}
+                                
                                 {/* date end */}
                                 <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1  "
                                     onChange={handleSelectChange}>
@@ -234,16 +222,6 @@ function InventoryRequest() {
                                     </tr>)
                                 }
                             </tbody>
-                            {/* foot */}
-                            <tfoot className="bg-slate-200	">
-                                <tr>
-                                    <th className="text-black">#</th>
-                                    <th className="text-black">Name</th>
-                                    <th className="text-black">Request Date</th>
-                                    <th className="text-black">Status</th>
-                                    <th className="text-black">Show/Actions</th>
-                                </tr>
-                            </tfoot>
 
                         </table>
                         {/* model  */}

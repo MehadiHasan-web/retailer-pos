@@ -9,7 +9,6 @@ import { AuthContext } from './../../Providers/AuthProvider';
 
 
 function Dashboard() {
-
     const [startDate, setStartDate] = useState(new Date());
     const [userData, setUserData] = useState([])
     console.log(userData)
@@ -19,9 +18,11 @@ function Dashboard() {
     const [searchText, setSearchText] = useState("");
     const {baseURL} = useContext(AuthContext)
 
+   
 
 
     useEffect(() => {
+       
         const user_id = localStorage.getItem('user_id');
         axios.get(`${baseURL}/myinventoryrequest/${user_id}/`)
             .then((res) => res.data)
