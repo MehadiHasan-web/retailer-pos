@@ -9,6 +9,7 @@ import Search from '../Search/Search';
 import axios from "axios";
 import { useContext } from 'react';
 import { AuthContext } from './../../../../Providers/AuthProvider';
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 
 
 const Home = () => {
@@ -19,6 +20,9 @@ const Home = () => {
   const initialCardTable = JSON.parse(localStorage.getItem('cardTable')) || [];
   const [cardTable, setCardTable] = useState(initialCardTable);
   const [filteredCard, setFilteredCard] = useState([]);
+
+  //icon
+  const [open, setOpen]  = useState(false);
 
   
 
@@ -75,9 +79,11 @@ const Home = () => {
       {/* title section start */}
       <Title pageName={"Home"}></Title>
       {/* title section end */}
-      <div className='container mx-auto'>
-        <div className='md:flex justify-center lg:gap-5'>
-          <div className='w-full md:w-[60%] lg:w-[60%]  '>
+      <div >
+        {/* section start */}
+        <div className='container mx-auto'>
+        <div className='md:flex justify-center lg:gap-5 w-[100%]'>
+          <div className='w-[100%] md:w-[60%] lg:w-[60%]  '>
             <div className='mt-5 mb-5 px-6 sm:px-5 md:px-4 lg:px-2 xl:px-2 2xl:px-0'>
               {/* search bar  */}
               <Search card={card} filteredCard={filteredCard} setFilteredCard={setFilteredCard} setCard={setCard} cardTable={cardTable} setCardTable={setCardTable} initialCardTable={initialCardTable} ></Search>
@@ -118,6 +124,35 @@ const Home = () => {
             </div>
           </div>
         </div>
+      </div>
+        {/* section end */}
+        
+        <div className={`block md:hidden case-in duration-500 w-full h-full fixed top-16 pt-10 bottom-0 z-30 bg-slate-200 ${open ? 'right-2' : '-right-[800px]'}`}>
+        <div className='fixed top-64 -right-6 z-10'>
+                  {
+                        open && open ? (<span className='hidden' onClick={() => {setOpen(false)}}><FaChevronRight className="h-14 w-14 bg-slate-300 p-2 rounded-full"></FaChevronRight></span>) : (<span  onClick={() => {setOpen(true)}}><FaChevronLeft className="h-12 w-12 bg-slate-300 p-2 rounded-full"></FaChevronLeft></span>)
+                        
+                        
+                  }
+              </div>
+            <div className='pl-12'>
+              <div className=' top-20 '>
+                {/* table section start */}
+                <Table cardTable={cardTable} setCardTable={setCardTable} ></Table>
+                {/* table section end */}
+                <div className='absolute top-44 -left-4 z-10'>
+                  {
+                        open && open ? (<span  onClick={() => {setOpen(false)}}><FaChevronRight className="h-12 w-12 bg-slate-300 p-2 rounded-full"></FaChevronRight></span>) : (<span className='hidden' onClick={() => {setOpen(true)}}><FaChevronLeft className="h-12 w-12 bg-white p-2 rounded-full"></FaChevronLeft></span>)
+                        
+                        
+                  }
+              </div>
+                {/* form section start */}
+                <Form card={cardTable} setCard={setCardTable} className="md:absolute lg:absolute top-10 right-0 left-0 md:bottom-0 lg:bottom-0 rounded-md"></Form>
+                {/* form section end */}
+              </div>
+            </div>
+          </div>
       </div>
     </>
   );

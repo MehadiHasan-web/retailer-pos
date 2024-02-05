@@ -11,8 +11,8 @@ export const AuthProvider = ({ children }) => {
         localStorage.removeItem('token')
         navigate('/login')
     }
-    const baseURL = "http://inv.xcode.com.bd/api/v1/inventory"
-    const accountURL = "http://inv.xcode.com.bd/api/v1/account"
+    const baseURL = "https://inv.xcode.com.bd/api/v1/inventory"
+    const accountURL = "https://inv.xcode.com.bd/api/v1/account"
     const authInfo = {
         user,
         logOut,
