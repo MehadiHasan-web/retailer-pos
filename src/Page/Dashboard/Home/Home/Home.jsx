@@ -4,11 +4,12 @@ import { MdOutlineWatchLater } from "react-icons/md";
 import { GoDotFill } from "react-icons/go";
 import { IoPerson } from "react-icons/io5";
 import logo from '../../../../../public/logo.png'
-import { FaLongArrowAltRight } from "react-icons/fa";
+import { FaEdit, FaLongArrowAltRight, FaPlusCircle } from "react-icons/fa";
 import { useState } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import TabCard from './TabCard';
+import { GrSubtractCircle } from "react-icons/gr";
 
 
 
@@ -23,8 +24,8 @@ const Home = () => {
 
   return (
     <>
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
-        <div className='lg:col-span-2 px-5'>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 container mx-auto bg-slate-100'>
+        <div className='lg:col-span-2 px-5 '>
           {/* subscription section start */}
           <div className='flex justify-between items-center h-32 titleCon p-5 rounded-2xl opacity-90'>
             <div>
@@ -191,7 +192,7 @@ const Home = () => {
           </div>
           {/* medicines section end */}
         </div>
-        <div className="lg:col-span-1 p-4">
+        <div className="lg:col-span-1 p-4 bg-white">
           <div className="flex justify-between ">
             <h3 className="text-xl text-black font-medium">Waitlist</h3>
             <p className="text-xl font-bold text-black">
