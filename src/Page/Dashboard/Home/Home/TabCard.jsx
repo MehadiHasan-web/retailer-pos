@@ -1,9 +1,11 @@
 import bottol from '../../../../../public/bottol.png'
+import { FaCirclePlus } from "react-icons/fa6";
+import { FaCircleMinus } from "react-icons/fa6";
 
 
 const TabCard = () => {
   return (
-    <div className=" bg-base-100 shadow-xl p-3">
+    <div className=" bg-base-100 shadow-xl p-3 rounded-md">
       <div className='flex justify-between items-center'>
         <div className='w-[35%]'>
           <figure><img className='w-60 h-40' src={bottol} alt="Movie"/></figure>
@@ -25,10 +27,14 @@ const TabCard = () => {
       </div>
       <div className='flex justify-between items-center mt-2'>
         <div className='w-[35%]'>
-          <p className='text-center'><span className='text-2xl font-bold'>3.75</span><span>/Bottle</span></p>
+          <p className='text-center'><sup className='text-green-600 font-bold -mt-10'>$</sup><span className='text-2xl font-bold'>3.75</span><span className='text-gray-500'>/Bottle</span></p>
         </div>
         <div className="w-[65%]">
-          <p>Lorem ipsum dolor sit amet.</p>
+          <ul className='flex justify-between items-center bg-slate-200 py-1 px-3 rounded-2xl'>
+            <li><FaCircleMinus className='text-white text-xl'></FaCircleMinus></li>
+            <li>1</li>
+            <li><FaCirclePlus className='text-green-600 text-xl'></FaCirclePlus></li>
+          </ul>
         </div>
       </div>
     </div>
