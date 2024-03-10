@@ -8,6 +8,7 @@ import { FaLongArrowAltRight } from "react-icons/fa";
 import { useState } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
+import TabCard from './TabCard';
 
 
 
@@ -117,16 +118,73 @@ const Home = () => {
             <div className=' mt-5'>
                 <Tabs selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
                 <TabList className="flex gap-5 items-center">
-                  
-                  <Tab style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }} className="bg-green-600 text-white font-bold py-2">Title 1</Tab>
-                  <Tab style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }} className="bg-green-600 text-white font-bold py-2">Title 2</Tab>
-                  <Tab style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }} className="bg-green-600 text-white font-bold py-2">Title 1</Tab>
-                  <Tab style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }} className="bg-green-600 text-white font-bold py-2">Title 2</Tab>
-                  <Tab style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }} className="bg-green-600 text-white font-bold py-2">Title 1</Tab>
-                  <Tab style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }} className="bg-green-600 text-white font-bold py-2 rounded-lg">Title 2</Tab>
+                  <Tab style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }} className="bg-green-600 text-white font-bold py-2 rounded-lg">All</Tab>
+                  <Tab style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }} className="bg-green-600 text-white font-bold py-2 rounded-lg">Tablet</Tab>
+                  <Tab style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }} className="bg-green-600 text-white font-bold py-2 rounded-lg">Capsule</Tab>
+                  <Tab style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }} className="bg-green-600 text-white font-bold py-2 rounded-lg">Suppository</Tab>
+                  <Tab style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }} className="bg-green-600 text-white font-bold py-2 rounded-lg">Eyedrops</Tab>
+                  <Tab style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }} className="bg-green-600 text-white font-bold py-2 rounded-lg">Bottle</Tab>
                 </TabList>
-                <TabPanel></TabPanel>
-                <TabPanel></TabPanel>
+                <TabPanel>
+                  <div className='grid grid-cols-1 md:grid-cols-2 gap-5 mt-2'>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                  </div>
+                </TabPanel>
+                <TabPanel>
+                  <div className='grid grid-cols-1 md:grid-cols-2 gap-5 mt-2'>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                  </div>
+                </TabPanel>
+                <TabPanel>
+                  <div className='grid grid-cols-1 md:grid-cols-2 gap-5 mt-2'>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                  </div>
+                </TabPanel>
+                <TabPanel>
+                  <div className='grid grid-cols-1 md:grid-cols-2 gap-5 mt-2'>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                  </div>
+                </TabPanel>
+                <TabPanel>
+                  <div className='grid grid-cols-1 md:grid-cols-2 gap-5 mt-2'>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                  </div>
+                </TabPanel>
+                <TabPanel>
+                  <div className='grid grid-cols-1 md:grid-cols-2 gap-5 mt-2'>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                  </div>
+                </TabPanel>
               </Tabs>
 
             </div>
