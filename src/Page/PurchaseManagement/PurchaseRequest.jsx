@@ -10,7 +10,7 @@ const PurchaseRequest = () => {
   console.log(itemList);
   const {baseURL} = useContext(AuthContext)
 
-// category api fetch
+  // category api fetch
   useEffect(() => {
     axios
       .get(`${baseURL}/catagorylist/`)
@@ -22,7 +22,6 @@ const PurchaseRequest = () => {
         console.error("Error:", error);
       });
   }, [baseURL]);
-
 
   // Item list api fetch
   useEffect(() => {
@@ -45,7 +44,7 @@ const PurchaseRequest = () => {
     const quantity = form.itemNumber.value;
     const note = form.bio.value;
     // const fileData = form.fileData.value;
-    const purchaseValue = { category_id,item_id, quantity, note };
+    const purchaseValue = { category_id, item_id, quantity, note };
     axios
       .post(`${baseURL}/purchase/`, purchaseValue)
       .then((response) => {

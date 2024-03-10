@@ -8,7 +8,6 @@
 //   return classes.filter(Boolean).join(" ");
 // }
 import { NavLink } from "react-router-dom";
-import "./style.css";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
 
@@ -78,7 +77,7 @@ const PurchaseManagement = () => {
         </Menu.Items>
       </Transition>
     </Menu> */}
-    <div className="collapse p-0 ">
+    <div className="collapse navlink p-0 ">
       <input type="checkbox" />
       <div className="collapse-title flex gap-10">
         Purchase Management
