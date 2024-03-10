@@ -11,4 +11,9 @@
   background-color: #cbd5e0;
 }
 
-
+.titleCon{
+  background-image: url('../../../../../public/bgImage.jpg');
+  background-position: initial;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

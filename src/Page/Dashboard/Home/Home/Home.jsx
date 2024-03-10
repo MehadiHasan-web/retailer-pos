@@ -1,40 +1,195 @@
 // import { useEffect } from 'react';
-import "./Home.css";
+import './Home.css'
+import { MdOutlineWatchLater } from "react-icons/md";
+import { GoDotFill } from "react-icons/go";
+import { IoPerson } from "react-icons/io5";
+import logo from '../../../../../public/logo.png'
+import { FaLongArrowAltRight } from "react-icons/fa";
+import { useState } from 'react';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
+import TabCard from './TabCard';
 
-import { FaEdit, FaPlusCircle } from "react-icons/fa";
-import { GrSubtractCircle } from "react-icons/gr";
+
+
 
 const Home = () => {
+
+
+  const [tabIndex, setTabIndex] = useState(0);
+
+  
+
+
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 container mx-auto">
-        <div className="lg:col-span-2">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
-            aspernatur, recusandae deleniti fugit in doloribus repellat officia
-            facilis quis hic autem at repellendus impedit magnam sapiente
-            blanditiis explicabo. Reiciendis consequatur sint iusto ipsa quia
-            quis error accusamus, architecto minima, eligendi hic exercitationem
-            maxime, molestiae dolor molestias deleniti odio. Nulla nam repellat
-            officia soluta ducimus delectus iste, magni, quis quas, quae vitae
-            eum iusto id? Beatae, officia ipsam? Veritatis amet commodi
-            voluptatibus ratione tenetur quia molestiae harum soluta perferendis
-            ducimus voluptatem itaque repellat minus, repellendus maxime eos
-            quis reiciendis modi, sapiente nemo quasi aspernatur ipsam!
-            Recusandae quo provident mollitia! Aliquam nesciunt ipsum dolorem
-            repellendus sit molestiae perspiciatis illo hic quod error.
-            Reprehenderit quod nobis neque deserunt facilis rem distinctio
-            magni? Quaerat animi dolorum voluptas praesentium adipisci
-            dignissimos illum consectetur quasi. Magnam quis, iure illum iusto
-            explicabo deleniti accusamus eaque excepturi, voluptatum quo cum ut,
-            cupiditate magni sint. Omnis ex consequuntur ut, quo inventore
-            voluptatibus quam alias. Exercitationem optio distinctio amet. Qui
-            iure aliquam, beatae, accusamus assumenda dolor perferendis
-            reprehenderit doloribus rerum consequatur ad illo. Facere, fugiat!
-            Esse impedit nobis at ipsa, quas natus! Assumenda veniam accusamus
-            commodi enim a quos aspernatur porro exercitationem blanditiis
-            dolores autem in laudantium ducimus, voluptatem illo?
-          </p>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
+        <div className='lg:col-span-2 px-5'>
+          {/* subscription section start */}
+          <div className='flex justify-between items-center h-32 titleCon p-5 rounded-2xl opacity-90'>
+            <div>
+              <h3 className='text-2xl font-bold text-slate-300 flex items-center gap-3'>Your subscription is almost expired <span className='text-base font-normal flex items-center gap-1'><MdOutlineWatchLater></MdOutlineWatchLater> 7 days left</span></h3>
+              <p className='text-gray-400'>Upgrade your plane to superior to enjoy various additional benefits</p>
+            </div>
+            <div>
+              <button className="btn btn-success font-bold text-lg text-white">Upgrade Plane</button>
+            </div>
+          </div>
+          {/* subscription section end */}
+          {/* waiting list section start */}
+          <div className='my-5'>
+            <ul className='flex justify-between items-center'>
+              <li className='text-2xl font-semibold'>Waiting List</li>
+              <li className='text-lg font-bold text-green-500 border-b-green-500 border-b-2'>See all</li>
+            </ul>
+            <div className='grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5'>
+              {/* item 1 */}
+              <div className="card card-side bg-base-100 shadow-xl">
+                <figure className='p-3'><img src={logo} alt="Movie" className='rounded-2xl w-20 h-20'/></figure>
+                <div className="card-body p-2">
+                  <ul className='bg-black p-1 rounded-lg flex justify-between items-center'>
+                    <li><GoDotFill className='text-green-500 text-sm'></GoDotFill></li>
+                    <li><span className='text-white text-sm'>#1234</span></li>
+                  </ul>
+                  <ul>
+                    <li className='flex gap-5 items-center'>
+                      <span><IoPerson className='text-sm'></IoPerson></span>
+                      <span className='text-lg font-semibold'>Yuda Rahmat</span>
+                    </li>
+                    <li className='flex gap-5 items-center'>
+                      <span><FaLongArrowAltRight className='text-sm'></FaLongArrowAltRight></span>
+                      <span className='text-base text-gray-500'>3 Items</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              {/* item 1 */}
+              {/* item 2 */}
+              <div className="card card-side bg-base-100 shadow-xl">
+                <figure className='p-3'><img src={logo} alt="Movie" className='rounded-2xl w-20 h-20'/></figure>
+                <div className="card-body p-2">
+                  <ul className='bg-black p-1 rounded-lg flex justify-between items-center'>
+                    <li><GoDotFill className='text-gray-500 text-sm'></GoDotFill></li>
+                    <li><span className='text-white text-sm'>#1234</span></li>
+                  </ul>
+                  <ul>
+                    <li className='flex gap-5 items-center'>
+                      <span><IoPerson className='text-sm'></IoPerson></span>
+                      <span className='text-lg font-semibold'>Angel Girl</span>
+                    </li>
+                    <li className='flex gap-5 items-center'>
+                      <span><FaLongArrowAltRight className='text-sm'></FaLongArrowAltRight></span>
+                      <span className='text-base text-gray-500'>3 Items</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              {/* item 2 */}
+              {/* item 3 */}
+              <div className="card card-side bg-base-100 shadow-xl">
+                <figure className='p-3'><img src={logo} alt="Movie" className='rounded-2xl w-20 h-20'/></figure>
+                <div className="card-body p-2">
+                  <ul className='bg-black p-1 rounded-lg flex justify-between items-center'>
+                    <li><GoDotFill className='text-gray-500 text-sm'></GoDotFill></li>
+                    <li><span className='text-white text-sm'>#1234</span></li>
+                  </ul>
+                  <ul>
+                    <li className='flex gap-5 items-center'>
+                      <span><IoPerson className='text-sm'></IoPerson></span>
+                      <span className='text-lg font-semibold'>Prince Rani</span>
+                    </li>
+                    <li className='flex gap-5 items-center'>
+                      <span><FaLongArrowAltRight className='text-sm'></FaLongArrowAltRight></span>
+                      <span className='text-base text-gray-500'>3 Items</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              {/* item 3 */}
+            </div>
+          </div>
+          {/* waiting list section end */}
+          {/* medicines section start */}
+          <div className='my-5'>
+            <ul className='flex justify-between items-center'>
+              <li className='text-2xl font-semibold'>Medicines</li>
+              <li className='text-lg font-bold text-green-500 border-b-green-500 border-b-2'>See all</li>
+            </ul>
+            <div className=' mt-5'>
+                <Tabs selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
+                <TabList className="flex gap-5 items-center">
+                  <Tab style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }} className="bg-green-600 text-white font-bold py-2 rounded-lg">All</Tab>
+                  <Tab style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }} className="bg-green-600 text-white font-bold py-2 rounded-lg">Tablet</Tab>
+                  <Tab style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }} className="bg-green-600 text-white font-bold py-2 rounded-lg">Capsule</Tab>
+                  <Tab style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }} className="bg-green-600 text-white font-bold py-2 rounded-lg">Suppository</Tab>
+                  <Tab style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }} className="bg-green-600 text-white font-bold py-2 rounded-lg">Eyedrops</Tab>
+                  <Tab style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }} className="bg-green-600 text-white font-bold py-2 rounded-lg">Bottle</Tab>
+                </TabList>
+                <TabPanel>
+                  <div className='grid grid-cols-1 md:grid-cols-2 gap-5 mt-2'>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                  </div>
+                </TabPanel>
+                <TabPanel>
+                  <div className='grid grid-cols-1 md:grid-cols-2 gap-5 mt-2'>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                  </div>
+                </TabPanel>
+                <TabPanel>
+                  <div className='grid grid-cols-1 md:grid-cols-2 gap-5 mt-2'>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                  </div>
+                </TabPanel>
+                <TabPanel>
+                  <div className='grid grid-cols-1 md:grid-cols-2 gap-5 mt-2'>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                  </div>
+                </TabPanel>
+                <TabPanel>
+                  <div className='grid grid-cols-1 md:grid-cols-2 gap-5 mt-2'>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                  </div>
+                </TabPanel>
+                <TabPanel>
+                  <div className='grid grid-cols-1 md:grid-cols-2 gap-5 mt-2'>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                    <TabCard></TabCard>
+                  </div>
+                </TabPanel>
+              </Tabs>
+
+            </div>
+          </div>
+          {/* medicines section end */}
         </div>
         <div className="lg:col-span-1 p-4">
           <div className="flex justify-between ">
