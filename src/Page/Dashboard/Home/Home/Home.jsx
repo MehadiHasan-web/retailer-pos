@@ -271,7 +271,8 @@ const Home = () => {
           </div>
           {/* medicines section end */}
         </div>
-        <div className="lg:col-span-1 p-4 bg-white">
+
+        <div className="md:col-span-1 p-4 bg-white">
           <div className="flex justify-between ">
             <h3 className="text-xl text-black font-medium">Whitelist</h3>
             <p className="text-xl font-bold text-black">
@@ -318,7 +319,7 @@ const Home = () => {
                 <p className="flex justify-between items-center mt-7">
                   <h4 className="font-bold">
                     <span className="text-green-500">$</span> 2.10
-                  </h4>{" "}
+                  </h4>
                   <span className="bg-white border-2 shadow-inner rounded-full flex px-1 gap-2 items-center"><GrSubtractCircle className="text-red-500 cursor-pointer" /> 3 <FaPlusCircle className="text-green-500 cursor-pointer" /></span>
                 </p>
               </div>
