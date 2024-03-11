@@ -1,9 +1,10 @@
 ::-webkit-scrollbar {
   width: 4px;
+  margin-left: 2px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #f5a698;
+  background-color: black;
   border-radius: 6px;
 }
 
@@ -16,4 +17,9 @@
   background-position: initial;
   background-repeat: no-repeat;
   background-size: cover;
+}
+.react-tabs__tab--selected {
+  background: rgb(10, 169, 10) !important;
+  border-radius: 9999px !important;
+  color: white !important;
 }

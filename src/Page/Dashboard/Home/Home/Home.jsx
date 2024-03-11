@@ -4,13 +4,13 @@ import { MdOutlineWatchLater } from "react-icons/md";
 import { GoDotFill } from "react-icons/go";
 import { IoPerson } from "react-icons/io5";
 import logo from '../../../../../public/logo.png'
-import { FaEdit, FaLongArrowAltRight, FaPlusCircle } from "react-icons/fa";
+import {  FaLongArrowAltRight, FaPlusCircle } from "react-icons/fa";
 import { useState } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import TabCard from './TabCard';
 import { GrSubtractCircle } from "react-icons/gr";
-
+import { CiEdit } from "react-icons/ci";
 
 
 
@@ -46,7 +46,7 @@ const Home = () => {
             <div className='grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5'>
               {/* item 1 */}
               <div className="card card-side bg-base-100 shadow-xl">
-                <figure className='p-3'><img src={logo} alt="Movie" className='rounded-2xl w-20 h-20'/></figure>
+                <figure className='p-3'><img src={logo} alt="Movie" className='rounded w-20 h-20'/></figure>
                 <div className="card-body p-2">
                   <ul className='bg-black p-1 rounded-lg flex justify-between items-center'>
                     <li><GoDotFill className='text-green-500 text-sm'></GoDotFill></li>
@@ -119,12 +119,12 @@ const Home = () => {
             <div className=' mt-5'>
                 <Tabs selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
                 <TabList className="flex gap-5 items-center">
-                  <Tab style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }} className="bg-green-600 text-white font-bold py-2 rounded-lg">All</Tab>
-                  <Tab style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }} className="bg-green-600 text-white font-bold py-2 rounded-lg">Tablet</Tab>
-                  <Tab style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }} className="bg-green-600 text-white font-bold py-2 rounded-lg">Capsule</Tab>
-                  <Tab style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }} className="bg-green-600 text-white font-bold py-2 rounded-lg">Suppository</Tab>
-                  <Tab style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }} className="bg-green-600 text-white font-bold py-2 rounded-lg">Eyedrops</Tab>
-                  <Tab style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }} className="bg-green-600 text-white font-bold py-2 rounded-lg">Bottle</Tab>
+                  <Tab style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }} className="bg-white text-black font-bold py-2 rounded-full">All</Tab>
+                  <Tab style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }} className="bg-white text-black font-bold py-2 rounded-full">Tablet</Tab>
+                  <Tab style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }} className="bg-white text-black font-bold py-2 rounded-full">Capsule</Tab>
+                  <Tab style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }} className="bg-white text-black font-bold py-2 rounded-full">Suppository</Tab>
+                  <Tab style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }} className="bg-white text-black font-bold py-2 rounded-full">Eyedrops</Tab>
+                  <Tab style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }} className="bg-white text-black font-bold py-2 rounded-full">Bottle</Tab>
                 </TabList>
                 <TabPanel className="mt-5">
                   <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
@@ -194,7 +194,7 @@ const Home = () => {
         </div>
         <div className="lg:col-span-1 p-4 bg-white">
           <div className="flex justify-between ">
-            <h3 className="text-xl text-black font-medium">Waitlist</h3>
+            <h3 className="text-xl text-black font-medium">Whitelist</h3>
             <p className="text-xl font-bold text-black">
               A1<span className="text-slate-100">#12910</span>
             </p>
@@ -202,28 +202,28 @@ const Home = () => {
           <p className="text-bold font-medium my-2">
             Detail Prescription <span className="text-green-500">3</span>
           </p>
-          <div className="bg-slate-100 rounded-lg p-4">
-            <ul>
+          <div className="bg-slate-100 rounded-lg p-4 w-full h-32 overflow-auto touch-auto">
+            <ul className=' max-w-none h-auto'>
               <li className="text-sm text-slate-400 flex justify-between">
                 <h5>Name</h5> <span>Amount</span>
               </li>
               <li className="font-bold flex justify-between mt-2">
-                <h5>HI--text</h5> <span className="text-slate-500">x1</span>
+                <h5>Paracetamol Berno</h5> <span className="text-slate-500 text-sm">x1</span>
               </li>
               <li className="font-bold flex justify-between mt-2">
-                <h5>HI--text</h5> <span className="text-slate-500">x1</span>
+                <h5>Paracetamol Berno</h5> <span className="text-slate-500 text-sm">x1</span>
               </li>
               <li className="font-bold flex justify-between mt-2">
-                <h5>HI--text</h5> <span className="text-slate-500">x1</span>
+                <h5>Paracetamol Berno</h5> <span className="text-slate-500 text-sm">x1</span>
               </li>
               <li className="font-bold flex justify-between mt-2">
-                <h5>HI--text</h5> <span className="text-slate-500">x1</span>
+                <h5>Paracetamol Berno</h5> <span className="text-slate-500 text-sm">x1</span>
               </li>
             </ul>
           </div>
           <div className="border-b-2 my-5"></div>
-          <div>
-            <div className="flex gap-5 mt-5">
+          <div className='w-full h-52 overflow-auto touch-auto'>
+            <div className="flex gap-5 mt-5 max-w-none h-auto p-2">
               <div className="w-1/4 p-2 bg-slate-100 rounded-lg">
                 <img
                   src="https://media.istockphoto.com/id/1304186549/vector/automatic-spring-ballpoint-pen-in-black-case-vector-illustration.jpg?s=612x612&w=0&k=20&c=R_yPawneqKX8J-NeiKmNXuYx36tCoPSCFEHx0Bd4dEg="
@@ -234,17 +234,17 @@ const Home = () => {
               <div className="w-3/4  ">
                 <p className="flex justify-between items-center">
                   <h4 className="font-bold">Pen-500</h4>{" "}
-                  <FaEdit className="inline-block border-2 text-3xl p-1 rounded-lg" />
+                  <CiEdit  className="inline-block border-2 text-3xl p-1 rounded-lg shadow-inner bg-white" />
                 </p>
-                <p className="flex justify-between items-center mt-4">
+                <p className="flex justify-between items-center mt-7">
                   <h4 className="font-bold">
                     <span className="text-green-500">$</span> 2.10
                   </h4>{" "}
-                  <span className="bg-slate-100 rounded-full flex px-1 gap-2 items-center"><GrSubtractCircle className="text-red-500 cursor-pointer"/> 3 <FaPlusCircle className="text-green-500 cursor-pointer"/></span>
+                  <span className="bg-white border-2 shadow-inner rounded-full flex px-1 gap-2 items-center"><GrSubtractCircle className="text-red-500 cursor-pointer"/> 3 <FaPlusCircle className="text-green-500 cursor-pointer"/></span>
                 </p>
               </div>
             </div>
-            <div className="flex gap-5 mt-5">
+            <div className="flex gap-5 mt-5 p-2">
               <div className="w-1/4 p-2 bg-slate-100 rounded-lg">
                 <img
                   src="https://media.istockphoto.com/id/1304186549/vector/automatic-spring-ballpoint-pen-in-black-case-vector-illustration.jpg?s=612x612&w=0&k=20&c=R_yPawneqKX8J-NeiKmNXuYx36tCoPSCFEHx0Bd4dEg="
@@ -255,13 +255,34 @@ const Home = () => {
               <div className="w-3/4  ">
                 <p className="flex justify-between items-center">
                   <h4 className="font-bold">Pen-500</h4>{" "}
-                  <FaEdit className="inline-block border-2 text-3xl p-1 rounded-lg" />
+                  <CiEdit className="inline-block border-2 text-3xl p-1 rounded-lg shadow-inner bg-white" />
                 </p>
-                <p className="flex justify-between items-center mt-4">
+                <p className="flex justify-between items-center mt-7">
                   <h4 className="font-bold">
                     <span className="text-green-500">$</span> 2.10
                   </h4>{" "}
-                  <span className="bg-slate-100 rounded-full flex px-1 gap-2 items-center"><GrSubtractCircle className="text-red-500 cursor-pointer"/> 3 <FaPlusCircle className="text-green-500 cursor-pointer"/></span>
+                  <span className=" bg-white border-2 shadow-inner rounded-full flex px-1 gap-2 items-center "><GrSubtractCircle className="text-red-500 cursor-pointer"/> 3 <FaPlusCircle className="text-green-500 cursor-pointer"/></span>
+                </p>
+              </div>
+            </div>
+            <div className="flex gap-5 mt-5 p-2">
+              <div className="w-1/4 p-2 bg-slate-100 rounded-lg">
+                <img
+                  src="https://media.istockphoto.com/id/1304186549/vector/automatic-spring-ballpoint-pen-in-black-case-vector-illustration.jpg?s=612x612&w=0&k=20&c=R_yPawneqKX8J-NeiKmNXuYx36tCoPSCFEHx0Bd4dEg="
+                  alt=""
+                  className="w-3/4 mx-auto "
+                />
+              </div>
+              <div className="w-3/4  ">
+                <p className="flex justify-between items-center">
+                  <h4 className="font-bold">Pen-500</h4>{" "}
+                  <CiEdit className="inline-block border-2 text-3xl p-1 rounded-lg shadow-inner bg-white" />
+                </p>
+                <p className="flex justify-between items-center mt-7">
+                  <h4 className="font-bold">
+                    <span className="text-green-500">$</span> 2.10
+                  </h4>{" "}
+                  <span className="bg-white border-2 shadow-inner rounded-full flex px-1 gap-2 items-center"><GrSubtractCircle className="text-red-500 cursor-pointer"/> 3 <FaPlusCircle className="text-green-500 cursor-pointer"/></span>
                 </p>
               </div>
             </div>
