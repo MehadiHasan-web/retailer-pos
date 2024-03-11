@@ -1,12 +1,9 @@
-import { Link } from "react-router-dom"
-import ManageInventory from "../ManageInventory/ManageInventory";
-import PurchaseManagement from "../PurchaseManagement/PurchaseManagement";
 import { FaPlusSquare } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import PurchaseManagement from './../PurchaseManagement/PurchaseManagement';
+import ManageInventory from "../ManageInventory/ManageInventory";
 
-
-
-
-const Sidebar = () => {
+const DesktopSidebar = () => {
 
   const isApprover = localStorage.getItem('is_approver') === 'true';
   const is_manager = localStorage.getItem('is_manager') === 'true';
@@ -15,33 +12,10 @@ const Sidebar = () => {
   const adminAndManager = isApprover || is_manager;
 
   return (
-    <>
-      <div className="drawer" >
-        <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content">
-          {/* Page content here */}
-          <label htmlFor="my-drawer" className="btn btn-ghost btn-circle drawer-button">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
-          </label>
-        </div>
-        <div className="drawer-side z-10">
-          <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
-          <ul className="menu p-4 w-80 min-h-full bg-[#1E1E1E] text-base-content">
-          <ul className="flex justify-center items-center gap-2 mt-5">
+    <div className="w-full bg-black h-full p-2">
+      <ul className="flex justify-center items-center gap-2 mt-5">
         <li><FaPlusSquare className="text-green-500"></FaPlusSquare></li>
         <li className="lg:text-xl font-semibold text-slate-200">MedKitPOS</li>
-        <li className="bg-slate">
-        <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content">
-          {/* Page content here */}
-          <label htmlFor="my-drawer" className="btn btn-outline btn-circle drawer-button">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-white">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-          </svg>
-
-          </label>
-        </div>
-        </li>
       </ul>
       <div className="border-[1px] border-x-slate-50 my-5"></div>
       <ul className="mt-5 space-y-5">
@@ -89,14 +63,8 @@ const Sidebar = () => {
             </li>
         }
       </ul>
-            
-          </ul>
+    </div>
+  );
+};
 
-        </div>
-      </div>
-
-    </>
-  )
-}
-
-export default Sidebar
+export default DesktopSidebar;
