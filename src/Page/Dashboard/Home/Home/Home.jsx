@@ -24,7 +24,7 @@ const Home = () => {
 
   return (
     <>
-      <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 container mx-auto bg-slate-100'>
+      <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 lg:container lg:mx-auto bg-slate-100'>
         <div className='md:col-span-2 px-5 '>
           {/* subscription section start */}
           {/* <div className='flex justify-between items-center h-32 titleCon p-5 rounded-2xl opacity-90'>
@@ -40,58 +40,79 @@ const Home = () => {
           {/* waiting list section start */}
           <div className='my-5'>
             <ul className='flex justify-between items-center'>
-              <li className='text-xl sm:text-2xl lg:text-2xl font-semibold'>Waiting List</li>
-              <li className='text-lg sm:text-lg lg:text-lg font-bold text-green-500 border-b-green-500 border-b-2'>See all</li>
+              <li className='text-xl sm:text-2xl md:text-lg lg:text-2xl font-semibold'>Waiting List</li>
+              <li className='text-lg sm:text-lg md:text-base lg:text-lg font-bold text-green-500 border-b-green-500 border-b-2'>See all</li>
             </ul>
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5'>
               {/* item 1 */}
               <div className="card card-side bg-base-100 shadow-xl">
-                <figure className='p-3'><img src={logo} alt="Movie" className='rounded w-24 h-24 sm:w-20 sm:h-20 lg:w-20 lg:h-24'/></figure>
+                <figure className='p-3'><img src={logo} alt="Movie" className='rounded w-24 h-24 sm:w-20 sm:h-20 md:h-20 md:w-16 lg:w-20 lg:h-24'/></figure>
                 <div className="card-body p-2">
-                  <ul className='bg-black p-1 rounded-lg flex justify-between items-center'>
-                    <li><GoDotFill className='text-green-500 text-lg sm:text-base lg:text-sm'></GoDotFill></li>
-                    <li><span className='text-white text-lg sm:text-base lg:text-sm'>#1234</span></li>
+                  <ul className='bg-black p-1 md:p-[2px] lg:p-1 rounded-lg flex justify-between items-center'>
+                    <li><GoDotFill className='text-green-500 text-lg sm:text-base md:text-xs lg:text-sm'></GoDotFill></li>
+                    <li><span className='text-white text-lg sm:text-base md:text-xs lg:text-sm'>#1234</span></li>
                   </ul>
                   <ul>
                     <li className='flex gap-2 items-center'>
-                      <span><IoPerson className='text-lg sm:text-base lg:text-sm'></IoPerson></span>
-                      <span className='text-lg sm:text-base lg:text-base font-semibold'>Yuda Rahmat</span>
+                      <span><IoPerson className='text-lg sm:text-base md:text-sm lg:text-sm'></IoPerson></span>
+                      <span className='text-lg sm:text-base md:text-sm lg:text-base font-semibold'>Yuda Rahmat</span>
                     </li>
                     <li className='flex gap-2 items-center'>
-                      <span><FaLongArrowAltRight className='text-lg lg:text-sm'></FaLongArrowAltRight></span>
-                      <span className='text-lg lg:text-base text-gray-500'>3 Items</span>
+                      <span><FaLongArrowAltRight className='text-lg md:text-sm lg:text-sm'></FaLongArrowAltRight></span>
+                      <span className='text-lg md:text-sm lg:text-base text-gray-500'>3 Items</span>
                     </li>
                   </ul>
                 </div>
               </div>
               {/* item 1 */}
-              {/* item 1 */}
+              {/* item 2 */}
               <div className="card card-side bg-base-100 shadow-xl">
-                <figure className='p-3'><img src={logo} alt="Movie" className='rounded w-24 h-24 sm:w-20 sm:h-20 lg:w-20 lg:h-24'/></figure>
+                <figure className='p-3'><img src={logo} alt="Movie" className='rounded w-24 h-24 sm:w-20 sm:h-20 md:h-20 md:w-16 lg:w-20 lg:h-24'/></figure>
                 <div className="card-body p-2">
-                  <ul className='bg-black p-1 rounded-lg flex justify-between items-center'>
-                    <li><GoDotFill className='text-green-500 text-lg sm:text-base lg:text-sm'></GoDotFill></li>
-                    <li><span className='text-white text-lg sm:text-base lg:text-sm'>#1234</span></li>
+                  <ul className='bg-black p-1 md:p-[2px] lg:p-1 rounded-lg flex justify-between items-center'>
+                    <li><GoDotFill className='text-green-500 text-lg sm:text-base md:text-xs lg:text-sm'></GoDotFill></li>
+                    <li><span className='text-white text-lg sm:text-base md:text-xs lg:text-sm'>#1234</span></li>
                   </ul>
                   <ul>
                     <li className='flex gap-2 items-center'>
-                      <span><IoPerson className='text-lg sm:text-base lg:text-sm'></IoPerson></span>
-                      <span className='text-lg sm:text-base lg:text-base font-semibold'>Yuda Rahmat</span>
+                      <span><IoPerson className='text-lg sm:text-base md:text-sm lg:text-sm'></IoPerson></span>
+                      <span className='text-lg sm:text-base md:text-sm lg:text-base font-semibold'>Yuda Rahmat</span>
                     </li>
                     <li className='flex gap-2 items-center'>
-                      <span><FaLongArrowAltRight className='text-lg lg:text-sm'></FaLongArrowAltRight></span>
-                      <span className='text-lg lg:text-base text-gray-500'>3 Items</span>
+                      <span><FaLongArrowAltRight className='text-lg md:text-sm lg:text-sm'></FaLongArrowAltRight></span>
+                      <span className='text-lg md:text-sm lg:text-base text-gray-500'>3 Items</span>
                     </li>
                   </ul>
                 </div>
               </div>
-              {/* item 1 */}
+              {/* item 2 */}
+              {/* item 3 */}
+              <div className="card card-side bg-base-100 shadow-xl">
+                <figure className='p-3'><img src={logo} alt="Movie" className='rounded w-24 h-24 sm:w-20 sm:h-20 md:h-20 md:w-16 lg:w-20 lg:h-24'/></figure>
+                <div className="card-body p-2">
+                  <ul className='bg-black p-1 md:p-[2px] lg:p-1 rounded-lg flex justify-between items-center'>
+                    <li><GoDotFill className='text-green-500 text-lg sm:text-base md:text-xs lg:text-sm'></GoDotFill></li>
+                    <li><span className='text-white text-lg sm:text-base md:text-xs lg:text-sm'>#1234</span></li>
+                  </ul>
+                  <ul>
+                    <li className='flex gap-2 items-center'>
+                      <span><IoPerson className='text-lg sm:text-base md:text-sm lg:text-sm'></IoPerson></span>
+                      <span className='text-lg sm:text-base md:text-sm lg:text-base font-semibold'>Yuda Rahmat</span>
+                    </li>
+                    <li className='flex gap-2 items-center'>
+                      <span><FaLongArrowAltRight className='text-lg md:text-sm lg:text-sm'></FaLongArrowAltRight></span>
+                      <span className='text-lg md:text-sm lg:text-base text-gray-500'>3 Items</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              {/* item 3 */}
               
             </div>
           </div>
           {/* waiting list section end */}
           {/* medicines section start */}
-          <div className='my-5 hidden'>
+          <div className='my-5'>
             <ul className='flex justify-between items-center'>
               <li className='text-2xl font-semibold'>Medicines</li>
               <li className='text-lg font-bold text-green-500 border-b-green-500 border-b-2'>See all</li>
