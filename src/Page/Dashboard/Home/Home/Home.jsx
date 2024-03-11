@@ -126,8 +126,8 @@ const Home = () => {
                   <Tab style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }} className="bg-green-600 text-white font-bold py-2 rounded-lg">Eyedrops</Tab>
                   <Tab style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }} className="bg-green-600 text-white font-bold py-2 rounded-lg">Bottle</Tab>
                 </TabList>
-                <TabPanel>
-                  <div className='grid grid-cols-1 md:grid-cols-2 gap-5 mt-2'>
+                <TabPanel className="mt-5">
+                  <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
                     <TabCard></TabCard>
                     <TabCard></TabCard>
                     <TabCard></TabCard>

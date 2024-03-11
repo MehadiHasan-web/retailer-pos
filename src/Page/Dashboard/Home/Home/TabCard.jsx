@@ -26,8 +26,8 @@ const TabCard = () => {
         </div>
       </div>
       <div className='flex justify-between items-center mt-2'>
-        <div className='w-[35%]'>
-          <p className='text-center'><sup className='text-green-600 font-bold -mt-10'>$</sup><span className='text-2xl font-bold'>3.75</span><span className='text-gray-500'>/Bottle</span></p>
+        <div className='w-[35%] flex items-center justify-center'>
+          <sup className='text-green-600 font-bold'>$</sup><p className='text-center'><span className='text-2xl font-bold'>3.75</span><span className='text-gray-500'>/Bottle</span></p>
         </div>
         <div className="w-[65%]">
           <ul className='flex justify-between items-center bg-slate-200 py-1 px-3 rounded-2xl'>
