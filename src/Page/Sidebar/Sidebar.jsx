@@ -2,6 +2,9 @@ import { Link } from "react-router-dom"
 import ManageInventory from "../ManageInventory/ManageInventory";
 import PurchaseManagement from "../PurchaseManagement/PurchaseManagement";
 import { FaPlusSquare } from "react-icons/fa";
+import { MdDashboard, MdSettingsApplications } from "react-icons/md";
+import { GoHomeFill } from "react-icons/go";
+import { IoPersonCircleSharp } from "react-icons/io5";
 
 
 
@@ -27,7 +30,7 @@ const Sidebar = () => {
         <div className="drawer-side z-10">
           <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80 min-h-full bg-[#1E1E1E] text-base-content">
-          <ul className="flex justify-center items-center gap-2 mt-5">
+        <ul className="flex justify-center items-center gap-2 mt-5">
         <li><FaPlusSquare className="text-green-500"></FaPlusSquare></li>
         <li className="lg:text-xl font-semibold text-slate-200">MedKitPOS</li>
         <li className="bg-slate">
@@ -45,19 +48,19 @@ const Sidebar = () => {
       </ul>
       <div className="border-[1px] border-x-slate-50 my-5"></div>
       <ul className="mt-5 space-y-5">
-        <li className="text-sm text-gray-500">Title heading</li>
+      <li className="text-sm text-gray-500">Title heading</li>
         <li >
-          <Link className="flex justify-start items-center gap-2" to="/dashboard"><FaPlusSquare className="text-green-500"></FaPlusSquare>
-            <span className="lg:text-sm font-semibold text-slate-200">Dashboard</span></Link>
+          <Link className="flex justify-start items-center gap-2" to="/dashboard"><MdDashboard className="text-green-500"></MdDashboard>
+            <span className="lg:text-xs font-semibold text-slate-200">Dashboard</span></Link>
         </li>
         <li >
-          <Link className="flex justify-start items-center gap-2" to="/"><FaPlusSquare className="text-green-500"></FaPlusSquare>
-            <span className="lg:text-sm font-semibold text-slate-200">Create Inventory History</span></Link>
+          <Link className="flex justify-start items-center gap-2" to="/"><GoHomeFill className="text-green-500"></GoHomeFill>
+            <span className="lg:text-xs font-semibold text-slate-200">Create Inventory History</span></Link>
         </li>
         {
           is_manager && <li>
             <Link className="flex justify-start items-center gap-2" to="/inventoryRequest"><FaPlusSquare className="text-green-500"></FaPlusSquare>
-            <span className="lg:text-sm font-semibold text-slate-200">Inventory Request</span></Link>
+            <span className="lg:text-xs font-semibold text-slate-200">Inventory Request</span></Link>
             </li>
         }
         {
@@ -65,13 +68,13 @@ const Sidebar = () => {
         }
         {
           isApprover && <li>
-            <Link className="flex justify-start items-center gap-2" to="/applications"><FaPlusSquare className="text-green-500"></FaPlusSquare>
-            <span className="lg:text-sm font-semibold text-slate-200">Applications</span></Link>
+            <Link className="flex justify-start items-center gap-2" to="/applications"><MdSettingsApplications className="text-green-500"></MdSettingsApplications>
+            <span className="lg:text-xs font-semibold text-slate-200">Applications</span></Link>
           </li>
         }
         <li>
-          <Link className="flex justify-start items-center gap-2" to="/myInventory"><FaPlusSquare className="text-green-500"></FaPlusSquare>
-            <span className="lg:text-sm font-semibold text-slate-200">My Inventory</span></Link>
+          <Link className="flex justify-start items-center gap-2" to="/myInventory"><IoPersonCircleSharp className="text-green-500"></IoPersonCircleSharp>
+            <span className="lg:text-xs font-semibold text-slate-200">My Inventory</span></Link>
         </li>
         {
           adminAndManager &&

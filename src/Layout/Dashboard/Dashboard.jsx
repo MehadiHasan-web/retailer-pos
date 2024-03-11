@@ -13,10 +13,10 @@ const DashBoard = () => {
       {/* navbar section end */}
       {/* main content section start */}
       <div className="flex mt-2">
-        <div className="w-[13%] hidden md:block">
+        <div className="lg:w-[13%] hidden lg:block">
           <DesktopSidebar></DesktopSidebar>
         </div>
-        <div className="w-full md:w-[87%]">
+        <div className="w-full lg:w-[87%]">
           <Outlet></Outlet>
         </div>
       </div>

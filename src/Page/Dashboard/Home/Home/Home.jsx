@@ -24,10 +24,10 @@ const Home = () => {
 
   return (
     <>
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 container mx-auto bg-slate-100'>
-        <div className='lg:col-span-2 px-5 '>
+      <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 container mx-auto bg-slate-100'>
+        <div className='md:col-span-2 px-5 '>
           {/* subscription section start */}
-          <div className='flex justify-between items-center h-32 titleCon p-5 rounded-2xl opacity-90'>
+          {/* <div className='flex justify-between items-center h-32 titleCon p-5 rounded-2xl opacity-90'>
             <div>
               <h3 className='text-2xl font-bold text-slate-300 flex items-center gap-3'>Your subscription is almost expired <span className='text-base font-normal flex items-center gap-1'><MdOutlineWatchLater></MdOutlineWatchLater> 7 days left</span></h3>
               <p className='text-gray-400'>Upgrade your plane to superior to enjoy various additional benefits</p>
@@ -35,83 +35,63 @@ const Home = () => {
             <div>
               <button className="btn btn-success font-bold text-lg text-white">Upgrade Plane</button>
             </div>
-          </div>
+          </div> */}
           {/* subscription section end */}
           {/* waiting list section start */}
           <div className='my-5'>
             <ul className='flex justify-between items-center'>
-              <li className='text-2xl font-semibold'>Waiting List</li>
-              <li className='text-lg font-bold text-green-500 border-b-green-500 border-b-2'>See all</li>
+              <li className='text-xl sm:text-2xl lg:text-2xl font-semibold'>Waiting List</li>
+              <li className='text-lg sm:text-lg lg:text-lg font-bold text-green-500 border-b-green-500 border-b-2'>See all</li>
             </ul>
-            <div className='grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5'>
               {/* item 1 */}
               <div className="card card-side bg-base-100 shadow-xl">
-                <figure className='p-3'><img src={logo} alt="Movie" className='rounded w-20 h-20'/></figure>
+                <figure className='p-3'><img src={logo} alt="Movie" className='rounded w-24 h-24 sm:w-20 sm:h-20 lg:w-20 lg:h-24'/></figure>
                 <div className="card-body p-2">
                   <ul className='bg-black p-1 rounded-lg flex justify-between items-center'>
-                    <li><GoDotFill className='text-green-500 text-sm'></GoDotFill></li>
-                    <li><span className='text-white text-sm'>#1234</span></li>
+                    <li><GoDotFill className='text-green-500 text-lg sm:text-base lg:text-sm'></GoDotFill></li>
+                    <li><span className='text-white text-lg sm:text-base lg:text-sm'>#1234</span></li>
                   </ul>
                   <ul>
-                    <li className='flex gap-5 items-center'>
-                      <span><IoPerson className='text-sm'></IoPerson></span>
-                      <span className='text-lg font-semibold'>Yuda Rahmat</span>
+                    <li className='flex gap-2 items-center'>
+                      <span><IoPerson className='text-lg sm:text-base lg:text-sm'></IoPerson></span>
+                      <span className='text-lg sm:text-base lg:text-base font-semibold'>Yuda Rahmat</span>
                     </li>
-                    <li className='flex gap-5 items-center'>
-                      <span><FaLongArrowAltRight className='text-sm'></FaLongArrowAltRight></span>
-                      <span className='text-base text-gray-500'>3 Items</span>
+                    <li className='flex gap-2 items-center'>
+                      <span><FaLongArrowAltRight className='text-lg lg:text-sm'></FaLongArrowAltRight></span>
+                      <span className='text-lg lg:text-base text-gray-500'>3 Items</span>
                     </li>
                   </ul>
                 </div>
               </div>
               {/* item 1 */}
-              {/* item 2 */}
+              {/* item 1 */}
               <div className="card card-side bg-base-100 shadow-xl">
-                <figure className='p-3'><img src={logo} alt="Movie" className='rounded-2xl w-20 h-20'/></figure>
+                <figure className='p-3'><img src={logo} alt="Movie" className='rounded w-24 h-24 sm:w-20 sm:h-20 lg:w-20 lg:h-24'/></figure>
                 <div className="card-body p-2">
                   <ul className='bg-black p-1 rounded-lg flex justify-between items-center'>
-                    <li><GoDotFill className='text-gray-500 text-sm'></GoDotFill></li>
-                    <li><span className='text-white text-sm'>#1234</span></li>
+                    <li><GoDotFill className='text-green-500 text-lg sm:text-base lg:text-sm'></GoDotFill></li>
+                    <li><span className='text-white text-lg sm:text-base lg:text-sm'>#1234</span></li>
                   </ul>
                   <ul>
-                    <li className='flex gap-5 items-center'>
-                      <span><IoPerson className='text-sm'></IoPerson></span>
-                      <span className='text-lg font-semibold'>Angel Girl</span>
+                    <li className='flex gap-2 items-center'>
+                      <span><IoPerson className='text-lg sm:text-base lg:text-sm'></IoPerson></span>
+                      <span className='text-lg sm:text-base lg:text-base font-semibold'>Yuda Rahmat</span>
                     </li>
-                    <li className='flex gap-5 items-center'>
-                      <span><FaLongArrowAltRight className='text-sm'></FaLongArrowAltRight></span>
-                      <span className='text-base text-gray-500'>3 Items</span>
+                    <li className='flex gap-2 items-center'>
+                      <span><FaLongArrowAltRight className='text-lg lg:text-sm'></FaLongArrowAltRight></span>
+                      <span className='text-lg lg:text-base text-gray-500'>3 Items</span>
                     </li>
                   </ul>
                 </div>
               </div>
-              {/* item 2 */}
-              {/* item 3 */}
-              <div className="card card-side bg-base-100 shadow-xl">
-                <figure className='p-3'><img src={logo} alt="Movie" className='rounded-2xl w-20 h-20'/></figure>
-                <div className="card-body p-2">
-                  <ul className='bg-black p-1 rounded-lg flex justify-between items-center'>
-                    <li><GoDotFill className='text-gray-500 text-sm'></GoDotFill></li>
-                    <li><span className='text-white text-sm'>#1234</span></li>
-                  </ul>
-                  <ul>
-                    <li className='flex gap-5 items-center'>
-                      <span><IoPerson className='text-sm'></IoPerson></span>
-                      <span className='text-lg font-semibold'>Prince Rani</span>
-                    </li>
-                    <li className='flex gap-5 items-center'>
-                      <span><FaLongArrowAltRight className='text-sm'></FaLongArrowAltRight></span>
-                      <span className='text-base text-gray-500'>3 Items</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              {/* item 3 */}
+              {/* item 1 */}
+              
             </div>
           </div>
           {/* waiting list section end */}
           {/* medicines section start */}
-          <div className='my-5'>
+          <div className='my-5 hidden'>
             <ul className='flex justify-between items-center'>
               <li className='text-2xl font-semibold'>Medicines</li>
               <li className='text-lg font-bold text-green-500 border-b-green-500 border-b-2'>See all</li>
@@ -192,7 +172,7 @@ const Home = () => {
           </div>
           {/* medicines section end */}
         </div>
-        <div className="lg:col-span-1 p-4 bg-white">
+        <div className="md:col-span-1 p-4 bg-white">
           <div className="flex justify-between ">
             <h3 className="text-xl text-black font-medium">Whitelist</h3>
             <p className="text-xl font-bold text-black">
