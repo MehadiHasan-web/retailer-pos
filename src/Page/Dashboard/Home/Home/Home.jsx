@@ -315,19 +315,19 @@ const Home = () => {
         ))}
       </TabList> */}
       <TabList className="flex gap-5 items-center">
-      <Tab style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }} className="bg-white text-black font-bold py-2 rounded-full">All</Tab>
-      {Object.keys(groupedProducts)
-        .filter(category => category !== 'All')
-        .map((category, index) => (
-          <Tab
-            key={index + 1}
-            style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }}
-            className="bg-white text-black font-bold py-2 rounded-full"
-          >
-            {category}
-          </Tab>
-        ))}
-    </TabList>
+  <Tab style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }} className="bg-white text-black font-bold py-2 rounded-full">All</Tab>
+  {Object.keys(groupedProducts)
+    .filter(category => category !== 'All')
+    .map((categoryId, index) => (
+      <Tab
+        key={index + 1}
+        style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }}
+        className="bg-white text-black font-bold py-2 rounded-full"
+      >
+        {groupedProducts[categoryId][0].tab_name}
+      </Tab>
+    ))}
+</TabList>
 
 
       {[products, ...Object.values(groupedProducts)].map((categoryProducts, index) => (
@@ -350,7 +350,7 @@ const Home = () => {
                   </div>
                   <div className="w-[65%]">
                     <h2 className="text-xl font-bold">
-                      {product.name}
+                      {product.name}+ {product.category_id}
                     </h2>
                     <p className="text-xs">{product.description}</p>
                     <ul className="flex items-center gap-32 mt-2">

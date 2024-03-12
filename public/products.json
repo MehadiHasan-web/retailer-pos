@@ -8,6 +8,7 @@
     "price": 10,
     "quantity": 1,
     "image": "https://example.com/product1.jpg",
+    "tab_name" : "medicine",
     "category_id": 1
   },
   {
@@ -19,6 +20,7 @@
     "price": 15,
     "quantity": 1,
     "image": "https://example.com/product2.jpg",
+    "tab_name" : "bottle",
     "category_id": 2
   },
   {
@@ -30,6 +32,7 @@
     "price": 12,
     "quantity": 1,
     "image": "https://example.com/product3.jpg",
+    "tab_name" : "medicine",
     "category_id": 1
   },
   {
@@ -41,6 +44,7 @@
     "price": 18,
     "quantity": 1,
     "image": "https://example.com/product4.jpg",
+    "tab_name": "vegetables",
     "category_id": 3
   },
   {
@@ -52,6 +56,7 @@
     "price": 14,
     "quantity": 1,
     "image": "https://example.com/product5.jpg",
+    "tab_name" : "bottle",
     "category_id": 2
   },
   {
@@ -63,6 +68,7 @@
     "price": 20,
     "quantity": 1,
     "image": "https://example.com/product6.jpg",
+    "tab_name": "vegetables",
     "category_id": 3
   },
   {
@@ -74,6 +80,7 @@
     "price": 16,
     "quantity": 1,
     "image": "https://example.com/product7.jpg",
+    "tab_name" : "medicine",
     "category_id": 1
   },
   {
@@ -85,6 +92,7 @@
     "price": 22,
     "quantity": 1,
     "image": "https://example.com/product8.jpg",
+    "tab_name" : "bottle",
     "category_id": 2
   },
   {
@@ -96,6 +104,7 @@
     "price": 24,
     "quantity": 1,
     "image": "https://example.com/product9.jpg",
+    "tab_name": "vegetables",
     "category_id": 3
   },
   {
@@ -107,6 +116,7 @@
     "price": 28,
     "quantity": 1,
     "image": "https://example.com/product10.jpg",
+    "tab_name" : "medicine",
     "category_id": 1
   }
 ]
