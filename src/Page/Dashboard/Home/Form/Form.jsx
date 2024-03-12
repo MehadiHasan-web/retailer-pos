@@ -58,9 +58,6 @@ const Form = ({setCard}) => {
     sendData(updatedCardTable);
   }
 
-  
-  
-  
   return (
     <div>
       <div className="collapse bg-slate-200">

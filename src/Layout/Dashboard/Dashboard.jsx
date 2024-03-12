@@ -8,15 +8,13 @@ AOS.init();
 const DashBoard = () => {
   return (
     <div>
-      {/* navbar section start */}
-      <Navbar></Navbar>
-      {/* navbar section end */}
       {/* main content section start */}
       <div className="flex mt-2">
-        <div className="lg:w-[13%] hidden lg:block">
+        <div className="lg:w-[13%] hidden  lg:block">
           <DesktopSidebar></DesktopSidebar>
         </div>
         <div className="w-full lg:w-[87%]">
+        <Navbar></Navbar>
           <Outlet></Outlet>
         </div>
       </div>

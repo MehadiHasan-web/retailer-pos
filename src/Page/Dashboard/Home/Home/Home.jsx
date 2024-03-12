@@ -19,7 +19,7 @@ import bottol from "../../../../../public/bottol.png";
 import { FaCirclePlus } from "react-icons/fa6";
 import { FaCircleMinus } from "react-icons/fa6";
 import { AuthContext } from "../../../../Providers/AuthProvider";
-import HomeExtra from "./HomeExtra";
+
 
 const Home = () => {
   const [tabIndex, setTabIndex] = useState(0);
@@ -103,7 +103,7 @@ const Home = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 container mx-auto bg-slate-100">
         <div className="md:col-span-2 px-5 ">
           {/* subscription section start */}
-          <div className="flex justify-between items-center h-32 titleCon p-5 rounded-2xl opacity-90">
+          {/* <div className="flex justify-between items-center h-32 titleCon p-5 rounded-2xl opacity-90">
             <div>
               <h3 className="text-2xl font-bold text-slate-300 flex items-center gap-3">
                 Your subscription is almost expired{" "}
@@ -121,7 +121,7 @@ const Home = () => {
                 Upgrade Plane
               </button>
             </div>
-          </div>
+          </div> */}
           {/* subscription section end */}
           {/* waiting list section start */}
           <div className="my-5">
@@ -249,7 +249,7 @@ const Home = () => {
                 selectedIndex={tabIndex}
                 onSelect={(index) => setTabIndex(index)}
               >
-                <TabList className="flex gap-5 items-center">
+                <TabList className="flex gap-5 items-center flex-wrap">
                   <Tab
                     style={{ flex: 1, textAlign: "center", cursor: "pointer" }}
                     className="bg-white text-black font-bold py-2 rounded-full"
