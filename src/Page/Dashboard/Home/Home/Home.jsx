@@ -19,14 +19,14 @@ import bottol from "../../../../../public/bottol.png";
 import { FaCirclePlus } from "react-icons/fa6";
 import { FaCircleMinus } from "react-icons/fa6";
 import { AuthContext } from "../../../../Providers/AuthProvider";
-import HomeExtra from "./HomeExtra";
+import { MdDelete } from "react-icons/md";
 
 const Home = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const [products, setProducts] = useState([]);
   const { baseURL } = useContext(AuthContext);
-  const initialCardTable = JSON.parse(localStorage.getItem("cardTable")) || [];
-  const [cardTable, setCardTable] = useState(initialCardTable);
+  const initialCardTable = JSON.parse(localStorage.getItem("wishlist")) || [];
+  const [wishlist, setWishlist] = useState(initialCardTable);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -37,17 +37,17 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("cardTable", JSON.stringify(cardTable));
-  }, [cardTable]);
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+  }, [wishlist]);
 
   // add  to card or increment functionality
   const cardData = (product) => {
-    const cardTableItem = cardTable.find((value) => value.id === product.id);
+    const cardTableItem = wishlist.find((value) => value.id === product.id);
     if (cardTableItem) {
-      const updatedCardTable = cardTable.map((item) =>
+      const updatedCardTable = wishlist.map((item) =>
         item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
       );
-      setCardTable(updatedCardTable);
+      setWishlist(updatedCardTable);
     } else {
       const newData = {
         id: product.id,
@@ -55,13 +55,13 @@ const Home = () => {
         quantity: product.quantity,
         price: product.price * product.quantity,
       };
-      setCardTable([...cardTable, newData]);
+      setWishlist([...wishlist, newData]);
     }
   };
 
-  useEffect(() => {}, [cardTable]);
+  useEffect(() => { }, [wishlist]);
 
-  console.log(cardTable);
+  console.log(wishlist);
   console.log();
   // updateQuantity
   function updateQuantity(id) {
@@ -86,16 +86,69 @@ const Home = () => {
 
     if (index !== -1) {
       const updatedProducts = [...products];
+      let quantity = updatedProducts[index].quantity;
+      if (quantity > 1) {
+        updatedProducts[index] = {
+          ...updatedProducts[index],
+          quantity: updatedProducts[index].quantity - 1,
+        };
+        setProducts(updatedProducts);
+      } else {
+        alert('Quantity cannot be negative.')
+      }
 
-      updatedProducts[index] = {
-        ...updatedProducts[index],
-        quantity: updatedProducts[index].quantity - 1,
-      };
-
-      setProducts(updatedProducts);
     } else {
       console.log("Product not found");
     }
+  }
+
+  // Update wishlist Quantity 
+  function updateWishlistQuantity(id) {
+    const index = wishlist.findIndex((product) => product.id === id);
+
+    if (index !== -1) {
+      const updatedProducts = [...wishlist];
+
+      updatedProducts[index] = {
+        ...updatedProducts[index],
+        quantity: updatedProducts[index].quantity + 1,
+      };
+
+      setWishlist(updatedProducts);
+    } else {
+      console.log("Product not found");
+    }
+  }
+  // decrease wishlist Quantity 
+  function decreaseWishlistQuantity(id) {
+    const index = wishlist.findIndex((product) => product.id === id);
+
+    if (index !== -1) {
+      const updatedProducts = [...wishlist];
+      // let quantity;
+      let quantity = updatedProducts[index].quantity;
+      if (quantity > 1) {
+        updatedProducts[index] = {
+          ...updatedProducts[index],
+          quantity: updatedProducts[index].quantity - 1,
+
+        };
+        setWishlist(updatedProducts);
+      } else {
+        alert('Quantity cannot be negative.')
+      }
+    } else {
+      console.log("Product not found");
+    }
+  }
+  // Remove Wishlist Items 
+  function removeWishList(id) {
+    const updatedWishlist = wishlist.filter(product => product.id !== id);
+    setWishlist(updatedWishlist);
+  }
+  //  Total price show 
+  function calculateTotalPrice() {
+    return wishlist.reduce((total, product) => total + (product.price * product.quantity), 0);
   }
 
   return (
@@ -425,7 +478,7 @@ const Home = () => {
 
         <div className="hidden lg:block md:col-span-1 p-4 bg-white">
           <div className="flex justify-between ">
-            <h3 className="text-xl text-black font-medium">Whitelist</h3>
+            <h3 className="text-xl text-black font-medium">wishlist</h3>
             <p className="text-xl font-bold text-black">
               A1<span className="text-slate-100">#12910</span>
             </p>
@@ -438,7 +491,7 @@ const Home = () => {
               <li className="text-sm text-slate-400 flex justify-between">
                 <h5>Name</h5> <span>Amount</span>
               </li>
-              {cardTable.map((item) => (
+              {wishlist.map((item) => (
                 <li
                   key={item.id}
                   className="font-bold flex justify-between mt-2"
@@ -451,56 +504,75 @@ const Home = () => {
           </div>
           <div className="border-b-2 my-5"></div>
           <div className="w-full h-52 overflow-auto touch-auto">
-            <div className=" max-w-none h-auto ">
-              {cardTable.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex gap-5 mt-5 max-w-none h-auto p-2"
-                >
-                  <div className="w-1/4 p-2 bg-slate-100 rounded-lg">
-                    <img
-                      src="https://media.istockphoto.com/id/1304186549/vector/automatic-spring-ballpoint-pen-in-black-case-vector-illustration.jpg?s=612x612&w=0&k=20&c=R_yPawneqKX8J-NeiKmNXuYx36tCoPSCFEHx0Bd4dEg="
-                      alt=""
-                      className="w-3/4 mx-auto "
-                    />
+            {wishlist.length === 0 ? (
+              <div>
+                <p className="text-center">You have no products</p>
+                <img className="w-full p-4" src="https://icon-library.com/images/new-item-icon/new-item-icon-19.jpg" alt="" />
+
+              </div>
+
+            ) : (
+              <div className=" max-w-none h-auto ">
+                {wishlist.map((item) => (
+                  <div
+                    key={item.id}
+                    className="flex gap-5 mt-5 max-w-none h-auto p-2 shadow"
+                  >
+                    <div className="w-1/4 p-2 bg-slate-100 rounded-lg">
+                      <img
+                        src="https://media.istockphoto.com/id/1304186549/vector/automatic-spring-ballpoint-pen-in-black-case-vector-illustration.jpg?s=612x612&w=0&k=20&c=R_yPawneqKX8J-NeiKmNXuYx36tCoPSCFEHx0Bd4dEg="
+                        alt=""
+                        className="w-3/4 mx-auto "
+                      />
+                    </div>
+                    <div className="w-3/4  ">
+                      <p className="flex justify-between items-center">
+                        <h4 className="font-bold">{item.name}</h4>{" "}
+                        <button onClick={() => removeWishList(item.id)}><MdDelete className="inline-block border-2 text-3xl p-1 rounded-lg shadow bg-white text-red-500" /></button>
+                      </p>
+                      <p className="flex justify-between items-center mt-7">
+                        <h4 className="font-bold">
+                          <span className="text-green-500">$</span>
+                          {item.price * item.quantity}
+                        </h4>
+                        <span className="bg-white border-2 shadow-inner rounded-full flex px-1 gap-2 items-center">
+                          <button
+                            onClick={() => decreaseWishlistQuantity(item.id)}
+                            className="m-0 p-0"
+                          >
+                            <GrSubtractCircle className="text-red-500 cursor-pointer" />
+                          </button>
+
+                          {item.quantity}
+                          <button
+                            onClick={() => updateWishlistQuantity(item.id)}
+                            className="m-0 p-0"
+                          >
+                            <FaCirclePlus className="text-green-600 text-xl"></FaCirclePlus>
+                          </button>
+                        </span>
+                      </p>
+                    </div>
                   </div>
-                  <div className="w-3/4  ">
-                    <p className="flex justify-between items-center">
-                      <h4 className="font-bold">{item.name}</h4>{" "}
-                      <CiEdit className="inline-block border-2 text-3xl p-1 rounded-lg shadow-inner bg-white" />
-                    </p>
-                    <p className="flex justify-between items-center mt-7">
-                      <h4 className="font-bold">
-                        <span className="text-green-500">$</span>
-                        {item.price * item.quantity}
-                      </h4>
-                      <span className="bg-white border-2 shadow-inner rounded-full flex px-1 gap-2 items-center">
-                        <GrSubtractCircle className="text-red-500 cursor-pointer" />
-                        {item.quantity}
-                        <button
-                          onClick={() => updateQuantity(item.id)}
-                          className="m-0 p-0"
-                        >
-                          <FaCirclePlus className="text-green-600 text-xl"></FaCirclePlus>
-                        </button>
-                      </span>
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
           <div className="mt-5 ">
             <h2 className="text-2xl font-semibold mt-3">Summary</h2>
             <p className="flex justify-between mt-3 text-sm">
-              <span>Subtotal</span> <span className="font-bold">$ 12.00</span>
+              <span>Subtotal</span> <span className="font-bold">
+                ${
+                  calculateTotalPrice()
+                }
+              </span>
             </p>
             <p className="flex justify-between mt-3 text-sm">
               <span>Discount</span> <span className="font-bold">$ 2.00</span>
             </p>
             <p className="border-b-2 border-dashed mt-2"></p>
             <p className="flex justify-between mt-3 font-bold">
-              <span>Total</span> <span>$ 10.00</span>
+              <span>Total</span> <span>$ {calculateTotalPrice()}</span>
             </p>
           </div>
           <div className="mt-5">
@@ -511,9 +583,8 @@ const Home = () => {
         </div>
       </div>
       <div
-        className={`block md:hidden case-in duration-500 w-full h-full fixed top-16 pt-10 bottom-0 z-30 overflow-auto touch-auto bg-slate-200 ${
-          open ? "right-2" : "-right-[800px]"
-        }`}
+        className={`block md:hidden case-in duration-500 w-full h-full fixed top-16 pt-10 bottom-0 z-30 overflow-auto touch-auto bg-slate-200 ${open ? "right-2" : "-right-[800px]"
+          }`}
       >
         <div className="fixed top-64 -right-6 z-10">
           {open && open ? (
@@ -540,7 +611,7 @@ const Home = () => {
             {/* table section start */}
             <div className=" md:col-span-1 p-4 bg-white rounded-xl mb-14">
               <div className="flex justify-between ">
-                <h3 className="text-xl text-black font-medium">Whitelist</h3>
+                <h3 className="text-xl text-black font-medium">wishlist</h3>
                 <p className="text-xl font-bold text-black">
                   A1<span className="text-slate-100">#12910</span>
                 </p>
@@ -553,7 +624,7 @@ const Home = () => {
                   <li className="text-sm text-slate-400 flex justify-between">
                     <h5>Name</h5> <span>Amount</span>
                   </li>
-                  {cardTable.map((item) => (
+                  {wishlist.map((item) => (
                     <li
                       key={item.id}
                       className="font-bold flex justify-between mt-2"
@@ -569,7 +640,7 @@ const Home = () => {
               <div className="border-b-2 my-5"></div>
               <div className="w-full h-52 overflow-auto touch-auto">
                 <div className=" max-w-none h-auto ">
-                  {cardTable.map((item) => (
+                  {wishlist.map((item) => (
                     <div
                       key={item.id}
                       className="flex gap-5 mt-5 max-w-none h-auto p-2"
@@ -655,7 +726,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      
+
     </>
   );
 };
