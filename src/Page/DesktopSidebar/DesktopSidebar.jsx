@@ -52,6 +52,10 @@ const DesktopSidebar = () => {
           <Link className="flex justify-start items-center gap-2" to="/myInventory"><IoPersonCircleSharp className="text-green-500"></IoPersonCircleSharp>
             <span className="lg:text-xs font-semibold text-slate-200">My Inventory</span></Link>
         </li>
+        <li>
+          <Link className="flex justify-start items-center gap-2" to="/practice"><IoPersonCircleSharp className="text-green-500"></IoPersonCircleSharp>
+            <span className="lg:text-xs font-semibold text-slate-200">Practice</span></Link>
+        </li>
         {
           adminAndManager &&
           <>
