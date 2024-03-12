@@ -9,12 +9,12 @@ const DashBoard = () => {
   return (
     <div>
       {/* main content section start */}
-      <div className="flex mt-2">
+      <div className="flex">
         <div className="lg:w-[13%] hidden  lg:block">
           <DesktopSidebar></DesktopSidebar>
         </div>
         <div className="w-full lg:w-[87%]">
-        <Navbar></Navbar>
+          <Navbar></Navbar>
           <Outlet></Outlet>
         </div>
       </div>
