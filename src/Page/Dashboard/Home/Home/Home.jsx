@@ -10,9 +10,7 @@ import {
   FaLongArrowAltRight,
 } from "react-icons/fa";
 import { useContext, useEffect, useState } from "react";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import TabCard from "./TabCard";
 import { GrSubtractCircle } from "react-icons/gr";
 import { CiEdit } from "react-icons/ci";
 import bottol from "../../../../../public/bottol.png";
@@ -21,10 +19,11 @@ import { FaCircleMinus } from "react-icons/fa6";
 import { AuthContext } from "../../../../Providers/AuthProvider";
 import { MdDelete } from "react-icons/md";
 import axios from 'axios';
+import Form from "../Form/Form";
+
 
 
 const Home = () => {
-  const [tabIndex, setTabIndex] = useState(0);
   const [products, setProducts] = useState([]);
   const { baseURL } = useContext(AuthContext);
   const initialCardTable = JSON.parse(localStorage.getItem("wishlist")) || [];
@@ -41,13 +40,16 @@ const Home = () => {
   //     .catch((error) => console.error("Error fetching products:", error));
   // }, []);
 
+
+
+
   useEffect(() => {
     localStorage.setItem("wishlist", JSON.stringify(wishlist));
   }, [wishlist]);
 
   //get all categories
   useEffect(() => {
-    axios.get('https://inv.xcode.com.bd/api/v1/inventory/catagorylist/')
+    axios.get(`${baseURL}/catagorylist/`)
       .then(response => {
         setCategories(response.data)
         console.log('All Category:', response.data);
@@ -55,10 +57,11 @@ const Home = () => {
       .catch(error => {
         console.error('Error:', error);
       });
-  }, []);
+  }, [baseURL]);
+
   //get all Products
   useEffect(() => {
-    axios.get('http://inv.xcode.com.bd/api/v1/inventory/itemlist/')
+    axios.get(`${baseURL}/itemlist/`)
       .then(response => {
         setProducts(response.data)
         console.log('All Products:', response.data);
@@ -66,7 +69,7 @@ const Home = () => {
       .catch(error => {
         console.error('Error:', error);
       });
-  }, []);
+  }, [baseURL]);
 
   // add  to card or increment functionality
   const cardData = (product) => {
@@ -439,11 +442,10 @@ const Home = () => {
 
               {/* products end */}
             </div>
-
           </div>
-          {/* medicines section end */}
         </div>
 
+        {/* wishlist add to card  */}
         <div className="hidden lg:block md:col-span-1 p-4 bg-white " style={{ height: '100vh' }} >
           <div className="flex justify-between ">
             <h3 className="text-xl text-black font-medium">wishlist</h3>
@@ -544,12 +546,12 @@ const Home = () => {
             </p>
           </div>
           <div className="mt-5">
-            <button className="btn w-full bg-green-500 text-white rounded-xl">
-              Print Bill
-            </button>
+            <Form wishlist={wishlist} setWishlist={setWishlist}></Form>
           </div>
         </div>
       </div>
+
+      {/* mobile wishlist  */}
       <div
         className={`block md:hidden case-in duration-500 w-full h-full fixed top-16 pt-10 bottom-0 z-30 overflow-auto touch-auto bg-slate-200 ${open ? "right-2" : "-right-[800px]"
           }`}
@@ -662,9 +664,7 @@ const Home = () => {
                 </p>
               </div>
               <div className="mt-5">
-                <button className="btn w-full bg-green-500 text-white rounded-xl">
-                  Print Bill
-                </button>
+                <Form wishlist={wishlist} setWishlist={setWishlist}></Form>
               </div>
             </div>
             {/* table section end */}

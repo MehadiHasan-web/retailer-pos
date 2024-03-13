@@ -1,4 +1,5 @@
 [
+<<<<<<< HEAD
     {
       "id": 1,
       "name": "Product 1",
@@ -111,3 +112,126 @@
     }
   ]
   
+=======
+  {
+    "id": 1,
+    "name": "Product 1",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vehicula enim id leo fermentum, in aliquam ipsum scelerisque. Maecenas vel ante in turpis tincidunt auctor.",
+    "net_weight": "100g",
+    "stock": 100,
+    "price": 10,
+    "quantity": 1,
+    "image": "https://example.com/product1.jpg",
+    "tab_name" : "medicine",
+    "category_id": 1
+  },
+  {
+    "id": 2,
+    "name": "Product 2",
+    "description": "Vestibulum euismod lobortis ex, vitae eleifend ligula vehicula sit amet. Sed nec aliquam velit. Sed vitae est velit. Duis et libero nec lorem interdum placerat.",
+    "net_weight": "200g",
+    "stock": 50,
+    "price": 15,
+    "quantity": 1,
+    "image": "https://example.com/product2.jpg",
+    "tab_name" : "bottle",
+    "category_id": 2
+  },
+  {
+    "id": 3,
+    "name": "Product 3",
+    "description": "Proin lacinia nisi ac eros scelerisque, a pharetra nulla placerat. Duis sollicitudin purus nisi, id scelerisque lorem feugiat nec. Nulla facilisi. Suspendisse potenti.",
+    "net_weight": "150g",
+    "stock": 80,
+    "price": 12,
+    "quantity": 1,
+    "image": "https://example.com/product3.jpg",
+    "tab_name" : "medicine",
+    "category_id": 1
+  },
+  {
+    "id": 4,
+    "name": "Product 4",
+    "description": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut in nisi non est luctus consectetur a ac lorem.",
+    "net_weight": "180g",
+    "stock": 70,
+    "price": 18,
+    "quantity": 1,
+    "image": "https://example.com/product4.jpg",
+    "tab_name": "vegetables",
+    "category_id": 3
+  },
+  {
+    "id": 5,
+    "name": "Product 5",
+    "description": "Nam tincidunt turpis in velit facilisis, sit amet ultricies nisi bibendum. In ut velit non risus congue congue. Aliquam at magna tortor.",
+    "net_weight": "120g",
+    "stock": 90,
+    "price": 14,
+    "quantity": 1,
+    "image": "https://example.com/product5.jpg",
+    "tab_name" : "bottle",
+    "category_id": 2
+  },
+  {
+    "id": 6,
+    "name": "Product 6",
+    "description": "Fusce non ligula id ligula dapibus varius ut eu lorem. Aliquam nec justo quis velit scelerisque mattis. Cras non tellus bibendum, gravida elit at, consequat sapien.",
+    "net_weight": "170g",
+    "stock": 60,
+    "price": 20,
+    "quantity": 1,
+    "image": "https://example.com/product6.jpg",
+    "tab_name": "vegetables",
+    "category_id": 3
+  },
+  {
+    "id": 7,
+    "name": "Product 7",
+    "description": "Duis vulputate accumsan eros, nec tincidunt quam condimentum quis. Nullam luctus vestibulum magna, at sollicitudin risus finibus et.",
+    "net_weight": "130g",
+    "stock": 85,
+    "price": 16,
+    "quantity": 1,
+    "image": "https://example.com/product7.jpg",
+    "tab_name" : "medicine",
+    "category_id": 1
+  },
+  {
+    "id": 8,
+    "name": "Product 8",
+    "description": "Donec id urna at metus euismod lobortis. Nulla nec nisi leo. Duis scelerisque placerat justo, non feugiat tortor tempus nec.",
+    "net_weight": "140g",
+    "stock": 75,
+    "price": 22,
+    "quantity": 1,
+    "image": "https://example.com/product8.jpg",
+    "tab_name" : "bottle",
+    "category_id": 2
+  },
+  {
+    "id": 9,
+    "name": "Product 9",
+    "description": "Integer auctor, felis nec faucibus sagittis, metus ex rhoncus eros, et vestibulum justo mauris non nisi. Nam tincidunt turpis in velit facilisis, sit amet ultricies nisi bibendum.",
+    "net_weight": "160g",
+    "stock": 65,
+    "price": 24,
+    "quantity": 1,
+    "image": "https://example.com/product9.jpg",
+    "tab_name": "vegetables",
+    "category_id": 3
+  },
+  {
+    "id": 10,
+    "name": "Product 10",
+    "description": "In ut velit non risus congue congue. Aliquam at magna tortor. Aliquam tincidunt sapien a ante commodo, quis lacinia justo efficitur.",
+    "net_weight": "110g",
+    "stock": 95,
+    "price": 28,
+    "quantity": 1,
+    "image": "https://example.com/product10.jpg",
+    "tab_name" : "medicine",
+    "category_id": 1
+  }
+]
+>>>>>>> fe249f7808eadff7eadbc1af24faf383f2e74358

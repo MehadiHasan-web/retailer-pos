@@ -32,7 +32,7 @@ const HomeExtra = () => {
   // use useEffect hook
   useEffect(() => {
     // axios.get("http://inv.xcode.com.bd/api/v1/inventory/itemlist/")
-    axios.get(`${baseURL}/itemlist/`)
+    axios.get(`${baseURL}/catagorylist/`)
       .then((res) => res.data)
       .then((data) => setCard(data))
       .catch((error) => console.error("Error fetching data:", error));
@@ -151,6 +151,105 @@ const HomeExtra = () => {
               </div>
             </div>
         </div>
+
+        {/* ldjoiopdio */}
+        {/* <div className='my-5'>
+        <ul className='flex justify-between items-center'>
+          <li className='text-2xl font-semibold'>Medicines</li>
+          <li className='text-lg font-bold text-green-500 border-b-green-500 border-b-2'>See all</li>
+        </ul>
+        <div className='mt-5'>
+          <Tabs selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
+            <TabList className="flex gap-5 items-center">
+              {Object.keys(groupedProducts).map((category, index) => (
+                <Tab key={index} style={{ flex: 1, textAlign: 'center', cursor: 'pointer' }} className="bg-white text-black font-bold py-2 rounded-full">{category}</Tab>
+              ))}
+            </TabList>
+            {Object.values(groupedProducts).map((categoryProducts, index) => (
+              <TabPanel key={index} className="mt-5">
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
+                  {limitItems(categoryProducts, 5).map((product, index) => (
+                    <div
+                        className=" bg-base-100 shadow-xl p-3 rounded-md"
+                        key={product.id}
+                      >
+                        <div className="flex justify-between items-center">
+                          <div className="w-[35%]">
+                            <figure>
+                              <img
+                                className="w-60 h-40"
+                                src={bottol}
+                                alt="Movie"
+                              />
+                            </figure>
+                          </div>
+                          <div className="w-[65%]">
+                            <h2 className="text-xl font-bold">
+                              {product.name}
+                            </h2>
+                            <p className="text-xs">{product.description}</p>
+                            <ul className="flex items-center gap-32 mt-2">
+                              <li>
+                                <p className="text-sm">Netto</p>
+                                <p className="text-base font-bold">
+                                  {product.net_weight}
+                                </p>
+                              </li>
+                              <li>
+                                <p className="text-sm">Stock</p>
+                                <p className="text-base font-bold">
+                                  {product.stock} Available
+                                </p>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div className="flex justify-between items-center mt-2">
+                          <div className=" flex items-center justify-center">
+                            <sup className="text-green-600 font-bold">$</sup>
+                            <p className="text-center">
+                              <span className="text-2xl font-bold">
+                                {product.price}
+                              </span>
+                              <span className="text-gray-500">/Bottle</span>
+                            </p>
+                          </div>
+                          <div className="w-[65%] ">
+                            <ul className="flex justify-between items-center bg-slate-200 py-1 px-3 rounded-2xl">
+                              <li>
+                                <button
+                                  onClick={() => decreaseQuantity(product.id)}
+                                >
+                                  <FaCircleMinus className="text-white text-xl"></FaCircleMinus>
+                                </button>
+                              </li>
+                              <li>{product.quantity}</li>
+                              <li>
+                                <button
+                                  onClick={() => updateQuantity(product.id)}
+                                  className="m-0 p-0"
+                                >
+                                  <FaCirclePlus className="text-green-600 text-xl"></FaCirclePlus>
+                                </button>
+                              </li>
+                            </ul>
+                          </div>
+                          <button
+                            onClick={() => cardData(product)}
+                            className="btn bg-green-500 py-[2px] px-3"
+                          >
+                            Add
+                          </button>
+                        </div>
+                      </div>
+                  ))}
+                </div>
+              </TabPanel>
+            ))}
+          </Tabs>
+        </div>
+          </div> */}
+        {/* ldjoiopdio */}
 
       </div>
       {/* all data */}
