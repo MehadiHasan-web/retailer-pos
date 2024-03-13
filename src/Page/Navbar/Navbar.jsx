@@ -30,7 +30,7 @@ function Navbar() {
             <input type="text" className="grow bg-slate-200 text-black" placeholder="search medicine" />
           </label>
           <ul className='flex items-center gap-3'>
-            <li><div className="timeline-end timeline-box flex items-center gap-2 font-semibold"><SlNote></SlNote><span className='text-sm'>User Voucher</span></div></li>
+            {/* <li><div className="timeline-end timeline-box flex items-center gap-2 font-semibold"><SlNote></SlNote><span className='text-sm'>User Voucher</span></div></li> */}
             <li><div className="timeline-end timeline-box flex items-center gap-2 font-semibold"><TbScan></TbScan><span className='text-sm'>Scan Prescription</span></div></li>
             <li><div className="timeline-end timeline-box flex items-center gap-2">
               <div className="avatar online placeholder">

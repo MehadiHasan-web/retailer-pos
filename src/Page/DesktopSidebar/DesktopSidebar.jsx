@@ -14,7 +14,7 @@ const DesktopSidebar = () => {
   const adminAndManager = isApprover || is_manager;
 
   return (
-    <div className="w-full bg-[#1E1E1E] h-full p-2">
+    <div className="w-full bg-[#1E1E1E] sticky top-0 p-2 " style={{ height: '100vh' }}>
       <ul className="mt-5">
         <Link to="/" className="flex justify-center items-center gap-2">
           <li>

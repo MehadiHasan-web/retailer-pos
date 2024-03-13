@@ -20,6 +20,8 @@ import { FaCirclePlus } from "react-icons/fa6";
 import { FaCircleMinus } from "react-icons/fa6";
 import { AuthContext } from "../../../../Providers/AuthProvider";
 import { MdDelete } from "react-icons/md";
+import axios from 'axios';
+
 
 const Home = () => {
   const [tabIndex, setTabIndex] = useState(0);
@@ -28,17 +30,43 @@ const Home = () => {
   const initialCardTable = JSON.parse(localStorage.getItem("wishlist")) || [];
   const [wishlist, setWishlist] = useState(initialCardTable);
   const [open, setOpen] = useState(false);
+  const [activeButton, setActiveButton] = useState('All');
+  const [categories, setCategories] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState([]);
 
-  useEffect(() => {
-    fetch("/public/products.json")
-      .then((response) => response.json())
-      .then((data) => setProducts(data))
-      .catch((error) => console.error("Error fetching products:", error));
-  }, []);
+  // useEffect(() => {
+  //   fetch("/public/products.json")
+  //     .then((response) => response.json())
+  //     .then((data) => setProducts(data))
+  //     .catch((error) => console.error("Error fetching products:", error));
+  // }, []);
 
   useEffect(() => {
     localStorage.setItem("wishlist", JSON.stringify(wishlist));
   }, [wishlist]);
+
+  //get all categories
+  useEffect(() => {
+    axios.get('https://inv.xcode.com.bd/api/v1/inventory/catagorylist/')
+      .then(response => {
+        setCategories(response.data)
+        console.log('All Category:', response.data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  }, []);
+  //get all Products
+  useEffect(() => {
+    axios.get('http://inv.xcode.com.bd/api/v1/inventory/itemlist/')
+      .then(response => {
+        setProducts(response.data)
+        console.log('All Products:', response.data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  }, []);
 
   // add  to card or increment functionality
   const cardData = (product) => {
@@ -59,10 +87,6 @@ const Home = () => {
     }
   };
 
-  useEffect(() => { }, [wishlist]);
-
-  console.log(wishlist);
-  console.log();
   // updateQuantity
   function updateQuantity(id) {
     const index = products.findIndex((product) => product.id === id);
@@ -150,10 +174,23 @@ const Home = () => {
   function calculateTotalPrice() {
     return wishlist.reduce((total, product) => total + (product.price * product.quantity), 0);
   }
+  //selected category click function 
+  const handleButtonClick = (category) => {
+    setActiveButton(category.name);
+    console.log("Category ID:", category.id);
+
+    const filteredProducts = products.filter(product => {
+      return product.catagory === category.id;
+    });
+    setSelectedProduct(filteredProducts);
+
+    console.log("Filtered Products:", filteredProducts);
+
+  };
 
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 container mx-auto bg-slate-100">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  bg-slate-100">
         <div className="md:col-span-2 px-5 ">
           {/* subscription section start */}
           {/* <div className="flex justify-between items-center h-32 titleCon p-5 rounded-2xl opacity-90">
@@ -297,186 +334,117 @@ const Home = () => {
                 See all
               </li>
             </ul>
-            <div className=" mt-5">
-              <Tabs
-                selectedIndex={tabIndex}
-                onSelect={(index) => setTabIndex(index)}
-              >
-                <TabList className="flex gap-5 items-center flex-wrap">
-                  <Tab
-                    style={{ flex: 1, textAlign: "center", cursor: "pointer" }}
-                    className="bg-white text-black font-bold py-2 rounded-full"
+            {/* products  list*/}
+            <div className="mt-4">
+              {/* categories  */}
+              <div className="flex gap-2 items-center flex-wrap">
+                <button
+                  className={activeButton === 'All' ? "category-button category-button-selected px-5 py-2 font-bold" : "category-button  px-5 py-2 bg-white text-black font-bold  rounded-full"}
+                  onClick={() => handleButtonClick({ id: null, name: 'All' })}
+                >
+                  All
+                </button>
+                {categories.slice(0, 7).map((category) => (
+                  <button
+                    key={category.id}
+                    className={activeButton === category.name ? "category-button category-button-selected px-5 py-2 font-bold" : "category-button  px-5 py-2 bg-white text-black font-bold  rounded-full"}
+                    onClick={() => handleButtonClick(category)}
                   >
-                    All
-                  </Tab>
-                  <Tab
-                    style={{ flex: 1, textAlign: "center", cursor: "pointer" }}
-                    className="bg-white text-black font-bold py-2 rounded-full"
-                  >
-                    Tablet
-                  </Tab>
-                  <Tab
-                    style={{ flex: 1, textAlign: "center", cursor: "pointer" }}
-                    className="bg-white text-black font-bold py-2 rounded-full"
-                  >
-                    Capsule
-                  </Tab>
-                  <Tab
-                    style={{ flex: 1, textAlign: "center", cursor: "pointer" }}
-                    className="bg-white text-black font-bold py-2 rounded-full"
-                  >
-                    Suppository
-                  </Tab>
-                  <Tab
-                    style={{ flex: 1, textAlign: "center", cursor: "pointer" }}
-                    className="bg-white text-black font-bold py-2 rounded-full"
-                  >
-                    Eyedrops
-                  </Tab>
-                  <Tab
-                    style={{ flex: 1, textAlign: "center", cursor: "pointer" }}
-                    className="bg-white text-black font-bold py-2 rounded-full"
-                  >
-                    Bottle
-                  </Tab>
-                </TabList>
-                <TabPanel className="mt-5">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    {/* Item 1  */}
-                    {products.map((product) => (
-                      <div
-                        className=" bg-base-100 shadow-xl p-3 rounded-md"
-                        key={product.id}
-                      >
-                        <div className="flex justify-between items-center">
-                          <div className="w-[35%]">
-                            <figure>
-                              <img
-                                className="w-60 h-40"
-                                src={bottol}
-                                alt="Movie"
-                              />
-                            </figure>
-                          </div>
-                          <div className="w-[65%]">
-                            <h2 className="text-xl font-bold">
-                              {product.name}
-                            </h2>
-                            <p className="text-xs">{product.description}</p>
-                            <ul className="flex items-center gap-32 mt-2">
-                              <li>
-                                <p className="text-sm">Netto</p>
-                                <p className="text-base font-bold">
-                                  {product.net_weight}
-                                </p>
-                              </li>
-                              <li>
-                                <p className="text-sm">Stock</p>
-                                <p className="text-base font-bold">
-                                  {product.stock} Available
-                                </p>
-                              </li>
-                            </ul>
-                          </div>
+                    {category.name}
+                  </button>
+                ))}
+              </div>
+              {/* categories end */}
+              {/* products  */}
+              <div className="mt-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  {/* Item 1  */}
+                  {(selectedProduct.length > 0 ? selectedProduct : products).map((product) => (
+                    <div
+                      className=" bg-base-100 shadow-xl p-3 rounded-md"
+                      key={product.id}
+                    >
+                      <div className="flex justify-between items-center">
+                        <div className="w-[35%]">
+                          <figure>
+                            <img
+                              className="w-60 h-40"
+                              src={bottol}
+                              alt="Movie"
+                            />
+                          </figure>
                         </div>
-                        <div className="flex justify-between items-center mt-2">
-                          <div className=" flex items-center justify-center">
-                            <sup className="text-green-600 font-bold">$</sup>
-                            <p className="text-center">
-                              <span className="text-2xl font-bold">
-                                {product.price}
-                              </span>
-                              <span className="text-gray-500">/Bottle</span>
-                            </p>
-                          </div>
-                          <div className="w-[65%] ">
-                            <ul className="flex justify-between items-center bg-slate-200 py-1 px-3 rounded-2xl">
-                              <li>
-                                <button
-                                  onClick={() => decreaseQuantity(product.id)}
-                                >
-                                  <FaCircleMinus className="text-white text-xl"></FaCircleMinus>
-                                </button>
-                              </li>
-                              <li>{product.quantity}</li>
-                              <li>
-                                <button
-                                  onClick={() => updateQuantity(product.id)}
-                                  className="m-0 p-0"
-                                >
-                                  <FaCirclePlus className="text-green-600 text-xl"></FaCirclePlus>
-                                </button>
-                              </li>
-                            </ul>
-                          </div>
-                          <button
-                            onClick={() => cardData(product)}
-                            className="btn bg-green-500 py-[2px] px-3"
-                          >
-                            Add
-                          </button>
+                        <div className="w-[65%]">
+                          <h2 className="text-xl font-bold">
+                            {product.name}
+                          </h2>
+                          <p className="text-xs">{product.description}</p>
+                          <ul className="flex items-center gap-32 mt-2">
+                            <li>
+                              <p className="text-sm">Netto</p>
+                              <p className="text-base font-bold">
+                                {product.net_weight}
+                              </p>
+                            </li>
+                            <li>
+                              <p className="text-sm">Stock</p>
+                              <p className="text-base font-bold">
+                                {product.stock} Available
+                              </p>
+                            </li>
+                          </ul>
                         </div>
                       </div>
-                    ))}
-                  </div>
-                </TabPanel>
-                <TabPanel>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-2">
-                    <TabCard></TabCard>
-                    <TabCard></TabCard>
-                    <TabCard></TabCard>
-                    <TabCard></TabCard>
-                    <TabCard></TabCard>
-                    <TabCard></TabCard>
-                  </div>
-                </TabPanel>
-                <TabPanel>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-2">
-                    <TabCard></TabCard>
-                    <TabCard></TabCard>
-                    <TabCard></TabCard>
-                    <TabCard></TabCard>
-                    <TabCard></TabCard>
-                    <TabCard></TabCard>
-                  </div>
-                </TabPanel>
-                <TabPanel>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-2">
-                    <TabCard></TabCard>
-                    <TabCard></TabCard>
-                    <TabCard></TabCard>
-                    <TabCard></TabCard>
-                    <TabCard></TabCard>
-                    <TabCard></TabCard>
-                  </div>
-                </TabPanel>
-                <TabPanel>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-2">
-                    <TabCard></TabCard>
-                    <TabCard></TabCard>
-                    <TabCard></TabCard>
-                    <TabCard></TabCard>
-                    <TabCard></TabCard>
-                    <TabCard></TabCard>
-                  </div>
-                </TabPanel>
-                <TabPanel>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-2">
-                    <TabCard></TabCard>
-                    <TabCard></TabCard>
-                    <TabCard></TabCard>
-                    <TabCard></TabCard>
-                    <TabCard></TabCard>
-                    <TabCard></TabCard>
-                  </div>
-                </TabPanel>
-              </Tabs>
+                      <div className="flex justify-between items-center mt-2">
+                        <div className=" flex items-center justify-center">
+                          <sup className="text-green-600 font-bold">$</sup>
+                          <p className="text-center">
+                            <span className="text-2xl font-bold">
+                              {product.price}
+                            </span>
+                            <span className="text-gray-500">/Bottle</span>
+                          </p>
+                        </div>
+                        <div className="w-[65%] ">
+                          <ul className="flex justify-between items-center bg-slate-200 py-1 px-3 rounded-2xl">
+                            <li>
+                              <button
+                                onClick={() => decreaseQuantity(product.id)}
+                              >
+                                <FaCircleMinus className="text-white text-xl"></FaCircleMinus>
+                              </button>
+                            </li>
+                            <li>{product.quantity}</li>
+                            <li>
+                              <button
+                                onClick={() => updateQuantity(product.id)}
+                                className="m-0 p-0"
+                              >
+                                <FaCirclePlus className="text-green-600 text-xl"></FaCirclePlus>
+                              </button>
+                            </li>
+                          </ul>
+                        </div>
+                        <button
+                          onClick={() => cardData(product)}
+                          className="btn bg-green-500 py-[2px] px-3"
+                        >
+                          Add
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* products end */}
             </div>
+
           </div>
           {/* medicines section end */}
         </div>
 
-        <div className="hidden lg:block md:col-span-1 p-4 bg-white">
+        <div className="hidden lg:block md:col-span-1 p-4 bg-white " style={{ height: '100vh' }} >
           <div className="flex justify-between ">
             <h3 className="text-xl text-black font-medium">wishlist</h3>
             <p className="text-xl font-bold text-black">

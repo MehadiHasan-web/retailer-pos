@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.category-button{
+    /* flex: 1 1 0%; */
+    text-align: center;
+    cursor: pointer;
+}
+
+.category-button-selected{
+    background: rgb(10, 169, 10) !important;
+    border-radius: 9999px !important;
+    color: white !important;
+}
