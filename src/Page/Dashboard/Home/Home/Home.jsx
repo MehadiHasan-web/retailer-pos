@@ -20,6 +20,8 @@ import { FaCirclePlus } from "react-icons/fa6";
 import { FaCircleMinus } from "react-icons/fa6";
 import { AuthContext } from "../../../../Providers/AuthProvider";
 import { MdDelete } from "react-icons/md";
+import Form from "../Form/Form";
+
 
 
 const Home = () => {
@@ -72,8 +74,7 @@ const Home = () => {
 
   useEffect(() => { }, [wishlist]);
 
-  console.log(wishlist);
-  console.log();
+
   // updateQuantity
   function updateQuantity(id) {
     const index = products.findIndex((product) => product.id === id);
@@ -518,9 +519,7 @@ const Home = () => {
             </p>
           </div>
           <div className="mt-5">
-            <button className="btn w-full bg-green-500 text-white rounded-xl">
-              Print Bill
-            </button>
+            <Form wishlist={wishlist} setWishlist={setWishlist}></Form>
           </div>
         </div>
       </div>
@@ -636,9 +635,7 @@ const Home = () => {
                 </p>
               </div>
               <div className="mt-5">
-                <button className="btn w-full bg-green-500 text-white rounded-xl">
-                  Print Bill
-                </button>
+              <Form wishlist={wishlist} setWishlist={setWishlist}></Form>
               </div>
             </div>
             {/* table section end */}

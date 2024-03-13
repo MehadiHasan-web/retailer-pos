@@ -20,6 +20,7 @@ import MyInventory from './../Page/My Inventory/MyInventory';
 import ErrorPage from "../Page/ErrorPage/ErrorPage";
 import AllUserInventory from "../Page/AllUserInventory/AllUserInventory";
 import UserInventory from "../Page/UserInventory/UserInventory";
+import HomeExtra from './../Page/Dashboard/Home/Home/HomeExtra';
 
 
 const router = createBrowserRouter([
@@ -106,6 +107,10 @@ const router = createBrowserRouter([
       {
         path : '/userInventory',
         element : <UserInventory></UserInventory>
+      },
+      {
+        path : '/homeExtra',
+        element : <HomeExtra></HomeExtra>
       }
     ]
   },
