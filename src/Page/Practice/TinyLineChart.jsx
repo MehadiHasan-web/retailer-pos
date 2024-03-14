@@ -42,7 +42,7 @@ const TinyLineChart = () => {
     },
     {
       name: 'Jul',
-      pv: 4300,
+      pv: 4200,
     },
     {
       name: 'Agu',
@@ -54,7 +54,7 @@ const TinyLineChart = () => {
     },
     {
       name: 'Oct',
-      pv: 3800,
+      pv: 3900,
     },
     {
       name: 'Nov',
