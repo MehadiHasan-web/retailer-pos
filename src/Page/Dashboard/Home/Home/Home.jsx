@@ -18,10 +18,8 @@ import { FaCirclePlus } from "react-icons/fa6";
 import { FaCircleMinus } from "react-icons/fa6";
 import { AuthContext } from "../../../../Providers/AuthProvider";
 import { MdDelete } from "react-icons/md";
-import axios from 'axios';
+import axios from "axios";
 import Form from "../Form/Form";
-
-
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -29,7 +27,7 @@ const Home = () => {
   const initialCardTable = JSON.parse(localStorage.getItem("wishlist")) || [];
   const [wishlist, setWishlist] = useState(initialCardTable);
   const [open, setOpen] = useState(false);
-  const [activeButton, setActiveButton] = useState('All');
+  const [activeButton, setActiveButton] = useState("All");
   const [categories, setCategories] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState([]);
 
@@ -40,34 +38,33 @@ const Home = () => {
   //     .catch((error) => console.error("Error fetching products:", error));
   // }, []);
 
-
-
-
   useEffect(() => {
     localStorage.setItem("wishlist", JSON.stringify(wishlist));
   }, [wishlist]);
 
   //get all categories
   useEffect(() => {
-    axios.get(`${baseURL}/catagorylist/`)
-      .then(response => {
-        setCategories(response.data)
-        console.log('All Category:', response.data);
+    axios
+      .get(`${baseURL}/catagorylist/`)
+      .then((response) => {
+        setCategories(response.data);
+        console.log("All Category:", response.data);
       })
-      .catch(error => {
-        console.error('Error:', error);
+      .catch((error) => {
+        console.error("Error:", error);
       });
   }, [baseURL]);
 
   //get all Products
   useEffect(() => {
-    axios.get(`${baseURL}/itemlist/`)
-      .then(response => {
-        setProducts(response.data)
-        console.log('All Products:', response.data);
+    axios
+      .get(`${baseURL}/itemlist/`)
+      .then((response) => {
+        setProducts(response.data);
+        console.log("All Products:", response.data);
       })
-      .catch(error => {
-        console.error('Error:', error);
+      .catch((error) => {
+        console.error("Error:", error);
       });
   }, [baseURL]);
 
@@ -121,15 +118,14 @@ const Home = () => {
         };
         setProducts(updatedProducts);
       } else {
-        alert('Quantity cannot be negative.')
+        alert("Quantity cannot be negative.");
       }
-
     } else {
       console.log("Product not found");
     }
   }
 
-  // Update wishlist Quantity 
+  // Update wishlist Quantity
   function updateWishlistQuantity(id) {
     const index = wishlist.findIndex((product) => product.id === id);
 
@@ -146,7 +142,7 @@ const Home = () => {
       console.log("Product not found");
     }
   }
-  // decrease wishlist Quantity 
+  // decrease wishlist Quantity
   function decreaseWishlistQuantity(id) {
     const index = wishlist.findIndex((product) => product.id === id);
 
@@ -158,43 +154,44 @@ const Home = () => {
         updatedProducts[index] = {
           ...updatedProducts[index],
           quantity: updatedProducts[index].quantity - 1,
-
         };
         setWishlist(updatedProducts);
       } else {
-        alert('Quantity cannot be negative.')
+        alert("Quantity cannot be negative.");
       }
     } else {
       console.log("Product not found");
     }
   }
-  // Remove Wishlist Items 
+  // Remove Wishlist Items
   function removeWishList(id) {
-    const updatedWishlist = wishlist.filter(product => product.id !== id);
+    const updatedWishlist = wishlist.filter((product) => product.id !== id);
     setWishlist(updatedWishlist);
   }
-  //  Total price show 
+  //  Total price show
   function calculateTotalPrice() {
-    return wishlist.reduce((total, product) => total + (product.price * product.quantity), 0);
+    return wishlist.reduce(
+      (total, product) => total + product.price * product.quantity,
+      0
+    );
   }
-  //selected category click function 
+  //selected category click function
   const handleButtonClick = (category) => {
     setActiveButton(category.name);
     console.log("Category ID:", category.id);
 
-    const filteredProducts = products.filter(product => {
+    const filteredProducts = products.filter((product) => {
       return product.catagory === category.id;
     });
     setSelectedProduct(filteredProducts);
 
     console.log("Filtered Products:", filteredProducts);
-
   };
 
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  bg-slate-100">
-        <div className="md:col-span-2 px-5 ">
+        <div className="col-span-2 px-5 ">
           {/* subscription section start */}
           {/* <div className="flex justify-between items-center h-32 titleCon p-5 rounded-2xl opacity-90">
             <div>
@@ -342,15 +339,23 @@ const Home = () => {
               {/* categories  */}
               <div className="flex gap-2 items-center flex-wrap">
                 <button
-                  className={activeButton === 'All' ? "category-button category-button-selected px-5 py-2 font-bold" : "category-button  px-5 py-2 bg-white text-black font-bold  rounded-full"}
-                  onClick={() => handleButtonClick({ id: null, name: 'All' })}
+                  className={
+                    activeButton === "All"
+                      ? "category-button category-button-selected px-5 py-2 font-bold"
+                      : "category-button  px-5 py-2 bg-white text-black font-bold  rounded-full"
+                  }
+                  onClick={() => handleButtonClick({ id: null, name: "All" })}
                 >
                   All
                 </button>
                 {categories.slice(0, 7).map((category) => (
                   <button
                     key={category.id}
-                    className={activeButton === category.name ? "category-button category-button-selected px-5 py-2 font-bold" : "category-button  px-5 py-2 bg-white text-black font-bold  rounded-full"}
+                    className={
+                      activeButton === category.name
+                        ? "category-button category-button-selected px-5 py-2 font-bold"
+                        : "category-button  px-5 py-2 bg-white text-black font-bold  rounded-full"
+                    }
                     onClick={() => handleButtonClick(category)}
                   >
                     {category.name}
@@ -362,7 +367,10 @@ const Home = () => {
               <div className="mt-5">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   {/* Item 1  */}
-                  {(selectedProduct.length > 0 ? selectedProduct : products).map((product) => (
+                  {(selectedProduct.length > 0
+                    ? selectedProduct
+                    : products
+                  ).map((product) => (
                     <div
                       className=" bg-base-100 shadow-xl p-3 rounded-md"
                       key={product.id}
@@ -378,9 +386,7 @@ const Home = () => {
                           </figure>
                         </div>
                         <div className="w-[65%]">
-                          <h2 className="text-xl font-bold">
-                            {product.name}
-                          </h2>
+                          <h2 className="text-xl font-bold">{product.name}</h2>
                           <p className="text-xs">{product.description}</p>
                           <ul className="flex items-center gap-32 mt-2">
                             <li>
@@ -410,15 +416,15 @@ const Home = () => {
                         </div>
                         <div className="w-[65%] ">
                           <ul className="flex justify-between items-center bg-slate-200 py-1 px-3 rounded-2xl">
-                            <li>
+                            <li className="flex items-center">
                               <button
                                 onClick={() => decreaseQuantity(product.id)}
                               >
                                 <FaCircleMinus className="text-white text-xl"></FaCircleMinus>
                               </button>
                             </li>
-                            <li>{product.quantity}</li>
-                            <li>
+                            <li><input type="number" className="p-1 w-16 rounded-full text-center" value={1}  /></li>
+                            <li className="flex items-center">
                               <button
                                 onClick={() => updateQuantity(product.id)}
                                 className="m-0 p-0"
@@ -430,7 +436,7 @@ const Home = () => {
                         </div>
                         <button
                           onClick={() => cardData(product)}
-                          className="btn bg-green-500 py-[2px] px-3"
+                          className=" bg-green-500 py-2 font-bold rounded-full px-7 text-white"
                         >
                           Add
                         </button>
@@ -446,7 +452,10 @@ const Home = () => {
         </div>
 
         {/* wishlist add to card  */}
-        <div className="hidden lg:block md:col-span-1 p-4 bg-white " style={{ height: '100vh' }} >
+        <div
+          className="hidden lg:block  p-4 bg-white h-full "
+         
+        >
           <div className="flex justify-between ">
             <h3 className="text-xl text-black font-medium">wishlist</h3>
             <p className="text-xl font-bold text-black">
@@ -477,10 +486,7 @@ const Home = () => {
             {wishlist.length === 0 ? (
               <div>
                 <p className="text-center">You have no products</p>
-                <img className="w-full p-4" src="https://icon-library.com/images/new-item-icon/new-item-icon-19.jpg" alt="" />
-
               </div>
-
             ) : (
               <div className=" max-w-none h-auto ">
                 {wishlist.map((item) => (
@@ -498,7 +504,9 @@ const Home = () => {
                     <div className="w-3/4  ">
                       <p className="flex justify-between items-center">
                         <h4 className="font-bold">{item.name}</h4>{" "}
-                        <button onClick={() => removeWishList(item.id)}><MdDelete className="inline-block border-2 text-3xl p-1 rounded-lg shadow bg-white text-red-500" /></button>
+                        <button onClick={() => removeWishList(item.id)}>
+                          <MdDelete className="inline-block border-2 text-3xl p-1 rounded-lg shadow bg-white text-red-500" />
+                        </button>
                       </p>
                       <p className="flex justify-between items-center mt-7">
                         <h4 className="font-bold">
@@ -531,11 +539,8 @@ const Home = () => {
           <div className="mt-5 ">
             <h2 className="text-2xl font-semibold mt-3">Summary</h2>
             <p className="flex justify-between mt-3 text-sm">
-              <span>Subtotal</span> <span className="font-bold">
-                ${
-                  calculateTotalPrice()
-                }
-              </span>
+              <span>Subtotal</span>{" "}
+              <span className="font-bold">${calculateTotalPrice()}</span>
             </p>
             <p className="flex justify-between mt-3 text-sm">
               <span>Discount</span> <span className="font-bold">$ 2.00</span>
@@ -553,8 +558,9 @@ const Home = () => {
 
       {/* mobile wishlist  */}
       <div
-        className={`block md:hidden case-in duration-500 w-full h-full fixed top-16 pt-10 bottom-0 z-30 overflow-auto touch-auto bg-slate-200 ${open ? "right-2" : "-right-[800px]"
-          }`}
+        className={`block md:hidden case-in duration-500 w-full h-full fixed top-16 pt-10 bottom-0 z-30 overflow-auto touch-auto bg-slate-200 ${
+          open ? "right-2" : "-right-[800px]"
+        }`}
       >
         <div className="fixed top-64 -right-6 z-10">
           {open && open ? (
@@ -579,7 +585,10 @@ const Home = () => {
         <div className="pl-12">
           <div className=" top-20 p-2 ">
             {/* table section start */}
-            <div className=" md:col-span-1 p-4 bg-white rounded-xl mb-14">
+            <div
+              className=" lg:hidden md:col-span-1 p-4 bg-white "
+              
+            >
               <div className="flex justify-between ">
                 <h3 className="text-xl text-black font-medium">wishlist</h3>
                 <p className="text-xl font-bold text-black">
@@ -609,50 +618,66 @@ const Home = () => {
               </div>
               <div className="border-b-2 my-5"></div>
               <div className="w-full h-52 overflow-auto touch-auto">
-                <div className=" max-w-none h-auto ">
-                  {wishlist.map((item) => (
-                    <div
-                      key={item.id}
-                      className="flex gap-5 mt-5 max-w-none h-auto p-2"
-                    >
-                      <div className="w-1/4 p-2 bg-slate-100 rounded-lg">
-                        <img
-                          src="https://media.istockphoto.com/id/1304186549/vector/automatic-spring-ballpoint-pen-in-black-case-vector-illustration.jpg?s=612x612&w=0&k=20&c=R_yPawneqKX8J-NeiKmNXuYx36tCoPSCFEHx0Bd4dEg="
-                          alt=""
-                          className="w-3/4 mx-auto "
-                        />
-                      </div>
-                      <div className="w-3/4  ">
-                        <p className="flex justify-between items-center">
-                          <h4 className="font-bold">{item.name}</h4>{" "}
-                          <CiEdit className="inline-block border-2 text-3xl p-1 rounded-lg shadow-inner bg-white" />
-                        </p>
-                        <p className="flex justify-between items-center mt-7">
-                          <h4 className="font-bold">
-                            <span className="text-green-500">$</span>
-                            {item.price * item.quantity}
-                          </h4>
-                          <span className="bg-white border-2 shadow-inner rounded-full flex px-1 gap-2 items-center">
-                            <GrSubtractCircle className="text-red-500 cursor-pointer" />
-                            {item.quantity}
-                            <button
-                              onClick={() => updateQuantity(item.id)}
-                              className="m-0 p-0"
-                            >
-                              <FaCirclePlus className="text-green-600 text-xl"></FaCirclePlus>
+                {wishlist.length === 0 ? (
+                  <div>
+                    <p className="text-center">You have no products</p>
+                  </div>
+                ) : (
+                  <div className=" max-w-none h-auto ">
+                    {wishlist.map((item) => (
+                      <div
+                        key={item.id}
+                        className="flex gap-5 mt-5 max-w-none h-auto p-2 shadow"
+                      >
+                        <div className="w-1/4 p-2 bg-slate-100 rounded-lg">
+                          <img
+                            src="https://media.istockphoto.com/id/1304186549/vector/automatic-spring-ballpoint-pen-in-black-case-vector-illustration.jpg?s=612x612&w=0&k=20&c=R_yPawneqKX8J-NeiKmNXuYx36tCoPSCFEHx0Bd4dEg="
+                            alt=""
+                            className="w-3/4 mx-auto "
+                          />
+                        </div>
+                        <div className="w-3/4  ">
+                          <p className="flex justify-between items-center">
+                            <h4 className="font-bold">{item.name}</h4>{" "}
+                            <button onClick={() => removeWishList(item.id)}>
+                              <MdDelete className="inline-block border-2 text-3xl p-1 rounded-lg shadow bg-white text-red-500" />
                             </button>
-                          </span>
-                        </p>
+                          </p>
+                          <p className="flex justify-between items-center mt-7">
+                            <h4 className="font-bold">
+                              <span className="text-green-500">$</span>
+                              {item.price * item.quantity}
+                            </h4>
+                            <span className="bg-white border-2 shadow-inner rounded-full flex px-1 gap-2 items-center">
+                              <button
+                                onClick={() =>
+                                  decreaseWishlistQuantity(item.id)
+                                }
+                                className="m-0 p-0"
+                              >
+                                <GrSubtractCircle className="text-red-500 cursor-pointer" />
+                              </button>
+
+                              {item.quantity}
+                              <button
+                                onClick={() => updateWishlistQuantity(item.id)}
+                                className="m-0 p-0"
+                              >
+                                <FaCirclePlus className="text-green-600 text-xl"></FaCirclePlus>
+                              </button>
+                            </span>
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                )}
               </div>
               <div className="mt-5 ">
                 <h2 className="text-2xl font-semibold mt-3">Summary</h2>
                 <p className="flex justify-between mt-3 text-sm">
                   <span>Subtotal</span>{" "}
-                  <span className="font-bold">$ 12.00</span>
+                  <span className="font-bold">${calculateTotalPrice()}</span>
                 </p>
                 <p className="flex justify-between mt-3 text-sm">
                   <span>Discount</span>{" "}
@@ -660,7 +685,7 @@ const Home = () => {
                 </p>
                 <p className="border-b-2 border-dashed mt-2"></p>
                 <p className="flex justify-between mt-3 font-bold">
-                  <span>Total</span> <span>$ 10.00</span>
+                  <span>Total</span> <span>$ {calculateTotalPrice()}</span>
                 </p>
               </div>
               <div className="mt-5">
@@ -694,7 +719,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-
     </>
   );
 };
