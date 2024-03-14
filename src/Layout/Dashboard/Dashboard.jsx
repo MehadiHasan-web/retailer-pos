@@ -10,11 +10,11 @@ const DashBoard = () => {
     <div>
       {/* main content section start */}
       <div className="flex">
-        <div className="lg:w-[13%] hidden  lg:block">
+        <div className="lg:w-[13%] hidden  lg:block ">
           <DesktopSidebar></DesktopSidebar>
         </div>
-        <div className="w-full lg:w-[87%]">
-        <Navbar></Navbar>
+        <div className="w-full lg:w-[87%] bg-slate-100">
+          <Navbar></Navbar>
           <Outlet></Outlet>
         </div>
       </div>
