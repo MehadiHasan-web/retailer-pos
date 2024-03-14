@@ -5,18 +5,18 @@ import { HiOutlineBell } from "react-icons/hi2";
 function Navbar() {
   const navigate = useNavigate();
 
-  
+
 
 
   const logout = () => {
     localStorage.removeItem("token");
-    
+
     navigate("/login");
   };
 
   return (
     <>
-      <div className="navbar bg-base-100 shadow-sm sticky top-0 z-10 hidden">
+      <div className="navbar bg-base-100 shadow-sm sticky top-0 z-10 ">
         <div className="navbar-start block md:hidden">
           {/* sidebar  */}
           <Sidebar></Sidebar>
