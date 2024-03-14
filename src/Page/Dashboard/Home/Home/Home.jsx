@@ -21,6 +21,21 @@ import { MdDelete } from "react-icons/md";
 import axios from "axios";
 import Form from "../Form/Form";
 
+// swiper slider functionality
+// import { Swiper, SwiperSlide } from 'swiper/react';
+// import 'swiper/css';
+// import 'swiper/css/pagination';
+// import 'swiper/css/navigation';
+// import { Navigation } from 'swiper/modules';
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { Navigation, Pagination } from 'swiper/modules';
+
+
+
 const Home = () => {
   const [products, setProducts] = useState([]);
   const { baseURL } = useContext(AuthContext);
@@ -337,7 +352,7 @@ const Home = () => {
             {/* products  list*/}
             <div className="mt-4">
               {/* categories  */}
-              <div className="flex gap-2 items-center flex-wrap">
+              <div className="flex gap-2 items-center">
                 <button
                   className={
                     activeButton === "All"
@@ -348,9 +363,19 @@ const Home = () => {
                 >
                   All
                 </button>
-                {categories.slice(0, 7).map((category) => (
+                {/* <Swiper
+                  slidesPerView={6}
+                  spaceBetween={30}
+                  loop={true}
+                  // pagination={{
+                  //   clickable: true,
+                  // }}
+                  navigation={true}
+                  modules={[ Navigation]}
+                  className="mySwiper">
+                  {categories.map((category) => (
+                  <SwiperSlide key={category.id}>
                   <button
-                    key={category.id}
                     className={
                       activeButton === category.name
                         ? "category-button category-button-selected px-5 py-2 font-bold"
@@ -360,7 +385,43 @@ const Home = () => {
                   >
                     {category.name}
                   </button>
+                  </SwiperSlide>
                 ))}
+                </Swiper> */}
+                <Swiper
+                  slidesPerView={6}
+                  spaceBetween={30}
+                  loop={true}
+                  navigation={true}
+                  modules={[Navigation, Pagination]}
+                  className="mySwiper text-center"
+                  breakpoints={{
+                    768: {
+                      slidesPerView: 4,
+                    },
+                    640: {
+                      slidesPerView: 3,
+                    },
+                    320: {
+                      slidesPerView: 1,
+                    },
+                  }}
+                >
+                  {categories.map((category) => (
+                    <SwiperSlide key={category.id}>
+                      <button
+                        className={
+                          activeButton === category.name
+                            ? "category-button category-button-selected px-5 py-2 font-bold"
+                            : "category-button  px-5 py-2 bg-white text-black font-bold  rounded-full"
+                        }
+                        onClick={() => handleButtonClick(category)}
+                      >
+                        {category.name}
+                      </button>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
               </div>
               {/* categories end */}
               {/* products  */}
@@ -445,7 +506,6 @@ const Home = () => {
                   ))}
                 </div>
               </div>
-
               {/* products end */}
             </div>
           </div>
