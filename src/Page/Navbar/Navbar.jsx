@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import Sidebar from "./../Sidebar/Sidebar";
-import { TbScan } from "react-icons/tb";
 import { HiOutlineBell } from "react-icons/hi2";
+import { SlNote } from "react-icons/sl";
 function Navbar() {
   const navigate = useNavigate();
 
@@ -16,18 +16,14 @@ function Navbar() {
 
   return (
     <>
-      <div className="navbar bg-base-100 shadow-sm sticky top-0 z-10 ">
-        <div className="navbar-start block md:hidden">
+      <div className="navbar bg-base-100 shadow-sm sticky top-0 z-10 justify-between">
+        <div className="navbar-start block lg:hidden">
           {/* sidebar  */}
           <Sidebar></Sidebar>
         </div>
         <div className="navbar-center">
-          <ul>
-            <li className="lg:text-xl font-semibold">Apotek Pelita Sehat</li>
-            <li className="lg:text-xs text-gray-500">Tuesday, 13 June 2024</li>
-          </ul>
-          <label className="input focus-within:outline-none focus-visible:border-none w-96 rounded-2xl flex items-center gap-2 mx-5 bg-slate-200 ">
-            <svg
+          <label className="input focus-within:outline-none focus-visible:border-none w-32 md:w-64 lg:w-96 rounded-2xl flex items-center gap-2 mx-5 bg-slate-200 ">
+          <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
               fill="currentColor"
@@ -41,31 +37,14 @@ function Navbar() {
             </svg>
             <input
               type="text"
-              className="grow bg-slate-200 text-black"
+              className=" bg-slate-200 text-black w-full "
               placeholder="search medicine"
             />
           </label>
-          <ul className="flex items-center gap-3">
-            {/* <li><div className="timeline-end timeline-box flex items-center gap-2 font-semibold"><SlNote></SlNote><span className='text-sm'>User Voucher</span></div></li> */}
-            <li>
-              <div className="timeline-end timeline-box flex items-center gap-2 font-semibold">
-                <TbScan className="text-xl"></TbScan>
-                <span className="text-sm hidden lg:hidden">Scan Prescription</span>
-              </div>
-            </li>
-            <li>
-              <div className="timeline-end timeline-box flex items-center gap-2">
-                <div className="avatar online placeholder">
-                  <div className=" text-neutral-content">
-                    <HiOutlineBell className="text-2xl"></HiOutlineBell>
-                  </div>
-                </div>
-              </div>
-            </li>
-          </ul>
+          
           {/* <Link to="/" className="btn btn-ghost text-xl">NTRCA Store </Link> */}
         </div>
-        <div className="navbar-end flex items-center">
+        <div className="navbar-end flex items-center grow gap-5">
           {/* <div className="dropdown dropdown-end">
       <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
         <div className="  ">
@@ -78,6 +57,18 @@ function Navbar() {
         <li><Link onClick={logout}>Logout</Link></li>
       </ul>
     </div> */}
+    <ul className="flex items-center gap-3">
+            <li className="hidden md:block"><div className="timeline-end timeline-box flex items-center gap-2 font-semibold"><SlNote></SlNote><span className='text-sm hidden lg:block'>User Voucher</span></div></li>
+            {/* <li>
+              <div className="timeline-end timeline-box flex items-center gap-2 font-semibold">
+                <TbScan className="text-xl"></TbScan>
+                <span className="text-sm hidden lg:bl">Scan Prescription</span>
+              </div>
+            </li> */}
+            <li className="text-xl opacity-80 cursor-pointer">
+            <HiOutlineBell className="text-2xl"></HiOutlineBell>
+            </li>
+          </ul>
           <div className="avatar">
             <div className="w-10 rounded-full">
               <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />

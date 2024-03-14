@@ -424,7 +424,7 @@ const Home = () => {
                       key={product.id}
                     >
                       <div className="flex justify-between items-center">
-                        <div className="w-[35%]">
+                        <div className="w-1/4">
                           <figure>
                             <img
                               className="w-60 h-40"
@@ -433,10 +433,10 @@ const Home = () => {
                             />
                           </figure>
                         </div>
-                        <div className="w-[65%]">
+                        <div className="w-3/4">
                           <h2 className="text-xl font-bold">{product.name}</h2>
                           <p className="text-xs">{product.description}</p>
-                          <ul className="flex items-center gap-32 mt-2">
+                          <ul className="flex items-center justify-between mt-2">
                             <li>
                               <p className="text-sm">Netto</p>
                               <p className="text-base font-bold">
