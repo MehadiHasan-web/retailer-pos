@@ -423,7 +423,7 @@ const Home = () => {
                                 <FaCircleMinus className="text-white text-xl"></FaCircleMinus>
                               </button>
                             </li>
-                            <li><input type="number" className="p-1 w-16 rounded-full text-center" value={1}  /></li>
+                            <li><input type="number" className="p-1 w-16 rounded-full text-center  shadow-inner  border-[1px] border-slate-400" value={1}  /></li>
                             <li className="flex items-center">
                               <button
                                 onClick={() => updateQuantity(product.id)}
