@@ -65,8 +65,8 @@ function Navbar() {
                 <span className="text-sm hidden lg:bl">Scan Prescription</span>
               </div>
             </li> */}
-            <li>
-              
+            <li className="text-xl opacity-80 cursor-pointer">
+            <HiOutlineBell className="text-2xl"></HiOutlineBell>
             </li>
           </ul>
           <div className="avatar">
