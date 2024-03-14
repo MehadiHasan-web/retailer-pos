@@ -5,12 +5,12 @@ import { SlNote } from "react-icons/sl";
 function Navbar() {
   const navigate = useNavigate();
 
-  
+
 
 
   const logout = () => {
     localStorage.removeItem("token");
-    
+
     navigate("/login");
   };
 

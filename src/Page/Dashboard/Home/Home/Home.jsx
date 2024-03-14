@@ -21,6 +21,21 @@ import { MdDelete } from "react-icons/md";
 import axios from "axios";
 import Form from "../Form/Form";
 
+// swiper slider functionality
+// import { Swiper, SwiperSlide } from 'swiper/react';
+// import 'swiper/css';
+// import 'swiper/css/pagination';
+// import 'swiper/css/navigation';
+// import { Navigation } from 'swiper/modules';
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { Navigation, Pagination } from 'swiper/modules';
+
+
+
 const Home = () => {
   const [products, setProducts] = useState([]);
   const { baseURL } = useContext(AuthContext);
@@ -69,9 +84,14 @@ const Home = () => {
   }, [baseURL]);
 
   // add  to card or increment functionality
-  const cardData = (product) => {
-    const cardTableItem = wishlist.find((value) => value.id === product.id);
-    if (cardTableItem) {
+  const cardData = (product, event) => {
+    event.preventDefault();
+    const quantity = event.target.elements.quantity.value;
+    console.log(wishlist);
+
+
+    const filterItem = wishlist.find((value) => value.id === product.id);
+    if (filterItem) {
       const updatedCardTable = wishlist.map((item) =>
         item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
       );
@@ -80,8 +100,8 @@ const Home = () => {
       const newData = {
         id: product.id,
         name: product.name,
-        quantity: product.quantity,
-        price: product.price * product.quantity,
+        quantity: quantity,
+        // price: product.price * product.quantity,
       };
       setWishlist([...wishlist, newData]);
     }
@@ -337,7 +357,7 @@ const Home = () => {
             {/* products  list*/}
             <div className="mt-4">
               {/* categories  */}
-              <div className="flex gap-2 items-center flex-wrap">
+              <div className="flex gap-2 items-center">
                 <button
                   className={
                     activeButton === "All"
@@ -348,19 +368,40 @@ const Home = () => {
                 >
                   All
                 </button>
-                {categories.slice(0, 7).map((category) => (
-                  <button
-                    key={category.id}
-                    className={
-                      activeButton === category.name
-                        ? "category-button category-button-selected px-5 py-2 font-bold"
-                        : "category-button  px-5 py-2 bg-white text-black font-bold  rounded-full"
-                    }
-                    onClick={() => handleButtonClick(category)}
-                  >
-                    {category.name}
-                  </button>
-                ))}
+                <Swiper
+                  slidesPerView={6}
+                  spaceBetween={5}
+                  loop={true}
+                  navigation={true}
+                  modules={[Navigation, Pagination]}
+                  className="mySwiper text-center"
+                  breakpoints={{
+                    768: {
+                      slidesPerView: 4,
+                    },
+                    640: {
+                      slidesPerView: 3,
+                    },
+                    320: {
+                      slidesPerView: 1,
+                    },
+                  }}
+                >
+                  {categories.map((category) => (
+                    <SwiperSlide key={category.id}>
+                      <button
+                        className={
+                          activeButton === category.name
+                            ? "category-button category-button-selected px-5 py-2 font-bold"
+                            : "category-button  px-5 py-2 bg-white text-black font-bold  rounded-full"
+                        }
+                        onClick={() => handleButtonClick(category)}
+                      >
+                        {category.name}
+                      </button>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
               </div>
               {/* categories end */}
               {/* products  */}
@@ -404,8 +445,10 @@ const Home = () => {
                           </ul>
                         </div>
                       </div>
-                      <div className="flex justify-between items-center mt-2">
-                        <div className=" flex items-center justify-center">
+
+                      <form onSubmit={(event) => cardData(product, event)}>
+                        <div className="flex justify-between items-center mt-2">
+                          {/* <div className=" flex items-center justify-center">
                           <sup className="text-green-600 font-bold">$</sup>
                           <p className="text-center">
                             <span className="text-2xl font-bold">
@@ -413,39 +456,38 @@ const Home = () => {
                             </span>
                             <span className="text-gray-500">/Bottle</span>
                           </p>
-                        </div>
-                        <div className="w-[65%] ">
-                          <ul className="flex justify-between items-center bg-slate-200 py-1 px-3 rounded-2xl">
-                            <li className="flex items-center">
+                        </div> */}
+                          <div className="w-[65%] ">
+                            <ul className="flex justify-between items-center bg-slate-200 py-1 px-1 rounded-full">
+                              {/* <li className="flex items-center">
                               <button
                                 onClick={() => decreaseQuantity(product.id)}
                               >
                                 <FaCircleMinus className="text-white text-xl"></FaCircleMinus>
                               </button>
-                            </li>
-                            <li><input type="number" className="p-1 w-16 rounded-full text-center  shadow-inner  border-[1px] border-slate-400" value={1}  /></li>
-                            <li className="flex items-center">
+                            </li> */}
+                              <li className="w-full"><input name="quantity" type="number" className="p-1 w-full rounded-full text-center" min={1} max={30} required placeholder="Write Quantity" /></li>
+                              {/* <li className="flex items-center ">
                               <button
                                 onClick={() => updateQuantity(product.id)}
                                 className="m-0 p-0"
                               >
                                 <FaCirclePlus className="text-green-600 text-xl"></FaCirclePlus>
                               </button>
-                            </li>
-                          </ul>
+                            </li> */}
+                            </ul>
+                          </div>
+                          <button
+                            className=" bg-green-500 py-2 font-bold rounded-full px-7 text-white "
+                          >
+                            Add
+                          </button>
                         </div>
-                        <button
-                          onClick={() => cardData(product)}
-                          className=" bg-green-500 py-2 font-bold rounded-full px-7 text-white"
-                        >
-                          Add
-                        </button>
-                      </div>
+                      </form>
                     </div>
                   ))}
                 </div>
               </div>
-
               {/* products end */}
             </div>
           </div>
@@ -454,7 +496,7 @@ const Home = () => {
         {/* wishlist add to card  */}
         <div
           className="hidden lg:block  p-4 bg-white h-full "
-         
+
         >
           <div className="flex justify-between ">
             <h3 className="text-xl text-black font-medium">wishlist</h3>
@@ -468,7 +510,7 @@ const Home = () => {
           <div className="bg-slate-100 rounded-lg p-4 w-full h-32 overflow-auto touch-auto">
             <ul className=" max-w-none h-auto">
               <li className="text-sm text-slate-400 flex justify-between">
-                <h5>Name</h5> <span>Amount</span>
+                <h5>Name</h5> <span>Quantity</span>
               </li>
               {wishlist.map((item) => (
                 <li
@@ -476,7 +518,7 @@ const Home = () => {
                   className="font-bold flex justify-between mt-2"
                 >
                   <h5>{item.name}</h5>{" "}
-                  <span className="text-slate-500 text-sm">${item.price}</span>
+                  <span className="text-slate-500 text-sm">{item.quantity}</span>
                 </li>
               ))}
             </ul>
@@ -485,7 +527,7 @@ const Home = () => {
           <div className="w-full h-52 overflow-auto touch-auto">
             {wishlist.length === 0 ? (
               <div>
-                <p className="text-center">You have no products</p>
+                <h2 className="text-center font-bold">No Products Found</h2>
               </div>
             ) : (
               <div className=" max-w-none h-auto ">
@@ -504,15 +546,15 @@ const Home = () => {
                     <div className="w-3/4  ">
                       <p className="flex justify-between items-center">
                         <h4 className="font-bold">{item.name}</h4>{" "}
-                        <button onClick={() => removeWishList(item.id)}>
+                        {/* <button onClick={() => removeWishList(item.id)}>
                           <MdDelete className="inline-block border-2 text-3xl p-1 rounded-lg shadow bg-white text-red-500" />
-                        </button>
+                        </button> */}
                       </p>
-                      <p className="flex justify-between items-center mt-7">
-                        <h4 className="font-bold">
+                      <div className="flex justify-between items-center mt-7">
+                        {/* <h4 className="font-bold">
                           <span className="text-green-500">$</span>
                           {item.price * item.quantity}
-                        </h4>
+                        </h4> */}
                         <span className="bg-white border-2 shadow-inner rounded-full flex px-1 gap-2 items-center">
                           <button
                             onClick={() => decreaseWishlistQuantity(item.id)}
@@ -529,7 +571,10 @@ const Home = () => {
                             <FaCirclePlus className="text-green-600 text-xl"></FaCirclePlus>
                           </button>
                         </span>
-                      </p>
+                        <button onClick={() => removeWishList(item.id)}>
+                          <MdDelete className="inline-block border-2 text-3xl p-1 rounded-lg shadow bg-white text-red-500" />
+                        </button>
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -558,9 +603,8 @@ const Home = () => {
 
       {/* mobile wishlist  */}
       <div
-        className={`block md:hidden case-in duration-500 w-full h-full fixed top-16 pt-10 bottom-0 z-30 overflow-auto touch-auto bg-slate-200 ${
-          open ? "right-2" : "-right-[800px]"
-        }`}
+        className={`block md:hidden case-in duration-500 w-full h-full fixed top-16 pt-10 bottom-0 z-30 overflow-auto touch-auto bg-slate-200 ${open ? "right-2" : "-right-[800px]"
+          }`}
       >
         <div className="fixed top-64 -right-6 z-10">
           {open && open ? (
@@ -587,7 +631,7 @@ const Home = () => {
             {/* table section start */}
             <div
               className=" lg:hidden md:col-span-1 p-4 bg-white "
-              
+
             >
               <div className="flex justify-between ">
                 <h3 className="text-xl text-black font-medium">wishlist</h3>
