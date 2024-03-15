@@ -87,6 +87,7 @@ const DesktopSidebar = () => {
             </span>
           </Link>
         </li>
+        
         {adminAndManager && (
           <>
             {is_manager && (
@@ -110,6 +111,17 @@ const DesktopSidebar = () => {
             </Link>
           </li>
         )}
+        <li>
+          <Link
+            className="flex justify-start items-center gap-2"
+            to="/practice"
+          >
+            <IoPersonCircleSharp className="text-green-500"></IoPersonCircleSharp>
+            <span className="lg:text-xs font-semibold text-slate-200">
+              Practice
+            </span>
+          </Link>
+        </li>
       </ul>
     </div>
   );
