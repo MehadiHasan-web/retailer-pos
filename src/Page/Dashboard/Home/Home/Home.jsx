@@ -454,7 +454,7 @@ const Home = () => {
                       </div>
 
                       <form onSubmit={(event) => cardData(product, event)}>
-                        <div className="flex justify-between items-center mt-2">
+                        <div className="flex justify-between items-center mt-2 gap-4">
                           {/* <div className=" flex items-center justify-center">
                           <sup className="text-green-600 font-bold">$</sup>
                           <p className="text-center">
@@ -464,8 +464,8 @@ const Home = () => {
                             <span className="text-gray-500">/Bottle</span>
                           </p>
                         </div> */}
-                          <div className="w-[65%] ">
-                            <ul className="flex justify-between items-center bg-slate-200 py-1 px-1 rounded-full">
+                          <div className="w-full">
+                            <ul className="flex justify-between items-center bg-slate-200 py-1 px-1 rounded-full w-full">
                               {/* <li className="flex items-center">
                               <button
                                 onClick={() => decreaseQuantity(product.id)}
@@ -485,7 +485,7 @@ const Home = () => {
                             </ul>
                           </div>
                           <button
-                            className=" bg-green-500 py-2 font-bold rounded-full px-7 text-white "
+                            className=" bg-green-500 py-2 font-bold rounded-full w-2/4 text-white "
                           >
                             Add
                           </button>
@@ -610,7 +610,7 @@ const Home = () => {
 
       {/* mobile wishlist  */}
       <div
-        className={`block md:hidden case-in duration-500 w-full h-full fixed top-16 pt-10 bottom-0 z-30 overflow-auto touch-auto bg-slate-200 ${open ? "right-2" : "-right-[800px]"
+        className={`block lg:hidden case-in duration-500 w-full h-full fixed top-16 pt-10 bottom-0 z-30 overflow-auto touch-auto bg-slate-200 pb-20 ${open ? "right-2" : "-right-[800px]"
           }`}
       >
         <div className="fixed top-64 -right-6 z-10">

@@ -1,18 +1,9 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import Sidebar from "./../Sidebar/Sidebar";
 import { HiOutlineBell } from "react-icons/hi2";
 import { SlNote } from "react-icons/sl";
 function Navbar() {
-  const navigate = useNavigate();
-
-
-
-
-  const logout = () => {
-    localStorage.removeItem("token");
-
-    navigate("/login");
-  };
+  
 
   return (
     <>
@@ -83,11 +74,6 @@ function Navbar() {
                     <li>pharmacist</li>
                   </ul>
                 </summary>
-                <ul>
-                  <li>
-                    <Link onClick={logout}>Logout</Link>
-                  </li>
-                </ul>
               </details>
             </li>
           </ul>

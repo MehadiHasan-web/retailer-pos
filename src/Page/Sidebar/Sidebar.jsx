@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import ManageInventory from "../ManageInventory/ManageInventory";
 import PurchaseManagement from "../PurchaseManagement/PurchaseManagement";
-import { FaPlusSquare } from "react-icons/fa";
+import { FaPlusSquare, FaPowerOff } from "react-icons/fa";
 import { MdDashboard, MdSettingsApplications } from "react-icons/md";
 import { GoHomeFill } from "react-icons/go";
 import { IoPersonCircleSharp } from "react-icons/io5";
@@ -16,6 +16,16 @@ const Sidebar = () => {
   const is_admin = localStorage.getItem('is_admin') === 'true';
 
   const adminAndManager = isApprover || is_manager;
+  const navigate = useNavigate();
+
+
+
+
+  const logout = () => {
+    localStorage.removeItem("token");
+
+    navigate("/login");
+  };
 
   return (
     <>
@@ -47,7 +57,7 @@ const Sidebar = () => {
               </li>
             </ul>
             <div className="border-[1px] border-x-slate-50 my-5"></div>
-            <ul className="mt-5 space-y-5">
+            <ul className="mt-5 space-y-5 relative">
               <li className="text-sm text-gray-500">Title heading</li>
               <li >
                 <Link className="flex justify-start items-center gap-2" to="/dashboard"><MdDashboard className="text-green-500"></MdDashboard>
@@ -91,8 +101,9 @@ const Sidebar = () => {
                     <span className="lg:text-sm font-semibold text-slate-200">Create User</span></Link>
                 </li>
               }
+              
             </ul >
-
+            <li className="absolute bottom-0 text-white left-[35%] mb-5 flex gap-2 items-center">  <Link onClick={logout}><FaPowerOff className="text-green-500"/> Logout </Link></li>
           </ul >
 
         </div >

@@ -1,5 +1,5 @@
-import { FaPlusSquare } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { FaPlusSquare, FaPowerOff } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
 import PurchaseManagement from "./../PurchaseManagement/PurchaseManagement";
 import ManageInventory from "../ManageInventory/ManageInventory";
 import { MdDashboard, MdSettingsApplications } from "react-icons/md";
@@ -12,6 +12,16 @@ const DesktopSidebar = () => {
   const is_admin = localStorage.getItem("is_admin") === "true";
 
   const adminAndManager = isApprover || is_manager;
+  const navigate = useNavigate();
+
+
+
+
+  const logout = () => {
+    localStorage.removeItem("token");
+
+    navigate("/login");
+  };
 
   return (
     <div className="w-full bg-[#1E1E1E] sticky top-0 p-2 " style={{ height: '100vh' }}>
@@ -123,6 +133,7 @@ const DesktopSidebar = () => {
           </Link>
         </li>
       </ul>
+      <button className="absolute bottom-0 text-white left-[30%] xl:left[25%] mb-5 ">  <Link onClick={logout} className="flex gap-2 items-center"><FaPowerOff className="text-green-500"/> Logout </Link></button>
     </div>
   );
 };
