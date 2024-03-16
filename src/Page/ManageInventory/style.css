@@ -24,3 +24,8 @@
 .collapse-title {
   min-height: 0;
 }
+.navlink input[type="checkbox"]{
+  padding: 0rem;
+  padding-inline-end: 0rem;
+   min-height: 0rem;
+  }

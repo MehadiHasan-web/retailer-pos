@@ -79,15 +79,15 @@ const PurchaseManagement = () => {
     </Menu> */}
     <div className="collapse navlink p-0 ">
       <input type="checkbox" />
-      <div className="collapse-title flex gap-10">
+      <div className="collapse-title flex gap-10 text-white lg:text-xs">
         Purchase Management
         <ChevronDownIcon
-            className="h-5 w-5 text-gray-400"
+            className="h-5 w-5 text-green-500"
             aria-hidden="true"
           />
       </div>
-      <div className="collapse-content p-0 w-full">
-        <ul >
+      <div className="collapse-content p-0 w-full text-white lg:text-xs">
+        <ul className="space-y-2">
             <li><NavLink to="/purchaseManagement/purchaseRequest" className="block">Purchase Request</NavLink></li>
             <li><NavLink to="/purchaseManagement/purchaseRequestHistory" className="block">Purchase Request History</NavLink></li>
             

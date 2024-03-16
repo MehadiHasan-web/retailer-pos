@@ -9,21 +9,21 @@ const ManageInventory = () => {
   return (
     <div className="collapse navlink p-0 ">
       <input type="checkbox" />
-      <div className="collapse-title flex gap-10">
+      <div className="collapse-title flex gap-10 text-white lg:text-xs">
         Inventory Management
         <ChevronDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
       </div>
-      <div className="collapse-content p-0 h-64">
-        <ul>
+      <div className="collapse-content p-0   h-44  text-white lg:text-xs">
+        <ul className="space-y-2">
           <li>
-            <div className="dropdown block">
+            <div className="dropdown block ">
               <div tabIndex={0} role="button" className="flex gap-10 ">
                 Manage Inventory
                 <ChevronDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
               </div>
               <ul
                 tabIndex={0}
-                className="dropdown-content z-[1] menu p-2 shadow bg-base-300 rounded-box  w-full "
+                className="dropdown-content  z-40 menu p-2 shadow bg-black rounded-box  w-full lg:text-xs "
               >
                 <li>
                   <NavLink to="/manageInventory/category" >
