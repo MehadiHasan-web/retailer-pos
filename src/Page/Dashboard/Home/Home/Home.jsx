@@ -397,13 +397,13 @@ const Home = () => {
 
         >
           <div className="flex justify-between ">
-            <h3 className="text-xl text-black font-medium">wishlist</h3>
+            <h3 className="text-xl text-black font-medium">Whitelist</h3>
             <p className="text-xl font-bold text-black">
               A1<span className="text-slate-100">#12910</span>
             </p>
           </div>
           <p className="text-bold font-medium my-2">
-            Detail Prescription <span className="text-green-500">3</span>
+            Detail Prescription <span className="text-green-500">{wishlist.length}</span>
           </p>
           <div className="bg-slate-100 rounded-lg p-4 w-full h-32 overflow-auto touch-auto">
             <ul className=" max-w-none h-auto">
@@ -532,13 +532,13 @@ const Home = () => {
 
             >
               <div className="flex justify-between ">
-                <h3 className="text-xl text-black font-medium">wishlist</h3>
+                <h3 className="text-xl text-black font-medium">Whitelist</h3>
                 <p className="text-xl font-bold text-black">
                   A1<span className="text-slate-100">#12910</span>
                 </p>
               </div>
               <p className="text-bold font-medium my-2">
-                Detail Prescription <span className="text-green-500">3</span>
+                Detail Prescription <span className="text-green-500">{wishlist.length}</span>
               </p>
               <div className="bg-slate-100 rounded-lg p-4 w-full h-32 overflow-auto touch-auto">
                 <ul className=" max-w-none h-auto">
