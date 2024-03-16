@@ -613,7 +613,7 @@ const Home = () => {
         className={`block lg:hidden case-in duration-500 w-full h-full fixed top-16 pt-10 bottom-0 z-30 overflow-auto touch-auto bg-slate-200 pb-20 ${open ? "right-2" : "-right-[800px]"
           }`}
       >
-        <div className="fixed top-64 -right-6 z-10">
+        <div className="fixed top-2/4 -right-6 z-10">
           {open && open ? (
             <span
               className="hidden"
@@ -744,7 +744,7 @@ const Home = () => {
               </div>
             </div>
             {/* table section end */}
-            <div className="absolute top-44 -left-4 z-10">
+            <div className="fixed top-2/4 -left-4 z-10">
               {open && open ? (
                 <span
                   onClick={() => {

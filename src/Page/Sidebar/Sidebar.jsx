@@ -29,18 +29,18 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className="drawer " >
+      <div className="drawer z-30 " >
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content">
+        <div className="drawer-content z-30">
           {/* Page content here */}
           <label htmlFor="my-drawer" className="btn btn-ghost btn-circle drawer-button">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
           </label>
         </div>
-        <div className="drawer-side z-10">
+        <div className="drawer-side z-30">
           <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
-          <ul className="menu p-4 w-80 min-h-full bg-[#1E1E1E] text-base-content">
-            <ul className="flex justify-center items-center gap-2 mt-5">
+          <ul className="menu p-4 w-80 min-h-full bg-[#1E1E1E] text-base-content z-30">
+            <ul className="flex justify-center items-center gap-2 mt-5 ">
               <li><FaPlusSquare className="text-green-500"></FaPlusSquare></li>
               <li className="lg:text-xl font-semibold text-slate-200">MedKitPOS</li>
               <li className="bg-slate">
