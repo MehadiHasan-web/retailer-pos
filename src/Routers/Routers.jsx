@@ -21,6 +21,7 @@ import ErrorPage from "../Page/ErrorPage/ErrorPage";
 import AllUserInventory from "../Page/AllUserInventory/AllUserInventory";
 import UserInventory from "../Page/UserInventory/UserInventory";
 import HomeExtra from './../Page/Dashboard/Home/Home/HomeExtra';
+import Practice from "../Page/Practice/Practice";
 
 
 const router = createBrowserRouter([
@@ -111,6 +112,10 @@ const router = createBrowserRouter([
       {
         path : '/homeExtra',
         element : <HomeExtra></HomeExtra>
+      },
+      {
+        path : '/practice',
+        element : <Practice></Practice>
       }
     ]
   },
