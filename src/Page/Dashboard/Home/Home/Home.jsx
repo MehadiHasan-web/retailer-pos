@@ -3,7 +3,7 @@ import "./Home.css";
 import { MdOutlineWatchLater } from "react-icons/md";
 import { GoDotFill } from "react-icons/go";
 import { IoPerson } from "react-icons/io5";
-import logo from "../../../../../public/logo.png";
+
 import {
   FaChevronLeft,
   FaChevronRight,
@@ -33,6 +33,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Navigation, Pagination } from 'swiper/modules';
+import WaitingList from "./WaitingList";
 
 
 
@@ -241,117 +242,7 @@ const Home = () => {
           </div> */}
           {/* subscription section end */}
           {/* waiting list section start */}
-          <div className="my-5">
-            <ul className="flex justify-between items-center">
-              <li className="text-2xl font-semibold">Waiting List</li>
-              <li className="text-lg font-bold text-green-500 border-b-green-500 border-b-2">
-                See all
-              </li>
-            </ul>
-            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">
-              {/* item 1 */}
-              <div className="card card-side bg-base-100 shadow-xl">
-                <figure className="p-3">
-                  <img src={logo} alt="Movie" className="rounded w-20 h-20" />
-                </figure>
-                <div className="card-body p-2">
-                  <ul className="bg-black p-1 rounded-lg flex justify-between items-center">
-                    <li>
-                      <GoDotFill className="text-green-500 text-sm"></GoDotFill>
-                    </li>
-                    <li>
-                      <span className="text-white text-sm">#1234</span>
-                    </li>
-                  </ul>
-                  <ul>
-                    <li className="flex gap-5 items-center">
-                      <span>
-                        <IoPerson className="text-sm"></IoPerson>
-                      </span>
-                      <span className="text-lg font-semibold">Yuda Rahmat</span>
-                    </li>
-                    <li className="flex gap-5 items-center">
-                      <span>
-                        <FaLongArrowAltRight className="text-sm"></FaLongArrowAltRight>
-                      </span>
-                      <span className="text-base text-gray-500">3 Items</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              {/* item 1 */}
-              {/* item 2 */}
-              <div className="card card-side bg-base-100 shadow-xl">
-                <figure className="p-3">
-                  <img
-                    src={logo}
-                    alt="Movie"
-                    className="rounded-2xl w-20 h-20"
-                  />
-                </figure>
-                <div className="card-body p-2">
-                  <ul className="bg-black p-1 rounded-lg flex justify-between items-center">
-                    <li>
-                      <GoDotFill className="text-gray-500 text-sm"></GoDotFill>
-                    </li>
-                    <li>
-                      <span className="text-white text-sm">#1234</span>
-                    </li>
-                  </ul>
-                  <ul>
-                    <li className="flex gap-5 items-center">
-                      <span>
-                        <IoPerson className="text-sm"></IoPerson>
-                      </span>
-                      <span className="text-lg font-semibold">Angel Girl</span>
-                    </li>
-                    <li className="flex gap-5 items-center">
-                      <span>
-                        <FaLongArrowAltRight className="text-sm"></FaLongArrowAltRight>
-                      </span>
-                      <span className="text-base text-gray-500">3 Items</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              {/* item 2 */}
-              {/* item 3 */}
-              <div className="card card-side bg-base-100 shadow-xl">
-                <figure className="p-3">
-                  <img
-                    src={logo}
-                    alt="Movie"
-                    className="rounded-2xl w-20 h-20"
-                  />
-                </figure>
-                <div className="card-body p-2">
-                  <ul className="bg-black p-1 rounded-lg flex justify-between items-center">
-                    <li>
-                      <GoDotFill className="text-gray-500 text-sm"></GoDotFill>
-                    </li>
-                    <li>
-                      <span className="text-white text-sm">#1234</span>
-                    </li>
-                  </ul>
-                  <ul>
-                    <li className="flex gap-5 items-center">
-                      <span>
-                        <IoPerson className="text-sm"></IoPerson>
-                      </span>
-                      <span className="text-lg font-semibold">Prince Rani</span>
-                    </li>
-                    <li className="flex gap-5 items-center">
-                      <span>
-                        <FaLongArrowAltRight className="text-sm"></FaLongArrowAltRight>
-                      </span>
-                      <span className="text-base text-gray-500">3 Items</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              {/* item 3 */}
-            </div>
-          </div>
+          <WaitingList></WaitingList>
           {/* waiting list section end */}
           {/* medicines section start */}
           <div className="my-5">

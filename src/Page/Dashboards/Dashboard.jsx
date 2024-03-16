@@ -11,7 +11,7 @@ import { AuthContext } from './../../Providers/AuthProvider';
 function Dashboard() {
     const [startDate, setStartDate] = useState(new Date());
     const [userData, setUserData] = useState([])
-    console.log(userData)
+
     const [modalData, setModalData] = useState({});
     const [selectedOption, setSelectedOption] = useState(1); // 1 == all data, 2==approve, 3==pending
     const [filteredData, setFilteredData] = useState([]);
