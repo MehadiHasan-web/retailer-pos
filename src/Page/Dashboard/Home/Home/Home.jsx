@@ -92,10 +92,17 @@ const Home = () => {
 
     const filterItem = wishlist.find((value) => value.id === product.id);
     if (filterItem) {
-      const updatedCardTable = wishlist.map((item) =>
-        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-      );
-      setWishlist(updatedCardTable);
+      if (quantity > 1) {
+        const updatedCardTable = wishlist.map((item) =>
+          item.id === product.id ? { ...item, quantity: parseInt(item.quantity) + quantity } : item
+        );
+        setWishlist(updatedCardTable);
+      } {
+        const updatedCardTable = wishlist.map((item) =>
+          item.id === product.id ? { ...item, quantity: parseInt(item.quantity) + 1 } : item
+        );
+        setWishlist(updatedCardTable);
+      }
     } else {
       const newData = {
         id: product.id,
@@ -154,7 +161,7 @@ const Home = () => {
 
       updatedProducts[index] = {
         ...updatedProducts[index],
-        quantity: updatedProducts[index].quantity + 1,
+        quantity: parseInt(updatedProducts[index].quantity) + 1,
       };
 
       setWishlist(updatedProducts);
@@ -466,7 +473,7 @@ const Home = () => {
                                 <FaCircleMinus className="text-white text-xl"></FaCircleMinus>
                               </button>
                             </li> */}
-                              <li className="w-full"><input name="quantity" type="number" className="p-1 w-full rounded-full text-center" min={1} max={30} required placeholder="Write Quantity" /></li>
+                              <li className="w-full"><input name="quantity" type="number" className="p-1 w-full rounded-full text-center" min={1} max={30} placeholder="Write Quantity" required /></li>
                               {/* <li className="flex items-center ">
                               <button
                                 onClick={() => updateQuantity(product.id)}

@@ -23,7 +23,7 @@ function Navbar() {
         </div>
         <div className="navbar-center">
           <label className="input focus-within:outline-none focus-visible:border-none w-32 md:w-64 lg:w-96 rounded-2xl flex items-center gap-2 mx-5 bg-slate-200 ">
-          <svg
+            <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
               fill="currentColor"
@@ -41,7 +41,7 @@ function Navbar() {
               placeholder="search medicine"
             />
           </label>
-          
+
           {/* <Link to="/" className="btn btn-ghost text-xl">NTRCA Store </Link> */}
         </div>
         <div className="navbar-end flex items-center grow gap-5">
@@ -57,7 +57,7 @@ function Navbar() {
         <li><Link onClick={logout}>Logout</Link></li>
       </ul>
     </div> */}
-    <ul className="flex items-center gap-3">
+          <ul className="flex items-center gap-3">
             <li className="hidden md:block"><div className="timeline-end timeline-box flex items-center gap-2 font-semibold"><SlNote></SlNote><span className='text-sm hidden lg:block'>User Voucher</span></div></li>
             {/* <li>
               <div className="timeline-end timeline-box flex items-center gap-2 font-semibold">
@@ -66,7 +66,7 @@ function Navbar() {
               </div>
             </li> */}
             <li className="text-xl opacity-80 cursor-pointer">
-            <HiOutlineBell className="text-2xl"></HiOutlineBell>
+              <HiOutlineBell className="text-2xl"></HiOutlineBell>
             </li>
           </ul>
           <div className="avatar">
