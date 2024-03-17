@@ -1,4 +1,3 @@
-
 // import { Fragment } from "react";
 // import { Menu, Transition } from "@headlessui/react";
 // import { ChevronDownIcon } from "@heroicons/react/20/solid";
@@ -9,14 +8,12 @@
 // }
 import { NavLink } from "react-router-dom";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
-
+import { BiSolidPurchaseTagAlt } from "react-icons/bi";
 
 const PurchaseManagement = () => {
-
-
   return (
     <>
-    {/* <div className="container mx-auto ">
+      {/* <div className="container mx-auto ">
             <div className="py-2 px-5 mb-3 bg-slate-100 rounded-lg mt-5 flex justify-center">
                 <ul className="flex gap-5 flex-wrap">
                   <li><NavLink to="/purchaseManagement" className="btn hover:btn-outline btn-sm rounded-full mx-3  hover:text-white">Purchase Request</NavLink></li>
@@ -25,7 +22,7 @@ const PurchaseManagement = () => {
             </div>
             <Outlet></Outlet>
         </div> */}
-        {/* <Menu as="div" className="relative inline-block text-left ">
+      {/* <Menu as="div" className="relative inline-block text-left ">
       <div >
         <Menu.Button className="inline-flex w-full justify-between  rounded-md  text-sm ">
           Purchase Management
@@ -77,23 +74,37 @@ const PurchaseManagement = () => {
         </Menu.Items>
       </Transition>
     </Menu> */}
-    <div className="collapse navlink p-0 ">
-      <input type="checkbox" />
-      <div className="collapse-title flex gap-10">
-        Purchase Management
-        <ChevronDownIcon
-            className="h-5 w-5 text-gray-400"
+      <div className="collapse navlink p-0 ">
+        <input type="checkbox" />
+        <div className="collapse-title lg:p-0 py-0 flex items-center text-white lg:text-xs">
+          <BiSolidPurchaseTagAlt className="text-lg text-green-500 mr-2"/>
+          Purchase Management
+          <ChevronDownIcon
+            className="h-5 w-5 text-green-500 ml-5"
             aria-hidden="true"
           />
+        </div>
+        <div className="collapse-content p-0 w-full text-white lg:text-xs pt-2">
+          <ul className="space-y-2 pl-5">
+            <li>
+              <NavLink
+                to="/purchaseManagement/purchaseRequest"
+                className="block"
+              >
+                Purchase Request
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/purchaseManagement/purchaseRequestHistory"
+                className="block"
+              >
+                Purchase Request History
+              </NavLink>
+            </li>
+          </ul>
+        </div>
       </div>
-      <div className="collapse-content p-0 w-full">
-        <ul >
-            <li><NavLink to="/purchaseManagement/purchaseRequest" className="block">Purchase Request</NavLink></li>
-            <li><NavLink to="/purchaseManagement/purchaseRequestHistory" className="block">Purchase Request History</NavLink></li>
-            
-        </ul>
-      </div>
-    </div>
     </>
   );
 };
