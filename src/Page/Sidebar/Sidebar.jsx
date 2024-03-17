@@ -20,7 +20,6 @@ const Sidebar = () => {
 
 
 
-
   const logout = () => {
     localStorage.removeItem("token");
 
@@ -101,9 +100,9 @@ const Sidebar = () => {
                     <span className="lg:text-sm font-semibold text-slate-200">Create User</span></Link>
                 </li>
               }
-              
+
             </ul >
-            <li className="absolute bottom-0 text-white left-[35%] mb-5 flex gap-2 items-center">  <Link onClick={logout}><FaPowerOff className="text-green-500"/> Logout </Link></li>
+            <li className="absolute bottom-0 text-white left-[35%] mb-5 flex gap-2 items-center">  <Link onClick={logout}><FaPowerOff className="text-green-500" /> Logout </Link></li>
           </ul >
 
         </div >
