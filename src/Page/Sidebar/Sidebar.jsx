@@ -87,6 +87,12 @@ const Sidebar = () => {
                   <span className="lg:text-xs font-semibold text-slate-200">My Inventory</span></Link>
               </li>
               {
+                is_admin && <li>
+                  <Link className="flex justify-start items-center gap-2" to="/createUser"><FaPlusSquare className="text-green-500"></FaPlusSquare>
+                    <span className="lg:text-xs font-semibold text-slate-200">Create User</span></Link>
+                </li>
+              }
+              {
                 adminAndManager &&
                 <>
                   {
@@ -94,12 +100,6 @@ const Sidebar = () => {
                   }
                   {/* <li><InstituteManagement></InstituteManagement></li> */}
                 </>
-              }
-              {
-                is_admin && <li>
-                  <Link className="flex justify-start items-center gap-2" to="/createUser"><FaPlusSquare className="text-green-500"></FaPlusSquare>
-                    <span className="lg:text-xs font-semibold text-slate-200">Create User</span></Link>
-                </li>
               }
               
             </ul >

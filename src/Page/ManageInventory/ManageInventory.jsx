@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import "./style.css";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import UserInventory from "./../UserInventory/UserInventory";
+import { MdManageHistory } from "react-icons/md";
 
 const ManageInventory = () => {
   // const [isShow,setIsShow] = useState(false)
@@ -9,41 +10,39 @@ const ManageInventory = () => {
   return (
     <div className="collapse navlink p-0 ">
       <input type="checkbox" />
-      <div className="collapse-title flex gap-10 text-white lg:text-xs">
+      <div className="collapse-title flex items-center text-white lg:text-xs lg:p-0 pt-0">
+        <MdManageHistory className="text-base mr-2 text-green-500"/>
         Inventory Management
-        <ChevronDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+        <ChevronDownIcon className="h-5 w-5 text-gray-400 ml-5" aria-hidden="true" />
       </div>
-      <div className="collapse-content p-0   h-44  text-white lg:text-xs">
-        <ul className="space-y-2">
+      <div className="collapse-content p-0 pt-2  h-44  text-white lg:text-xs">
+        <ul className="space-y-2 pl-5">
           <li>
             <div className="dropdown block ">
               <div tabIndex={0} role="button" className="flex gap-10 ">
                 Manage Inventory
-                <ChevronDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                <ChevronDownIcon
+                  className="h-5 w-5 text-gray-400"
+                  aria-hidden="true"
+                />
               </div>
               <ul
                 tabIndex={0}
                 className="dropdown-content  z-40 menu p-2 shadow bg-black rounded-box  w-full lg:text-xs "
               >
                 <li>
-                  <NavLink to="/manageInventory/category" >
-                    Category
-                  </NavLink>
+                  <NavLink to="/manageInventory/category">Category</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/manageInventory/subcategory" >
+                  <NavLink to="/manageInventory/subcategory">
                     Sub Category
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/manageInventory/item" >
-                    Item
-                  </NavLink>
+                  <NavLink to="/manageInventory/item">Item</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/manageInventory/subitem" >
-                    Sub Item
-                  </NavLink>
+                  <NavLink to="/manageInventory/subitem">Sub Item</NavLink>
                 </li>
               </ul>
             </div>

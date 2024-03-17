@@ -14,9 +14,6 @@ const DesktopSidebar = () => {
   const adminAndManager = isApprover || is_manager;
   const navigate = useNavigate();
 
-
-
-
   const logout = () => {
     localStorage.removeItem("token");
 
@@ -24,7 +21,10 @@ const DesktopSidebar = () => {
   };
 
   return (
-    <div className="w-full bg-[#1E1E1E] sticky top-0 p-2 " style={{ height: '100vh' }}>
+    <div
+      className="w-full bg-[#1E1E1E] sticky top-0 p-2 "
+      style={{ height: "100vh" }}
+    >
       <ul className="mt-5">
         <Link to="/" className="flex justify-center items-center gap-2">
           <li>
@@ -34,106 +34,113 @@ const DesktopSidebar = () => {
         </Link>
       </ul>
       <div className="border-[1px] border-x-slate-50 my-5"></div>
-      <ul className="mt-5 space-y-5">
-        <li className="text-sm text-gray-500">Title heading</li>
-        <li>
-          <Link
-            className="flex justify-start items-center gap-2"
-            to="/dashboard"
-          >
-            <MdDashboard className="text-green-500"></MdDashboard>
-            <span className="lg:text-xs font-semibold text-slate-200">
-              Dashboard
-            </span>
-          </Link>
-        </li>
-        <li>
-          <Link className="flex justify-start items-center gap-2" to="/">
-            <GoHomeFill className="text-green-500"></GoHomeFill>
-            <span className="lg:text-xs font-semibold text-slate-200">
-              Create Inventory History
-            </span>
-          </Link>
-        </li>
-        {is_manager && (
+      <div className="overflow-auto touch-auto h-screen pb-40">
+        <ul className="mt-5 space-y-5  ">
+          <li className="text-sm text-gray-500">Title heading</li>
           <li>
             <Link
               className="flex justify-start items-center gap-2"
-              to="/inventoryRequest"
+              to="/dashboard"
             >
-              <FaPlusSquare className="text-green-500"></FaPlusSquare>
+              <MdDashboard className="text-green-500"></MdDashboard>
               <span className="lg:text-xs font-semibold text-slate-200">
-                Inventory Request
+                Dashboard
               </span>
             </Link>
           </li>
-        )}
-        {is_manager && (
           <li>
-            <PurchaseManagement></PurchaseManagement>
-          </li>
-        )}
-        {isApprover && (
-          <li>
-            <Link
-              className="flex justify-start items-center gap-2"
-              to="/applications"
-            >
-              <MdSettingsApplications className="text-green-500"></MdSettingsApplications>
+            <Link className="flex justify-start items-center gap-2" to="/">
+              <GoHomeFill className="text-green-500"></GoHomeFill>
               <span className="lg:text-xs font-semibold text-slate-200">
-                Applications
+                Create Inventory History
               </span>
             </Link>
           </li>
-        )}
-        <li>
-          <Link
-            className="flex justify-start items-center gap-2"
-            to="/myInventory"
-          >
-            <IoPersonCircleSharp className="text-green-500"></IoPersonCircleSharp>
-            <span className="lg:text-xs font-semibold text-slate-200">
-              My Inventory
-            </span>
-          </Link>
-        </li>
-        
-        {adminAndManager && (
-          <>
-            {is_manager && (
-              <li>
-                <ManageInventory></ManageInventory>
-              </li>
-            )}
-            {/* <li><InstituteManagement></InstituteManagement></li> */}
-          </>
-        )}
-        {is_admin && (
+          {is_manager && (
+            <li>
+              <Link
+                className="flex justify-start items-center gap-2"
+                to="/inventoryRequest"
+              >
+                <FaPlusSquare className="text-green-500"></FaPlusSquare>
+                <span className="lg:text-xs font-semibold text-slate-200">
+                  Inventory Request
+                </span>
+              </Link>
+            </li>
+          )}
+          {is_manager && (
+            <li>
+              <PurchaseManagement></PurchaseManagement>
+            </li>
+          )}
+          {isApprover && (
+            <li>
+              <Link
+                className="flex justify-start items-center gap-2"
+                to="/applications"
+              >
+                <MdSettingsApplications className="text-green-500"></MdSettingsApplications>
+                <span className="lg:text-xs font-semibold text-slate-200">
+                  Applications
+                </span>
+              </Link>
+            </li>
+          )}
           <li>
             <Link
               className="flex justify-start items-center gap-2"
-              to="/createUser"
+              to="/myInventory"
             >
-              <FaPlusSquare className="text-green-500"></FaPlusSquare>
-              <span className="lg:text-sm font-semibold text-slate-200">
-                Create User
+              <IoPersonCircleSharp className="text-green-500"></IoPersonCircleSharp>
+              <span className="lg:text-xs font-semibold text-slate-200">
+                My Inventory
               </span>
             </Link>
           </li>
-        )}
-        <li>
-          <Link
-            className="flex justify-start items-center gap-2"
-            to="/practice"
-          >
-            <IoPersonCircleSharp className="text-green-500"></IoPersonCircleSharp>
-            <span className="lg:text-xs font-semibold text-slate-200">
-              Practice
-            </span>
-          </Link>
-        </li>
-      </ul>
-      <button className="absolute bottom-0 text-white left-[30%] xl:left[25%] mb-5 ">  <Link onClick={logout} className="flex gap-2 items-center"><FaPowerOff className="text-green-500"/> Logout </Link></button>
+
+          {is_admin && (
+            <li>
+              <Link
+                className="flex justify-start items-center gap-2"
+                to="/createUser"
+              >
+                <FaPlusSquare className="text-green-500"></FaPlusSquare>
+                <span className="lg:text-sm font-semibold text-slate-200">
+                  Create User
+                </span>
+              </Link>
+            </li>
+          )}
+          <li>
+            <Link
+              className="flex justify-start items-center gap-2"
+              to="/practice"
+            >
+              <IoPersonCircleSharp className="text-green-500"></IoPersonCircleSharp>
+              <span className="lg:text-xs font-semibold text-slate-200">
+                Practice
+              </span>
+            </Link>
+          </li>
+          {adminAndManager && (
+            <>
+              {is_manager && (
+                <li>
+                  <ManageInventory></ManageInventory>
+                </li>
+              )}
+              {/* <li><InstituteManagement></InstituteManagement></li> */}
+            </>
+          )}
+        </ul>
+      </div>
+      <button className="absolute bottom-0 text-white left-[30%] xl:left[25%] mb-5 ">
+        {" "}
+        <Link onClick={logout} className="flex gap-2 items-center">
+          <FaPowerOff className="text-green-500" /> Logout{" "}
+        </Link>
+      </button>
     </div>
   );
 };
