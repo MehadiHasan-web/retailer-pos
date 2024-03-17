@@ -47,17 +47,21 @@ const Home = () => {
   const [categories, setCategories] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState([]);
 
-  const findSearchData = products.filter((product) => product.name.charAt().toLowerCase() === searchData.charAt().toLowerCase());
-  // setSelectedProduct(findSearchData)
-  console.log(selectedProduct)
- 
-  // if(findSearchData){
-  //   setSelectedProduct(findSearchData)
-  //   console.log('aaaaaaa' + selectedProduct)
-  // }
 
-  // console.log(selectedProduct)
-  
+
+
+  useEffect(() => {
+
+    const findSearchData = products.filter(product =>
+      product.name.toLowerCase().includes(searchData.toLowerCase())
+    );
+    if (findSearchData?.length > 0) {
+      setSelectedProduct(findSearchData);
+      console.log(findSearchData);
+      setActiveButton('All');
+    }
+  }, [searchData, products, setSelectedProduct, setActiveButton]);
+
 
   // useEffect(() => {
   //   fetch("/public/products.json")
