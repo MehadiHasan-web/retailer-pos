@@ -39,13 +39,29 @@ import WaitingList from "./WaitingList";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
-  const { baseURL } = useContext(AuthContext);
+  const { baseURL, searchData } = useContext(AuthContext);
   const initialCardTable = JSON.parse(localStorage.getItem("wishlist")) || [];
   const [wishlist, setWishlist] = useState(initialCardTable);
   const [open, setOpen] = useState(false);
   const [activeButton, setActiveButton] = useState("All");
   const [categories, setCategories] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState([]);
+
+
+
+
+  useEffect(() => {
+
+    const findSearchData = products.filter(product =>
+      product.name.toLowerCase().includes(searchData.toLowerCase())
+    );
+    if (findSearchData?.length > 0) {
+      setSelectedProduct(findSearchData);
+      console.log(findSearchData);
+      setActiveButton('All');
+    }
+  }, [searchData, products, setSelectedProduct, setActiveButton]);
+
 
   // useEffect(() => {
   //   fetch("/public/products.json")

@@ -30,11 +30,10 @@ function InventoryRequest() {
         const user_id = localStorage.getItem('user_id');
         console.log(user_id);
 
-        const res_data = axios.get(`${baseURL}/inventory/?user_id=${user_id}`)
+        axios.get(`${baseURL}/inventory/?user_id=${user_id}`)
             .then((res) => res.data)
             .then((data) => setAdminData(data))
             .catch((error) => console.error("Error fetching data:", error));
-        console.log(res_data);
     }, [baseURL]);
 
 
@@ -167,7 +166,8 @@ function InventoryRequest() {
                                     <th className="text-black">Name</th>
                                     <th className="text-black">Request Date</th>
                                     <th className="text-black">Approver Name</th>
-                                    <th className="text-black">Status</th>
+                                    <th className="text-black">Approver Status</th>
+                                    <th className="text-black">Manager Status</th>
                                     <th className="text-black">Show/Actions</th>
                                 </tr>
                             </thead>
@@ -188,7 +188,9 @@ function InventoryRequest() {
                                         </td>
                                         <td>  <p>{tableData.approver.username} </p></td>
 
-                                        <td>Pending</td>
+                                        <td>{tableData.approve_status}</td>
+                                        <td>{tableData.manager_status}</td>
+
                                         <td onClick={() => openModal(tableData.id)}>
                                             <button className="btn btn-outline btn-success btn-sm" onClick={() => document.getElementById('my_modal_4').showModal()}>
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -207,7 +209,8 @@ function InventoryRequest() {
                                     <th className="text-black">Name</th>
                                     <th className="text-black">Request Date</th>
                                     <th className="text-black">Approver Name</th>
-                                    <th className="text-black">Status</th>
+                                    <th className="text-black">Approver Status</th>
+                                    <th className="text-black">Manager Status</th>
                                     <th className="text-black">Show/Actions</th>
                                 </tr>
                             </tfoot>
