@@ -9,7 +9,7 @@ import {
   FaChevronRight,
   FaLongArrowAltRight,
 } from "react-icons/fa";
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import "react-tabs/style/react-tabs.css";
 import { GrSubtractCircle } from "react-icons/gr";
 import { CiEdit } from "react-icons/ci";
@@ -49,7 +49,7 @@ const Home = () => {
 
 
 
-
+  // search function 
   useEffect(() => {
 
     const findSearchData = products.filter(product =>
@@ -63,19 +63,13 @@ const Home = () => {
   }, [searchData, products, setSelectedProduct, setActiveButton]);
 
 
-  // useEffect(() => {
-  //   fetch("/public/products.json")
-  //     .then((response) => response.json())
-  //     .then((data) => setProducts(data))
-  //     .catch((error) => console.error("Error fetching products:", error));
-  // }, []);
 
   useEffect(() => {
     localStorage.setItem("wishlist", JSON.stringify(wishlist));
   }, [wishlist]);
 
   //get all categories
-  useEffect(() => {
+  const getAllCategories = useCallback(() => {
     axios
       .get(`${baseURL}/catagorylist/`)
       .then((response) => {
@@ -85,7 +79,13 @@ const Home = () => {
       .catch((error) => {
         console.error("Error:", error);
       });
-  }, [baseURL]);
+  }, [])
+
+
+  useEffect(() => {
+    getAllCategories();
+  }, [getAllCategories]);
+
 
   //get all Products
   useEffect(() => {
@@ -110,24 +110,28 @@ const Home = () => {
     const filterItem = wishlist.find((value) => value.id === product.id);
     if (filterItem) {
       if (quantity > 1) {
+        console.log('product acha')
         const updatedCardTable = wishlist.map((item) =>
-          item.id === product.id ? { ...item, quantity: parseInt(item.quantity) + quantity } : item
+          item.id === product.id ? { ...item, quantity: parseInt(item.quantity) + parseInt(quantity) } : item
         );
         setWishlist(updatedCardTable);
-      } {
+      } else {
         const updatedCardTable = wishlist.map((item) =>
           item.id === product.id ? { ...item, quantity: parseInt(item.quantity) + 1 } : item
         );
         setWishlist(updatedCardTable);
       }
     } else {
-      const newData = {
-        id: product.id,
-        name: product.name,
-        quantity: quantity,
-        // price: product.price * product.quantity,
-      };
-      setWishlist([...wishlist, newData]);
+      console.log('product nai')
+      if (!quantity) {
+        const newData = {
+          id: product.id,
+          name: product.name,
+          quantity: 1,
+          // price: product.price * product.quantity,
+        };
+        setWishlist([...wishlist, newData]);
+      }
     }
   };
 
@@ -380,7 +384,7 @@ const Home = () => {
                                 <FaCircleMinus className="text-white text-xl"></FaCircleMinus>
                               </button>
                             </li> */}
-                              <li className="w-full"><input name="quantity" type="number" className="p-1 w-full rounded-full text-center" min={1} max={30} placeholder="Write Quantity" required /></li>
+                              <li className="w-full"><input name="quantity" type="number" className="p-1 w-full rounded-full text-center" min={1} max={30} placeholder="Write Quantity" /></li>
                               {/* <li className="flex items-center ">
                               <button
                                 onClick={() => updateQuantity(product.id)}
