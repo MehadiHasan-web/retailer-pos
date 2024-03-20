@@ -193,7 +193,7 @@ function InventoryRequest() {
             <div >
                 <div className="container mx-auto px-12">
                     <div className="flex justify-start my-3 ">
-                        <h2 className="w-34  font-semibold border-b-[1px] border-indigo-500 ">Inventory History:</h2> <span className="ms-2"> Branch Name</span>
+                        <h2 className="w-34  font-semibold border-b-[1px] border-indigo-500  mx-auto">Inventory History:</h2>
                     </div>
 
                     {/* search bar  */}

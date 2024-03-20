@@ -15,13 +15,13 @@ function MyInventoryRequest() {
     const [selectedOption, setSelectedOption] = useState(1); // 1 == all data, 2==approve, 3==pending
     const [filteredData, setFilteredData] = useState([]);
     const [searchText, setSearchText] = useState("");
-    const {baseURL} = useContext(AuthContext)
+    const { baseURL } = useContext(AuthContext)
 
-   
+
 
 
     useEffect(() => {
-       
+
         const user_id = localStorage.getItem('user_id');
         axios.get(`${baseURL}/myinventoryrequest/${user_id}/`)
             .then((res) => res.data)
@@ -57,25 +57,25 @@ function MyInventoryRequest() {
     }
 
     // Filtering Data
- // Filtering Data
-useEffect(() => {
-    let filteredResults = userData;
+    // Filtering Data
+    useEffect(() => {
+        let filteredResults = userData;
 
-    if (selectedOption === 2) {
-        filteredResults = filteredResults.filter((item) => item.approve_status === "Approved");
-    } else if (selectedOption === 3) {
-        filteredResults = filteredResults.filter((item) => item.approve_status === "pending");
-    }
+        if (selectedOption === 2) {
+            filteredResults = filteredResults.filter((item) => item.approve_status === "Approved");
+        } else if (selectedOption === 3) {
+            filteredResults = filteredResults.filter((item) => item.approve_status === "pending");
+        }
 
-    // Applying the search filter
-    if (searchText.trim() !== "") {
-        filteredResults = filteredResults.filter((item) =>
-            item.user.username.toLowerCase().includes(searchText.toLowerCase())
-        );
-    }
+        // Applying the search filter
+        if (searchText.trim() !== "") {
+            filteredResults = filteredResults.filter((item) =>
+                item.user.username.toLowerCase().includes(searchText.toLowerCase())
+            );
+        }
 
-    setFilteredData(filteredResults);
-}, [selectedOption, userData, searchText]);
+        setFilteredData(filteredResults);
+    }, [selectedOption, userData, searchText]);
 
 
 
@@ -127,7 +127,8 @@ useEffect(() => {
                             {/* head */}
                             <thead className="bg-slate-200	">
                                 <tr>
-                                    <th className="text-black">SL</th>
+                                    <th className="text-black">No.</th>
+                                    <th className="text-black">Serial Number</th>
                                     <th className="text-black">Name</th>
                                     <th className="text-black">Request Date</th>
                                     <th className="text-black">Receive Date</th>
@@ -138,7 +139,8 @@ useEffect(() => {
                             </thead>
                             <tbody>
                                 {
-                                    filteredData.map((data) => <tr key={data.id}>
+                                    filteredData.map((data, index) => <tr key={data.id} className={data.approve_status === 'pending' ? 'bg-red-100' : 'bg-green-200'}>
+                                        <td>{++index}</td>
                                         <td>{data.id}</td>
                                         <td>
                                             <div className="flex items-center gap-1">
@@ -190,7 +192,8 @@ useEffect(() => {
                             {/* foot */}
                             <tfoot className="bg-slate-200	">
                                 <tr>
-                                    <th className="text-black">SL</th>
+                                    <th className="text-black">No.</th>
+                                    <th className="text-black">Serial Number</th>
                                     <th className="text-black">Name</th>
                                     <th className="text-black">Request Date</th>
                                     <th className="text-black">Receive Date</th>
