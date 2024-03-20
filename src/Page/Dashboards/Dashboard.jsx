@@ -128,7 +128,8 @@ useEffect(() => {
                             {/* head */}
                             <thead className="bg-slate-200	">
                                 <tr>
-                                    <th className="text-black">SL</th>
+                                    <th className="text-black">No.</th>
+                                    <th className="text-black">Serial Number</th>
                                     <th className="text-black">Name</th>
                                     <th className="text-black">Request Date</th>
                                     <th className="text-black">Receive Date</th>
@@ -139,7 +140,8 @@ useEffect(() => {
                             </thead>
                             <tbody>
                                 {
-                                    filteredData.map((data, index) => <tr key={data.id}>
+                                    filteredData.map((data, index) => <tr key={data.id} className={data.approve_status === 'pending' ? 'bg-red-100' : 'bg-green-200'}>
+                                        <td>{++index}</td>
                                         <td>{data.id}</td>
                                         <td>
                                             <div className="flex items-center gap-1">
@@ -191,7 +193,8 @@ useEffect(() => {
                             {/* foot */}
                             <tfoot className="bg-slate-200	">
                                 <tr>
-                                    <th className="text-black">SL</th>
+                                    <th className="text-black">No.</th>
+                                    <th className="text-black">Serial Number</th>
                                     <th className="text-black">Name</th>
                                     <th className="text-black">Request Date</th>
                                     <th className="text-black">Receive Date</th>
