@@ -66,6 +66,10 @@ const Sidebar = () => {
                 <Link className="flex justify-start items-center gap-2" to="/"><GoHomeFill className="text-green-500"></GoHomeFill>
                   <span className="lg:text-xs font-semibold text-slate-200">Create Inventory History</span></Link>
               </li>
+              <li >
+                <Link className="flex justify-start items-center gap-2" to="/my-inventory-request"><GoHomeFill className="text-green-500"></GoHomeFill>
+                  <span className="lg:text-xs font-semibold text-slate-200">My Inventory Request</span></Link>
+              </li>
               {
                 is_manager && <li>
                   <Link className="flex justify-start items-center gap-2" to="/inventoryRequest"><FaPlusSquare className="text-green-500"></FaPlusSquare>

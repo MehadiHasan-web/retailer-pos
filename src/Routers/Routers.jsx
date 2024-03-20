@@ -11,7 +11,6 @@ import SubCategory from './../Page/Forms/SubCategory';
 import ItemFrom from './../Page/Forms/ItemFrom';
 import SubItemFrom from './../Page/Forms/SubItemFrom';
 import CreateUser from "../Page/CreateUser/CreateUser";
-import Dashboard from "../Page/Dashboards/Dashboard";
 import InventoryRequest from "../Page/Dashboard/InventoryRequest/InventoryRequest";
 import Appointments from "../Page/Dashboard/Appointments/Appointments";
 import PurchaseRequestHistory from "../Page/PurchaseManagement/PurchaseRequestHistory";
@@ -21,7 +20,9 @@ import ErrorPage from "../Page/ErrorPage/ErrorPage";
 import AllUserInventory from "../Page/AllUserInventory/AllUserInventory";
 import UserInventory from "../Page/UserInventory/UserInventory";
 import HomeExtra from './../Page/Dashboard/Home/Home/HomeExtra';
-import Practice from "../Page/Practice/Practice";
+// import Practice from "../Page/Practice/Practice";
+import Dashboard from "../Page/Practice/Dashboard";
+import MyInventoryRequest from "../Page/MyInventoryRequest/MyInventoryRequest";
 
 
 const router = createBrowserRouter([
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
       {
         path: '/myInventory',
         element: <MyInventory></MyInventory>
+      },
+      {
+        path: '/my-inventory-request',
+        element: <MyInventoryRequest></MyInventoryRequest>
       },
       {
         path : '/purchaseManagement/purchaseRequest',
@@ -113,10 +118,10 @@ const router = createBrowserRouter([
         path : '/homeExtra',
         element : <HomeExtra></HomeExtra>
       },
-      {
-        path : '/practice',
-        element : <Practice></Practice>
-      }
+      // {
+      //   path : '/practice',
+      //   element : <Practice></Practice>
+      // }
     ]
   },
 
