@@ -2,13 +2,12 @@ import Title from "../../Title/Title"
 import { useContext, useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Swal from "sweetalert2";
 import axios from "axios";
-import { AuthContext } from './../../Providers/AuthProvider';
+import { AuthContext } from '../../Providers/AuthProvider';
 
 
 
-function Dashboard() {
+function MyInventoryRequest() {
     const [startDate, setStartDate] = useState(new Date());
     const [userData, setUserData] = useState([])
 
@@ -16,13 +15,13 @@ function Dashboard() {
     const [selectedOption, setSelectedOption] = useState(1); // 1 == all data, 2==approve, 3==pending
     const [filteredData, setFilteredData] = useState([]);
     const [searchText, setSearchText] = useState("");
-    const {baseURL} = useContext(AuthContext)
+    const { baseURL } = useContext(AuthContext)
 
-   
+
 
 
     useEffect(() => {
-       
+
         const user_id = localStorage.getItem('user_id');
         axios.get(`${baseURL}/myinventoryrequest/${user_id}/`)
             .then((res) => res.data)
@@ -58,25 +57,25 @@ function Dashboard() {
     }
 
     // Filtering Data
- // Filtering Data
-useEffect(() => {
-    let filteredResults = userData;
+    // Filtering Data
+    useEffect(() => {
+        let filteredResults = userData;
 
-    if (selectedOption === 2) {
-        filteredResults = filteredResults.filter((item) => item.approve_status === "Approved");
-    } else if (selectedOption === 3) {
-        filteredResults = filteredResults.filter((item) => item.approve_status === "pending");
-    }
+        if (selectedOption === 2) {
+            filteredResults = filteredResults.filter((item) => item.approve_status === "Approved");
+        } else if (selectedOption === 3) {
+            filteredResults = filteredResults.filter((item) => item.approve_status === "pending");
+        }
 
-    // Applying the search filter
-    if (searchText.trim() !== "") {
-        filteredResults = filteredResults.filter((item) =>
-            item.user.username.toLowerCase().includes(searchText.toLowerCase())
-        );
-    }
+        // Applying the search filter
+        if (searchText.trim() !== "") {
+            filteredResults = filteredResults.filter((item) =>
+                item.user.username.toLowerCase().includes(searchText.toLowerCase())
+            );
+        }
 
-    setFilteredData(filteredResults);
-}, [selectedOption, userData, searchText]);
+        setFilteredData(filteredResults);
+    }, [selectedOption, userData, searchText]);
 
 
 
@@ -290,4 +289,4 @@ useEffect(() => {
     )
 }
 
-export default Dashboard;
+export default MyInventoryRequest;

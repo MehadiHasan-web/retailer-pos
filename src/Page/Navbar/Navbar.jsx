@@ -1,11 +1,13 @@
-import { Link} from "react-router-dom";
+
 import Sidebar from "./../Sidebar/Sidebar";
 import { HiOutlineBell } from "react-icons/hi2";
 import { SlNote } from "react-icons/sl";
-import { useContext, useState } from "react";
+import { useContext  } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 
 function Navbar() {
+  const userToken = localStorage.getItem('token')
+  const userDesignation = localStorage.getItem('designation')
   
   const {searchFun} = useContext(AuthContext)
   
@@ -72,7 +74,10 @@ function Navbar() {
           </ul>
           <div className="avatar">
             <div className="w-10 rounded-full">
-              <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+              {
+                userToken ?  <img src="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=" />  : ""
+              }
+             
             </div>
           </div>
           <ul className="menu lg:menu-horizontal rounded-box hidden lg:block">
@@ -81,7 +86,10 @@ function Navbar() {
                 <summary>
                   <ul>
                     <li className="font-bold">Mohammad Nabi</li>
-                    <li>pharmacist</li>
+
+                    {
+                     userDesignation && <li className="text-center">{userDesignation}</li> 
+                    }
                   </ul>
                 </summary>
               </details>
