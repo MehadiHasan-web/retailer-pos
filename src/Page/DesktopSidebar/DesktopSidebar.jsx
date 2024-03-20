@@ -30,7 +30,7 @@ const DesktopSidebar = () => {
           <li>
             <FaPlusSquare className="text-green-500"></FaPlusSquare>
           </li>
-          <li className="lg:text-xl font-semibold text-slate-200">MedKitPOS</li>
+          <li className="lg:text-xl font-semibold text-slate-200">Holos Technologies</li>
         </Link>
       </ul>
       <div className="border-[1px] border-x-slate-50 my-5"></div>
