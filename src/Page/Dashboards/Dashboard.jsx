@@ -140,7 +140,7 @@ useEffect(() => {
                             </thead>
                             <tbody>
                                 {
-                                    filteredData.map((data, index) => <tr key={data.id} className={data.approve_status === 'pending' ? 'bg-red-100' : 'bg-green-200'}>
+                                    filteredData.map((data, index) => <tr key={data.id} className='hover:bg-slate-200'>
                                         <td>{++index}</td>
                                         <td>{data.id}</td>
                                         <td>
