@@ -52,10 +52,14 @@ const DesktopSidebar = () => {
             <Link className="flex justify-start items-center gap-2" to="/">
               <GoHomeFill className="text-green-500"></GoHomeFill>
               <span className="lg:text-xs font-semibold text-slate-200">
-                Create Inventory History
+              Request for inventory 
               </span>
             </Link>
           </li>
+          <li >
+                <Link className="flex justify-start items-center gap-2" to="/my-inventory-request"><GoHomeFill className="text-green-500"></GoHomeFill>
+                  <span className="lg:text-xs font-semibold text-slate-200">My Inventory Request</span></Link>
+              </li>
           {is_manager && (
             <li>
               <Link
@@ -112,7 +116,7 @@ const DesktopSidebar = () => {
               </Link>
             </li>
           )}
-          <li>
+          {/* <li>
             <Link
               className="flex justify-start items-center gap-2"
               to="/practice"
@@ -122,7 +126,7 @@ const DesktopSidebar = () => {
                 Practice
               </span>
             </Link>
-          </li>
+          </li> */}
           {adminAndManager && (
             <>
               {is_manager && (

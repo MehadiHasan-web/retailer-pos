@@ -5,7 +5,7 @@ import ProgressBars from "./ProgressBars";
 import TinyLineChart from "./TinyLineChart";
 
 
-const Practice = () => {
+const Dashboard = () => {
   return (
     <div className=" p-5">
       <div className="my-5">
@@ -40,4 +40,4 @@ const Practice = () => {
   );
 };
 
-export default Practice;
+export default Dashboard;

@@ -2,13 +2,12 @@ import Title from "../../Title/Title"
 import { useContext, useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Swal from "sweetalert2";
 import axios from "axios";
-import { AuthContext } from './../../Providers/AuthProvider';
+import { AuthContext } from '../../Providers/AuthProvider';
 
 
 
-function Dashboard() {
+function MyInventoryRequest() {
     const [startDate, setStartDate] = useState(new Date());
     const [userData, setUserData] = useState([])
 
@@ -139,7 +138,7 @@ useEffect(() => {
                             </thead>
                             <tbody>
                                 {
-                                    filteredData.map((data, index) => <tr key={data.id}>
+                                    filteredData.map((data) => <tr key={data.id}>
                                         <td>{data.id}</td>
                                         <td>
                                             <div className="flex items-center gap-1">
@@ -287,4 +286,4 @@ useEffect(() => {
     )
 }
 
-export default Dashboard;
+export default MyInventoryRequest;

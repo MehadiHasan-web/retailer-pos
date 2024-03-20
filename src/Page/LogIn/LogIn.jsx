@@ -31,6 +31,7 @@ const LogIn = () => {
         localStorage.setItem('is_approver', response.data.is_approver)
         localStorage.setItem('is_manager', response.data.is_manager)
         localStorage.setItem('user_id', response.data.user_id)
+        localStorage.setItem('designation', response.data.designation)
         navigate('/dashboard')
       }
     } catch (error) {
