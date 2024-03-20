@@ -2,13 +2,19 @@
 import Sidebar from "./../Sidebar/Sidebar";
 import { HiOutlineBell } from "react-icons/hi2";
 import { SlNote } from "react-icons/sl";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../Providers/AuthProvider";
 
 function Navbar() {
-  const userToken = localStorage.getItem('token');
-  const userDesignation
-  = localStorage.getItem('designation');
+  
+  const {searchFun} = useContext(AuthContext)
+  
+  
 
   return (
+
+    
+
     <>
       <div className="navbar bg-base-100 shadow-sm sticky top-0 z-10 justify-between">
         <div className="navbar-start block lg:hidden">
@@ -29,10 +35,11 @@ function Navbar() {
                 clipRule="evenodd"
               />
             </svg>
-            <input
+            <input 
               type="text"
               className=" bg-slate-200 text-black w-full "
               placeholder="search medicine"
+              onChange={(evt) => { searchFun(evt.target.value); }}
             />
           </label>
 

@@ -13,13 +13,13 @@ function InventoryRequest() {
     const [startDate, setStartDate] = useState(new Date());
     const [adminData, setAdminData] = useState([])
     const [modalData, setModalData] = useState({});
-    const {baseURL} = useContext(AuthContext)
+    const { baseURL } = useContext(AuthContext)
     console.log(adminData)
 
     console.log(modalData)
     const isApprover = localStorage.getItem('is_approver') === 'true';
     const is_manager = localStorage.getItem('is_manager') === 'true';
-    
+
     // const adminAndManager = isApprover || is_manager;
     // useEffect(() => {
     //     fetch('card.json')
@@ -29,13 +29,13 @@ function InventoryRequest() {
     useEffect(() => {
         const user_id = localStorage.getItem('user_id');
         console.log(user_id);
-    
+
         axios.get(`${baseURL}/inventory/?user_id=${user_id}`)
-        .then((res) => res.data)
-        .then((data) => setAdminData(data))
-        .catch((error) => console.error("Error fetching data:", error));
+            .then((res) => res.data)
+            .then((data) => setAdminData(data))
+            .catch((error) => console.error("Error fetching data:", error));
     }, [baseURL]);
-    
+
 
 
     const openModal = async (data) => {
@@ -45,7 +45,7 @@ function InventoryRequest() {
             setModalData(response.data);
         } catch (error) {
             console.error('Error fetching data:', error);
-       
+
         }
     };
 
@@ -92,19 +92,19 @@ function InventoryRequest() {
         const approve_status = isApprover ? form.approve_status.value : (is_manager ? form.manager_status.value : null);
 
         let data = {};
-        
+
         if (is_manager) {
             data.manager_status = form.manager_status.value;
         } else {
             data.approve_status = approve_status;
         }
-        
-        
+
+
         const response = await axios.put(`${baseURL}/inventory/${modalData.id}/`, data);
-        
+
         if (response.status === 200) {
             toast.success("Successfully created");
-        }else {
+        } else {
             toast.error("Try again")
         }
     }
@@ -166,7 +166,8 @@ function InventoryRequest() {
                                     <th className="text-black">Name</th>
                                     <th className="text-black">Request Date</th>
                                     <th className="text-black">Approver Name</th>
-                                    <th className="text-black">Status</th>
+                                    <th className="text-black">Approver Status</th>
+                                    <th className="text-black">Manager Status</th>
                                     <th className="text-black">Show/Actions</th>
                                 </tr>
                             </thead>
@@ -176,18 +177,20 @@ function InventoryRequest() {
                                         <td>{tableData.id}</td>
                                         <td>
                                             <div className="flex items-center gap-3">
-                                                
+
                                                 <div>
-                                                <div className="font-bold">{tableData.user.username}</div>
+                                                    <div className="font-bold">{tableData.user.username}</div>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
                                             <p>20 january </p>
                                         </td>
-                                       <td>  <p>{tableData.approver.username} </p></td>
+                                        <td>  <p>{tableData.approver.username} </p></td>
 
-                                        <td>Pending</td>
+                                        <td>{tableData.approve_status}</td>
+                                        <td>{tableData.manager_status}</td>
+
                                         <td onClick={() => openModal(tableData.id)}>
                                             <button className="btn btn-outline btn-success btn-sm" onClick={() => document.getElementById('my_modal_4').showModal()}>
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -206,7 +209,8 @@ function InventoryRequest() {
                                     <th className="text-black">Name</th>
                                     <th className="text-black">Request Date</th>
                                     <th className="text-black">Approver Name</th>
-                                    <th className="text-black">Status</th>
+                                    <th className="text-black">Approver Status</th>
+                                    <th className="text-black">Manager Status</th>
                                     <th className="text-black">Show/Actions</th>
                                 </tr>
                             </tfoot>
@@ -217,7 +221,7 @@ function InventoryRequest() {
                             <div className="modal-box w-11/12 max-w-[80%]">
                                 <div className="flex flex-col md:flex-row">
                                     <div className="w-full md:w-[60%] order-1">
-                                    <h3 className="font-bold text-lg">{modalData?.user?.username}</h3>
+                                        <h3 className="font-bold text-lg">{modalData?.user?.username}</h3>
                                         <div className="w-full  rounded mt-6 ">
                                             {/* table start */}
                                             <table className="w-full overflow-y-scroll rounded-md mb-2">
@@ -268,36 +272,36 @@ function InventoryRequest() {
                                     <div className="md:divider md:divider-horizontal md:divider-info mt-8 order-2 hidden mb:block"> OR </div>
                                     <div className="w-full md:w-[40%] order-3">
 
-                                      
-                                        {isApprover ? (                                                    
-                                                    <React.Fragment>
-                                                          <h3 className="mt-3 font-semibold">Approver Actions</h3>
-                                                    </React.Fragment>
-                                                ) : (is_manager ? (
-                                                    <React.Fragment>
-                                                          <h3 className="mt-3 font-semibold">Managerial Actions</h3>
-                                                    </React.Fragment>
-                                                ) : null)}
+
+                                        {isApprover ? (
+                                            <React.Fragment>
+                                                <h3 className="mt-3 font-semibold">Approver Actions</h3>
+                                            </React.Fragment>
+                                        ) : (is_manager ? (
+                                            <React.Fragment>
+                                                <h3 className="mt-3 font-semibold">Managerial Actions</h3>
+                                            </React.Fragment>
+                                        ) : null)}
                                         <form onSubmit={takeAction}>
-                                            <textarea className="textarea textarea-bordered my-3 w-full" placeholder="Return Message" name="reject_msg"></textarea>   
-                                                {isApprover ? (                                                    
-                                                    <React.Fragment>
-                                                        <select className="select select-bordered w-full" name="approve_status">
+                                            <textarea className="textarea textarea-bordered my-3 w-full" placeholder="Return Message" name="reject_msg"></textarea>
+                                            {isApprover ? (
+                                                <React.Fragment>
+                                                    <select className="select select-bordered w-full" name="approve_status">
                                                         <option selected>Take Actions</option>
                                                         <option value={'Approved'}>Approve</option>
                                                         <option value={'Returned'}>Return</option>
                                                         <option value={'Rejected'}>Reject</option>
-                                                        </select>
-                                                    </React.Fragment>
-                                                ) : (is_manager ? (
-                                                    <React.Fragment>
-                                                        <select className="select select-bordered w-full" name="manager_status">
+                                                    </select>
+                                                </React.Fragment>
+                                            ) : (is_manager ? (
+                                                <React.Fragment>
+                                                    <select className="select select-bordered w-full" name="manager_status">
                                                         <option value={'Partial Disbursed'}>Partial Disburse</option>
                                                         <option value={'Disbursed'}>Disburse</option>
                                                         <option value={'Hold'}>Hold</option>
-                                                        </select>
-                                                    </React.Fragment>
-                                                ) : null)}
+                                                    </select>
+                                                </React.Fragment>
+                                            ) : null)}
                                             <button className="btn btn-neutral mt-4">Submit</button>
                                         </form>
                                     </div>
@@ -308,7 +312,7 @@ function InventoryRequest() {
                                         {/* if there is a button, it will close the modal */}
                                         <button className="btn">Close</button>
                                     </form>
-                                    <ToastContainer position="bottom-right"/>
+                                    <ToastContainer position="bottom-right" />
                                 </div>
                             </div>
                         </dialog>
