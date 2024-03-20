@@ -5,19 +5,30 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { AuthContext } from './../../../Providers/AuthProvider';
+import productJson from './../../../../public/products.json'
 
 function InventoryRequest() {
+    const [endDate, setEndDate] = useState(new Date());
     const [startDate, setStartDate] = useState(new Date());
     const [adminData, setAdminData] = useState([])
     const [modalData, setModalData] = useState({});
     const [selectedOption, setSelectedOption] = useState(1); // 1 == all data, 2==approve, 3==pending
     const [filteredData, setFilteredData] = useState([]);
     const [searchText, setSearchText] = useState("");
-    const {baseURL} = useContext(AuthContext)
+    const { baseURL } = useContext(AuthContext)
+    const [products, setProduct] = useState([]);
 
 
     const isApprover = localStorage.getItem('is_approver') === 'true';
     const is_manager = localStorage.getItem('is_manager') === 'true';
+
+    // get json products 
+    useEffect(() => {
+        // Once the component mounts, set the JSON data
+        setProduct(productJson);
+
+    }, []);
+
 
 
     useEffect(() => {
@@ -127,8 +138,8 @@ function InventoryRequest() {
         setSelectedOption(newSelectedOption);
     }
 
-     // Handle search input change
-     const handleSearchInputChange = (e) => {
+    // Handle search input change
+    const handleSearchInputChange = (e) => {
         setSearchText(e.target.value);
     };
 
@@ -137,6 +148,41 @@ function InventoryRequest() {
         e.preventDefault();
         setSearchText("");
     }
+
+    // search by datePicker
+    const handleDateChange = () => {
+        var endDateObject = new Date(endDate);
+        var startDateObject = new Date(startDate);
+        console.log(endDateObject)
+
+        // Extract start year, month, and day from the Date object
+        var startYear = startDateObject.getFullYear();
+        var startMonth = ('0' + (startDateObject.getMonth() + 1)).slice(-2);
+        var startDay = ('0' + startDateObject.getDate()).slice(-2);
+        var startFormattedDate = startYear + '-' + startMonth + '-' + startDay;
+
+        // Extract end year, month, and day from the Date object
+        var endYear = endDateObject.getFullYear();
+        var endMonth = ('0' + (endDateObject.getMonth() + 1)).slice(-2);
+        var endDay = ('0' + endDateObject.getDate()).slice(-2);
+        var endFormattedDate = endYear + '-' + endMonth + '-' + endDay;
+
+
+        // shorting code 
+        var resultProductData = products.filter(function (item) {
+            var productDate = new Date(item.create_date);
+            var itemYear = productDate.getFullYear();
+            var itemMonth = ('0' + (productDate.getMonth() + 1)).slice(-2);
+            var itemDay = ('0' + productDate.getDate()).slice(-2);
+            var itemFormattedDate = itemYear + '-' + itemMonth + '-' + itemDay;
+            console.log('item date: ' + itemFormattedDate)
+            return itemFormattedDate >= startFormattedDate && itemFormattedDate <= endFormattedDate;
+        });
+
+        console.log(resultProductData)
+    }
+
+
 
 
     return (
@@ -154,7 +200,7 @@ function InventoryRequest() {
                     <div className="py-2 mb-3 bg-slate-100 rounded-lg">
                         <div className="flex justify-center mt-1">
                             <form action="" className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-2  lg:flex md:gap-0 lg:justify-around lg:items-center">
-                                
+
                                 {/* date end */}
                                 <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1  "
                                     onChange={handleSelectChange}>
@@ -162,9 +208,14 @@ function InventoryRequest() {
                                     <option value={2}>Complete Application</option>
                                     <option value={3}>Pending Application</option>
                                 </select>
-                                {/* date  */}
+                                {/*Start date  */}
                                 <div className="w-full xl:w-44 mx-1 mb-1">
-                                    <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} className="w-full overflow-hidden border input input-sm  rounded-full" />
+                                    <DatePicker selected={startDate} onChange={(date) => { setStartDate(date); handleDateChange() }} className="w-full overflow-hidden border input input-sm  rounded-full" />
+                                </div>
+                                <p>To</p>
+                                {/*End date  */}
+                                <div className="w-full xl:w-44 mx-1 mb-1">
+                                    <DatePicker selected={endDate} onChange={(date) => { setEndDate(date); handleDateChange() }} className="w-full overflow-hidden border input input-sm  rounded-full" />
                                 </div>
                                 {/* search bar  */}
                                 <input value={searchText} onChange={handleSearchInputChange} type="text" placeholder="Type here" className="input input-bordered input-sm max-w-xs w-full xl:w-44 rounded-full mx-1 mb-1 " />
