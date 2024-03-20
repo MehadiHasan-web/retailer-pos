@@ -165,7 +165,7 @@ function MyInventoryRequest() {
                                 data.manager_status === 5 ? 'disbursed' :
                                 'Unknown'
                             } */}
-                                            <p>{data.manager_status}</p>
+                                            <p>{data.manager_status === 'waiting for approver' ? <div className="badge badge-warning">{data.manager_status}</div> : <div className="badge badge-info">{data.manager_status}</div>}</p>
                                         </td>
                                         <td>
                                             {/* {
@@ -175,7 +175,7 @@ function MyInventoryRequest() {
                                 data.approve_status === 4 ? 'Reject' :
                                 'Unknown'
                             } */}
-                                            <p>{data.approve_status}</p>
+                                            <p>{data.approve_status === 'pending' ? <div className="badge badge-warning">{data.approve_status}</div> : <div className="badge badge-success">{data.approve_status}</div>}</p>
                                         </td>
 
                                         <td onClick={() => openModal(data.id)}>
