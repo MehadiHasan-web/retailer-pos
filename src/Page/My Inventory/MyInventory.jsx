@@ -34,30 +34,10 @@ console.log(card)
       {/* search bar  */}
       <div className="py-2 bg-slate-100 rounded-lg mt-5">
               <div className="flex justify-center mt-1 mx-2">
-                <form action="" className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-2  lg:flex md:gap-0 lg:justify-around lg:items-center">
-                    {/* category  */}
-                    <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1 " >
-                        <option disabled selected>Category</option>
-                        <option>Han Solo</option>
-                        <option>Greedo</option>
-                    </select>
-                    {/* subcategory  */}
-                    <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1 " >
-                        <option disabled selected>Subcategory?</option>
-                        <option>Han Solo</option>
-                        <option>Greedo</option>
-                    </select>
-                    {/* subcategory  */}
-                    {/* date end */}
-                    <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1  " >
-                        <option disabled selected>Subcategory?</option>
-                        <option>Han Solo</option>
-                        <option>Greedo</option>
-                    </select>
+                <form action="" className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-2  lg:flex md:gap-0 lg:justify-around lg:items-center">
                     <input type="text" placeholder="Type here" className="input input-bordered input-sm max-w-xs w-full xl:w-44 rounded-full mx-1 mb-1 " />
                     <button type="submit" className="btn btn-outline btn-sm rounded-full mx-3  hover:text-white ">Search</button>
                     <button type="button" className="btn btn-outline btn-sm rounded-full mx-1 hover:text-white ">Clear filter</button>
-
                 </form>
               </div>
             </div>
