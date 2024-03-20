@@ -58,7 +58,7 @@ const DesktopSidebar = () => {
           </li>
           <li >
                 <Link className="flex justify-start items-center gap-2" to="/my-inventory-request"><GoHomeFill className="text-green-500"></GoHomeFill>
-                  <span className="lg:text-xs font-semibold text-slate-200">My Inventory Request</span></Link>
+                  <span className="lg:text-xs font-semibold text-slate-200">My Inventory Requests</span></Link>
               </li>
           {is_manager && (
             <li>

@@ -61,7 +61,7 @@ function Navbar() {
       </ul>
     </div> */}
           <ul className="flex items-center gap-3">
-            <li className="hidden md:block"><div className="timeline-end timeline-box flex items-center gap-2 font-semibold"><SlNote></SlNote><span className='text-sm hidden lg:block'>User Voucher</span></div></li>
+            {/* <li className="hidden md:block"><div className="timeline-end timeline-box flex items-center gap-2 font-semibold"><SlNote></SlNote><span className='text-sm hidden lg:block'>User Voucher</span></div></li> */}
             {/* <li>
               <div className="timeline-end timeline-box flex items-center gap-2 font-semibold">
                 <TbScan className="text-xl"></TbScan>
