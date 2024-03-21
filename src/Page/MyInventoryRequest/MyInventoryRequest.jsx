@@ -19,7 +19,6 @@ function MyInventoryRequest() {
     const [searchText, setSearchText] = useState("");
     const { baseURL } = useContext(AuthContext)
 
-
     const lastPostIndex = currentPage * postPerPage;
     const firstPostIndex = lastPostIndex - postPerPage;
     const currentPosts = filteredData.slice(firstPostIndex, lastPostIndex)
