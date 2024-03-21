@@ -125,7 +125,8 @@ function InventoryRequest() {
             filteredResults = filteredResults.filter((item) =>
                 item.user.username.toLowerCase().includes(searchText.toLowerCase()) ||
                 item.id.toString().toLowerCase().includes(searchText.toLowerCase()) ||
-                item.manager_status.toLowerCase().includes(searchText.toLowerCase())
+                item.manager_status.toLowerCase().includes(searchText.toLowerCase()) ||
+                item.approve_status.toLowerCase().includes(searchText.toLowerCase())
             );
         }
 

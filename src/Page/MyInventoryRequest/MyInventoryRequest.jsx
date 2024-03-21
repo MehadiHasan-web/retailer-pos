@@ -14,14 +14,35 @@ function MyInventoryRequest() {
     const [modalData, setModalData] = useState({});
     const [selectedOption, setSelectedOption] = useState(1); // 1 == all data, 2==approve, 3==pending
     const [filteredData, setFilteredData] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postPerPage, setPostPerPage] = useState(20);
     const [searchText, setSearchText] = useState("");
     const { baseURL } = useContext(AuthContext)
 
 
+    const lastPostIndex = currentPage * postPerPage;
+    const firstPostIndex = lastPostIndex - postPerPage;
+    const currentPosts = filteredData.slice(firstPostIndex, lastPostIndex)
 
+    let page = [];
+    for (let i = 1; i <= Math.ceil(filteredData.length / postPerPage); i++) {
+        page.push(i)
+    }
 
+    const nextPage = () => {
+        if (currentPage < page.length) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
+    const prevPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
+
+    // get data 
     useEffect(() => {
-
         const user_id = localStorage.getItem('user_id');
         axios.get(`${baseURL}/myinventoryrequest/${user_id}/`)
             .then((res) => res.data)
@@ -57,7 +78,6 @@ function MyInventoryRequest() {
     }
 
     // Filtering Data
-    // Filtering Data
     useEffect(() => {
         let filteredResults = userData;
 
@@ -70,7 +90,10 @@ function MyInventoryRequest() {
         // Applying the search filter
         if (searchText.trim() !== "") {
             filteredResults = filteredResults.filter((item) =>
-                item.user.username.toLowerCase().includes(searchText.toLowerCase())
+                item.user.username.toLowerCase().includes(searchText.toLowerCase()) ||
+                item.id.toString().toLowerCase().includes(searchText.toLowerCase()) ||
+                item.manager_status.toLowerCase().includes(searchText.toLowerCase()) ||
+                item.approve_status.toLowerCase().includes(searchText.toLowerCase())
             );
         }
 
@@ -139,7 +162,7 @@ function MyInventoryRequest() {
                             </thead>
                             <tbody>
                                 {
-                                    filteredData.map((data, index) => <tr key={data.id} className={data.approve_status === 'pending' ? 'bg-red-100' : 'bg-green-200'}>
+                                    currentPosts.map((data, index) => <tr key={data.id} className='hover:bg-slate-200'>
                                         <td>{++index}</td>
                                         <td>{data.id}</td>
                                         <td>
@@ -165,7 +188,7 @@ function MyInventoryRequest() {
                                 data.manager_status === 5 ? 'disbursed' :
                                 'Unknown'
                             } */}
-                                            <p>{data.manager_status}</p>
+                                            <p>{data.manager_status === 'waiting for approver' ? <div className="badge badge-warning">{data.manager_status}</div> : <div className="badge badge-info">{data.manager_status}</div>}</p>
                                         </td>
                                         <td>
                                             {/* {
@@ -175,7 +198,7 @@ function MyInventoryRequest() {
                                 data.approve_status === 4 ? 'Reject' :
                                 'Unknown'
                             } */}
-                                            <p>{data.approve_status}</p>
+                                            <p>{data.approve_status === 'pending' ? <div className="badge badge-warning">{data.approve_status}</div> : <div className="badge badge-success">{data.approve_status}</div>}</p>
                                         </td>
 
                                         <td onClick={() => openModal(data.id)}>
@@ -203,7 +226,19 @@ function MyInventoryRequest() {
                                 </tr>
                             </tfoot>
 
+
                         </table>
+                        {/* pagination section start */}
+                        <div className="mx-auto text-center">
+                            <div className="join ">
+                                <button className="join-item btn" onClick={prevPage}>«</button>
+                                {page.map((page, index) => (
+                                    <button key={index} className="join-item btn" onClick={() => setCurrentPage(page)}>{page}</button>
+                                ))}
+                                <button className="join-item btn" onClick={nextPage}>»</button>
+                            </div>
+                        </div>
+                        {/* pagination section end */}
                         {/* modal section start */}
                         <dialog id="my_modal_4" className="modal">
                             <div className="modal-box w-[90%] max-w-5xl">
