@@ -236,7 +236,7 @@ function InventoryRequest() {
                                     <option value={30} className="font-bold">Show 30</option>
                                     <option value={40} className="font-bold">Show 40</option>
                                     <option value={50} className="font-bold">Show 50</option>
-                                    <option value={100} className="font-bold">Show 0</option>
+                                    <option value={100} className="font-bold">Show 100</option>
                                 </select>
                                 {/* date end */}
                                 <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1   shadow hover:shadow-lg"
