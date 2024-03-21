@@ -267,7 +267,7 @@ const Home = () => {
           {/* medicines section start */}
           <div className="my-5">
             <ul className="flex justify-between items-center">
-              <li className="text-2xl font-semibold">Medicines</li>
+              <li className="text-2xl font-semibold">Products</li>
               <li className="text-lg font-bold text-green-500 border-b-green-500 border-b-2">
                 See all
               </li>
@@ -420,7 +420,7 @@ const Home = () => {
             </p>
           </div>
           <p className="text-bold font-medium my-2">
-            Detail Prescription <span className="text-green-500">{wishlist.length}</span>
+            Detail Products <span className="text-green-500">{wishlist.length}</span>
           </p>
           <div className="bg-slate-100 rounded-lg p-4 w-full h-32 overflow-auto touch-auto">
             <ul className=" max-w-none h-auto">
@@ -439,7 +439,7 @@ const Home = () => {
             </ul>
           </div>
           <div className="border-b-2 my-5"></div>
-          <div className="w-full h-52 overflow-auto touch-auto">
+          <div className="w-full h-60 overflow-auto touch-auto">
             {wishlist.length === 0 ? (
               <div>
                 <h2 className="text-center font-bold">No Products Found</h2>

@@ -68,7 +68,7 @@ const Form = ({ wishlist, setWishlist }) => {
 
   return (
     <div>
-      <div className="collapse bg-slate-200">
+      <div className="collapse bg-slate-200 collapse-open">
         <input type="checkbox" className="peer" />
         <div className="collapse-title text-base">
           Attach File & Description

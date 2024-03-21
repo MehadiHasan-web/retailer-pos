@@ -2,7 +2,7 @@
 import MemberCard from "./MemberCard";
 import PieChartWithPadding from "./PieChartWithPadding";
 import ProgressBars from "./ProgressBars";
-import TinyLineChart from "./TinyLineChart";
+// import TinyLineChart from "./TinyLineChart";
 
 
 const Dashboard = () => {
@@ -19,13 +19,11 @@ const Dashboard = () => {
           </li>
         </ul>
       </div>
-      <div className="md:flex md:justify-between md:items-center gap-5">
-        <div className="md:flex-2">
+      <div className="">
+        <div className="">
           <MemberCard></MemberCard>
         </div>
-        <div className="md:flex-1">
-          <TinyLineChart></TinyLineChart>
-        </div>
+        
       </div>
       <div className="md:flex md:justify-between md:items-center gap-5 mt-5">
         <div className="md:flex-1">

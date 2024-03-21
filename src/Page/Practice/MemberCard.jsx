@@ -20,12 +20,44 @@ const MemberCard = () => {
       "person" : "102",
       "type" : "Avg Visits",
       "visitor" : "500 visits per month"
+    },
+    {
+      "id" : 3,
+      "image" : "https://png.pngtree.com/png-vector/20191009/ourmid/pngtree-group-icon-png-image_1796653.jpg",
+      "title" : "Total Visits",
+      "person" : "102",
+      "type" : "Avg Visits",
+      "visitor" : "500 visits per month"
+    },
+    {
+      "id" : 4,
+      "image" : "https://png.pngtree.com/png-vector/20191009/ourmid/pngtree-group-icon-png-image_1796653.jpg",
+      "title" : "Total Visits",
+      "person" : "102",
+      "type" : "Avg Visits",
+      "visitor" : "500 visits per month"
+    },
+    {
+      "id" : 5,
+      "image" : "https://png.pngtree.com/png-vector/20191009/ourmid/pngtree-group-icon-png-image_1796653.jpg",
+      "title" : "Total Visits",
+      "person" : "102",
+      "type" : "Avg Visits",
+      "visitor" : "500 visits per month"
+    },
+    {
+      "id" : 6,
+      "image" : "https://png.pngtree.com/png-vector/20191009/ourmid/pngtree-group-icon-png-image_1796653.jpg",
+      "title" : "Total Visits",
+      "person" : "102",
+      "type" : "Avg Visits",
+      "visitor" : "500 visits per month"
     }
   ]
 
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-3 md:grid-cols-1">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
       {
         cardData.map((data) => <div key={data.id} className="flex gap-5 items-center bg-white shadow-lg shadow-slate-300 w-full h-32 md:h-40 px-3 mb-5 rounded-xl">
             <div className="">
