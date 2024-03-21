@@ -192,12 +192,12 @@ function MyInventoryRequest() {
                                         </td>
                                         <td>
                                             {/* {
-                                data.approve_status === 1 ? 'Pending' :
-                                data.approve_status === 2 ? 'Approved' :
-                                data.approve_status === 3 ? 'Return' :
-                                data.approve_status === 4 ? 'Reject' :
-                                'Unknown'
-                            } */}
+                                                data.approve_status === 1 ? 'Pending' :
+                                                data.approve_status === 2 ? 'Approved' :
+                                                data.approve_status === 3 ? 'Return' :
+                                                data.approve_status === 4 ? 'Reject' :
+                                                'Unknown'
+                                            } */}
                                             <p>{data.approve_status === 'pending' ? <div className="badge badge-warning">{data.approve_status}</div> : <div className="badge badge-success text-white">{data.approve_status}</div>}</p>
                                         </td>
 
