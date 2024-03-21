@@ -16,9 +16,32 @@ function InventoryRequest() {
     const [modalData, setModalData] = useState({});
     const [selectedOption, setSelectedOption] = useState(1); // 1 == all data, 2==approve, 3==pending
     const [filteredData, setFilteredData] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postPerPage, setPostPerPage] = useState(20);
     const [searchText, setSearchText] = useState("");
     const { baseURL } = useContext(AuthContext)
     const [products, setProduct] = useState([]);
+
+    const lastPostIndex = currentPage * postPerPage;
+    const firstPostIndex = lastPostIndex - postPerPage;
+    const currentPosts = filteredData.slice(firstPostIndex, lastPostIndex)
+
+    let page = [];
+    for (let i = 1; i <= Math.ceil(filteredData.length / postPerPage); i++) {
+        page.push(i)
+    }
+
+    const nextPage = () => {
+        if (currentPage < page.length) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
+    const prevPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
 
 
     const isApprover = localStorage.getItem('is_approver') === 'true';
@@ -234,7 +257,8 @@ function InventoryRequest() {
                             {/* head */}
                             <thead className="bg-slate-200	">
                                 <tr>
-                                    <th className="text-black">#</th>
+                                    <th className="text-black">No.</th>
+                                    <th className="text-black">Serial Number</th>
                                     <th className="text-black">Name</th>
                                     <th className="text-black">Request Date</th>
                                     <th className="text-black">Approver Status</th>
@@ -244,13 +268,14 @@ function InventoryRequest() {
                             </thead>
                             <tbody>
                                 {
-                                    filteredData.map((tableData, index) => <tr key={tableData.id}>
+                                    currentPosts.map((tableData, index) => <tr key={tableData.id} className='hover:bg-slate-200'>
+                                        <td>{++index}</td>
                                         <td>{tableData.id}</td>
                                         <td>
                                             <div className="flex items-center gap-3">
 
                                                 <div>
-                                                    <div className="font-bold">{tableData.user.username}</div>
+                                                    <div className="font-bold capitalize">{tableData.user.username}</div>
                                                 </div>
                                             </div>
                                         </td>
@@ -259,11 +284,14 @@ function InventoryRequest() {
                                             <p>20 january </p>
                                         </td>
                                         <td>
-                                            {tableData.approve_status
-                                            }
+                                            <p>{tableData.approve_status === 'pending' ? <div className="badge badge-warning">{tableData.approve_status}</div> : <div className="badge badge-success text-white">{tableData.approve_status}</div>}</p>
+                                            <p></p>
                                         </td>
-                                        <td>
-                                            {tableData.manager_status}</td>
+                                        <td><p>{tableData.manager_status === 'pending' ? <div className="badge badge-warning">{tableData.manager_status}</div> : ''}
+                                        {tableData.manager_status === 'Partial Disbursed' ? <div className="badge badge-success text-white">{tableData.manager_status}</div> : ''}
+                                        {tableData.manager_status === 'waiting for approver' ? <div className="badge badge-info text-white">{tableData.manager_status}</div> : ''}
+                                        </p></td>
+                                        
                                         <td onClick={() => openModal(tableData.id)}>
                                             <button className="btn btn-outline btn-success btn-sm" onClick={() => document.getElementById('my_modal_4').showModal()}>
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -271,12 +299,22 @@ function InventoryRequest() {
                                                 </svg>
                                             </button>
                                         </td>
-
+                                        
                                     </tr>)
                                 }
+
                             </tbody>
 
                         </table>
+                        {/* pagination section start */}
+                        <div className="mx-auto text-center">
+                        <div className="join ">
+                        <button className="join-item btn" onClick={prevPage}>«</button>{page.map((page, index) => (
+                        <button key={index} className="join-item btn" onClick={() => setCurrentPage(page)}>{page}</button>))}
+                        <button className="join-item btn" onClick={nextPage}>»</button>
+                        </div>
+                            </div>
+                        {/* pagination section end */}
                         {/* model  */}
                         <dialog id="my_modal_4" className="modal">
                             <div className="modal-box w-11/12 max-w-[80%]">
@@ -319,9 +357,12 @@ function InventoryRequest() {
                                                             </td> */}
                                                         </tr>)
                                                     }
+                                                    
                                                 </tbody>
+                                                
                                             </table>
                                             {/* table end */}
+                                            
                                         </div>
                                         <div className="mb-4">
                                             <h2 className="font-bold">Additional Information</h2>

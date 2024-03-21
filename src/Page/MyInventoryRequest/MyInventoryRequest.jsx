@@ -168,7 +168,7 @@ function MyInventoryRequest() {
                                         <td>
                                             <div className="flex items-center gap-1">
                                                 <div>
-                                                    <div className="font-bold">{data.user.username}</div>
+                                                    <div className="font-bold capitalize">{data.user.username}</div>
                                                     <div className="text-sm opacity-50">{data.user.designation}</div>
                                                 </div>
                                             </div>
@@ -198,7 +198,7 @@ function MyInventoryRequest() {
                                 data.approve_status === 4 ? 'Reject' :
                                 'Unknown'
                             } */}
-                                            <p>{data.approve_status === 'pending' ? <div className="badge badge-warning">{data.approve_status}</div> : <div className="badge badge-success">{data.approve_status}</div>}</p>
+                                            <p>{data.approve_status === 'pending' ? <div className="badge badge-warning">{data.approve_status}</div> : <div className="badge badge-success text-white">{data.approve_status}</div>}</p>
                                         </td>
 
                                         <td onClick={() => openModal(data.id)}>
