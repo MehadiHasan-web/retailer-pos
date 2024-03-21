@@ -7,6 +7,8 @@ import { ToastContainer, toast } from "react-toastify";
 import { AuthContext } from './../../../Providers/AuthProvider';
 import productJson from './../../../../public/products.json'
 
+
+
 function InventoryRequest() {
     const [endDate, setEndDate] = useState(new Date());
     const [startDate, setStartDate] = useState(new Date());
@@ -24,9 +26,7 @@ function InventoryRequest() {
 
     // get json products 
     useEffect(() => {
-        // Once the component mounts, set the JSON data
         setProduct(productJson);
-
     }, []);
 
 
@@ -123,7 +123,9 @@ function InventoryRequest() {
         // Applying the search filter
         if (searchText.trim() !== "") {
             filteredResults = filteredResults.filter((item) =>
-                item.user.username.toLowerCase().includes(searchText.toLowerCase())
+                item.user.username.toLowerCase().includes(searchText.toLowerCase()) ||
+                item.id.toString().toLowerCase().includes(searchText.toLowerCase()) ||
+                item.manager_status.toLowerCase().includes(searchText.toLowerCase())
             );
         }
 
@@ -181,7 +183,6 @@ function InventoryRequest() {
 
         console.log(resultProductData)
     }
-
 
 
 
