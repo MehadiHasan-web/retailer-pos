@@ -412,10 +412,7 @@ const Home = () => {
         </div>
 
         {/* wishlist add to card  */}
-        <div
-          className="hidden lg:block  p-4 bg-white h-full "
-
-        >
+        <div className="hidden lg:block  p-4 bg-white  ">
           <div className="flex justify-between ">
             <h3 className="text-xl text-black font-medium">Whitelist</h3>
             <p className="text-xl font-bold text-black">
@@ -498,20 +495,6 @@ const Home = () => {
                 ))}
               </div>
             )}
-          </div>
-          <div className="mt-5 ">
-            <h2 className="text-2xl font-semibold mt-3">Summary</h2>
-            <p className="flex justify-between mt-3 text-sm">
-              <span>Subtotal</span>{" "}
-              <span className="font-bold">${calculateTotalPrice()}</span>
-            </p>
-            <p className="flex justify-between mt-3 text-sm">
-              <span>Discount</span> <span className="font-bold">$ 2.00</span>
-            </p>
-            <p className="border-b-2 border-dashed mt-2"></p>
-            <p className="flex justify-between mt-3 font-bold">
-              <span>Total</span> <span>$ {calculateTotalPrice()}</span>
-            </p>
           </div>
           <div className="mt-5">
             <Form wishlist={wishlist} setWishlist={setWishlist}></Form>

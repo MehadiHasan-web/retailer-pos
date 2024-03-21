@@ -30,7 +30,7 @@ const DesktopSidebar = () => {
           <li>
             <FaPlusSquare className="text-green-500"></FaPlusSquare>
           </li>
-          <li className="lg:text-xl font-semibold text-slate-200">MedKitPOS</li>
+          <li className="lg:text-xl font-semibold text-slate-200">Holos Technologies</li>
         </Link>
       </ul>
       <div className="border-[1px] border-x-slate-50 my-5"></div>
@@ -58,7 +58,7 @@ const DesktopSidebar = () => {
           </li>
           <li >
                 <Link className="flex justify-start items-center gap-2" to="/my-inventory-request"><GoHomeFill className="text-green-500"></GoHomeFill>
-                  <span className="lg:text-xs font-semibold text-slate-200">My Inventory Request</span></Link>
+                  <span className="lg:text-xs font-semibold text-slate-200">My Inventory Requests</span></Link>
               </li>
           {is_manager && (
             <li>

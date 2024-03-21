@@ -41,7 +41,7 @@ const Sidebar = () => {
           <ul className="menu p-4 w-80 min-h-full bg-[#1E1E1E] text-base-content z-30">
             <ul className="flex justify-center items-center gap-2 mt-5 ">
               <li><FaPlusSquare className="text-green-500"></FaPlusSquare></li>
-              <li className="lg:text-xl font-semibold text-slate-200">MedKitPOS</li>
+              <li className="lg:text-xl font-semibold text-slate-200">Holos Technologies</li>
               <li className="bg-slate">
                 <input id="my-drawer" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content">
@@ -68,7 +68,7 @@ const Sidebar = () => {
               </li>
               <li >
                 <Link className="flex justify-start items-center gap-2" to="/my-inventory-request"><GoHomeFill className="text-green-500"></GoHomeFill>
-                  <span className="lg:text-xs font-semibold text-slate-200">My Inventory Request</span></Link>
+                  <span className="lg:text-xs font-semibold text-slate-200">My Inventory Requests</span></Link>
               </li>
               {
                 is_manager && <li>
