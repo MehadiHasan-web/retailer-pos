@@ -107,6 +107,12 @@ function MyInventoryRequest() {
         setSearchText(e.target.value);
     };
 
+    // show data PerPage
+    const showDataPerPage = (e) => {
+        e.preventDefault();
+        setPostPerPage(parseInt(e.target.value));
+    }
+
     return (
         <>
             {/* title section start */}
@@ -116,14 +122,20 @@ function MyInventoryRequest() {
             <div >
                 <div className="container mx-auto px-12">
                     <div className="flex justify-start my-3 ">
-                        <h2 className="w-34  font-semibold border-b-[1px] border-indigo-500 ">Inventory History:</h2> <span className="ms-2"> Branch Name</span>
+                        <h2 className="w-34  font-semibold border-b-[1px] border-indigo-500 mx-auto">Inventory History:</h2>
                     </div>
 
                     {/* search bar  */}
                     <div className="py-2 mb-3 bg-slate-100 rounded-lg">
                         <div className="flex justify-center mt-1">
                             <form action="" className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-2  lg:flex md:gap-0 lg:justify-around lg:items-center">
-
+                                <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1  "
+                                    onChange={showDataPerPage}>
+                                    <option value={20} className="font-bold">Show 20</option>
+                                    <option value={30} className="font-bold">Show 30</option>
+                                    <option value={40} className="font-bold">Show 40</option>
+                                    <option value={50} className="font-bold">Show 50</option>
+                                </select>
                                 {/* date end */}
                                 <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1  "
                                     onChange={handleSelectChange}>
