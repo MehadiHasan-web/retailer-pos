@@ -129,15 +129,16 @@ function MyInventoryRequest() {
                     <div className="py-2 mb-3 bg-slate-100 rounded-lg">
                         <div className="flex justify-center mt-1">
                             <form action="" className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-2  lg:flex md:gap-0 lg:justify-around lg:items-center">
-                                <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1  "
+                                <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1   shadow hover:shadow-lg"
                                     onChange={showDataPerPage}>
                                     <option value={20} className="font-bold">Show 20</option>
                                     <option value={30} className="font-bold">Show 30</option>
                                     <option value={40} className="font-bold">Show 40</option>
                                     <option value={50} className="font-bold">Show 50</option>
+                                    <option value={100} className="font-bold">Show 100</option>
                                 </select>
                                 {/* date end */}
-                                <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1  "
+                                <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1  shadow hover:shadow-lg"
                                     onChange={handleSelectChange}>
                                     <option value={1}>All Application</option>
                                     <option value={2}>Complete Application</option>
@@ -145,12 +146,12 @@ function MyInventoryRequest() {
                                 </select>
                                 {/* date  */}
                                 <div className="w-full xl:w-44 mx-1 mb-1">
-                                    <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} className="w-full overflow-hidden border input input-sm  rounded-full" />
+                                    <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} className="w-full overflow-hidden border input input-sm  rounded-full shadow hover:shadow-lg" />
                                 </div>
                                 {/* search bar  */}
                                 <input value={searchText}
-                                    onChange={handleSearchInputChange} type="text" placeholder="Type here" className="input input-bordered input-sm max-w-xs w-full xl:w-44 rounded-full mx-1 mb-1 " />
-                                <button onClick={handleClearSearch} type="button" className="btn btn-outline btn-sm rounded-full mx-1 hover:text-white ">Clear filter</button>
+                                    onChange={handleSearchInputChange} type="text" placeholder="Type here" className="input input-bordered input-sm max-w-xs w-full xl:w-44 rounded-full mx-1 mb-1 shadow hover:shadow-lg" />
+                                <button onClick={handleClearSearch} type="button" className="btn btn-outline btn-sm rounded-full mx-1 hover:text-white shadow hover:shadow-lg">Clear filter</button>
 
                             </form>
                         </div>
@@ -180,7 +181,7 @@ function MyInventoryRequest() {
                                         <td>
                                             <div className="flex items-center gap-1">
                                                 <div>
-                                                    <div className="font-bold">{data.user.username}</div>
+                                                    <div className="font-bold capitalize">{data.user.username}</div>
                                                     <div className="text-sm opacity-50">{data.user.designation}</div>
                                                 </div>
                                             </div>
@@ -210,7 +211,7 @@ function MyInventoryRequest() {
                                 data.approve_status === 4 ? 'Reject' :
                                 'Unknown'
                             } */}
-                                            <p>{data.approve_status === 'pending' ? <div className="badge badge-warning">{data.approve_status}</div> : <div className="badge badge-success">{data.approve_status}</div>}</p>
+                                            <p>{data.approve_status === 'pending' ? <div className="badge badge-warning">{data.approve_status}</div> : <div className="badge badge-success text-white">{data.approve_status}</div>}</p>
                                         </td>
 
                                         <td onClick={() => openModal(data.id)}>
