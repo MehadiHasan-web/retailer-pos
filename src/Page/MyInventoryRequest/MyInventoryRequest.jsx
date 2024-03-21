@@ -107,6 +107,12 @@ function MyInventoryRequest() {
         setSearchText(e.target.value);
     };
 
+    // show data PerPage
+    const showDataPerPage = (e) => {
+        e.preventDefault();
+        setPostPerPage(parseInt(e.target.value));
+    }
+
     return (
         <>
             {/* title section start */}
@@ -116,16 +122,23 @@ function MyInventoryRequest() {
             <div >
                 <div className="container mx-auto px-12">
                     <div className="flex justify-start my-3 ">
-                        <h2 className="w-34  font-semibold border-b-[1px] border-indigo-500 ">Inventory History:</h2> <span className="ms-2"> Branch Name</span>
+                        <h2 className="w-34  font-semibold border-b-[1px] border-indigo-500 mx-auto">Inventory History:</h2>
                     </div>
 
                     {/* search bar  */}
                     <div className="py-2 mb-3 bg-slate-100 rounded-lg">
                         <div className="flex justify-center mt-1">
                             <form action="" className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-2  lg:flex md:gap-0 lg:justify-around lg:items-center">
-
+                                <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1   shadow hover:shadow-lg"
+                                    onChange={showDataPerPage}>
+                                    <option value={20} className="font-bold">Show 20</option>
+                                    <option value={30} className="font-bold">Show 30</option>
+                                    <option value={40} className="font-bold">Show 40</option>
+                                    <option value={50} className="font-bold">Show 50</option>
+                                    <option value={100} className="font-bold">Show 100</option>
+                                </select>
                                 {/* date end */}
-                                <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1  "
+                                <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1  shadow hover:shadow-lg"
                                     onChange={handleSelectChange}>
                                     <option value={1}>All Application</option>
                                     <option value={2}>Complete Application</option>
@@ -133,12 +146,12 @@ function MyInventoryRequest() {
                                 </select>
                                 {/* date  */}
                                 <div className="w-full xl:w-44 mx-1 mb-1">
-                                    <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} className="w-full overflow-hidden border input input-sm  rounded-full" />
+                                    <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} className="w-full overflow-hidden border input input-sm  rounded-full shadow hover:shadow-lg" />
                                 </div>
                                 {/* search bar  */}
                                 <input value={searchText}
-                                    onChange={handleSearchInputChange} type="text" placeholder="Type here" className="input input-bordered input-sm max-w-xs w-full xl:w-44 rounded-full mx-1 mb-1 " />
-                                <button onClick={handleClearSearch} type="button" className="btn btn-outline btn-sm rounded-full mx-1 hover:text-white ">Clear filter</button>
+                                    onChange={handleSearchInputChange} type="text" placeholder="Type here" className="input input-bordered input-sm max-w-xs w-full xl:w-44 rounded-full mx-1 mb-1 shadow hover:shadow-lg" />
+                                <button onClick={handleClearSearch} type="button" className="btn btn-outline btn-sm rounded-full mx-1 hover:text-white shadow hover:shadow-lg">Clear filter</button>
 
                             </form>
                         </div>
