@@ -14,16 +14,17 @@ function InventoryRequest() {
     const [adminData, setAdminData] = useState([])
     const [modalData, setModalData] = useState({});
     const { baseURL } = useContext(AuthContext)
-    console.log(adminData)
+    const [searchText, setSearchText] = useState("");
+    const [filteredData, setFilteredData] = useState([]);
 
     const [currentPage, setCurrentPage] = useState(1);
     const [postPerPage, setPostPerPage] = useState(20);
     const lastPostIndex = currentPage * postPerPage;
     const firstPostIndex = lastPostIndex - postPerPage;
-    const currentPosts = adminData.slice(firstPostIndex, lastPostIndex)
+    const currentPosts = filteredData.slice(firstPostIndex, lastPostIndex)
 
     let page = [];
-    for (let i = 1; i <= Math.ceil(adminData.length / postPerPage); i++) {
+    for (let i = 1; i <= Math.ceil(filteredData.length / postPerPage); i++) {
         page.push(i)
     }
 
@@ -137,6 +138,31 @@ function InventoryRequest() {
         setPostPerPage(parseInt(e.target.value));
     }
 
+    // Handle search input change
+    const handleSearchInputChange = (e) => {
+        setSearchText(e.target.value);
+    };
+
+    useEffect(() => {
+        let filteredResults = adminData;
+
+        
+
+        // Applying the search filter
+        if (searchText.trim() !== "") {
+            filteredResults = filteredResults.filter((item) =>
+                item.user.username.toLowerCase().includes(searchText.toLowerCase()) ||
+                item.id.toString().toLowerCase().includes(searchText.toLowerCase()) ||
+                item.manager_status.toLowerCase().includes(searchText.toLowerCase()) ||
+                item.approve_status.toLowerCase().includes(searchText.toLowerCase())
+            );
+        }
+
+        setFilteredData(filteredResults);
+    }, [ adminData, searchText]);
+
+    
+
     return (
         <div>
             <Title pageName={"Inventory Complete"}></Title>
@@ -144,7 +170,7 @@ function InventoryRequest() {
             {/* table history  */}
             <div >
                 <div className="container mx-auto px-12">
-                    <div className="flex justify-start my-3 ">
+                    <div className="flex justify-center my-3 ">
                         <h2 className="w-34  font-semibold border-b-[1px] border-indigo-500 ">Inventory History:</h2> <span className="ms-2"> Branch Name</span>
                     </div>
 
@@ -164,7 +190,7 @@ function InventoryRequest() {
                                     <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} className="w-full overflow-hidden border input input-sm  rounded-full" />
                                 </div>
                                 {/* search bar  */}
-                                <input type="text" placeholder="Type here" className="input input-bordered input-sm max-w-xs w-full xl:w-44 rounded-full mx-1 mb-1 " />
+                                <input value={searchText} onChange={handleSearchInputChange} type="text" placeholder="Type here" className="input input-bordered input-sm max-w-xs w-full xl:w-44 rounded-full mx-1 mb-1  shadow hover:shadow-lg" />
                                 <button type="submit" className="btn btn-outline btn-sm rounded-full mx-3  hover:text-white ">Search</button>
                                 <button type="button" className="btn btn-outline btn-sm rounded-full mx-1  hover:text-white ">Clear filter</button>
 

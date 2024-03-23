@@ -102,24 +102,59 @@ function PurchaseRequestHistory() {
     setSelectedOption(newSelectedOption);
   }
 
+
   useEffect(() => {
     let filteredResults = userData;
+    if (selectedOption === 2) {
+      filteredResults = filteredResults.filter((item) => item.approve_status === "Approved");
+  } else if (selectedOption === 3) {
+      filteredResults = filteredResults.filter((item) => item.approve_status === "pending");
+  }
+
     // Applying the search filter
     if (searchText.trim() !== "") {
-      filteredResults = userData.filter((item) =>
-        item.item.toLowerCase().includes(searchText.toLowerCase())
-        // item.id.toString().toLowerCase().includes(searchText.toLowerCase()) ||
-        // item.manager_status.toLowerCase().includes(searchText.toLowerCase()) ||
-        // item.approve_status.toLowerCase().includes(searchText.toLowerCase())
+      filteredResults = filteredResults.filter((item) =>
+          item.item.toLowerCase().includes(searchText.toLowerCase()) ||
+          item.quantity.toString().toLowerCase().includes(searchText.toLowerCase()) ||
+          item.status.toLowerCase().includes(searchText.toLowerCase())
       );
-      console.log(filteredResults)
+  }
+    setUserData(filteredResults);
+  }, [selectedOption, userData, searchText]);
+
+  const [currentPage, setCurrentPage] = useState(1);
+    const [postPerPage, setPostPerPage] = useState(20);
+    const lastPostIndex = currentPage * postPerPage;
+    const firstPostIndex = lastPostIndex - postPerPage;
+    const currentPosts = userData.slice(firstPostIndex, lastPostIndex)
+
+
+    let page = [];
+    for (let i = 1; i <= Math.ceil(userData.length / postPerPage); i++) {
+        page.push(i)
     }
-  }, []);
+
+  const nextPage = () => {
+    if (currentPage < page.length) {
+        setCurrentPage(currentPage + 1);
+    }
+};
+
+const prevPage = () => {
+    if (currentPage > 1) {
+        setCurrentPage(currentPage - 1);
+    }
+};
 
   // Handle search input change
   const handleSearchInputChange = (e) => {
     setSearchText(e.target.value);
   };
+
+  const showDataPerPage = (e) => {
+    e.preventDefault();
+    setPostPerPage(parseInt(e.target.value));
+}
 
   return (
     <>
@@ -148,6 +183,14 @@ function PurchaseRequestHistory() {
                                 </select> */}
                 {/* date end */}
                 <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1   shadow hover:shadow-lg"
+                                    onChange={showDataPerPage}>
+                                    <option value={20} className="font-bold">Show 20</option>
+                                    <option value={30} className="font-bold">Show 30</option>
+                                    <option value={40} className="font-bold">Show 40</option>
+                                    <option value={50} className="font-bold">Show 50</option>
+                                    <option value={100} className="font-bold">Show 100</option>
+                                </select>
+                <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1   shadow hover:shadow-lg"
                   onChange={handleSelectChange}>
                   <option value={1}>All Application</option>
                   <option value={2}>Complete Application</option>
@@ -168,6 +211,7 @@ function PurchaseRequestHistory() {
               {/* head */}
               <thead className="bg-slate-200	">
                 <tr>
+                  <th className="text-black">No.</th>
                   <th className="text-black">Item Name</th>
                   <th className="text-black">Quantity</th>
                   <th className="text-black">Receive Date</th>
@@ -177,8 +221,10 @@ function PurchaseRequestHistory() {
               </thead>
               <tbody>
                 {
-                  userData.map((data, index) => <tr key={data.id}>
-
+                  currentPosts.map((data, index) => <tr key={data.id}>
+                    <td>
+                      {++index}
+                    </td>
                     <td>
                       <div className="flex items-center gap-1">
                         <div>
@@ -210,6 +256,7 @@ function PurchaseRequestHistory() {
               {/* foot */}
               <tfoot className="bg-slate-200	">
                 <tr>
+                  <th className="text-black">No.</th>
                   <th className="text-black">Item Name</th>
                   <th className="text-black">Quantity</th>
                   <th className="text-black">Receive Date</th>
@@ -218,6 +265,16 @@ function PurchaseRequestHistory() {
                 </tr>
               </tfoot>
             </table>
+            {/* pagination section start */}
+            <div className="mx-auto text-center">
+              <div className="join ">
+                <button className="join-item btn" onClick={prevPage}>«</button>
+                  {page.map((page, index) => (
+                    <button key={index} className="join-item btn" onClick={() => setCurrentPage(page)}>{page}</button>))}
+                    <button className="join-item btn" onClick={nextPage}>»</button>
+              </div>
+            </div>
+            {/* pagination section end */}
             {/* modal  */}
             <dialog id="my_modal_3" className="modal">
               <div className="modal-box">
