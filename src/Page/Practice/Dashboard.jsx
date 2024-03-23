@@ -28,7 +28,7 @@ const Dashboard = () => {
     <div className=" p-5">
       <div className="my-5">
         <ul className="sm:flex sm:justify-between sm:items-center">
-          <li className="text-lg lg:text-xl"><span className="text-gray-500">Welcome back,</span><span className="text-black font-bold">Business name</span></li>
+          <li className="text-lg lg:text-xl"><span className="text-gray-500">Welcome back</span></li>
           <li className="mt-2 sm:mt-0">
             <label className="input input-bordered flex items-center gap-2">
               <input type="text" className="grow" placeholder="Search" />

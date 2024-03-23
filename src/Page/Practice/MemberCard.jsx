@@ -8,20 +8,23 @@ import { GiReturnArrow, GiStockpiles } from "react-icons/gi";
 import { MdSupervisorAccount } from "react-icons/md";
 import { IoIosDoneAll } from "react-icons/io";
 import { BiPurchaseTag } from "react-icons/bi";
-
+import Aos from "aos";
+import 'aos/dist/aos.css';
+import { useEffect } from "react";
 
 const MemberCard = (data) => {
 
-  console.log(data.data.inventorrequest_approve)
 
-
+  useEffect(() => {
+    Aos.init();
+  }, []);
 
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-2">
 
         {/* inventorrequest_approve */}
-        <div className="flex gap-5 items-center bg-white shadow-lg shadow-slate-300 w-full h-32 md:h-40 px-3 mb-5 rounded-xl  hover:shadow-slate-400 hover:border-solid hover:border-[3px] hover:border-red-100 hover:cursor-pointer">
+        <div className="flex gap-5 items-center bg-white shadow-lg shadow-slate-300 w-full h-32 md:h-40 px-3 mb-5 rounded-xl  hover:shadow-slate-400 hover:border-solid hover:border-[3px] hover:border-red-100 hover:cursor-pointer" data-aos="flip-left">
           <div className="">
             {/* <img className="w-16 h-16 sm:h-14 sm:w-14 md:h-20 md:w-20 lg:h-20 lg:w-24" ></img> */}
             <VscGitPullRequestGoToChanges className="w-16 h-16 sm:h-14 sm:w-14 md:h-20 md:w-20 lg:h-20 lg:w-24" />
@@ -40,7 +43,7 @@ const MemberCard = (data) => {
         </div>
 
         {/* inventorrequest_disburse */}
-        <div className="flex gap-5 items-center bg-white shadow-lg shadow-slate-300 w-full h-32 md:h-40 px-3 mb-5 rounded-xl  hover:border-solid hover:border-[3px] hover:border-red-100 hover:cursor-pointer hover:shadow-slate-400">
+        <div className="flex gap-5 items-center bg-white shadow-lg shadow-slate-300 w-full h-32 md:h-40 px-3 mb-5 rounded-xl  hover:border-solid hover:border-[3px] hover:border-red-100 hover:cursor-pointer hover:shadow-slate-400" data-aos="flip-left">
           <div className="">
             {/* <img className="w-16 h-16 sm:h-14 sm:w-14 md:h-20 md:w-20 lg:h-20 lg:w-24" ></img> */}
             <IoIosGitPullRequest className="w-16 h-16 sm:h-14 sm:w-14 md:h-20 md:w-20 lg:h-20 lg:w-24" />
@@ -59,7 +62,7 @@ const MemberCard = (data) => {
         </div>
 
         {/* inventorrequest_partisl_disburse */}
-        <div className="flex gap-5 items-center bg-white shadow-lg shadow-slate-300 w-full h-32 md:h-40 px-3 mb-5 rounded-xl   hover:border-solid hover:border-[3px] hover:border-red-100 hover:cursor-pointer hover:shadow-slate-400">
+        <div className="flex gap-5 items-center bg-white shadow-lg shadow-slate-300 w-full h-32 md:h-40 px-3 mb-5 rounded-xl   hover:border-solid hover:border-[3px] hover:border-red-100 hover:cursor-pointer hover:shadow-slate-400" data-aos="flip-left">
           <div className="">
             {/* <img className="w-16 h-16 sm:h-14 sm:w-14 md:h-20 md:w-20 lg:h-20 lg:w-24" ></img> */}
             <IoIosGitPullRequest className="w-16 h-16 sm:h-14 sm:w-14 md:h-20 md:w-20 lg:h-20 lg:w-24" />
@@ -78,7 +81,7 @@ const MemberCard = (data) => {
         </div>
 
         {/* inventorrequest_hold */}
-        <div className="flex gap-5 items-center bg-white shadow-lg shadow-slate-300 w-full h-32 md:h-40 px-3 mb-5 rounded-xl   hover:border-solid hover:border-[3px] hover:border-red-100 hover:cursor-pointer hover:shadow-slate-400">
+        <div className="flex gap-5 items-center bg-white shadow-lg shadow-slate-300 w-full h-32 md:h-40 px-3 mb-5 rounded-xl   hover:border-solid hover:border-[3px] hover:border-red-100 hover:cursor-pointer hover:shadow-slate-400" data-aos="flip-left">
           <div className="">
             {/* <img className="w-16 h-16 sm:h-14 sm:w-14 md:h-20 md:w-20 lg:h-20 lg:w-24" ></img> */}
             <IoStopCircleOutline className="w-16 h-16 sm:h-14 sm:w-14 md:h-20 md:w-20 lg:h-20 lg:w-24" />
@@ -97,7 +100,7 @@ const MemberCard = (data) => {
         </div>
 
         {/* inventorrequest_reject */}
-        <div className="flex gap-5 items-center bg-white shadow-lg shadow-slate-300 w-full h-32 md:h-40 px-3 mb-5 rounded-xl   hover:border-solid hover:border-[3px] hover:border-red-100 hover:cursor-pointer hover:shadow-slate-400">
+        <div className="flex gap-5 items-center bg-white shadow-lg shadow-slate-300 w-full h-32 md:h-40 px-3 mb-5 rounded-xl   hover:border-solid hover:border-[3px] hover:border-red-100 hover:cursor-pointer hover:shadow-slate-400" data-aos="flip-left">
           <div className="">
             {/* <img className="w-16 h-16 sm:h-14 sm:w-14 md:h-20 md:w-20 lg:h-20 lg:w-24" ></img> */}
             <FcCancel className="w-16 h-16 sm:h-14 sm:w-14 md:h-20 md:w-20 lg:h-20 lg:w-24" />
@@ -116,7 +119,7 @@ const MemberCard = (data) => {
         </div>
 
         {/* inventorrequest_return */}
-        <div className="flex gap-5 items-center bg-white shadow-lg shadow-slate-300 w-full h-32 md:h-40 px-3 mb-5 rounded-xl   hover:border-solid hover:border-[3px] hover:border-red-100 hover:cursor-pointer hover:shadow-slate-400">
+        <div className="flex gap-5 items-center bg-white shadow-lg shadow-slate-300 w-full h-32 md:h-40 px-3 mb-5 rounded-xl   hover:border-solid hover:border-[3px] hover:border-red-100 hover:cursor-pointer hover:shadow-slate-400" data-aos="flip-left">
           <div className="">
             {/* <img className="w-16 h-16 sm:h-14 sm:w-14 md:h-20 md:w-20 lg:h-20 lg:w-24" ></img> */}
             <GiReturnArrow className="w-16 h-16 sm:h-14 sm:w-14 md:h-20 md:w-20 lg:h-20 lg:w-24" />
@@ -135,7 +138,7 @@ const MemberCard = (data) => {
         </div>
 
         {/* total_account */}
-        <div className="flex gap-5 items-center bg-white shadow-lg shadow-slate-300 w-full h-32 md:h-40 px-3 mb-5 rounded-xl   hover:border-solid hover:border-[3px] hover:border-red-100 hover:cursor-pointer hover:shadow-slate-400">
+        <div className="flex gap-5 items-center bg-white shadow-lg shadow-slate-300 w-full h-32 md:h-40 px-3 mb-5 rounded-xl   hover:border-solid hover:border-[3px] hover:border-red-100 hover:cursor-pointer hover:shadow-slate-400" data-aos="flip-left">
           <div className="">
             {/* <img className="w-16 h-16 sm:h-14 sm:w-14 md:h-20 md:w-20 lg:h-20 lg:w-24" ></img> */}
             <MdSupervisorAccount className="w-16 h-16 sm:h-14 sm:w-14 md:h-20 md:w-20 lg:h-20 lg:w-24" />
@@ -154,7 +157,7 @@ const MemberCard = (data) => {
         </div>
 
         {/* total_inventory_stock */}
-        <div className="flex gap-5 items-center bg-white shadow-lg shadow-slate-300 w-full h-32 md:h-40 px-3 mb-5 rounded-xl   hover:border-solid hover:border-[3px] hover:border-red-100 hover:cursor-pointer hover:shadow-slate-400">
+        <div className="flex gap-5 items-center bg-white shadow-lg shadow-slate-300 w-full h-32 md:h-40 px-3 mb-5 rounded-xl   hover:border-solid hover:border-[3px] hover:border-red-100 hover:cursor-pointer hover:shadow-slate-400" data-aos="flip-left">
           <div className="">
             {/* <img className="w-16 h-16 sm:h-14 sm:w-14 md:h-20 md:w-20 lg:h-20 lg:w-24" ></img> */}
             <GiStockpiles className="w-16 h-16 sm:h-14 sm:w-14 md:h-20 md:w-20 lg:h-20 lg:w-24" />
@@ -174,7 +177,7 @@ const MemberCard = (data) => {
 
 
         {/* total_purchased_Completed */}
-        <div className="flex gap-5 items-center bg-white shadow-lg shadow-slate-300 w-full h-32 md:h-40 px-3 mb-5 rounded-xl  hover:border-solid hover:border-[3px] hover:border-red-100 hover:cursor-pointer hover:shadow-slate-400">
+        <div className="flex gap-5 items-center bg-white shadow-lg shadow-slate-300 w-full h-32 md:h-40 px-3 mb-5 rounded-xl  hover:border-solid hover:border-[3px] hover:border-red-100 hover:cursor-pointer hover:shadow-slate-400" data-aos="flip-left">
           <div className="">
             {/* <img className="w-16 h-16 sm:h-14 sm:w-14 md:h-20 md:w-20 lg:h-20 lg:w-24" ></img> */}
             <IoIosDoneAll className="w-16 h-16 sm:h-14 sm:w-14 md:h-20 md:w-20 lg:h-20 lg:w-24" />
@@ -193,7 +196,7 @@ const MemberCard = (data) => {
         </div>
 
         {/* total_purchased_pending */}
-        <div className="flex gap-5 items-center bg-white shadow-lg shadow-slate-300 w-full h-32 md:h-40 px-3 mb-5 rounded-xl   hover:border-solid hover:border-[3px] hover:border-red-100 hover:cursor-pointer hover:shadow-slate-400">
+        <div className="flex gap-5 items-center bg-white shadow-lg shadow-slate-300 w-full h-32 md:h-40 px-3 mb-5 rounded-xl   hover:border-solid hover:border-[3px] hover:border-red-100 hover:cursor-pointer hover:shadow-slate-400" data-aos="flip-left">
           <div className="">
             {/* <img className="w-16 h-16 sm:h-14 sm:w-14 md:h-20 md:w-20 lg:h-20 lg:w-24" ></img> */}
             <IoIosDoneAll className="w-16 h-16 sm:h-14 sm:w-14 md:h-20 md:w-20 lg:h-20 lg:w-24" />
@@ -212,7 +215,7 @@ const MemberCard = (data) => {
         </div>
 
         {/* total_purchased */}
-        <div className="flex gap-5 items-center bg-white shadow-lg shadow-slate-300 w-full h-32 md:h-40 px-3 mb-5 rounded-xl   hover:border-solid hover:border-[3px] hover:border-red-100 hover:cursor-pointer hover:shadow-slate-400">
+        <div className="flex gap-5 items-center bg-white shadow-lg shadow-slate-300 w-full h-32 md:h-40 px-3 mb-5 rounded-xl   hover:border-solid hover:border-[3px] hover:border-red-100 hover:cursor-pointer hover:shadow-slate-400" data-aos="flip-left">
           <div className="">
             {/* <img className="w-16 h-16 sm:h-14 sm:w-14 md:h-20 md:w-20 lg:h-20 lg:w-24" ></img> */}
             <BiPurchaseTag className="w-16 h-16 sm:h-14 sm:w-14 md:h-20 md:w-20 lg:h-20 lg:w-24" />
@@ -235,7 +238,7 @@ const MemberCard = (data) => {
       <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900">Weekly Report</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-6">
         {/* inventorrequest_disburse_week */}
-        <div className="flex gap-5 items-center bg-white shadow-lg shadow-slate-300 w-full h-32 md:h-40 px-3 mb-5 rounded-xl  hover:shadow-slate-400 hover:border-solid hover:border-[3px] hover:border-red-100 hover:cursor-pointer">
+        <div className="flex gap-5 items-center bg-white shadow-lg shadow-slate-300 w-full h-32 md:h-40 px-3 mb-5 rounded-xl  hover:shadow-slate-400 hover:border-solid hover:border-[3px] hover:border-red-100 hover:cursor-pointer" data-aos="flip-up">
           <div className="">
             {/* <img className="w-16 h-16 sm:h-14 sm:w-14 md:h-20 md:w-20 lg:h-20 lg:w-24" ></img> */}
             <IoIosGitPullRequest className="w-16 h-16 sm:h-14 sm:w-14 md:h-20 md:w-20 lg:h-20 lg:w-24" />
@@ -254,7 +257,7 @@ const MemberCard = (data) => {
         </div>
 
         {/* total_account_week */}
-        <div className="flex gap-5 items-center bg-white shadow-lg shadow-slate-300 w-full h-32 md:h-40 px-3 mb-5 rounded-xl  hover:shadow-slate-400 hover:border-solid hover:border-[3px] hover:border-red-100 hover:cursor-pointer">
+        <div className="flex gap-5 items-center bg-white shadow-lg shadow-slate-300 w-full h-32 md:h-40 px-3 mb-5 rounded-xl  hover:shadow-slate-400 hover:border-solid hover:border-[3px] hover:border-red-100 hover:cursor-pointer" data-aos="flip-down">
           <div className="">
             {/* <img className="w-16 h-16 sm:h-14 sm:w-14 md:h-20 md:w-20 lg:h-20 lg:w-24" ></img> */}
             <MdSupervisorAccount className="w-16 h-16 sm:h-14 sm:w-14 md:h-20 md:w-20 lg:h-20 lg:w-24" />
@@ -278,7 +281,7 @@ const MemberCard = (data) => {
       <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900">Monthly Report</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-6">
         {/* inventorrequest_disburse_month */}
-        <div className="flex gap-5 items-center bg-white shadow-lg shadow-slate-300 w-full h-32 md:h-40 px-3 mb-5 rounded-xl  hover:shadow-slate-400 hover:border-solid hover:border-[3px] hover:border-red-100 hover:cursor-pointer">
+        <div className="flex gap-5 items-center bg-white shadow-lg shadow-slate-300 w-full h-32 md:h-40 px-3 mb-5 rounded-xl  hover:shadow-slate-400 hover:border-solid hover:border-[3px] hover:border-red-100 hover:cursor-pointer" data-aos="flip-down">
           <div className="">
             {/* <img className="w-16 h-16 sm:h-14 sm:w-14 md:h-20 md:w-20 lg:h-20 lg:w-24" ></img> */}
             <IoIosGitPullRequest className="w-16 h-16 sm:h-14 sm:w-14 md:h-20 md:w-20 lg:h-20 lg:w-24" />
@@ -297,7 +300,7 @@ const MemberCard = (data) => {
         </div>
 
         {/* total_account_month */}
-        <div className="flex gap-5 items-center bg-white shadow-lg shadow-slate-300 w-full h-32 md:h-40 px-3 mb-5 rounded-xl  hover:shadow-slate-400 hover:border-solid hover:border-[3px] hover:border-red-100 hover:cursor-pointer">
+        <div className="flex gap-5 items-center bg-white shadow-lg shadow-slate-300 w-full h-32 md:h-40 px-3 mb-5 rounded-xl  hover:shadow-slate-400 hover:border-solid hover:border-[3px] hover:border-red-100 hover:cursor-pointer" data-aos="flip-down">
           <div className="">
             {/* <img className="w-16 h-16 sm:h-14 sm:w-14 md:h-20 md:w-20 lg:h-20 lg:w-24" ></img> */}
             <MdSupervisorAccount className="w-16 h-16 sm:h-14 sm:w-14 md:h-20 md:w-20 lg:h-20 lg:w-24" />
