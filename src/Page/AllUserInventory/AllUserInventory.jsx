@@ -91,7 +91,7 @@ useEffect(() => {
                                     <option value={100} className="font-bold">Show 100</option>
                                 </select>
                                 <input value={searchText} onChange={handleSearchInputChange} type="text" placeholder="Type here" className="input input-bordered input-sm max-w-xs w-full xl:w-44 rounded-full mx-1 mb-1  shadow hover:shadow-lg" />
-                                <button type="submit" className="btn btn-outline btn-sm rounded-full mx-3  hover:text-white ">Search</button>
+                                <button type="button" className="btn btn-outline btn-sm rounded-full mx-3  hover:text-white ">Search</button>
                                 <button type="button" className="btn btn-outline btn-sm rounded-full mx-1  hover:text-white ">Clear filter</button>
 
                             </form>

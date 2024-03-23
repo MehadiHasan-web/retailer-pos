@@ -102,19 +102,25 @@ function PurchaseRequestHistory() {
     setSelectedOption(newSelectedOption);
   }
 
+
   useEffect(() => {
     let filteredResults = userData;
+    if (selectedOption === 2) {
+      filteredResults = filteredResults.filter((item) => item.approve_status === "Approved");
+  } else if (selectedOption === 3) {
+      filteredResults = filteredResults.filter((item) => item.approve_status === "pending");
+  }
+
     // Applying the search filter
     if (searchText.trim() !== "") {
-      filteredResults = userData.filter((item) =>
-        item.item.toLowerCase().includes(searchText.toLowerCase())
-        // item.id.toString().toLowerCase().includes(searchText.toLowerCase()) ||
-        // item.manager_status.toLowerCase().includes(searchText.toLowerCase()) ||
-        // item.approve_status.toLowerCase().includes(searchText.toLowerCase())
+      filteredResults = filteredResults.filter((item) =>
+          item.item.toLowerCase().includes(searchText.toLowerCase()) ||
+          item.quantity.toString().toLowerCase().includes(searchText.toLowerCase()) ||
+          item.status.toLowerCase().includes(searchText.toLowerCase())
       );
-      console.log(filteredResults)
-    }
-  }, []);
+  }
+    setUserData(filteredResults);
+  }, [selectedOption, userData, searchText]);
 
   const [currentPage, setCurrentPage] = useState(1);
     const [postPerPage, setPostPerPage] = useState(20);
@@ -250,6 +256,7 @@ const prevPage = () => {
               {/* foot */}
               <tfoot className="bg-slate-200	">
                 <tr>
+                  <th className="text-black">No.</th>
                   <th className="text-black">Item Name</th>
                   <th className="text-black">Quantity</th>
                   <th className="text-black">Receive Date</th>
