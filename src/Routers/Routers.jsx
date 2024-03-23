@@ -23,6 +23,7 @@ import HomeExtra from './../Page/Dashboard/Home/Home/HomeExtra';
 // import Practice from "../Page/Practice/Practice";
 import Dashboard from "../Page/Practice/Dashboard";
 import MyInventoryRequest from "../Page/MyInventoryRequest/MyInventoryRequest";
+import UserProfile from "../Page/UserProfile/UserProfile";
 
 
 const router = createBrowserRouter([
@@ -117,6 +118,10 @@ const router = createBrowserRouter([
       {
         path : '/homeExtra',
         element : <HomeExtra></HomeExtra>
+      },
+      {
+        path : '/user-profile',
+        element : <UserProfile></UserProfile>
       },
       // {
       //   path : '/practice',
