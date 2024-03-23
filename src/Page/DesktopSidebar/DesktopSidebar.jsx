@@ -116,6 +116,17 @@ const DesktopSidebar = () => {
               </Link>
             </li>
           )}
+          <li>
+              <Link
+                className="flex justify-start items-center gap-2"
+                to="/user-profile"
+              >
+                <FaPlusSquare className="text-green-500"></FaPlusSquare>
+                <span className="lg:text-sm font-semibold text-slate-200">
+                  User Profile
+                </span>
+              </Link>
+            </li>
           {/* <li>
             <Link
               className="flex justify-start items-center gap-2"
