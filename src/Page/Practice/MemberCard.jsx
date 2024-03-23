@@ -1,5 +1,7 @@
+import { useEffect, useState } from "react";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { LuDot } from "react-icons/lu";
+import { TbSum } from "react-icons/tb";
 
 
 const MemberCard = () => {
@@ -54,7 +56,7 @@ const MemberCard = () => {
       "visitor" : "500 visits per month"
     }
   ]
-
+  
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -77,6 +79,7 @@ const MemberCard = () => {
           </div>
         )
       }
+      
     </div>
   );
 };
