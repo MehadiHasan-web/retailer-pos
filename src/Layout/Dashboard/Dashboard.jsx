@@ -10,7 +10,6 @@ AOS.init();
 const DashBoard = () => {
 
   const [open, setOpen] = useState(true);
-  console.log(open)
 
   return (
     <div>
