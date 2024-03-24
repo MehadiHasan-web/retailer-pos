@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
 import { RiGlobalLine } from "react-icons/ri";
-import { HiOutlineMailOpen, HiDotsHorizontal } from "react-icons/hi";
+import { HiOutlineMailOpen } from "react-icons/hi";
 import { FaPhoneAlt, FaRegCalendarAlt } from "react-icons/fa";
-import { IoPersonOutline } from "react-icons/io5";
-import { BiMessageMinus } from "react-icons/bi";
 import './UserProfile.css'
 
 
@@ -11,8 +9,8 @@ const UserProfile = () => {
   return (
     <div className="mt-5">
       <div className="container mx-auto">
-        <div className="flex justify-center gap-16">
-          <div className="flex-1 ml-14">
+        <div className="flex justify-center flex-col lg:flex-row gap-16 p-4">
+          <div className="flex-1 lg:ml-14">
             <div className="p-5 bg-base-100 rounded-md shadow-2xl mb-5">
               <div>
                 <div className="bgImgPro w-full h-28 rounded-md"></div>
@@ -58,7 +56,7 @@ const UserProfile = () => {
                 </li>
               </ul>
               <div className="divider"></div>
-              <ul className="grid grid-cols-3 gap-5">
+              <ul className="flex flex-wrap gap-5">
                 <li className="text-base border-[1px] border-slate-200 p-2 rounded-md bg-slate-100 text-center font-semibold"><Link to="#">UI Design</Link></li>
                 <li className="text-base border-[1px] border-slate-200 p-2 rounded-md bg-slate-100 text-center font-semibold"><Link to="#">UX Design</Link></li>
                 <li className="text-base border-[1px] border-slate-200 p-2 rounded-md bg-slate-100 text-center font-semibold"><Link to="#">Design System</Link></li>
@@ -67,7 +65,7 @@ const UserProfile = () => {
               </ul>
             </div>
           </div>
-          <div className="flex-1">
+          <div className="flex-1 mx-auto">
             <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
             <form className="card-body">
               <div className="form-control">

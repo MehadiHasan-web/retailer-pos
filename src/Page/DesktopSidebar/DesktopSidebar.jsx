@@ -43,7 +43,7 @@ const DesktopSidebar = () => {
               to="/dashboard"
             >
               <MdDashboard className="text-green-500"></MdDashboard>
-              <span className="lg:text-xs font-semibold text-slate-200">
+              <span className=" font-semibold text-slate-200">
                 Dashboard
               </span>
             </Link>
@@ -51,14 +51,14 @@ const DesktopSidebar = () => {
           <li>
             <Link className="flex justify-start items-center gap-2" to="/">
               <GoHomeFill className="text-green-500"></GoHomeFill>
-              <span className="lg:text-xs font-semibold text-slate-200">
+              <span className=" font-semibold text-slate-200">
               Request for inventory 
               </span>
             </Link>
           </li>
           <li >
                 <Link className="flex justify-start items-center gap-2" to="/my-inventory-request"><GoHomeFill className="text-green-500"></GoHomeFill>
-                  <span className="lg:text-xs font-semibold text-slate-200">My Inventory Requests</span></Link>
+                  <span className=" font-semibold text-slate-200">My Inventory Requests</span></Link>
               </li>
           {is_manager && (
             <li>
@@ -67,7 +67,7 @@ const DesktopSidebar = () => {
                 to="/inventoryRequest"
               >
                 <FaPlusSquare className="text-green-500"></FaPlusSquare>
-                <span className="lg:text-xs font-semibold text-slate-200">
+                <span className=" font-semibold text-slate-200">
                   Inventory Request
                 </span>
               </Link>
@@ -85,7 +85,7 @@ const DesktopSidebar = () => {
                 to="/applications"
               >
                 <MdSettingsApplications className="text-green-500"></MdSettingsApplications>
-                <span className="lg:text-xs font-semibold text-slate-200">
+                <span className=" font-semibold text-slate-200">
                   Applications
                 </span>
               </Link>
@@ -97,7 +97,7 @@ const DesktopSidebar = () => {
               to="/myInventory"
             >
               <IoPersonCircleSharp className="text-green-500"></IoPersonCircleSharp>
-              <span className="lg:text-xs font-semibold text-slate-200">
+              <span className=" font-semibold text-slate-200">
                 My Inventory
               </span>
             </Link>
@@ -110,7 +110,7 @@ const DesktopSidebar = () => {
                 to="/createUser"
               >
                 <FaPlusSquare className="text-green-500"></FaPlusSquare>
-                <span className="lg:text-sm font-semibold text-slate-200">
+                <span className=" font-semibold text-slate-200">
                   Create User
                 </span>
               </Link>
@@ -122,7 +122,7 @@ const DesktopSidebar = () => {
                 to="/user-profile"
               >
                 <FaPlusSquare className="text-green-500"></FaPlusSquare>
-                <span className="lg:text-sm font-semibold text-slate-200">
+                <span className=" font-semibold text-slate-200">
                   User Profile
                 </span>
               </Link>
@@ -133,7 +133,7 @@ const DesktopSidebar = () => {
               to="/practice"
             >
               <IoPersonCircleSharp className="text-green-500"></IoPersonCircleSharp>
-              <span className="lg:text-xs font-semibold text-slate-200">
+              <span className=" font-semibold text-slate-200">
                 Practice
               </span>
             </Link>

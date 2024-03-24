@@ -76,7 +76,7 @@ const PurchaseManagement = () => {
     </Menu> */}
       <div className="collapse navlink p-0 ">
         <input type="checkbox" />
-        <div className="collapse-title lg:p-0 py-0 flex items-center text-white lg:text-xs">
+        <div className="collapse-title lg:p-0 py-0 flex items-center text-white ">
           <BiSolidPurchaseTagAlt className="text-lg text-green-500 mr-2"/>
           Purchase Management
           <ChevronDownIcon
@@ -84,7 +84,7 @@ const PurchaseManagement = () => {
             aria-hidden="true"
           />
         </div>
-        <div className="collapse-content p-0 w-full text-white lg:text-xs pt-2">
+        <div className="collapse-content p-0 w-full text-white  pt-2">
           <ul className="space-y-2 pl-5">
             <li>
               <NavLink
