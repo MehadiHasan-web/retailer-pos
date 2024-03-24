@@ -21,7 +21,7 @@ const MemberCard = (data) => {
 
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-5">
 
         {/* inventorrequest_approve */}
         <div className="flex gap-5 items-center bg-white shadow-lg shadow-slate-300 w-full h-32 md:h-40 px-3 mb-5 rounded-xl  hover:shadow-slate-400 hover:border-solid hover:border-[3px] hover:border-red-100 hover:cursor-pointer" data-aos="flip-left">

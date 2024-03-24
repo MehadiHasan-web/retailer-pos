@@ -7,6 +7,15 @@ export const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [searchData, setSearchData] = useState('');
+    const [lang, setLang]=useState(true);
+
+    const changeLanguage = () =>{
+        if (lang){
+            setLang(false)
+        }else(
+            setLang(true)
+        )
+    }
 
     const searchFun = (value) => {
         setSearchData(value)
@@ -27,7 +36,10 @@ export const AuthProvider = ({ children }) => {
         baseURL,
         accountURL,
         searchFun,
-        searchData
+        searchData,
+        changeLanguage,
+        lang
+
     }
     return (
         <AuthContext.Provider value={authInfo}>

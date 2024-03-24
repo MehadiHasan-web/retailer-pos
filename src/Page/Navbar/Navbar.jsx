@@ -1,7 +1,6 @@
 
 import Sidebar from "./../Sidebar/Sidebar";
 import { HiOutlineBell } from "react-icons/hi2";
-import { SlNote } from "react-icons/sl";
 import { useContext  } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 
@@ -9,9 +8,9 @@ function Navbar() {
   const userToken = localStorage.getItem('token')
   const userDesignation = localStorage.getItem('designation')
   
-  const {searchFun} = useContext(AuthContext)
+  const {searchFun,changeLanguage,lang} = useContext(AuthContext)
   
-  
+  console.log(lang)
 
   return (
 
@@ -70,6 +69,9 @@ function Navbar() {
             </li> */}
             <li className="text-xl opacity-80 cursor-pointer">
               <HiOutlineBell className="text-2xl"></HiOutlineBell>
+            </li>
+            <li className="text-xl opacity-80 cursor-pointer">
+            <button className="btn" onClick={()=>changeLanguage()}>{lang? "En" : "Bn"}</button> 
             </li>
           </ul>
           <div className="avatar">
