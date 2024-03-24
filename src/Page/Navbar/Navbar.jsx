@@ -1,38 +1,16 @@
 
 import Sidebar from "./../Sidebar/Sidebar";
 import { HiOutlineBell } from "react-icons/hi2";
-import { SlNote } from "react-icons/sl";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 
 function Navbar() {
   const userToken = localStorage.getItem('token')
   const userDesignation = localStorage.getItem('designation')
-  const { searchFun } = useContext(AuthContext)
-  const [lang, setLang] = useState()
 
+  const { searchFun, changeLanguage, lang } = useContext(AuthContext)
 
-  // handelTranslate
-  useEffect(() => {
-    const language = localStorage.getItem('lang');
-    setLang(language);
-  }, []);
-
-  // Log lang whenever it changes
-  useEffect(() => {
-    console.log(lang);
-  }, [lang]);
-
-  const handelTranslate = () => {
-    let translate = localStorage.getItem('lang');
-    if (translate === 'en') {
-      localStorage.setItem('lang', 'bn');
-      setLang('bn');
-    } else {
-      localStorage.setItem('lang', 'en');
-      setLang('en');
-    }
-  }
+  console.log(lang)
 
   return (
     <>
@@ -89,10 +67,8 @@ function Navbar() {
             <li className="text-xl opacity-80 cursor-pointer">
               <HiOutlineBell className="text-2xl"></HiOutlineBell>
             </li>
-            <li>
-              <button onClick={handelTranslate} className="btn btn-sm btn-outline">
-                En
-              </button>
+            <li className="text-xl opacity-80 cursor-pointer">
+              <button className="btn" onClick={() => changeLanguage()}>{lang ? "En" : "Bn"}</button>
             </li>
           </ul>
           <div className="avatar">
