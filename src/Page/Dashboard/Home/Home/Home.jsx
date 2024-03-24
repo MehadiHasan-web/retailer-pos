@@ -46,6 +46,8 @@ const Home = () => {
   const [activeButton, setActiveButton] = useState("All");
   const [categories, setCategories] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState([]);
+  const [size, setSize] = useState('');
+  console.log(size)
 
 
 
@@ -347,7 +349,7 @@ const Home = () => {
                         <div className="w-3/4">
                           <h2 className="text-xl font-bold">{product.name}</h2>
                           <p className="text-xs">{product.description}</p>
-                          <ul className="flex items-center justify-between mt-2">
+                          <ul className="flex items-start justify-between mt-2">
                             <li>
                               <p className="text-sm">Netto</p>
                               <p className="text-base font-bold">
@@ -375,8 +377,11 @@ const Home = () => {
                             <span className="text-gray-500">/Bottle</span>
                           </p>
                         </div> */}
-                          <div className="w-full">
-                            <ul className="flex justify-between items-center bg-slate-200 py-1 px-1 rounded-full w-full">
+                          <div className="w-full flex items-center gap-2">
+                            <div className="flex-2">
+                              <p className="text-lg font-bold">Price: $20</p>
+                            </div>
+                            <ul className=" flex-1 rounded-full w-full">
                               {/* <li className="flex items-center">
                               <button
                                 onClick={() => decreaseQuantity(product.id)}
@@ -384,7 +389,8 @@ const Home = () => {
                                 <FaCircleMinus className="text-white text-xl"></FaCircleMinus>
                               </button>
                             </li> */}
-                              <li className="w-full"><input name="quantity" type="number" className="p-1 w-full rounded-full text-center" min={1} max={30} placeholder="Write Quantity" /></li>
+                            
+                              <li className="w-full"><input name="quantity" type="number" className="p-1 w-full rounded-full text-center bg-slate-200" min={1} max={30} placeholder="Write Quantity" /></li>
                               {/* <li className="flex items-center ">
                               <button
                                 onClick={() => updateQuantity(product.id)}
@@ -396,7 +402,7 @@ const Home = () => {
                             </ul>
                           </div>
                           <button
-                            className=" bg-green-500 py-2 font-bold rounded-full w-2/4 text-white "
+                            className=" bg-green-500 py-1 font-bold rounded-full w-2/5 text-white"
                           >
                             Add
                           </button>

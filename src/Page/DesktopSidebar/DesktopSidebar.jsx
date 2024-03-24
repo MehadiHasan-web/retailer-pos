@@ -6,6 +6,7 @@ import { MdDashboard, MdManageHistory, MdSettingsApplications } from "react-icon
 import { IoPersonCircleSharp } from "react-icons/io5";
 import { GoHomeFill } from "react-icons/go";
 import { FaSquareCaretRight, FaSquareCaretLeft } from "react-icons/fa6";
+import { MdOutlineInventory } from "react-icons/md";
 
 import { BiSolidPurchaseTagAlt } from "react-icons/bi";
 
@@ -86,7 +87,7 @@ const DesktopSidebar = ({open, setOpen}) => {
           </li>
           <li >
             {
-              open ? <Link to="/my-inventory-request" className="flex justify-center items-center"><GoHomeFill className="text-green-500 text-2xl"></GoHomeFill></Link> : <Link className="flex justify-start items-center gap-2" to="/my-inventory-request"><GoHomeFill className="text-green-500"></GoHomeFill>
+              open ? <Link to="/my-inventory-request" className="flex justify-center items-center"><MdOutlineInventory className="text-green-500 text-2xl"></MdOutlineInventory></Link> : <Link className="flex justify-start items-center gap-2" to="/my-inventory-request"><MdOutlineInventory className="text-green-500"></MdOutlineInventory>
               <span className=" font-semibold text-slate-200">My Inventory Requests</span></Link>
             }
           </li>
