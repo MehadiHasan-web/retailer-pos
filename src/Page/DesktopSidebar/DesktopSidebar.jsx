@@ -7,6 +7,8 @@ import { IoPersonCircleSharp } from "react-icons/io5";
 import { GoHomeFill } from "react-icons/go";
 import { FaSquareCaretRight, FaSquareCaretLeft } from "react-icons/fa6";
 import { MdOutlineInventory, MdInventory } from "react-icons/md";
+import { FaUser } from "react-icons/fa";
+import { RiMoneyDollarCircleFill } from "react-icons/ri";
 
 import { BiSolidPurchaseTagAlt } from "react-icons/bi";
 
@@ -108,7 +110,7 @@ const DesktopSidebar = ({open, setOpen}) => {
           {is_manager && (
             <li className="flex justify-center items-center">
               {
-                open ? <BiSolidPurchaseTagAlt className="text-2xl text-green-500 mr-2 flex justify-center items-center"/> :
+                open ? <RiMoneyDollarCircleFill className="text-2xl text-green-500 flex justify-center items-center"/> :
               <PurchaseManagement></PurchaseManagement>
               }
             </li>
@@ -148,11 +150,11 @@ const DesktopSidebar = ({open, setOpen}) => {
             <li>
               {
                 open ? <Link to="/createUser" className="flex justify-center items-center">
-                <FaPlusSquare className="text-green-500 text-2xl"></FaPlusSquare></Link> : <Link
+                <FaUser className="text-green-500 text-2xl"></FaUser></Link> : <Link
                 className="flex justify-start items-center gap-2"
                 to="/createUser"
               >
-                <FaPlusSquare className="text-green-500"></FaPlusSquare>
+                <FaUser className="text-green-500"></FaUser>
                 <span className=" font-semibold text-slate-200">
                   Create User
                 </span>

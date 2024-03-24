@@ -8,7 +8,8 @@
 // }
 import { NavLink } from "react-router-dom";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import { BiSolidPurchaseTagAlt } from "react-icons/bi";
+
+import { RiMoneyDollarCircleFill } from "react-icons/ri";
 
 const PurchaseManagement = () => {
   return (
@@ -77,7 +78,7 @@ const PurchaseManagement = () => {
       <div className="collapse navlink p-0 ">
         <input type="checkbox" />
         <div className="collapse-title lg:p-0 py-0 flex items-center text-white ">
-          <BiSolidPurchaseTagAlt className="text-lg text-green-500 mr-2"/>
+          <RiMoneyDollarCircleFill className="text-lg text-green-500 mr-2"/>
           Purchase Management
           <ChevronDownIcon
             className="h-5 w-5 text-green-500 ml-5"
