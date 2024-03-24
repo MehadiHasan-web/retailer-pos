@@ -10,12 +10,12 @@ const ManageInventory = () => {
   return (
     <div className="collapse navlink p-0 ">
       <input type="checkbox" />
-      <div className="collapse-title flex items-center text-white lg:text-xs lg:p-0 pt-0">
+      <div className="collapse-title flex items-center text-white  lg:p-0 pt-0">
         <MdManageHistory className="text-base mr-2 text-green-500"/>
         Inventory Management
         <ChevronDownIcon className="h-5 w-5 text-gray-400 ml-5" aria-hidden="true" />
       </div>
-      <div className="collapse-content p-0 pt-2  h-44  text-white lg:text-xs">
+      <div className="collapse-content p-0 pt-2  h-44  text-white ">
         <ul className="space-y-2 pl-5">
           <li>
             <div className="dropdown block ">
@@ -28,7 +28,7 @@ const ManageInventory = () => {
               </div>
               <ul
                 tabIndex={0}
-                className="dropdown-content  z-40 menu p-2 shadow bg-black rounded-box  w-full lg:text-xs "
+                className="dropdown-content  z-40 menu p-2 shadow bg-black rounded-box  w-full  "
               >
                 <li>
                   <NavLink to="/manageInventory/category">Category</NavLink>

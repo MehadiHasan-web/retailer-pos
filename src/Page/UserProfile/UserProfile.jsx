@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
 import { RiGlobalLine } from "react-icons/ri";
-import { HiOutlineMailOpen, HiDotsHorizontal } from "react-icons/hi";
+import { HiOutlineMailOpen } from "react-icons/hi";
 import { FaPhoneAlt, FaRegCalendarAlt } from "react-icons/fa";
-import { IoPersonOutline } from "react-icons/io5";
-import { BiMessageMinus } from "react-icons/bi";
 import './UserProfile.css'
 
 

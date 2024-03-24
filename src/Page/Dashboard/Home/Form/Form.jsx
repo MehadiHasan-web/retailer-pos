@@ -82,12 +82,12 @@ const Form = ({ wishlist, setWishlist }) => {
                 <input type="number" hidden name='user_id' value={user_id} />
                 {/* file section start */}
                 <label className="form-control w-full flex-1">
-                  <input type="file" className="file-input file-input-bordered w-full h-6 lg:h-9 text-sm" name="file" />
+                  <input type="file" className="file-input file-input-bordered w-full h-6 lg:h-9 " name="file" />
                 </label>
                 {/* file section end */}
                 {/* file section start */}
                 <label className="form-control w-full flex-1">
-                  <select className="select select-bordered select-sm h-6 lg:h-9 w-full max-w-xs" name='position'>
+                  <select className="select select-bordered select-sm text-base h-6 lg:h-9 w-full max-w-xs" name='position'>
                     {/* <option selected>Select controller</option>
                     <option value={'Approver'}>Approver</option>
                     <option value={'Manager'}>Manager</option>

@@ -121,7 +121,7 @@ function MyInventoryRequest() {
             <div >
                 <div className="container mx-auto px-12">
                     <div className="flex justify-start my-3 ">
-                        <h2 className="w-34  font-semibold border-b-[1px] border-indigo-500 mx-auto">Inventory History:</h2>
+                        <h2 className="w-34  font-semibold border-b-[1px] border-indigo-500 mx-auto text-lg">Inventory History:</h2>
                     </div>
 
                     {/* search bar  */}
@@ -158,7 +158,7 @@ function MyInventoryRequest() {
                     {/* search bar end  */}
 
                     <div className="overflow-x-auto  shadow-lg rounded">
-                        <table className="table">
+                        <table className="table text-base">
                             {/* head */}
                             <thead className="bg-slate-200	">
                                 <tr>
@@ -181,7 +181,7 @@ function MyInventoryRequest() {
                                             <div className="flex items-center gap-1">
                                                 <div>
                                                     <div className="font-bold capitalize">{data.user.username}</div>
-                                                    <div className="text-sm opacity-50">{data.user.designation}</div>
+                                                    <div className="text-base opacity-50">{data.user.designation}</div>
                                                 </div>
                                             </div>
                                         </td>

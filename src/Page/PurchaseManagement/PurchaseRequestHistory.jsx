@@ -165,7 +165,7 @@ const prevPage = () => {
       <div >
         <div className="container mx-auto px-12">
           <div className="flex justify-start my-3 ">
-            <h2 className="w-34  font-semibold border-b-[1px] border-indigo-500 mx-auto">Purchase Request History:</h2>
+            <h2 className="w-34  font-semibold border-b-[1px] border-indigo-500 mx-auto text-lg">Purchase Request History:</h2>
           </div>
 
           {/* search bar  */}
@@ -207,7 +207,7 @@ const prevPage = () => {
           </div>
           {/* search bar end  */}
           <div className="overflow-x-auto  shadow-lg rounded">
-            <table className="table">
+            <table className="table text-base">
               {/* head */}
               <thead className="bg-slate-200	">
                 <tr>
