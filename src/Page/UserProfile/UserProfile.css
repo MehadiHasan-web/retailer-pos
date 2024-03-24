@@ -1,0 +1,6 @@
+.bgImgPro{
+  background-image: url('../../../public/bgImage.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}

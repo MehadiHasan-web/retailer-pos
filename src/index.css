@@ -13,3 +13,7 @@
     border-radius: 9999px !important;
     color: white !important;
 }
+.table :where(thead, tfoot) {
+    font-size:1rem;
+   
+}

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { LuDot } from "react-icons/lu";
 import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
@@ -10,7 +11,6 @@ import { IoIosDoneAll } from "react-icons/io";
 import { BiPurchaseTag } from "react-icons/bi";
 import Aos from "aos";
 import 'aos/dist/aos.css';
-import { useEffect } from "react";
 
 const MemberCard = (data) => {
 
