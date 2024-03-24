@@ -2,21 +2,39 @@
 import Sidebar from "./../Sidebar/Sidebar";
 import { HiOutlineBell } from "react-icons/hi2";
 import { SlNote } from "react-icons/sl";
-import { useContext  } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 
 function Navbar() {
   const userToken = localStorage.getItem('token')
   const userDesignation = localStorage.getItem('designation')
-  
-  const {searchFun} = useContext(AuthContext)
-  
-  
+  const { searchFun } = useContext(AuthContext)
+  const [lang, setLang] = useState()
+
+
+  // handelTranslate
+  useEffect(() => {
+    const language = localStorage.getItem('lang');
+    setLang(language);
+  }, []);
+
+  // Log lang whenever it changes
+  useEffect(() => {
+    console.log(lang);
+  }, [lang]);
+
+  const handelTranslate = () => {
+    let translate = localStorage.getItem('lang');
+    if (translate === 'en') {
+      localStorage.setItem('lang', 'bn');
+      setLang('bn');
+    } else {
+      localStorage.setItem('lang', 'en');
+      setLang('en');
+    }
+  }
 
   return (
-
-    
-
     <>
       <div className="navbar bg-base-100 shadow-sm sticky top-0 z-10 justify-between">
         <div className="navbar-start block lg:hidden">
@@ -37,7 +55,7 @@ function Navbar() {
                 clipRule="evenodd"
               />
             </svg>
-            <input 
+            <input
               type="text"
               className=" bg-slate-200 text-black w-full "
               placeholder="search medicine"
@@ -71,13 +89,18 @@ function Navbar() {
             <li className="text-xl opacity-80 cursor-pointer">
               <HiOutlineBell className="text-2xl"></HiOutlineBell>
             </li>
+            <li>
+              <button onClick={handelTranslate} className="btn btn-sm btn-outline">
+                En
+              </button>
+            </li>
           </ul>
           <div className="avatar">
             <div className="w-10 rounded-full">
               {
-                userToken ?  <img src="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=" />  : ""
+                userToken ? <img src="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=" /> : ""
               }
-             
+
             </div>
           </div>
           <ul className="menu lg:menu-horizontal rounded-box hidden lg:block">
@@ -88,7 +111,7 @@ function Navbar() {
                     <li className="font-bold">Mohammad Nabi</li>
 
                     {
-                     userDesignation && <li className="text-center">{userDesignation}</li> 
+                      userDesignation && <li className="text-center">{userDesignation}</li>
                     }
                   </ul>
                 </summary>
