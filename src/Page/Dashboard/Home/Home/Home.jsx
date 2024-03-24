@@ -128,7 +128,7 @@ const Home = () => {
           id: product.id,
           name: product.name,
           quantity: 1,
-          // price: product.price * product.quantity,
+          price: product.price 
         };
         setWishlist([...wishlist, newData]);
       }
@@ -425,7 +425,7 @@ const Home = () => {
           <div className="bg-slate-100 rounded-lg p-4 w-full h-32 overflow-auto touch-auto">
             <ul className=" max-w-none h-auto">
               <li className="text-sm text-slate-400 flex justify-between">
-                <h5>Name</h5> <span>Quantity</span>
+                <h5>Name</h5> <span>Amount</span>
               </li>
               {wishlist.map((item) => (
                 <li
