@@ -116,9 +116,9 @@ const DesktopSidebar = ({open, setOpen}) => {
             </li>
           )}
           {isApprover && (
-            <li className="flex justify-center items-center">
+            <li>
               {
-                open ? <Link to="/applications">
+                open ? <Link to="/applications" className="flex justify-center items-center">
                 <MdSettingsApplications className="text-green-500 text-2xl"></MdSettingsApplications></Link> : <Link
                 className="flex justify-start items-center gap-2"
                 to="/applications"
