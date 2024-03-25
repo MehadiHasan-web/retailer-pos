@@ -28,14 +28,12 @@ import Form from "../Form/Form";
 // import 'swiper/css/navigation';
 // import { Navigation } from 'swiper/modules';
 
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Navigation, Pagination } from "swiper/modules";
 import WaitingList from "./WaitingList";
-
-
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -46,25 +44,20 @@ const Home = () => {
   const [activeButton, setActiveButton] = useState("All");
   const [categories, setCategories] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState([]);
-  const [size, setSize] = useState('');
-  console.log(size)
+  const [size, setSize] = useState("");
+  console.log(size);
 
-
-
-  // search function 
+  // search function
   useEffect(() => {
-
-    const findSearchData = products.filter(product =>
+    const findSearchData = products.filter((product) =>
       product.name.toLowerCase().includes(searchData.toLowerCase())
     );
     if (findSearchData?.length > 0) {
       setSelectedProduct(findSearchData);
       console.log(findSearchData);
-      setActiveButton('All');
+      setActiveButton("All");
     }
   }, [searchData, products, setSelectedProduct, setActiveButton]);
-
-
 
   useEffect(() => {
     localStorage.setItem("wishlist", JSON.stringify(wishlist));
@@ -81,13 +74,11 @@ const Home = () => {
       .catch((error) => {
         console.error("Error:", error);
       });
-  }, [])
-
+  }, []);
 
   useEffect(() => {
     getAllCategories();
   }, [getAllCategories]);
-
 
   //get all Products
   useEffect(() => {
@@ -106,31 +97,40 @@ const Home = () => {
   const cardData = (product, event) => {
     event.preventDefault();
     const quantity = event.target.elements.quantity.value;
+    const size = event.target.elements.size.value;
+    const randomPrice =Math.floor(Math.random() * (999 - 100 + 1)+100);
     console.log(wishlist);
-
 
     const filterItem = wishlist.find((value) => value.id === product.id);
     if (filterItem) {
       if (quantity > 1) {
-        console.log('product acha')
+        console.log("product acha");
         const updatedCardTable = wishlist.map((item) =>
-          item.id === product.id ? { ...item, quantity: parseInt(item.quantity) + parseInt(quantity) } : item
+          item.id === product.id
+            ? {
+                ...item,
+                quantity: parseInt(item.quantity) + parseInt(quantity),
+              }
+            : item
         );
         setWishlist(updatedCardTable);
       } else {
         const updatedCardTable = wishlist.map((item) =>
-          item.id === product.id ? { ...item, quantity: parseInt(item.quantity) + 1 } : item
+          item.id === product.id
+            ? { ...item, quantity: parseInt(item.quantity) + 1 }
+            : item
         );
         setWishlist(updatedCardTable);
       }
     } else {
-      console.log('product nai')
+      console.log("product nai");
       if (!quantity) {
         const newData = {
           id: product.id,
           name: product.name,
           quantity: 1,
-          price: product.price 
+          price: randomPrice,
+          size : size
         };
         setWishlist([...wishlist, newData]);
       }
@@ -363,10 +363,58 @@ const Home = () => {
                               </p>
                             </li>
                           </ul>
+                          <div></div>
                         </div>
                       </div>
 
                       <form onSubmit={(event) => cardData(product, event)}>
+                        <div className="flex flex-wrap items-center gap-4 justify-center m-5">
+                          <div className="flex items-center gap-2">
+                            <input
+                              type="radio"
+                              name="size" value="S"
+                              id="size"
+                              className="radio radio-success"
+                            />
+                            <label htmlFor="size" className="text-lg font-semibold">S</label>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <input
+                              type="radio"
+                              name="size" value="M"
+                              id="radio-4"
+                              className="radio radio-success"
+                            />
+                            <label htmlFor="radio-4" className="text-lg font-semibold">M</label>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <input
+                              type="radio"
+                              name="size" value="L"
+                              id="radio-3"
+                              className="radio radio-success"
+                            />
+                            <label htmlFor="radio-3" className="text-lg font-semibold">L</label>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <input
+                              type="radio"
+                              name="size" value="XL"
+                              id="radio-2"
+                              className="radio radio-success"
+                            />
+                            <label htmlFor="radio-2" className="text-lg font-semibold">XL</label>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <input
+                              type="radio"
+                              name="size" value="XXL"
+                              id="radio-1"
+                              className="radio radio-success"
+                            />
+                            <label htmlFor="size" className="text-lg font-semibold">XXL</label>
+                          </div>
+                        </div>
                         <div className="flex justify-between items-center mt-2 gap-4">
                           {/* <div className=" flex items-center justify-center">
                           <sup className="text-green-600 font-bold">$</sup>
@@ -379,7 +427,7 @@ const Home = () => {
                         </div> */}
                           <div className="w-full flex items-center gap-2">
                             <div className="flex-2">
-                              <p className="text-lg font-bold">Price: $20</p>
+                              <p className="text-lg font-bold" >Price: $20</p>
                             </div>
                             <ul className=" flex-1 rounded-full w-full">
                               {/* <li className="flex items-center">
@@ -389,8 +437,17 @@ const Home = () => {
                                 <FaCircleMinus className="text-white text-xl"></FaCircleMinus>
                               </button>
                             </li> */}
-                            
-                              <li className="w-full"><input name="quantity" type="number" className="p-1 w-full rounded-full text-center bg-slate-200" min={1} max={30} placeholder="Write Quantity" /></li>
+
+                              <li className="w-full">
+                                <input
+                                  name="quantity"
+                                  type="number"
+                                  className="p-1 w-full rounded-full text-center bg-slate-200"
+                                  min={1}
+                                  max={30}
+                                  placeholder="Write Quantity"
+                                />
+                              </li>
                               {/* <li className="flex items-center ">
                               <button
                                 onClick={() => updateQuantity(product.id)}
@@ -401,9 +458,7 @@ const Home = () => {
                             </li> */}
                             </ul>
                           </div>
-                          <button
-                            className=" bg-green-500 py-1 font-bold rounded-full w-2/5 text-white"
-                          >
+                          <button className=" bg-green-500 py-1 font-bold rounded-full w-2/5 text-white">
                             Add
                           </button>
                         </div>
@@ -426,7 +481,8 @@ const Home = () => {
             </p>
           </div>
           <p className="text-bold font-medium my-2">
-            Detail Products <span className="text-green-500">{wishlist.length}</span>
+            Detail Products{" "}
+            <span className="text-green-500">{wishlist.length}</span>
           </p>
           <div className="bg-slate-100 rounded-lg p-4 w-full h-32 overflow-auto touch-auto">
             <ul className=" max-w-none h-auto">
@@ -439,7 +495,9 @@ const Home = () => {
                   className="font-bold flex justify-between mt-2"
                 >
                   <h5>{item.name}</h5>{" "}
-                  <span className="text-slate-500 text-sm">{item.quantity}</span>
+                  <span className="text-slate-500 text-sm">
+                    {item.price}
+                  </span>
                 </li>
               ))}
             </ul>
@@ -465,17 +523,19 @@ const Home = () => {
                       />
                     </div>
                     <div className="w-3/4  ">
-                      <p className="flex justify-between items-center">
+                      <p className="flex justify-between items-center ">
                         <h4 className="font-bold">{item.name}</h4>{" "}
                         {/* <button onClick={() => removeWishList(item.id)}>
                           <MdDelete className="inline-block border-2 text-3xl p-1 rounded-lg shadow bg-white text-red-500" />
+                          
                         </button> */}
-                      </p>
-                      <div className="flex justify-between items-center mt-7">
-                        {/* <h4 className="font-bold">
+                        <h4 className="font-bold mr-5">
                           <span className="text-green-500">$</span>
                           {item.price * item.quantity}
-                        </h4> */}
+                        </h4>
+                      </p>
+                      <div className="flex justify-between items-center mt-7">
+                        
                         <span className="bg-white border-2 shadow-inner rounded-full flex px-1 gap-2 items-center">
                           <button
                             onClick={() => decreaseWishlistQuantity(item.id)}
@@ -502,16 +562,18 @@ const Home = () => {
               </div>
             )}
           </div>
-          <div className="mt-5">
-            <Form wishlist={wishlist} setWishlist={setWishlist}></Form>
+          
+          <div className="">
+            <Form wishlist={wishlist} setWishlist={setWishlist} calculateTotalPrice={calculateTotalPrice()}></Form>
           </div>
         </div>
       </div>
 
       {/* mobile wishlist  */}
       <div
-        className={`block lg:hidden case-in duration-500 w-full h-full fixed top-16 pt-10 bottom-0 z-30 overflow-auto touch-auto bg-slate-200 pb-20 ${open ? "right-2" : "-right-[800px]"
-          }`}
+        className={`block lg:hidden case-in duration-500 w-full h-full fixed top-16 pt-10 bottom-0 z-30 overflow-auto touch-auto bg-slate-200 pb-20 ${
+          open ? "right-2" : "-right-[800px]"
+        }`}
       >
         <div className="fixed top-2/4 -right-6 z-10">
           {open && open ? (
@@ -536,10 +598,7 @@ const Home = () => {
         <div className="pl-12">
           <div className=" top-20 p-2 ">
             {/* table section start */}
-            <div
-              className=" lg:hidden md:col-span-1 p-4 bg-white "
-
-            >
+            <div className=" lg:hidden md:col-span-1 p-4 bg-white ">
               <div className="flex justify-between ">
                 <h3 className="text-xl text-black font-medium">Whitelist</h3>
                 <p className="text-xl font-bold text-black">
@@ -547,7 +606,8 @@ const Home = () => {
                 </p>
               </div>
               <p className="text-bold font-medium my-2">
-                Detail Prescription <span className="text-green-500">{wishlist.length}</span>
+                Detail Prescription{" "}
+                <span className="text-green-500">{wishlist.length}</span>
               </p>
               <div className="bg-slate-100 rounded-lg p-4 w-full h-32 overflow-auto touch-auto">
                 <ul className=" max-w-none h-auto">
