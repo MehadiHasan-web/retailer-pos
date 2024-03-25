@@ -71,7 +71,7 @@ const Form = ({ wishlist, setWishlist, calculateTotalPrice }) => {
 
   return (
     <div>
-      <div className="collapse bg-slate-200 collapse-open">
+      <div className="collapse bg-slate-200 collapse-open mt-5">
         <input type="checkbox" className="peer" />
         <div className="collapse-content ">
           <div>

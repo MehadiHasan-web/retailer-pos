@@ -552,6 +552,7 @@ const Home = () => {
                             <FaCirclePlus className="text-green-600 text-xl"></FaCirclePlus>
                           </button>
                         </span>
+                        <span>Size:-<strong>{item.size}</strong></span>
                         <button onClick={() => removeWishList(item.id)}>
                           <MdDelete className="inline-block border-2 text-3xl p-1 rounded-lg shadow bg-white text-red-500" />
                         </button>
