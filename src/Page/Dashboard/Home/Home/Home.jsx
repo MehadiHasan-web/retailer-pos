@@ -94,48 +94,95 @@ const Home = () => {
   }, [baseURL]);
 
   // add  to card or increment functionality
+  // const cardData = (product, event) => {
+  //   event.preventDefault();
+  //   const quantity = event.target.elements.quantity.value;
+  //   const size = event.target.elements.size.value;
+  //   const randomPrice =Math.floor(Math.random() * (999 - 100 + 1)+100);
+  //   console.log(wishlist);
+    
+  //   const filterItem = wishlist.find((value) => value.id === product.id);
+  //   console.log(filterItem)
+  //   if (filterItem) {
+  //     if (quantity > 1) {
+  //       console.log("product acha");
+  //       const updatedCardTable = wishlist.map((item) =>
+  //         item.id === product.id
+  //           ? {
+  //               ...item,
+  //               quantity: parseInt(item.quantity) + parseInt(quantity),
+  //             }
+  //           : item
+  //       );
+  //       setWishlist(updatedCardTable);
+  //     } else {
+  //       const updatedCardTable = wishlist.map((item) =>
+  //         item.id === product.id
+  //           ? { ...item, quantity: parseInt(item.quantity) + 1 }
+  //           : item
+  //       );
+  //       setWishlist(updatedCardTable);
+  //     }
+  //   } else {
+  //     console.log("product nai");
+  //     if (!quantity) {
+  //       const newData = {
+  //         id: product.id,
+  //         name: product.name,
+  //         quantity: 1,
+  //         price: randomPrice,
+  //         size : size
+  //       };
+  //       setWishlist([...wishlist, newData]);
+  //     }
+  //   }
+  // };
+
   const cardData = (product, event) => {
     event.preventDefault();
     const quantity = event.target.elements.quantity.value;
     const size = event.target.elements.size.value;
-    const randomPrice =Math.floor(Math.random() * (999 - 100 + 1)+100);
-    console.log(wishlist);
-
-    const filterItem = wishlist.find((value) => value.id === product.id);
+    const randomPrice = Math.floor(Math.random() * (999 - 100 + 1) + 100);
+    
+    const filterItem = wishlist.find(
+      (value) => value.id === product.id && value.size === size
+    );
+  
     if (filterItem) {
-      if (quantity > 1) {
-        console.log("product acha");
-        const updatedCardTable = wishlist.map((item) =>
-          item.id === product.id
-            ? {
-                ...item,
-                quantity: parseInt(item.quantity) + parseInt(quantity),
-              }
-            : item
-        );
-        setWishlist(updatedCardTable);
-      } else {
-        const updatedCardTable = wishlist.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: parseInt(item.quantity) + 1 }
-            : item
-        );
-        setWishlist(updatedCardTable);
-      }
+      const updatedCardTable = wishlist.map((item) =>
+        item.id === product.id && item.size === size
+          ? {
+              ...item,
+              quantity: parseInt(item.quantity) + parseInt(quantity),
+            }
+          : item
+      );
+      setWishlist(updatedCardTable);
     } else {
-      console.log("product nai");
       if (!quantity) {
         const newData = {
           id: product.id,
           name: product.name,
           quantity: 1,
           price: randomPrice,
-          size : size
+          size: size,
+        };
+        setWishlist([...wishlist, newData]);
+      } else {
+        const newData = {
+          id: product.id,
+          name: product.name,
+          quantity: parseInt(quantity),
+          price: randomPrice,
+          size: size,
         };
         setWishlist([...wishlist, newData]);
       }
     }
   };
+  
+  
+  
 
   // updateQuantity
   function updateQuantity(id) {
