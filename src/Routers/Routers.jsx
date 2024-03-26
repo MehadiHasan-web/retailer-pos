@@ -24,6 +24,7 @@ import HomeExtra from './../Page/Dashboard/Home/Home/HomeExtra';
 import Dashboard from "../Page/Practice/Dashboard";
 import MyInventoryRequest from "../Page/MyInventoryRequest/MyInventoryRequest";
 import UserProfile from "../Page/UserProfile/UserProfile";
+import Expensh from "../Page/Expensh/Expensh";
 
 
 const router = createBrowserRouter([
@@ -118,6 +119,10 @@ const router = createBrowserRouter([
       {
         path : '/homeExtra',
         element : <HomeExtra></HomeExtra>
+      },
+      {
+        path : '/expensh',
+        element : <Expensh></Expensh>
       },
       {
         path : '/user-profile',

@@ -9,6 +9,7 @@ import { FaSquareCaretRight, FaSquareCaretLeft } from "react-icons/fa6";
 import { MdOutlineInventory, MdInventory } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
+import { GiExpense } from "react-icons/gi";
 
 import { BiSolidPurchaseTagAlt } from "react-icons/bi";
 
@@ -162,6 +163,20 @@ const DesktopSidebar = ({open, setOpen}) => {
               }
             </li>
           )}
+          <li>
+              {
+                open ? <Link to="/expensh" className="flex justify-center items-center">
+                <GiExpense className="text-green-500 text-2xl"></GiExpense></Link> : <Link
+                className="flex justify-start items-center gap-2"
+                to="/expensh"
+              >
+                <GiExpense className="text-green-500"></GiExpense>
+                <span className=" font-semibold text-slate-200">
+                  Expensh
+                </span>
+              </Link>
+              }
+            </li>
           <li>
               {
                 open ? <Link to="/user-profile" className="flex justify-center items-center">
