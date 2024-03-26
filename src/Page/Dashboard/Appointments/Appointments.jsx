@@ -6,7 +6,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { AuthContext } from './../../../Providers/AuthProvider';
 import productJson from './../../../../public/products.json'
-
+import Barcode from 'react-barcode';
 
 
 function InventoryRequest() {
@@ -216,6 +216,13 @@ function InventoryRequest() {
 
     return (
         <div>
+
+            {/* test barcode  */}
+            <div className="text-center">
+                <Barcode value="Mehadi Hasan" className="shadow rounded" />
+            </div>
+
+
             <Title pageName={"Inventory Complete"}></Title>
             {/* title section end */}
             {/* table history  */}
