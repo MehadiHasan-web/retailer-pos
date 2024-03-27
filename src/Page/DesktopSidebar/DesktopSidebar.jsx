@@ -10,6 +10,7 @@ import { MdOutlineInventory, MdInventory } from "react-icons/md";
 
 import { BiSolidPurchaseTagAlt } from "react-icons/bi";
 
+// eslint-disable-next-line react/prop-types
 const DesktopSidebar = ({open, setOpen}) => {
   const isApprover = localStorage.getItem("is_approver") === "true";
   const is_manager = localStorage.getItem("is_manager") === "true";
