@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { AuthContext } from './../../../Providers/AuthProvider';
+import { Link } from "react-router-dom";
 
 function InventoryRequest() {
     const [startDate, setStartDate] = useState(new Date());
@@ -145,9 +146,6 @@ function InventoryRequest() {
 
     useEffect(() => {
         let filteredResults = adminData;
-
-        
-
         // Applying the search filter
         if (searchText.trim() !== "") {
             filteredResults = filteredResults.filter((item) =>
@@ -159,9 +157,9 @@ function InventoryRequest() {
         }
 
         setFilteredData(filteredResults);
-    }, [ adminData, searchText]);
+    }, [adminData, searchText]);
 
-    
+
 
     return (
         <div>
@@ -178,7 +176,7 @@ function InventoryRequest() {
                     <div className="py-2 mb-3 bg-slate-100 rounded-lg">
                         <div className="flex justify-center mt-1">
                             <form action="" className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-2  lg:flex md:gap-0 lg:justify-around lg:items-center">
-                            <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1   shadow hover:shadow-lg"
+                                <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1   shadow hover:shadow-lg"
                                     onChange={showDataPerPage}>
                                     <option value={20} className="font-bold">Show 20</option>
                                     <option value={30} className="font-bold">Show 30</option>
@@ -209,9 +207,7 @@ function InventoryRequest() {
                                     <th className="text-black">Name</th>
                                     <th className="text-black">Request Date</th>
                                     <th className="text-black">Approver Name</th>
-                                    <th className="text-black">Approver Status</th>
-                                    <th className="text-black">Manager Status</th>
-                                    <th className="text-black">Show/Actions</th>
+                                    <th className="text-black">Details </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -231,17 +227,13 @@ function InventoryRequest() {
                                             <p>20 january </p>
                                         </td>
                                         <td>  <p>{tableData.approver.username} </p></td>
-
-                                        <td><p>{tableData.approve_status === 'pending' ? <div className="badge badge-warning">{tableData.approve_status}</div> : <div className="badge badge-success text-white">{tableData.approve_status}</div>}</p>
-                                        </td>
-                                        <td><p>{tableData.manager_status === 'waiting for approver' ? <div className="badge badge-warning">{tableData.manager_status}</div> : <div className="badge badge-info">{tableData.manager_status}</div>}</p></td>
-
-                                        <td onClick={() => openModal(tableData.id)}>
-                                            <button className="btn btn-outline btn-success btn-sm" onClick={() => document.getElementById('my_modal_4').showModal()}>
+                                        <td onClick={() => openModal(tableData.id)}><Link to={`${tableData.id}`}>
+                                            <button className="btn btn-outline btn-success btn-sm" >
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z" />
                                                 </svg>
                                             </button>
+                                        </Link>
                                         </td>
 
                                     </tr>)
@@ -255,9 +247,7 @@ function InventoryRequest() {
                                     <th className="text-black">Name</th>
                                     <th className="text-black">Request Date</th>
                                     <th className="text-black">Approver Name</th>
-                                    <th className="text-black">Approver Status</th>
-                                    <th className="text-black">Manager Status</th>
-                                    <th className="text-black">Show/Actions</th>
+                                    <th className="text-black">Details</th>
                                 </tr>
                             </tfoot>
 
