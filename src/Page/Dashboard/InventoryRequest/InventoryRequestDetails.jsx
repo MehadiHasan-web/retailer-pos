@@ -82,7 +82,7 @@ const InventoryRequestDetails = () => {
               <span className="font-normal">Thank you for choosing us!</span>
             </p>
           </div>
-          <div className="absolute w-full h-52 bg-slate-400 left-0 bottom-0 border-b-">
+          <div className="absolute w-full h-52 bg-slate-400 left-0 bottom-0 border-b">
             
           </div>
         </div>
