@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { useReactToPrint } from 'react-to-print';
 import Barcode from 'react-barcode';
 import footerImage from '../../../../public/invoice-footer.png';
-import { IoPrintSharp } from "react-icons/io5";
+import { FaPrint } from "react-icons/fa6";
 
 const InventoryRequestDetails = () => {
   const { baseURL } = useContext(AuthContext);
@@ -32,9 +32,9 @@ const InventoryRequestDetails = () => {
   return (
     <div className="container  mx-auto mb-10 ">
       <button onClick={handlePrintClick} className="btn btn-ghost">
-        <IoPrintSharp />
+        <FaPrint className="size-10" />
       </button>
-      <div className=" bg-white   p-4   rounded w-[793px] h-[1122px] mx-auto">
+      <div className=" bg-white   p-4   rounded w-[793px] h-[1122px] mx-auto shadow-lg">
         <div ref={contentToPrint} id="print_invoice" className="p-4 ">
           <div className="flex justify-between ">
             <h2 className="font-bold text-xl uppercase" style={{ textShadow: '1px 1px 1px #87CEEB' }} >Holos Technologies</h2>
