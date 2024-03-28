@@ -1,4 +1,4 @@
-import { FaPlusSquare, FaPowerOff } from "react-icons/fa";
+import { FaPlusSquare, FaPowerOff, FaUser } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import PurchaseManagement from "./../PurchaseManagement/PurchaseManagement";
 import ManageInventory from "../ManageInventory/ManageInventory";
@@ -7,10 +7,8 @@ import { IoPersonCircleSharp } from "react-icons/io5";
 import { GoHomeFill } from "react-icons/go";
 import { FaSquareCaretRight, FaSquareCaretLeft } from "react-icons/fa6";
 import { MdOutlineInventory, MdInventory } from "react-icons/md";
-import { FaUser } from "react-icons/fa";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { GiExpense } from "react-icons/gi";
-
 
 
 // eslint-disable-next-line react/prop-types
