@@ -5,9 +5,12 @@ export const AuthContext = createContext(null);
 
 // eslint-disable-next-line react/prop-types
 export const AuthProvider = ({ children }) => {
+
     const [user, setUser] = useState(null)
     const [searchData, setSearchData] = useState('');
+    const [loading, setLoading] = useState(true)
     const [lang, setLang]=useState(true);
+
 
     const changeLanguage = () =>{
         if (lang){
@@ -21,11 +24,16 @@ export const AuthProvider = ({ children }) => {
         setSearchData(value)
     }
 
-
-  console.log(user)
     const logOut = () => {
         localStorage.removeItem('token')
-        navigate('/login')
+        localStorage.removeItem('is_admin')
+        localStorage.removeItem('is_approver')
+        localStorage.removeItem('is_manager')
+        localStorage.removeItem('user_id')
+        localStorage.removeItem('designation')
+        // eslint-disable-next-line no-undef
+        navigate('/login');
+        setLoading(false)
     }
     const baseURL = "https://inv.xcode.com.bd/api/v1/inventory"
     const accountURL = "https://inv.xcode.com.bd/api/v1/account"
@@ -38,7 +46,9 @@ export const AuthProvider = ({ children }) => {
         searchFun,
         searchData,
         changeLanguage,
-        lang
+        lang,
+        loading,
+        setLoading
 
     }
     return (

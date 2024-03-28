@@ -1,17 +1,18 @@
 
-import { Navigate } from 'react-router-dom'
-import useAuth from '../hooks/useAuth'
+import { Navigate, useLocation } from 'react-router-dom'
+
 
 // eslint-disable-next-line react/prop-types
 const PrivateRoute = ({ children }) => {
-    const {user} =useAuth()
+    const token = localStorage.getItem('token')
+    const location = useLocation()
 
-
-    if (!user) {
-        return <Navigate to="/login" />
+    if(!token){
+        return <Navigate to="/login" state={{form : location}} replace></Navigate>
     }
+    
     return children
     
 }
 
-export default PrivateRoute
+export default PrivateRoute;
