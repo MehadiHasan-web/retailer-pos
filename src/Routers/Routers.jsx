@@ -41,98 +41,98 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Home></Home>
+        element: <PrivateRoute><Home></Home></PrivateRoute>
       },
       {
         path: '/dashboard',
-        element: <Dashboard></Dashboard>
+        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>
       },
       {
         path: '/inventoryRequest',
-        element: <InventoryRequest></InventoryRequest>
+        element: <PrivateRoute><InventoryRequest></InventoryRequest></PrivateRoute>
       },
       {
         path: `/inventoryRequest/:id`,
-        element: <InventoryRequestDetails></InventoryRequestDetails>
+        element: <PrivateRoute><InventoryRequestDetails></InventoryRequestDetails></PrivateRoute>
         
       },
       {
         path: '/applications',
-        element: <Appointments></Appointments>
+        element: <PrivateRoute><Appointments></Appointments></PrivateRoute>
       },
       {
         path: '/myInventory',
-        element: <MyInventory></MyInventory>
+        element: <PrivateRoute><MyInventory></MyInventory></PrivateRoute>
       },
       {
         path: '/my-inventory-request',
-        element: <MyInventoryRequest></MyInventoryRequest>
+        element: <PrivateRoute><MyInventoryRequest></MyInventoryRequest></PrivateRoute>
       },
       {
         path : '/purchaseManagement/purchaseRequest',
-        element : <PurchaseRequest></PurchaseRequest>
+        element : <PrivateRoute><PurchaseRequest></PurchaseRequest></PrivateRoute>
       },
       {
         path : '/purchaseManagement/purchaseRequestHistory',
-        element : <PurchaseRequestHistory></PurchaseRequestHistory>
+        element : <PrivateRoute><PurchaseRequestHistory></PurchaseRequestHistory></PrivateRoute>
       },
       {
         path: "/manageInventory/subcategory",
-        element: <SubCategory></SubCategory>
+        element: <PrivateRoute><SubCategory></SubCategory></PrivateRoute>
 
       },
       {
         path: "/manageInventory/category",
-        element: <CategoryFrom></CategoryFrom>
+        element: <PrivateRoute><CategoryFrom></CategoryFrom></PrivateRoute>
 
       },
       
       {
         path: "/manageInventory/item",
-        element: <ItemFrom></ItemFrom>
+        element: <PrivateRoute><ItemFrom></ItemFrom></PrivateRoute>
 
       },
       {
         path: "/manageInventory/subItem",
-        element: <SubItemFrom></SubItemFrom>
+        element: <PrivateRoute><SubItemFrom></SubItemFrom></PrivateRoute>
 
       },
       {
         path : '/manageInventory/allUserInventory',
-        element : <AllUserInventory></AllUserInventory>
+        element : <PrivateRoute><AllUserInventory></AllUserInventory></PrivateRoute>
       },
       {
         path : '/instituteManagement/instituteName',
-        element : <InstituteName></InstituteName>
+        element : <PrivateRoute><InstituteName></InstituteName></PrivateRoute>
       },
       {
         path : '/instituteManagement/branchName',
-        element : <BranchName></BranchName>
+        element : <PrivateRoute><BranchName></BranchName></PrivateRoute>
       },
       {
         path: '/instituteManagement/departmentName',
-        element: <DepartmentName></DepartmentName>
+        element: <PrivateRoute><DepartmentName></DepartmentName></PrivateRoute>
       },
       {
         path : '/createUser',
-        element : <CreateUser></CreateUser>
+        element : <PrivateRoute><CreateUser></CreateUser></PrivateRoute>
       },
       
       {
         path : '/userInventory',
-        element : <UserInventory></UserInventory>
+        element : <PrivateRoute><UserInventory></UserInventory></PrivateRoute>
       },
       {
         path : '/homeExtra',
-        element : <HomeExtra></HomeExtra>
+        element : <PrivateRoute><HomeExtra></HomeExtra></PrivateRoute>
       },
       {
         path : '/expensh',
-        element : <Expensh></Expensh>
+        element : <PrivateRoute><Expensh></Expensh></PrivateRoute>
       },
       {
         path : '/user-profile',
-        element : <UserProfile></UserProfile>
+        element : <PrivateRoute><UserProfile></UserProfile></PrivateRoute>
       },
       // {
       //   path : '/practice',

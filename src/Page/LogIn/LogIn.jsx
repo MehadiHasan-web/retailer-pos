@@ -2,17 +2,16 @@ import { useNavigate } from 'react-router-dom';
 import './LogIn.css'
 import Title from '../../Title/Title';
 import axios from 'axios';
-import useAuth from '../../hooks/useAuth';
 import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { useContext } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider';
 
 const LogIn = () => {
-  const {setUser} = useAuth()
-  const navigate = useNavigate()
+  
   let [errorMessage, setErrorMessage] = useState(null)
-  const {accountURL} = useContext(AuthContext)
+  const {accountURL, setUser, setLoading} = useContext(AuthContext)
+  const navigate = useNavigate();
 
 
   const submitData = async (event) => {
@@ -25,6 +24,7 @@ const LogIn = () => {
       const response = await axios.post(`${accountURL}/login/`, formData);
 
       if(response.status === 200) {
+        setLoading(true)
         setUser(response.data)
         localStorage.setItem('token', response.data.token)
         localStorage.setItem('is_admin', response.data.is_admin)
