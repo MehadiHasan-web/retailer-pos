@@ -44,18 +44,20 @@ const Form = ({ wishlist, setWishlist, calculateTotalPrice }) => {
 
   // from handeling
   const userData = (event) => {
-    event.preventDefault();
+    event.preventDefault()
     const form = event.target;
-    const file = form.file.value;
-    const bio = form.bio.value;
+    const name = form.name.value;
+    const number = form.number.value;
+    const information = form.information.value;
     const user_id = form.user_id.value;
-    const position = form.position.value;
+    // const position = form.position.value;
     const vat = form.vat.value;
     const tax = form.Tax.value;
     const discount = form.discount.value;
     const total = calculateTotalPrice - vat - tax - discount;
     setTotal(total);
-    const user = { user_id, file, bio, position };
+    const user = { user_id, name, number, information };
+    console.log(user)
     // const initialCardTable = JSON.parse(localStorage.getItem('cardTable')) || [];
 
     // setCardTable(initialCardTable);
@@ -99,45 +101,28 @@ const Form = ({ wishlist, setWishlist, calculateTotalPrice }) => {
                   <span>Total</span> <span>$ {total}</span>
                 </p>
               </div>
-              <h3 className="mt-5">Attach File & Description</h3>
+              <h3 className="mt-5"></h3>
               <div className="flex justify-between items-center gap-1">
                 {/* user id  */}
                 <input type="number" hidden name="user_id" value={user_id} />
                 {/* file section start */}
-                <label className="form-control w-full flex-1">
-                  <input
-                    type="file"
-                    className="file-input file-input-bordered w-full h-6 lg:h-9 "
-                    name="file"
-                  />
-                </label>
+                <div className="form-control w-full flex-1">
+                  <input type="text" placeholder="enter your name" className="input input-bordered w-full h-6 lg:h-9 " name="name" />
+                </div>
                 {/* file section end */}
                 {/* file section start */}
-                <label className="form-control w-full flex-1">
-                  <select
-                    className="select select-bordered select-sm text-base h-6 lg:h-9 w-full max-w-xs"
-                    name="position"
-                  >
-                    {/* <option selected>Select controller</option>
-                    <option value={'Approver'}>Approver</option>
-                    <option value={'Manager'}>Manager</option>
-                    <option value={'Admin'}>Admin</option> */}
-                    {approverList.map((item, index) => (
-                      <option key={index} value={item.id}>
-                        {item.username}
-                      </option>
-                    ))}
-                  </select>
-                </label>
+                <div className="form-control w-full flex-1">
+                <input type="number" placeholder="enter your number" className="input input-bordered w-full h-6 lg:h-9 " name="number" />
+                </div>
                 {/* file section end */}
               </div>
               {/* textarea section start */}
               <textarea
                 type="text"
-                placeholder="Note"
+                placeholder="additional information"
                 className="textarea textarea-lg w-full mt-1"
                 id="bio"
-                name="bio"
+                name="information"
               ></textarea>
               {/* textarea section end */}
               <div className="flex gap-2 mt-1">
@@ -149,7 +134,7 @@ const Form = ({ wishlist, setWishlist, calculateTotalPrice }) => {
                   Clear All
                 </button>
                 <button
-                  onClick={() => userData()}
+                  // onClick={() => userData()}
                   className="bg-green-500 text-white md:text-sm lg:text-base md:px-2 md:py-1 lg:px-3 lg:py-2 uppercase rounded"
                   type="submit"
                 >

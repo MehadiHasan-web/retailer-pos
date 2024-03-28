@@ -94,78 +94,44 @@ const Home = () => {
   }, [baseURL]);
 
   // add  to card or increment functionality
-  // const cardData = (product, event) => {
-  //   event.preventDefault();
-  //   const quantity = event.target.elements.quantity.value;
-  //   const size = event.target.elements.size.value;
-  //   const randomPrice =Math.floor(Math.random() * (999 - 100 + 1)+100);
-  //   console.log(wishlist);
-    
-  //   const filterItem = wishlist.find((value) => value.id === product.id);
-  //   console.log(filterItem)
-  //   if (filterItem) {
-  //     if (quantity > 1) {
-  //       console.log("product acha");
-  //       const updatedCardTable = wishlist.map((item) =>
-  //         item.id === product.id
-  //           ? {
-  //               ...item,
-  //               quantity: parseInt(item.quantity) + parseInt(quantity),
-  //             }
-  //           : item
-  //       );
-  //       setWishlist(updatedCardTable);
-  //     } else {
-  //       const updatedCardTable = wishlist.map((item) =>
-  //         item.id === product.id
-  //           ? { ...item, quantity: parseInt(item.quantity) + 1 }
-  //           : item
-  //       );
-  //       setWishlist(updatedCardTable);
-  //     }
-  //   } else {
-  //     console.log("product nai");
-  //     if (!quantity) {
-  //       const newData = {
-  //         id: product.id,
-  //         name: product.name,
-  //         quantity: 1,
-  //         price: randomPrice,
-  //         size : size
-  //       };
-  //       setWishlist([...wishlist, newData]);
-  //     }
-  //   }
-  // };
-
   const cardData = (product, event) => {
     event.preventDefault();
     const quantity = event.target.elements.quantity.value;
     const size = event.target.elements.size.value;
-    const randomPrice = Math.floor(Math.random() * (999 - 100 + 1) + 100);
-    
-    const filterItem = wishlist.find(
-      (value) => value.id === product.id && value.size === size
-    );
-  
+    const randomPrice = Math.floor(Math.random() * (99 - 10 + 1) + 10);
+    console.log(wishlist);
+
+    const filterItem = wishlist.find((item) => item.id === product.id && item.size === size);
+
     if (filterItem) {
-      const updatedCardTable = wishlist.map((item) =>
-        item.id === product.id && item.size === size
-          ? {
+      if (quantity > 1) {
+        console.log("product acha");
+        const updatedCardTable = wishlist.map((item) =>
+          item.id === product.id && item.size === size
+            ? {
               ...item,
               quantity: parseInt(item.quantity) + parseInt(quantity),
             }
-          : item
-      );
-      setWishlist(updatedCardTable);
+            : item
+        );
+        setWishlist(updatedCardTable);
+      } else {
+        const updatedCardTable = wishlist.map((item) =>
+          item.size === size
+            ? { ...item, quantity: parseInt(item.quantity) + 1 }
+            : item
+        );
+        setWishlist(updatedCardTable);
+      }
     } else {
+      console.log("product nai");
       if (!quantity) {
         const newData = {
           id: product.id,
           name: product.name,
           quantity: 1,
           price: randomPrice,
-          size: size,
+          size: size
         };
         setWishlist([...wishlist, newData]);
       } else {
@@ -180,51 +146,12 @@ const Home = () => {
       }
     }
   };
-  
-  
-  
 
-  // updateQuantity
-  function updateQuantity(id) {
-    const index = products.findIndex((product) => product.id === id);
 
-    if (index !== -1) {
-      const updatedProducts = [...products];
-
-      updatedProducts[index] = {
-        ...updatedProducts[index],
-        quantity: updatedProducts[index].quantity + 1,
-      };
-
-      setProducts(updatedProducts);
-    } else {
-      console.log("Product not found");
-    }
-  }
-  // decreaseQuantity
-  function decreaseQuantity(id) {
-    const index = products.findIndex((product) => product.id === id);
-
-    if (index !== -1) {
-      const updatedProducts = [...products];
-      let quantity = updatedProducts[index].quantity;
-      if (quantity > 1) {
-        updatedProducts[index] = {
-          ...updatedProducts[index],
-          quantity: updatedProducts[index].quantity - 1,
-        };
-        setProducts(updatedProducts);
-      } else {
-        alert("Quantity cannot be negative.");
-      }
-    } else {
-      console.log("Product not found");
-    }
-  }
 
   // Update wishlist Quantity
-  function updateWishlistQuantity(id) {
-    const index = wishlist.findIndex((product) => product.id === id);
+  function updateWishlistQuantity(id, size) {
+    const index = wishlist.findIndex((product) => product.id === id && product.size === size);
 
     if (index !== -1) {
       const updatedProducts = [...wishlist];
@@ -240,8 +167,8 @@ const Home = () => {
     }
   }
   // decrease wishlist Quantity
-  function decreaseWishlistQuantity(id) {
-    const index = wishlist.findIndex((product) => product.id === id);
+  function decreaseWishlistQuantity(id, size) {
+    const index = wishlist.findIndex((product) => product.id === id && product.size === size);
 
     if (index !== -1) {
       const updatedProducts = [...wishlist];
@@ -261,9 +188,12 @@ const Home = () => {
     }
   }
   // Remove Wishlist Items
-  function removeWishList(id) {
-    const updatedWishlist = wishlist.filter((product) => product.id !== id);
-    setWishlist(updatedWishlist);
+  function removeWishList(id, size) {
+    const updatedWishlist = wishlist.filter((product) => product.id !== id || product.size !== size);
+    console.log(updatedWishlist)
+    if (updatedWishlist) {
+      setWishlist(updatedWishlist);
+    }
   }
   //  Total price show
   function calculateTotalPrice() {
@@ -571,21 +501,17 @@ const Home = () => {
                     </div>
                     <div className="w-3/4  ">
                       <p className="flex justify-between items-center ">
-                        <h4 className="font-bold">{item.name}</h4>{" "}
-                        {/* <button onClick={() => removeWishList(item.id)}>
-                          <MdDelete className="inline-block border-2 text-3xl p-1 rounded-lg shadow bg-white text-red-500" />
-                          
-                        </button> */}
+                        <h4 className="font-bold">{item.name}</h4>
                         <h4 className="font-bold mr-5">
                           <span className="text-green-500">$</span>
                           {item.price * item.quantity}
                         </h4>
                       </p>
                       <div className="flex justify-between items-center mt-7">
-                        
+
                         <span className="bg-white border-2 shadow-inner rounded-full flex px-1 gap-2 items-center">
                           <button
-                            onClick={() => decreaseWishlistQuantity(item.id)}
+                            onClick={() => decreaseWishlistQuantity(item.id, item.size)}
                             className="m-0 p-0"
                           >
                             <GrSubtractCircle className="text-red-500 cursor-pointer" />
@@ -593,14 +519,14 @@ const Home = () => {
 
                           {item.quantity}
                           <button
-                            onClick={() => updateWishlistQuantity(item.id)}
+                            onClick={() => updateWishlistQuantity(item.id, item.size)}
                             className="m-0 p-0"
                           >
                             <FaCirclePlus className="text-green-600 text-xl"></FaCirclePlus>
                           </button>
                         </span>
                         <span>Size:-<strong>{item.size}</strong></span>
-                        <button onClick={() => removeWishList(item.id)}>
+                        <button onClick={() => removeWishList(item.id, item.size)}>
                           <MdDelete className="inline-block border-2 text-3xl p-1 rounded-lg shadow bg-white text-red-500" />
                         </button>
                       </div>
@@ -610,7 +536,7 @@ const Home = () => {
               </div>
             )}
           </div>
-          
+
           <div className="">
             <Form wishlist={wishlist} setWishlist={setWishlist} calculateTotalPrice={calculateTotalPrice()}></Form>
           </div>
@@ -619,9 +545,8 @@ const Home = () => {
 
       {/* mobile wishlist  */}
       <div
-        className={`block lg:hidden case-in duration-500 w-full h-full fixed top-16 pt-10 bottom-0 z-30 overflow-auto touch-auto bg-slate-200 pb-20 ${
-          open ? "right-2" : "-right-[800px]"
-        }`}
+        className={`block lg:hidden case-in duration-500 w-full h-full fixed top-16 pt-10 bottom-0 z-30 overflow-auto touch-auto bg-slate-200 pb-20 ${open ? "right-2" : "-right-[800px]"
+          }`}
       >
         <div className="fixed top-2/4 -right-6 z-10">
           {open && open ? (
@@ -698,7 +623,7 @@ const Home = () => {
                         <div className="w-3/4  ">
                           <p className="flex justify-between items-center">
                             <h4 className="font-bold">{item.name}</h4>{" "}
-                            <button onClick={() => removeWishList(item.id)}>
+                            <button onClick={() => removeWishList(item.id, item.size)}>
                               <MdDelete className="inline-block border-2 text-3xl p-1 rounded-lg shadow bg-white text-red-500" />
                             </button>
                           </p>
@@ -710,7 +635,7 @@ const Home = () => {
                             <span className="bg-white border-2 shadow-inner rounded-full flex px-1 gap-2 items-center">
                               <button
                                 onClick={() =>
-                                  decreaseWishlistQuantity(item.id)
+                                  decreaseWishlistQuantity(item.id, item.size)
                                 }
                                 className="m-0 p-0"
                               >
@@ -719,7 +644,7 @@ const Home = () => {
 
                               {item.quantity}
                               <button
-                                onClick={() => updateWishlistQuantity(item.id)}
+                                onClick={() => updateWishlistQuantity(item.id, item.size)}
                                 className="m-0 p-0"
                               >
                                 <FaCirclePlus className="text-green-600 text-xl"></FaCirclePlus>
