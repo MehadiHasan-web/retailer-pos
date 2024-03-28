@@ -11,8 +11,9 @@ import { FaUser } from "react-icons/fa";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { GiExpense } from "react-icons/gi";
 
-import { BiSolidPurchaseTagAlt } from "react-icons/bi";
 
+
+// eslint-disable-next-line react/prop-types
 const DesktopSidebar = ({open, setOpen}) => {
   const isApprover = localStorage.getItem("is_approver") === "true";
   const is_manager = localStorage.getItem("is_manager") === "true";
@@ -117,7 +118,7 @@ const DesktopSidebar = ({open, setOpen}) => {
             </li>
           )}
           {isApprover && (
-            <li>
+            <li >
               {
                 open ? <Link to="/applications" className="flex justify-center items-center">
                 <MdSettingsApplications className="text-green-500 text-2xl"></MdSettingsApplications></Link> : <Link

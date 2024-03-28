@@ -24,7 +24,8 @@ import HomeExtra from './../Page/Dashboard/Home/Home/HomeExtra';
 import Dashboard from "../Page/Practice/Dashboard";
 import MyInventoryRequest from "../Page/MyInventoryRequest/MyInventoryRequest";
 import UserProfile from "../Page/UserProfile/UserProfile";
-import Expensh from "../Page/Expensh/Expensh";
+import InventoryRequestDetails from "../Page/Dashboard/InventoryRequest/InventoryRequestDetails";
+import Expensh from './../Page/Expensh/Expensh';
 
 
 const router = createBrowserRouter([
@@ -49,6 +50,11 @@ const router = createBrowserRouter([
       {
         path: '/inventoryRequest',
         element: <InventoryRequest></InventoryRequest>
+      },
+      {
+        path: `/inventoryRequest/:id`,
+        element: <InventoryRequestDetails></InventoryRequestDetails>
+        
       },
       {
         path: '/applications',
