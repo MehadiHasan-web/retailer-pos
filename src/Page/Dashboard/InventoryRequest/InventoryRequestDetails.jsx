@@ -119,10 +119,10 @@ const InventoryRequestDetails = () => {
                   </div>
                 </div>
               </div>
-             
+
             </div>
           </div>
-          <img src={footerImage} alt="" className="max-h-60 absolute bottom-0 left-0 w-full right-0 rounded-b-lg " />
+          <img src={footerImage} alt="" className="max-h-60 absolute bottom-0 left-0 w-full right-0  " />
         </div>
       </div>
     </div>
