@@ -47,6 +47,10 @@ const Home = () => {
   const [size, setSize] = useState("");
   console.log(size);
 
+  const clearData = () => {
+    setWishlist([]);
+  };
+
   // search function
   useEffect(() => {
     const findSearchData = products.filter((product) =>
@@ -454,11 +458,11 @@ const Home = () => {
           <div className="flex justify-between ">
             <h3 className="text-xl text-black font-medium">Whitelist</h3>
             <p className="text-xl font-bold text-black">
-              A1<span className="text-slate-100">#12910</span>
+              A1<span className="text-slate-300">#12910</span>
             </p>
           </div>
           <p className="text-bold font-medium my-2">
-            Detail Products{" "}
+            Detail Products
             <span className="text-green-500">{wishlist.length}</span>
           </p>
           <div className="bg-slate-100 rounded-lg p-4 w-full h-32 overflow-auto touch-auto">
@@ -471,7 +475,7 @@ const Home = () => {
                   key={item.id}
                   className="font-bold flex justify-between mt-2"
                 >
-                  <h5>{item.name}</h5>{" "}
+                  <h5>{item.name}</h5>
                   <span className="text-slate-500 text-sm">
                     {item.price}
                   </span>
@@ -480,6 +484,13 @@ const Home = () => {
             </ul>
           </div>
           <div className="border-b-2 my-5"></div>
+          {/* all clear button  */}
+          <div className={`text-right mb-1 ${wishlist.length > 0 ? '' : 'hidden'}`}>
+            <button className="btn btn-error btn-sm mr-5 text-white shadow " type="button" onClick={clearData}>Clear All</button>
+          </div>
+
+
+          {/* wishlist  */}
           <div className="w-full h-60 overflow-auto touch-auto">
             {wishlist.length === 0 ? (
               <div>
@@ -608,6 +619,10 @@ const Home = () => {
                   </div>
                 ) : (
                   <div className=" max-w-none h-auto ">
+                    <div className="text-right">
+                      <button className="btn btn-error btn-sm mr-5 text-white" type="button"
+                        onClick={clearData}>Clear All</button>
+                    </div>
                     {wishlist.map((item) => (
                       <div
                         key={item.id}
