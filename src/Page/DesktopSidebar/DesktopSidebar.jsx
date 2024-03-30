@@ -190,6 +190,9 @@ const DesktopSidebar = ({ open, setOpen }) => {
               </Link>
             }
           </li>
+          <li>
+            <Link className=" font-semibold text-slate-200" to={'/sales-return'}>Sales Return</Link>
+          </li>
           {/* <li>
             <Link
               className="flex justify-start items-center gap-2"
