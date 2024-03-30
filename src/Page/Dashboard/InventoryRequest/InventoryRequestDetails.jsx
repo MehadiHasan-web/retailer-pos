@@ -27,6 +27,8 @@ const InventoryRequestDetails = () => {
   const handlePrintClick = useReactToPrint({
     content: () => contentToPrint.current,
   });
+  const unicBar = Math.floor(Math.random() * (99999999 - 10000000 + 1) + 10000000)
+  console.log(unicBar)
 
   return (
     <div className="container  mx-auto mb-10 ">
@@ -115,7 +117,7 @@ const InventoryRequestDetails = () => {
                 {/* barcode  */}
                 <div>
                   <div>
-                    <Barcode value="Mehadi Hasan" className="rounded w-40" />
+                    <Barcode value={unicBar} className="rounded " />
                   </div>
                 </div>
               </div>

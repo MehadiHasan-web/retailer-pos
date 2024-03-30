@@ -171,7 +171,7 @@ const DesktopSidebar = ({ open, setOpen }) => {
                 >
                 <GiExpense className="text-green-500"></GiExpense>
                 <span className=" font-semibold text-slate-200">
-                  Expensh
+                  Expenses
                 </span>
               </Link>
             }
