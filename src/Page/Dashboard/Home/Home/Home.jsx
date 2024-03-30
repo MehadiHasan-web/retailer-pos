@@ -47,6 +47,10 @@ const Home = () => {
   const [size, setSize] = useState("");
   console.log(size);
 
+  const clearData = () => {
+    setWishlist([]);
+  };
+
   // search function
   useEffect(() => {
     const findSearchData = products.filter((product) =>
@@ -454,7 +458,7 @@ const Home = () => {
           <div className="flex justify-between ">
             <h3 className="text-xl text-black font-medium">Whitelist</h3>
             <p className="text-xl font-bold text-black">
-              A1<span className="text-slate-100">#12910</span>
+              A1<span className="text-slate-300">#12910</span>
             </p>
           </div>
           <p className="text-bold font-medium my-2">
@@ -487,6 +491,10 @@ const Home = () => {
               </div>
             ) : (
               <div className=" max-w-none h-auto ">
+                <div className="text-right">
+                  <button  className="btn btn-error btn-sm mr-5 text-white" type="button"
+                  onClick={clearData}>Clear All</button>
+                </div>
                 {wishlist.map((item) => (
                   <div
                     key={item.id}
@@ -608,6 +616,10 @@ const Home = () => {
                   </div>
                 ) : (
                   <div className=" max-w-none h-auto ">
+                    <div className="text-right">
+                      <button  className="btn btn-error btn-sm mr-5 text-white" type="button"
+                      onClick={clearData}>Clear All</button>
+                    </div>
                     {wishlist.map((item) => (
                       <div
                         key={item.id}

@@ -22,10 +22,10 @@ const Form = ({ wishlist, setWishlist, calculateTotalPrice }) => {
       .catch((error) => console.error("Error fetching data:", error));
   }, [accountURL]);
 
-  const clearData = () => {
-    setWishlist([]);
-    setCardTable([]);
-  };
+  // const clearData = () => {
+  //   setWishlist([]);
+  //   setCardTable([]);
+  // };
 
   async function sendData(userInfo) {
     console.log(userInfo);
@@ -126,13 +126,7 @@ const Form = ({ wishlist, setWishlist, calculateTotalPrice }) => {
               ></textarea>
               {/* textarea section end */}
               <div className="flex gap-2 mt-1">
-                <button
-                  className="bg-red-500 text-white md:text-sm lg:text-base md:px-2 md:py-1 lg:px-3 lg:py-2 uppercase rounded"
-                  type="button"
-                  onClick={clearData}
-                >
-                  Clear All
-                </button>
+                
                 <button
                   // onClick={() => userData()}
                   className="bg-green-500 text-white md:text-sm lg:text-base md:px-2 md:py-1 lg:px-3 lg:py-2 uppercase rounded"
