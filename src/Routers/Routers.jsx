@@ -13,8 +13,8 @@ import SubItemFrom from './../Page/Forms/SubItemFrom';
 import CreateUser from "../Page/CreateUser/CreateUser";
 import InventoryRequest from "../Page/Dashboard/InventoryRequest/InventoryRequest";
 import Appointments from "../Page/Dashboard/Appointments/Appointments";
-import PurchaseRequestHistory from "../Page/PurchaseManagement/PurchaseRequestHistory";
-import PurchaseRequest from "../Page/PurchaseManagement/PurchaseRequest";
+// import PurchaseRequestHistory from "../Page/PurchaseManagement/PurchaseRequestHistory";
+// import PurchaseRequest from "../Page/PurchaseManagement/PurchaseRequest";
 import MyInventory from './../Page/My Inventory/MyInventory';
 import ErrorPage from "../Page/ErrorPage/ErrorPage";
 import AllUserInventory from "../Page/AllUserInventory/AllUserInventory";
@@ -49,7 +49,7 @@ const router = createBrowserRouter([
         element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>
       },
       {
-        path: '/inventoryRequest',
+        path: '/sales-return',
         element: <PrivateRoute><InventoryRequest></InventoryRequest></PrivateRoute>
       },
       {
@@ -70,12 +70,12 @@ const router = createBrowserRouter([
         element: <PrivateRoute><MyInventoryRequest></MyInventoryRequest></PrivateRoute>
       },
       {
-        path: '/purchaseManagement/purchaseRequest',
-        element: <PrivateRoute><PurchaseRequest></PurchaseRequest></PrivateRoute>
+        path: 'sales/sales-entry',
+        element: <PrivateRoute><Home></Home></PrivateRoute>
       },
       {
-        path: '/purchaseManagement/purchaseRequestHistory',
-        element: <PrivateRoute><PurchaseRequestHistory></PurchaseRequestHistory></PrivateRoute>
+        path: 'sales/sales-request',
+        element: <PrivateRoute><MyInventoryRequest></MyInventoryRequest></PrivateRoute>
       },
       {
         path: "/manageInventory/subcategory",
@@ -120,7 +120,7 @@ const router = createBrowserRouter([
       },
 
       {
-        path: '/userInventory',
+        path: '/management',
         element: <PrivateRoute><UserInventory></UserInventory></PrivateRoute>
       },
       {
@@ -128,7 +128,7 @@ const router = createBrowserRouter([
         element: <PrivateRoute><HomeExtra></HomeExtra></PrivateRoute>
       },
       {
-        path: '/expensh',
+        path: '/expenses',
         element: <PrivateRoute><Expensh></Expensh></PrivateRoute>
       },
       {

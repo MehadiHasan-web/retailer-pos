@@ -54,7 +54,8 @@ const Form = ({ wishlist, setWishlist, calculateTotalPrice }) => {
     const vat = form.vat.value;
     const tax = form.Tax.value;
     const discount = form.discount.value;
-    const total = calculateTotalPrice - vat - tax - discount;
+    const deliveryCost = form.delivery.value;
+    const total = calculateTotalPrice - vat - tax - discount-deliveryCost;
     setTotal(total);
     const user = { user_id, name, number, information };
     console.log(user)
@@ -95,6 +96,10 @@ const Form = ({ wishlist, setWishlist, calculateTotalPrice }) => {
                 <p className="flex justify-between mt-3 ">
                   <span>Discount</span>
                   <span className="font-bold">$ <input  name="discount" className=" w-14 bg-slate-50 shadow-inner rounded text-end"/></span>
+                </p>
+                <p className="flex justify-between mt-3 ">
+                  <span>Delivery Cost</span>
+                  <span className="font-bold">$ <input  name="delivery" className=" w-14 bg-slate-50 shadow-inner rounded text-end"/></span>
                 </p>
                 <p className="border-b-2 border-dashed border-black mt-2"></p>
                 <p className="flex justify-between mt-3 font-bold">

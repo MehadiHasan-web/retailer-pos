@@ -16,8 +16,14 @@ const UserInventory = () => {
   const addStockData = (event) => {
     event.preventDefault();
     const form = event.target;
-    const data = form.addStock.value;
-    console.log(data)
+    const stock = form.updateStock.value;
+    const transportationCost = form.transportationCost.value;
+    const otherCost = form.otherCost.value;
+    const updateData ={
+      stock:stock,
+      transportationCost:transportationCost,
+      otherCost:otherCost,
+    }
   }
 
 
@@ -33,13 +39,21 @@ const UserInventory = () => {
           <div className="p-2">
             <h2 className="text-sm sm:text-base md:text-sm lg:text-sm font-semibold mx-auto my-1 md:my-1 lg:my-2">Phone X</h2>
             <p className="text-sm sm:text-base md:text-sm">Stock : 20</p>
-            <form onSubmit={addStockData}>
+            <form onSubmit={addStockData} className="space-y-1">
+              <div className="flex justify-between items-center">
+                <span>Transportation Cost:</span>
+              <input  name="transportationCost" type="text" placeholder="Type here" className="input input-bordered input-sm w-28" />
+              </div>
+              <div className="flex justify-between items-center">
+                <span>Other Cost:</span>
+              <input  name="otherCost" type="text" placeholder="Type here" className="input input-bordered input-sm w-28" />
+              </div>
               <div className="flex justify-between items-center">
                 <span>Update Stock:</span>
-              <input  name="addStock" type="text" placeholder="Type here" className="input input-bordered input-sm w-28" />
+              <input  name="UpdateStock" type="text" placeholder="Type here" className="input input-bordered input-sm w-28" />
               </div>
 
-              <input type="submit" className="bg-blue-500 text-white p-2 w-full my-2 rounded" value="update"></input>
+              <input type="submit" className="bg-green-500 text-white  w-full my-2 btn btn-md uppercase rounded-full" value="update"></input>
             </form>
             
           </div>
