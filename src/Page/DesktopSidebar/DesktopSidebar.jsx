@@ -9,6 +9,7 @@ import { FaSquareCaretRight, FaSquareCaretLeft } from "react-icons/fa6";
 import { MdOutlineInventory, MdInventory } from "react-icons/md";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { GiExpense } from "react-icons/gi";
+import { FaSellsy } from "react-icons/fa";
 
 
 // eslint-disable-next-line react/prop-types
@@ -76,17 +77,28 @@ const DesktopSidebar = ({ open, setOpen }) => {
               </Link>
             }
           </li>
-          <li>
-            {
-              open ? <Link to="/" className="flex justify-center items-center">
-                <GoHomeFill className="text-green-500 text-2xl"></GoHomeFill></Link> : <Link className="flex justify-start items-center gap-2" to="/">
-                <GoHomeFill className="text-green-500"></GoHomeFill>
-                <span className=" font-semibold text-slate-200">
-                  Request for Sales
-                </span>
-              </Link>
-            }
-          </li>
+          <ul className="menu menu-horizontal p-0 w-full">
+              <li className="w-full">
+                <details className="w-full">
+                  <summary className="text-white">
+                  {
+                    open ? <FaSellsy className="text-green-500 text-lg"></FaSellsy> : <span className=" font-semibold text-slate-200 flex justify-center items-center gap-2 text-lg"><FaSellsy className="text-green-500 text-lg"></FaSellsy>Sells
+                    </span>
+                  }
+                  </summary>
+                  <ul className="rounded-t-none p-0 bg-black z-40">
+                  <li>
+                    {
+                      open ? <Link to="/" className="">
+                        <GoHomeFill className="text-green-500 text-2xl"></GoHomeFill></Link> : <Link className="flex justify-start items-center gap-2" to="/">
+                        <GoHomeFill className="text-green-500"></GoHomeFill>
+                        <span className=" font-semibold text-slate-200">
+                          Request for Sales
+                        </span>
+                      </Link>
+                    }
+                  </li>
+                  
           <li >
             {
               open ? <Link to="/my-inventory-request" className="flex justify-center items-center"><MdOutlineInventory className="text-green-500 text-2xl"></MdOutlineInventory></Link> : <Link className="flex justify-start items-center gap-2" to="/my-inventory-request"><MdOutlineInventory className="text-green-500"></MdOutlineInventory>
@@ -107,6 +119,11 @@ const DesktopSidebar = ({ open, setOpen }) => {
               }
             </li>
           )}
+                  </ul>
+                </details>
+              </li>
+            </ul>
+          
           {/* {is_manager && (
             <li className="flex justify-center items-center">
               {
@@ -162,6 +179,10 @@ const DesktopSidebar = ({ open, setOpen }) => {
               }
             </li>
           )}
+          {/* daisyUI */}
+
+            
+          {/* daisyUI */}
           <li>
             {
               open ? <Link to="/expensh" className="flex justify-center items-center">
