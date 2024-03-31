@@ -8,9 +8,9 @@ import { useContext } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider';
 
 const LogIn = () => {
-  
+
   let [errorMessage, setErrorMessage] = useState(null)
-  const {accountURL, setUser, setLoading} = useContext(AuthContext)
+  const { accountURL, setUser, setLoading } = useContext(AuthContext)
   const navigate = useNavigate();
 
 
@@ -23,7 +23,7 @@ const LogIn = () => {
     try {
       const response = await axios.post(`${accountURL}/login/`, formData);
 
-      if(response.status === 200) {
+      if (response.status === 200) {
         setLoading(true)
         setUser(response.data)
         localStorage.setItem('token', response.data.token)
@@ -35,9 +35,9 @@ const LogIn = () => {
         navigate('/dashboard')
       }
     } catch (error) {
-      if(error.response.status === 400){
+      if (error.response.status === 400) {
         setErrorMessage(error.response.data.non_field_errors[0])
-      }else if(error.response.status === 404){
+      } else if (error.response.status === 404) {
         toast.error('network error');
       }
     }

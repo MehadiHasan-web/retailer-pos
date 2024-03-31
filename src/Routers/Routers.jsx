@@ -39,7 +39,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <PrivateRoute><DashBoard></DashBoard></PrivateRoute>,
-    errorElement : <ErrorPage></ErrorPage>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: '/',
@@ -56,7 +56,7 @@ const router = createBrowserRouter([
       {
         path: `/inventoryRequest/:id`,
         element: <PrivateRoute><InventoryRequestDetails></InventoryRequestDetails></PrivateRoute>
-        
+
       },
       {
         path: '/applications',
@@ -71,8 +71,8 @@ const router = createBrowserRouter([
         element: <PrivateRoute><MyInventoryRequest></MyInventoryRequest></PrivateRoute>
       },
       {
-        path : 'sales/sales-entry',
-        element : <PrivateRoute><Home></Home></PrivateRoute>
+        path: 'sales/sales-entry',
+        element: <PrivateRoute><Home></Home></PrivateRoute>
       },
       {
         path : 'sales/sales-request',
@@ -93,7 +93,7 @@ const router = createBrowserRouter([
         element: <PrivateRoute><CategoryFrom></CategoryFrom></PrivateRoute>
 
       },
-      
+
       {
         path: "/manageInventory/item",
         element: <PrivateRoute><ItemFrom></ItemFrom></PrivateRoute>
@@ -105,42 +105,46 @@ const router = createBrowserRouter([
 
       },
       {
-        path : '/manageInventory/allUserInventory',
-        element : <PrivateRoute><AllUserInventory></AllUserInventory></PrivateRoute>
+        path: '/manageInventory/allUserInventory',
+        element: <PrivateRoute><AllUserInventory></AllUserInventory></PrivateRoute>
       },
       {
-        path : '/instituteManagement/instituteName',
-        element : <PrivateRoute><InstituteName></InstituteName></PrivateRoute>
+        path: '/instituteManagement/instituteName',
+        element: <PrivateRoute><InstituteName></InstituteName></PrivateRoute>
       },
       {
-        path : '/instituteManagement/branchName',
-        element : <PrivateRoute><BranchName></BranchName></PrivateRoute>
+        path: '/instituteManagement/branchName',
+        element: <PrivateRoute><BranchName></BranchName></PrivateRoute>
       },
       {
         path: '/instituteManagement/departmentName',
         element: <PrivateRoute><DepartmentName></DepartmentName></PrivateRoute>
       },
       {
-        path : '/createUser',
-        element : <PrivateRoute><CreateUser></CreateUser></PrivateRoute>
+        path: '/createUser',
+        element: <PrivateRoute><CreateUser></CreateUser></PrivateRoute>
       },
-      
+
       {
-        path : '/management',
-        element : <PrivateRoute><UserInventory></UserInventory></PrivateRoute>
+        path: '/management',
+        element: <PrivateRoute><UserInventory></UserInventory></PrivateRoute>
       },
       {
-        path : '/homeExtra',
-        element : <PrivateRoute><HomeExtra></HomeExtra></PrivateRoute>
+        path: '/homeExtra',
+        element: <PrivateRoute><HomeExtra></HomeExtra></PrivateRoute>
       },
       {
         path : '/expenses',
         element : <PrivateRoute><Expenses></Expenses></PrivateRoute>
       },
       {
-        path : '/user-profile',
-        element : <PrivateRoute><UserProfile></UserProfile></PrivateRoute>
+        path: '/user-profile',
+        element: <PrivateRoute><UserProfile></UserProfile></PrivateRoute>
       },
+      {
+        path: '/scanner',
+        element: <PrivateRoute> <Scanner></Scanner> </PrivateRoute>
+      }
       // {
       //   path : '/practice',
       //   element : <Practice></Practice>

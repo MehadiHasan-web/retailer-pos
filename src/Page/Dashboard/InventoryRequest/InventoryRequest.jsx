@@ -1,14 +1,12 @@
 import Title from "../../../Title/Title"
 import React, { useContext, useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
-import { MdDelete } from "react-icons/md";
-import { FiMinus } from 'react-icons/fi';
-import { FiPlus } from 'react-icons/fi';
-import Swal from "sweetalert2";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { AuthContext } from './../../../Providers/AuthProvider';
 
+import { BiBarcodeReader } from "react-icons/bi";
+import { Link } from "react-router-dom";
 function InventoryRequest() {
     const [startDate, setStartDate] = useState(new Date());
     const [adminData, setAdminData] = useState([])
@@ -44,12 +42,7 @@ function InventoryRequest() {
     const isApprover = localStorage.getItem('is_approver') === 'true';
     const is_manager = localStorage.getItem('is_manager') === 'true';
 
-    // const adminAndManager = isApprover || is_manager;
-    // useEffect(() => {
-    //     fetch('card.json')
-    //     .then((res) => res.json())
-    //     .then((data) => setAdminData(data))
-    // },[])
+
     useEffect(() => {
         const user_id = localStorage.getItem('user_id');
         console.log(user_id);
@@ -60,40 +53,9 @@ function InventoryRequest() {
             .catch((error) => console.error("Error fetching data:", error));
     }, [baseURL]);
 
-    // increment Quantity 
-    const incrementQuantity = (data) => {
-        const updatedTable = adminData.map(value => {
-            if (value.id === data.id) {
-                // Increment the quantity for the specific item
-                return { ...value, quantity: value.quantity + 1 }
-            }
-            return value;
-        })
-        setAdminData(updatedTable);
-    };
-
-    const [set, setSet] = useState({})
 
 
-    // decrement Quantity
-    const decrementQuantity = (data) => {
-        const updatedTable = adminData.map((value) => {
-            if (value.id === data.id) {
-                if (value.quantity > 1) {
-                    return { ...value, quantity: value.quantity - 1 };
-                } else {
-                    Swal.fire({
-                        icon: "error",
-                        title: "Oops...",
-                        text: "Sorry, quantity cannot be less than 1!",
-                    });
-                }
-            }
-            return value;
-        });
 
-        setAdminData(updatedTable);
-    };
     const takeAction = async (event) => {
         event.preventDefault();
         const form = event.target;
@@ -178,6 +140,8 @@ function InventoryRequest() {
                                 <button type="submit" className="btn btn-outline btn-sm rounded-full mx-3  hover:text-white ">Search</button>
                                 <button type="button" className="btn btn-outline btn-sm rounded-full mx-1  hover:text-white ">Clear filter</button>
 
+                                <Link to={'/scanner'} type="button" className="btn btn-outline btn-sm rounded mx-1  hover:text-white "><BiBarcodeReader className="text-2xl" /></Link>
+
                             </form>
                         </div>
                     </div>
@@ -222,8 +186,7 @@ function InventoryRequest() {
                                         </td>
                                         <td>  <p>4 march</p></td>
                                         <td>  <p>$ 700</p></td>
-                                        
-                                        
+
 
                                     </tr>)
                                 }
@@ -231,7 +194,7 @@ function InventoryRequest() {
                             {/* foot */}
                             <tfoot className="bg-slate-200	">
                                 <tr>
-                                <th className="text-black">No.</th>
+                                    <th className="text-black">No.</th>
                                     <th className="text-black">Sales ID</th>
                                     <th className="text-black">Customer Name</th>
                                     <th className="text-black">Customer Number</th>
@@ -268,8 +231,6 @@ function InventoryRequest() {
                                                     <th className='text-slate-600 text-sm'>SL</th>
                                                     <th className='text-slate-600 text-sm'>Product Name</th>
                                                     <th className='text-slate-600 text-sm'>Quantity</th>
-                                                    {/* <th className='text-slate-600 text-sm'>Inc/Dec</th>
-                                                    <th className='text-slate-600 text-sm'>Delete</th> */}
                                                 </thead>
                                                 <tbody className='bg-slate-100'>
                                                     {/* row 1 */}
@@ -284,16 +245,6 @@ function InventoryRequest() {
                                                             <td className='text-center text-sm'>
                                                                 {data.quantity}
                                                             </td>
-                                                            {/* <td className='text-center text-sm'>
-                                                                <div className='flex justify-around items-center'>
-                                                                    <button ><FiPlus onClick={() => incrementQuantity(data)} className='bg-green-500 text-white text-xl p-[1px] rounded'></FiPlus></button>
-                                                                    <button><FiMinus onClick={() => decrementQuantity(data)} className='bg-red-500 text-white text-xl p-[1px] rounded'></FiMinus></button>
-                                                                </div>
-                                                            </td>
-                                                            <td className=''>
-                                                                <MdDelete className='mx-auto bg-red-500 text-white text-xl p-[1px] rounded'></MdDelete>
-
-                                                            </td> */}
                                                         </tr>)
                                                     }
                                                 </tbody>

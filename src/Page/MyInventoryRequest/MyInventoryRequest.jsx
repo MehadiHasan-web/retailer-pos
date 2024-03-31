@@ -113,7 +113,7 @@ function MyInventoryRequest() {
         <div className="container mx-auto px-12">
           <div className="flex justify-start my-3 ">
             <h2 className="w-34  font-semibold border-b-[1px] border-indigo-500 mx-auto text-lg">
-              Sales Request:
+              Sales Request
             </h2>
           </div>
 
@@ -222,6 +222,7 @@ function MyInventoryRequest() {
                     <td className="text-center">
                       <p>$ 508</p>
                     </td>
+
                     <td className="text-center">
                       <Link to={`${data.id}`}>
                         <button className="btn btn-outline btn-success btn-sm">
