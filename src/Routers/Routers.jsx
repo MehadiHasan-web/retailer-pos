@@ -28,6 +28,7 @@ import InventoryRequestDetails from "../Page/Dashboard/InventoryRequest/Inventor
 import Invoice from "../Page/Invoice/Invoice";
 import SalesRequest from "../Page/SalesRequest/SalesRequest";
 import Expenses from "../Page/Expenses/Expenses";
+import Scanner from "../Page/Scanner";
 
 
 const router = createBrowserRouter([
@@ -71,7 +72,7 @@ const router = createBrowserRouter([
         element: <PrivateRoute><MyInventoryRequest></MyInventoryRequest></PrivateRoute>
       },
       {
-        path: 'sales/sales-entry',
+        path: 'sales/sales-request/sales-entry',
         element: <PrivateRoute><Home></Home></PrivateRoute>
       },
       {
