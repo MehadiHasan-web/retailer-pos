@@ -33,7 +33,7 @@ const Home = () => {
   const [categories, setCategories] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState([]);
   const [size, setSize] = useState("");
-  const token = "9ac442b59213b41034c5a6ab90835e20ae92f158"
+  const token = localStorage.getItem("token");
   console.log(size);
 
   const clearData = () => {
@@ -141,7 +141,7 @@ const Home = () => {
       }
     }
   };
-console.log(wishlist)
+  console.log(wishlist)
 
 
   // Update wishlist Quantity

@@ -16,11 +16,14 @@ const Invoice = () => {
   console.log(id);
   useEffect(() => {
     axios
-      .get(`${baseURL}/inventory/${id}/`)
+      .get(`https://rpos.pythonanywhere.com/api/v1/sales/${id}/`)
       .then((res) => res.data)
-      .then((data) => setDetailsData(data))
+      .then((data) => {
+        console.log(data);
+        setDetailsData(data)
+      })
       .catch((error) => console.error("Error fetching data:", error));
-  }, [baseURL, id]);
+  }, [id]);
   console.log(detailsData);
 
   // print function
@@ -44,7 +47,7 @@ const Invoice = () => {
                 Holos Technologies
               </h2>
               <div>
-                <p>#A33dD35</p>
+                <p>#{detailsData.id}</p>
               </div>
             </div>
             <h2
@@ -54,20 +57,14 @@ const Invoice = () => {
               INVOICE
             </h2>
             <p className="font-bold mt-10 text-lg">
-              Date : <span className="font-normal">02 june 2024</span>
+              Date : <span className="font-normal">{detailsData.created_date}</span>
             </p>
             <div className="flex justify-between mt-8 ">
               <div>
                 <h5 className="font-bold mb-1">Customer info:</h5>
-                <p>Silver Road</p>
-                <p>Chittagong,Bangladesh</p>
-                <p>djuk@gmail.com</p>
-              </div>
-              <div>
-                <h5 className="font-bold mb-1">User info:</h5>
-                <p>Golden Road</p>
-                <p>Cox's Bazar,Bangladesh</p>
-                <p>djuk@gmail.com</p>
+                <p>Name: {detailsData.customer.name}</p>
+                <p>Phone: {detailsData.customer.phone_number}</p>
+                <p>Details: {detailsData.customer.address}</p>
               </div>
             </div>
             <div className="mt-8">
@@ -77,19 +74,19 @@ const Invoice = () => {
                   <tr>
                     <th className="text-black">Item</th>
                     <th className="text-black text-end">Quantity</th>
-                    <th className="text-black text-end">Price</th>
-                    <th className="text-black text-end">Amount</th>
+                    <th className="text-black text-end">Size</th>
+                    {/* <th className="text-black text-end">Amount</th> */}
                   </tr>
                 </thead>
                 <tbody>
-                  {detailsData?.items?.map((tableData, index) => (
+                  {detailsData.saleitems?.map((tableData, index) => (
                     <tr key={index}>
-                      <td>{tableData.item.name}</td>
-                      <td className=" text-end">3</td>
-                      <td className=" text-end">200</td>
-                      <td className=" text-end">
+                      <td>{tableData.item_name}</td>
+                      <td className=" text-end">{tableData.quantity}</td>
+                      <td className=" text-end">{tableData.size}</td>
+                      {/* <td className=" text-end">
                         <p>$ 600</p>
-                      </td>
+                      </td> */}
                     </tr>
                   ))}
                 </tbody>
@@ -97,7 +94,7 @@ const Invoice = () => {
               <div className="border-b-2"></div>
               <div className="flex justify-end mr-4 my-2 font-bold">
                 <p className="mr-16">Total</p>
-                <span>$1200</span>
+                <span>TK {detailsData.total}</span>
               </div>
               <div className="border-b-2"></div>
               <div className="mt-14 flex justify-between items-center">
@@ -115,7 +112,7 @@ const Invoice = () => {
                 {/* barcode  */}
                 <div>
                   <div>
-                    <Barcode value="Mehadi Hasan" className="rounded w-40" />
+                    <Barcode value={detailsData.id} className="rounded w-96" />
                   </div>
                 </div>
               </div>

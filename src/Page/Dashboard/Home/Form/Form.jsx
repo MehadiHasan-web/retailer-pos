@@ -14,7 +14,7 @@ const Form = ({ wishlist, calculateTotalPrice }) => {
   const user_id = localStorage.getItem("user_id");
   const { baseURL, accountURL } = useContext(AuthContext);
   const [total, setTotal] = useState(calculateTotalPrice)
-  const token = "9ac442b59213b41034c5a6ab90835e20ae92f158"
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     axios
@@ -59,11 +59,12 @@ const Form = ({ wishlist, calculateTotalPrice }) => {
     setTotal(total);
     const products = wishlist.map(item => ({ id: item.id, quantity: item.quantity, size: item.size }))
 
-    const finalArray = [{ customer: userInfo, saleitems: products, vat_percentage: parseInt(vat), tax_percentage: parseInt(tax), discount_percentage: parseInt(discount), delivery_cost: parseInt(deliveryCost), total: parseInt(total), subtotal: parseInt(0) }]
+    const finalArray = { customer: userInfo, saleitems: products, vat_percentage: parseInt(vat), tax_percentage: parseInt(tax), discount_percentage: parseInt(discount), delivery_cost: parseInt(deliveryCost), total: parseInt(total), subtotal: parseInt(0) }
 
     // setCardTable((wishlist) => [...wishlist, user]);
     // const updatedCardTable = [...wishlist, user];
     sendData(finalArray);
+    console.log(finalArray)
   };
 
   return (
