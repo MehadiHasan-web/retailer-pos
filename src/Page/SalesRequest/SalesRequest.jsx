@@ -40,11 +40,16 @@ const SalesRequest = () => {
 
   // get data
   useEffect(() => {
-    const user_id = localStorage.getItem("user_id");
+    const token = localStorage.getItem("token");
     axios
-      .get(`${baseURL}/myinventoryrequest/${7}/`)
+      .get(`https://rpos.pythonanywhere.com/api/v1/sales/`, {
+        headers: { 'Authorization': 'token ' + token }
+      })
       .then((res) => res.data)
-      .then((data) => setUserData(data))
+      .then((data) => {
+        console.log(data)
+        setUserData(data)
+      })
       .catch((error) => console.error("Error fetching data:", error));
   }, [baseURL]);
 
@@ -209,22 +214,22 @@ const SalesRequest = () => {
                       <div className="flex items-center gap-1">
                         <div>
                           <div className="font-bold capitalize">
-                            {data.user.username}
+                            {data.customer.name}
                           </div>
                         </div>
                       </div>
                     </td>
                     <td className="text-center">
-                      <p>01879009988 </p>
+                      <p>{data.customer.phone_number} </p>
                     </td>
                     <td className="text-center">
-                      <p>Billa Road,Bogura</p>
+                      <p>{data.customer.address}</p>
                     </td>
                     <td className="text-center">
-                      <p>20 january </p>
+                      <p>{data.created_date} </p>
                     </td>
                     <td className="text-center">
-                      <p>$ 508</p>
+                      <p>TK {data.total}</p>
                     </td>
                     <td className="text-center">
                       <Link to={`${data.id}`}>

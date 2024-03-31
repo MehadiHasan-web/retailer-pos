@@ -29,6 +29,7 @@ import Invoice from "../Page/Invoice/Invoice";
 import SalesRequest from "../Page/SalesRequest/SalesRequest";
 import Expenses from "../Page/Expenses/Expenses";
 import Scanner from "../Page/Scanner";
+import AddInventoryProduct from "../Page/AddInventoryProduct";
 import SalesReturn from './../Page/SalesReturn/SalesReturn';
 
 
@@ -150,6 +151,10 @@ const router = createBrowserRouter([
       {
         path: '/scanner',
         element: <PrivateRoute> <Scanner></Scanner> </PrivateRoute>
+      },
+      {
+        path: '/management/add-inventory',
+        element: <PrivateRoute><AddInventoryProduct /></PrivateRoute>
       }
       // {
       //   path : '/practice',

@@ -5,14 +5,16 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useContext } from "react";
 import { AuthContext } from "./../../../../Providers/AuthProvider";
-// eslint-disable-next-line react/prop-types
-const Form = ({ wishlist, setWishlist, calculateTotalPrice }) => {
+
+
+
+const Form = ({ wishlist, calculateTotalPrice }) => {
   const [cardTable, setCardTable] = useState([]);
   const [approverList, setApprover] = useState([]);
   const user_id = localStorage.getItem("user_id");
   const { baseURL, accountURL } = useContext(AuthContext);
   const [total, setTotal] = useState(calculateTotalPrice)
-  console.log(cardTable);
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     axios
@@ -27,16 +29,12 @@ const Form = ({ wishlist, setWishlist, calculateTotalPrice }) => {
   //   setCardTable([]);
   // };
 
-  async function sendData(userInfo) {
-    console.log(userInfo);
+  async function sendData(finalArray) {
     try {
-      const response = await axios.post(`${baseURL}/inventory/`, userInfo, {
-        headers: {
-          "Content-Type": "application/json",
-          // 'user_id': user_id,
-        },
+      const response = await axios.post(`https://rpos.pythonanywhere.com/api/v1/sales/`, finalArray, {
+        headers: { 'Authorization': 'token ' + token }
       });
-      toast.success("Successfully created");
+      toast.success("Successfully Send");
     } catch (error) {
       toast.error(`${error.message} .Try again`);
     }
@@ -47,29 +45,26 @@ const Form = ({ wishlist, setWishlist, calculateTotalPrice }) => {
     event.preventDefault()
     const form = event.target;
     const name = form.name.value;
-    const number = form.number.value;
-    const information = form.information.value;
-    const user_id = form.user_id.value;
-    // const position = form.position.value;
+    const phone_number = form.number.value;
+    const address = form.information.value;
+    const userInfo = { name, phone_number, address };
+
+
     const vat = form.vat.value;
     const tax = form.Tax.value;
     const discount = form.discount.value;
     const deliveryCost = form.delivery.value;
-    const total = calculateTotalPrice - vat - tax - discount-deliveryCost;
+    const total = form.total.value;
+    // const totalAmount = calculateTotalPrice - vat - tax - discount - deliveryCost;
     setTotal(total);
-    const user = { user_id, name, number, information };
-    console.log(user)
-    // const initialCardTable = JSON.parse(localStorage.getItem('cardTable')) || [];
+    const products = wishlist.map(item => ({ id: item.id, quantity: item.quantity, size: item.size }))
 
-    // setCardTable(initialCardTable);
-    // setCardTable((prevCardTable) => [...prevCardTable, user]);
-    // const updatedCardTable = [...initialCardTable, user];
-    // sendData(updatedCardTable);
-    // setCardTable(initialCardTable);
-    setCardTable((wishlist) => [...wishlist, user]);
-    const updatedCardTable = [...wishlist, user];
-    sendData(updatedCardTable);
-    // console.log(updatedCardTable)
+    const finalArray = { customer: userInfo, saleitems: products, vat_percentage: parseInt(vat), tax_percentage: parseInt(tax), discount_percentage: parseInt(discount), delivery_cost: parseInt(deliveryCost), total: parseInt(total), subtotal: parseInt(0) }
+
+    // setCardTable((wishlist) => [...wishlist, user]);
+    // const updatedCardTable = [...wishlist, user];
+    sendData(finalArray);
+    console.log(finalArray)
   };
 
   return (
@@ -87,23 +82,24 @@ const Form = ({ wishlist, setWishlist, calculateTotalPrice }) => {
                 </p>
                 <p className="flex justify-between mt-3 ">
                   <span>Vat</span>
-                  <span className="font-bold">$ <input  name="vat" className=" w-14 bg-slate-50 shadow-inner rounded text-end"/></span>
+                  <span className="font-bold">$ <input name="vat" className=" w-14 bg-slate-50 shadow-inner rounded text-end" /></span>
                 </p>
                 <p className="flex justify-between mt-3 ">
                   <span>Tax</span>
-                  <span className="font-bold">$ <input  name="Tax" className=" w-14 bg-slate-50 shadow-inner rounded text-end"/></span>
+                  <span className="font-bold">$ <input name="Tax" className=" w-14 bg-slate-50 shadow-inner rounded text-end" /></span>
                 </p>
                 <p className="flex justify-between mt-3 ">
                   <span>Discount</span>
-                  <span className="font-bold">$ <input  name="discount" className=" w-14 bg-slate-50 shadow-inner rounded text-end"/></span>
+                  <span className="font-bold">$ <input name="discount" className=" w-14 bg-slate-50 shadow-inner rounded text-end" /></span>
                 </p>
                 <p className="flex justify-between mt-3 ">
                   <span>Delivery Cost</span>
-                  <span className="font-bold">$ <input  name="delivery" className=" w-14 bg-slate-50 shadow-inner rounded text-end"/></span>
+                  <span className="font-bold">$ <input name="delivery" className=" w-14 bg-slate-50 shadow-inner rounded text-end" /></span>
                 </p>
                 <p className="border-b-2 border-dashed border-black mt-2"></p>
-                <p className="flex justify-between mt-3 font-bold">
-                  <span>Total</span> <span>$ {total}</span>
+                <p className="flex justify-between mt-3 ">
+                  <span>Total</span>
+                  <span className="font-bold">$ <input name="total" defaultValue={calculateTotalPrice} className=" w-14 bg-slate-50 shadow-inner rounded text-end" /></span>
                 </p>
               </div>
               <h3 className="mt-5"></h3>
@@ -117,7 +113,7 @@ const Form = ({ wishlist, setWishlist, calculateTotalPrice }) => {
                 {/* file section end */}
                 {/* file section start */}
                 <div className="form-control w-full flex-1">
-                <input type="number" placeholder="enter your number" className="input input-bordered w-full h-6 lg:h-9 " name="number" />
+                  <input type="number" placeholder="enter your number" className="input input-bordered w-full h-6 lg:h-9 " name="number" />
                 </div>
                 {/* file section end */}
               </div>
@@ -131,13 +127,13 @@ const Form = ({ wishlist, setWishlist, calculateTotalPrice }) => {
               ></textarea>
               {/* textarea section end */}
               <div className="flex gap-2 mt-1">
-                
+
                 <button
                   // onClick={() => userData()}
                   className="bg-green-500 text-white md:text-sm lg:text-base md:px-2 md:py-1 lg:px-3 lg:py-2 uppercase rounded"
                   type="submit"
                 >
-                  Inventory Request
+                  Sales Entry
                 </button>
               </div>
             </form>

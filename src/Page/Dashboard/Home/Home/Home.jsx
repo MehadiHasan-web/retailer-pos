@@ -33,7 +33,7 @@ const Home = () => {
   const [categories, setCategories] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState([]);
   const [size, setSize] = useState("");
-  const token = "9ac442b59213b41034c5a6ab90835e20ae92f158"
+  const token = localStorage.getItem("token");
   console.log(size);
 
   const clearData = () => {
@@ -123,7 +123,7 @@ const Home = () => {
       if (!quantity) {
         const newData = {
           id: product.id,
-          name: product.name,
+          name: product.itemName,
           quantity: 1,
           price: randomPrice,
           size: size
@@ -132,7 +132,7 @@ const Home = () => {
       } else {
         const newData = {
           id: product.id,
-          name: product.name,
+          name: product.itemName,
           quantity: parseInt(quantity),
           price: randomPrice,
           size: size,
@@ -141,7 +141,7 @@ const Home = () => {
       }
     }
   };
-
+  console.log(wishlist)
 
 
   // Update wishlist Quantity
@@ -347,6 +347,7 @@ const Home = () => {
                               name="size" value="S"
                               id="size"
                               className="radio radio-success"
+                              required
                             />
                             <label htmlFor="size" className="text-lg font-semibold">S</label>
                           </div>
@@ -356,6 +357,7 @@ const Home = () => {
                               name="size" value="M"
                               id="radio-4"
                               className="radio radio-success"
+                              required
                             />
                             <label htmlFor="radio-4" className="text-lg font-semibold">M</label>
                           </div>
@@ -365,6 +367,7 @@ const Home = () => {
                               name="size" value="L"
                               id="radio-3"
                               className="radio radio-success"
+                              required
                             />
                             <label htmlFor="radio-3" className="text-lg font-semibold">L</label>
                           </div>
@@ -374,6 +377,7 @@ const Home = () => {
                               name="size" value="XL"
                               id="radio-2"
                               className="radio radio-success"
+                              required
                             />
                             <label htmlFor="radio-2" className="text-lg font-semibold">XL</label>
                           </div>
@@ -383,6 +387,7 @@ const Home = () => {
                               name="size" value="XXL"
                               id="radio-1"
                               className="radio radio-success"
+                              required
                             />
                             <label htmlFor="size" className="text-lg font-semibold">XXL</label>
                           </div>
