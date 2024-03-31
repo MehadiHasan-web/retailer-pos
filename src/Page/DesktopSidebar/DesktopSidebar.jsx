@@ -1,4 +1,4 @@
-import { FaPlusSquare, FaPowerOff, FaUser } from "react-icons/fa";
+import { FaPlusSquare, FaPowerOff } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import PurchaseManagement from "./../PurchaseManagement/PurchaseManagement";
 // import ManageInventory from "../ManageInventory/ManageInventory";
@@ -6,7 +6,7 @@ import { MdDashboard, } from "react-icons/md";
 import { IoPersonCircleSharp } from "react-icons/io5";
 // import { GoHomeFill } from "react-icons/go";
 import { FaSquareCaretRight, FaSquareCaretLeft } from "react-icons/fa6";
-import { MdOutlineInventory, MdInventory } from "react-icons/md";
+import { MdInventory } from "react-icons/md";
 // import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { GiExpense } from "react-icons/gi";
 
@@ -93,14 +93,14 @@ const DesktopSidebar = ({ open, setOpen }) => {
                 <span className=" font-semibold text-slate-200">My Sales Requests</span></Link>
             }
           </li> */}
-         
+
           {is_manager && (
             <li className="flex justify-center items-center">
-               
-              <PurchaseManagement open ={open} ></PurchaseManagement>
+
+              <PurchaseManagement open={open} ></PurchaseManagement>
             </li>
           )}
-           {is_manager && (
+          {is_manager && (
             <li>
               {
                 open ? <Link to="/sales-return" className="flex justify-center items-center">
@@ -130,7 +130,7 @@ const DesktopSidebar = ({ open, setOpen }) => {
               }
             </li>
           )} */}
-         
+
 
           {/* {is_admin && (
             <li>
@@ -171,7 +171,7 @@ const DesktopSidebar = ({ open, setOpen }) => {
                 >
                 <IoPersonCircleSharp className="text-green-500"></IoPersonCircleSharp>
                 <span className=" font-semibold text-slate-200">
-                 Management
+                  Management
                 </span>
               </Link>
             }
