@@ -101,7 +101,7 @@ const DesktopSidebar = ({ open, setOpen }) => {
               <Sales open={open}></Sales>
             </li>
           )} */}
-          {is_manager && (
+         
             <li>
               {
                 open ? <Link to="/sales-return" className="flex justify-center items-center">
@@ -114,7 +114,6 @@ const DesktopSidebar = ({ open, setOpen }) => {
                 </Link>
               }
             </li>
-          )}
           {/* {isApprover && (
             <li >
               {
