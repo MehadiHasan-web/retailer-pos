@@ -3,6 +3,7 @@ import blankImg from '../../../public/blankImg.jpg'
 // import { axios } from 'axios';
 import axios from 'axios';
 import { ToastContainer, toast } from "react-toastify";
+import { Link } from 'react-router-dom';
 
 
 const UserInventory = () => {
@@ -61,6 +62,36 @@ const UserInventory = () => {
 
   return (
     <div className="container mx-auto">
+
+      {/* search bar  */}
+      <div className="py-2 mb-3 bg-slate-100 rounded-lg">
+        <div className="flex justify-center mt-1">
+          <form
+            action=""
+            className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-2  lg:flex md:gap-0 lg:justify-around lg:items-center"
+          >
+            {/* search bar  */}
+            <input
+              type="text"
+              placeholder="Type here"
+              className="input input-bordered input-sm max-w-xs w-full xl:w-44 rounded-full mx-1 mb-1 shadow hover:shadow-lg"
+            />
+            <button
+              type="button"
+              className="btn btn-outline btn-sm rounded-full mx-1 hover:text-white shadow hover:shadow-lg"
+            >
+              Clear filter
+            </button>
+            <Link to={"add-inventory"}>
+              <button className="btn bg-green-500 text-white btn-sm rounded-full ">
+                Product Entry
+              </button>
+            </Link>
+          </form>
+        </div>
+      </div>
+      {/* search bar end  */}
+      {/* products  */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 gap-1 sm:gap-2 md:gap-1 lg:gap-2 mt-5">
         {
           card.map((data, index) => <div key={index} className=" p-2 flex flex-col justify-between rounded shadow-lg bg-slate-50">

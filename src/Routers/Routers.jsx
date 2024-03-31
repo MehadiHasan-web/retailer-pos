@@ -29,6 +29,7 @@ import Invoice from "../Page/Invoice/Invoice";
 import SalesRequest from "../Page/SalesRequest/SalesRequest";
 import Expenses from "../Page/Expenses/Expenses";
 import Scanner from "../Page/Scanner";
+import AddInventoryProduct from "../Page/AddInventoryProduct";
 
 
 const router = createBrowserRouter([
@@ -76,13 +77,13 @@ const router = createBrowserRouter([
         element: <PrivateRoute><Home></Home></PrivateRoute>
       },
       {
-        path : 'sales/sales-request',
-        element : <PrivateRoute><SalesRequest/></PrivateRoute>
+        path: 'sales/sales-request',
+        element: <PrivateRoute><SalesRequest /></PrivateRoute>
       },
       {
         path: `sales/sales-request/:id`,
         element: <PrivateRoute><Invoice></Invoice></PrivateRoute>
-        
+
       },
       {
         path: "/manageInventory/subcategory",
@@ -135,8 +136,8 @@ const router = createBrowserRouter([
         element: <PrivateRoute><HomeExtra></HomeExtra></PrivateRoute>
       },
       {
-        path : '/expenses',
-        element : <PrivateRoute><Expenses></Expenses></PrivateRoute>
+        path: '/expenses',
+        element: <PrivateRoute><Expenses></Expenses></PrivateRoute>
       },
       {
         path: '/user-profile',
@@ -145,6 +146,10 @@ const router = createBrowserRouter([
       {
         path: '/scanner',
         element: <PrivateRoute> <Scanner></Scanner> </PrivateRoute>
+      },
+      {
+        path: '/management/add-inventory',
+        element: <PrivateRoute><AddInventoryProduct /></PrivateRoute>
       }
       // {
       //   path : '/practice',
