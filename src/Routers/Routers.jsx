@@ -27,6 +27,7 @@ import UserProfile from "../Page/UserProfile/UserProfile";
 import InventoryRequestDetails from "../Page/Dashboard/InventoryRequest/InventoryRequestDetails";
 import Expensh from './../Page/Expensh/Expensh';
 import SalesReturn from "../Page/SalesReturn/SalesReturn";
+import Scanner from './../Page/Scanner';
 
 
 const router = createBrowserRouter([
@@ -138,6 +139,10 @@ const router = createBrowserRouter([
       {
         path: '/sales-return',
         element: <PrivateRoute> <SalesReturn /> </PrivateRoute>
+      },
+      {
+        path: '/scanner',
+        element: <PrivateRoute> <Scanner></Scanner> </PrivateRoute>
       }
       // {
       //   path : '/practice',

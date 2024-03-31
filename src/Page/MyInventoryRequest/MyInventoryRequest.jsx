@@ -5,7 +5,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import { AuthContext } from "../../Providers/AuthProvider";
 
-
 function MyInventoryRequest() {
   const [startDate, setStartDate] = useState(new Date());
   const [userData, setUserData] = useState([]);
@@ -125,7 +124,7 @@ function MyInventoryRequest() {
         <div className="container mx-auto px-12">
           <div className="flex justify-start my-3 ">
             <h2 className="w-34  font-semibold border-b-[1px] border-indigo-500 mx-auto text-lg">
-              Sales Request:
+              Sales Request
             </h2>
           </div>
 
@@ -233,7 +232,7 @@ function MyInventoryRequest() {
                     <td className="text-center">
                       <p>$ 508</p>
                     </td>
-                    
+
                   </tr>
                 ))}
               </tbody>
