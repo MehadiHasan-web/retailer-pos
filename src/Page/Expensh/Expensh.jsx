@@ -37,7 +37,7 @@ const Expensh = () => {
     }
   };
 
-  // get data
+  // get Expenses data
   useEffect(() => {
     const user_id = localStorage.getItem("user_id");
     axios
@@ -48,10 +48,10 @@ const Expensh = () => {
       .then((data) => setUserData(data))
       .catch((error) => console.error("Error fetching data:", error));
   }, [baseURL]);
-
+  console.log(userData)
   // category get 
   useEffect(() => {
-    axios.get(`https://rpos.pythonanywhere.com/api/v1/categories/`, {
+    axios.get(`https://rpos.pythonanywhere.com/api/v1/expense-categories/`, {
       headers: { 'Authorization': 'token ' + token }
     })
       .then(response => {
@@ -65,7 +65,7 @@ const Expensh = () => {
   }, [])
 
 
-  // category post 
+  // category create 
   const handleCategoryData = (e) => {
     e.preventDefault()
     const form = e.target;
@@ -76,7 +76,7 @@ const Expensh = () => {
       additionalInfo: additionalInfo,
     }
     console.log(categoryData)
-    axios.post(`https://rpos.pythonanywhere.com/api/v1/categories/`, categoryData, {
+    axios.post(`https://rpos.pythonanywhere.com/api/v1/expense-categories/`, categoryData, {
       headers: { 'Authorization': 'token ' + token }
     })
       .then(response => {
@@ -88,7 +88,7 @@ const Expensh = () => {
         toast.error(`${error.message} .Try again`);
       });
   }
-  // entry data 
+  // entry create 
   const handleEntryData = (e) => {
     e.preventDefault()
     const form = e.target;
@@ -96,9 +96,9 @@ const Expensh = () => {
     const note = form.userDetails.value;
     const category = form.category.value;
     const expensesData = {
-      category: category,
+      category: parseInt(category),
       note: note,
-      amount: price,
+      amount: parseInt(price),
       date: new Date().toISOString().split('T')[0]
     }
     console.log(expensesData)
@@ -249,16 +249,16 @@ const Expensh = () => {
                       <div className="flex items-center gap-1">
                         <div>
                           <div className="font-bold capitalize">
-                            Mobile
+                            {data.category}
                           </div>
                         </div>
                       </div>
                     </td>
                     <td>
-                      <p>20 january </p>
+                      <p>{data.date}</p>
                     </td>
                     <td>
-                      <p>$ 300</p>
+                      <p>{Math.floor(data.amount)}</p>
                     </td>
                   </tr>
                 ))}

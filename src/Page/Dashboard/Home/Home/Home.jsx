@@ -7,26 +7,17 @@ import { IoPerson } from "react-icons/io5";
 import {
   FaChevronLeft,
   FaChevronRight,
-  FaLongArrowAltRight,
 } from "react-icons/fa";
 import { useCallback, useContext, useEffect, useState } from "react";
 import "react-tabs/style/react-tabs.css";
 import { GrSubtractCircle } from "react-icons/gr";
-import { CiEdit } from "react-icons/ci";
 import bottol from "../../../../../public/bottol.png";
 import { FaCirclePlus } from "react-icons/fa6";
-import { FaCircleMinus } from "react-icons/fa6";
 import { AuthContext } from "../../../../Providers/AuthProvider";
 import { MdDelete } from "react-icons/md";
 import axios from "axios";
 import Form from "../Form/Form";
 
-// swiper slider functionality
-// import { Swiper, SwiperSlide } from 'swiper/react';
-// import 'swiper/css';
-// import 'swiper/css/pagination';
-// import 'swiper/css/navigation';
-// import { Navigation } from 'swiper/modules';
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
