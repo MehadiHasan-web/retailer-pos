@@ -17,21 +17,21 @@ const LogIn = () => {
   const submitData = async (event) => {
     event.preventDefault();
     const form = event.target;
-    const username = form.email.value;
+    const email = form.email.value;
     const password = form.password.value;
-    const formData = { username, password };
+    const formData = { email, password };
     try {
-      const response = await axios.post(`${accountURL}/login/`, formData);
+      const response = await axios.post(`https://rpos.pythonanywhere.com/api/v1/login/`, formData);
 
       if (response.status === 200) {
         setLoading(true)
         setUser(response.data)
         localStorage.setItem('token', response.data.token)
-        localStorage.setItem('is_admin', response.data.is_admin)
-        localStorage.setItem('is_approver', response.data.is_approver)
-        localStorage.setItem('is_manager', response.data.is_manager)
-        localStorage.setItem('user_id', response.data.user_id)
-        localStorage.setItem('designation', response.data.designation)
+        // localStorage.setItem('is_admin', response.data.user_type)
+        // localStorage.setItem('is_approver', response.data.is_approver)
+        // localStorage.setItem('is_manager', response.data.is_manager)
+        // localStorage.setItem('user_id', response.data.user_id)
+        localStorage.setItem('designation', response.data.user_type)
         navigate('/dashboard')
       }
     } catch (error) {

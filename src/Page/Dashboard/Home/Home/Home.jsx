@@ -1,8 +1,5 @@
 // import { useEffect } from 'react';
 import "./Home.css";
-import { MdOutlineWatchLater } from "react-icons/md";
-import { GoDotFill } from "react-icons/go";
-import { IoPerson } from "react-icons/io5";
 
 import {
   FaChevronLeft,
@@ -36,6 +33,7 @@ const Home = () => {
   const [categories, setCategories] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState([]);
   const [size, setSize] = useState("");
+  const token = "9ac442b59213b41034c5a6ab90835e20ae92f158"
   console.log(size);
 
   const clearData = () => {
@@ -45,7 +43,7 @@ const Home = () => {
   // search function
   useEffect(() => {
     const findSearchData = products.filter((product) =>
-      product.name.toLowerCase().includes(searchData.toLowerCase())
+      product.itemName.toLowerCase().includes(searchData.toLowerCase())
     );
     if (findSearchData?.length > 0) {
       setSelectedProduct(findSearchData);
@@ -78,7 +76,9 @@ const Home = () => {
   //get all Products
   useEffect(() => {
     axios
-      .get(`${baseURL}/itemlist/`)
+      .get(`https://rpos.pythonanywhere.com/api/v1/inventory/`, {
+        headers: { 'Authorization': 'token ' + token }
+      })
       .then((response) => {
         setProducts(response.data);
         console.log("All Products:", response.data);
@@ -319,19 +319,19 @@ const Home = () => {
                           </figure>
                         </div>
                         <div className="w-3/4">
-                          <h2 className="text-xl font-bold">{product.name}</h2>
-                          <p className="text-xs">{product.description}</p>
+                          <h2 className="text-xl font-bold">{product.itemName}</h2>
+                          {/* <p className="text-xs">{product.description}</p> */}
                           <ul className="flex items-start justify-between mt-2">
                             <li>
                               <p className="text-sm">Netto</p>
                               <p className="text-base font-bold">
-                                {product.net_weight}
+                                {/* {product.net_weight} */}
                               </p>
                             </li>
                             <li>
                               <p className="text-sm">Stock</p>
                               <p className="text-base font-bold">
-                                {product.stock} Available
+                                {product.unit} Available
                               </p>
                             </li>
                           </ul>
