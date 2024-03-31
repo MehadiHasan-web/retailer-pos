@@ -1,17 +1,31 @@
 import { useEffect, useState } from "react";
 import blankImg from '../../../public/blankImg.jpg'
+// import { axios } from 'axios';
 
 
 const UserInventory = () => {
   const [card, setCard] = useState([])
-
+  const token = "9ac442b59213b41034c5a6ab90835e20ae92f158"
 
 
   useEffect(() => {
     fetch('card.json')
-    .then((res) => res.json())
-    .then((data) => setCard(data))
-  },[])
+      .then((res) => res.json())
+      .then((data) => setCard(data))
+  }, [])
+
+  // get data
+  // useEffect(() => {
+  //   const user_id = localStorage.getItem("user_id");
+  //   axios
+  //     .get(`https://rpos.pythonanywhere.com/api/v1/inventory/`, {
+  //       headers: { 'Authorization': 'token ' + token }
+  //     })
+  //     .then((res) => res.data)
+  //     .then((data) => setCard(data))
+  //     .catch((error) => console.error("Error fetching data:", error));
+  // }, []);
+
 
   const addStockData = (event) => {
     event.preventDefault();
@@ -19,10 +33,10 @@ const UserInventory = () => {
     const stock = form.updateStock.value;
     const transportationCost = form.transportationCost.value;
     const otherCost = form.otherCost.value;
-    const updateData ={
-      stock:stock,
-      transportationCost:transportationCost,
-      otherCost:otherCost,
+    const updateData = {
+      stock: stock,
+      transportationCost: transportationCost,
+      otherCost: otherCost,
     }
   }
 
@@ -33,34 +47,34 @@ const UserInventory = () => {
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 gap-1 sm:gap-2 md:gap-1 lg:gap-2 mt-5">
         {
           card.map((data, index) => <div key={index} className=" p-2 flex flex-col justify-between rounded shadow-lg bg-slate-50">
-          {
-                        data.image ? <img className='w-full h-20 sm:h-24 md:h-20 lg:h-28 rounded' src={data.image}></img> : <img src={blankImg} className='w-full h-20 sm:h-24 md:h-20 lg:h-28 rounded'></img>
-                      }
-          <div className="p-2">
-            <h2 className="text-sm sm:text-base md:text-sm lg:text-sm font-semibold mx-auto my-1 md:my-1 lg:my-2">Phone X</h2>
-            <p className="text-sm sm:text-base md:text-sm">Stock : 20</p>
-            <form onSubmit={addStockData} className="space-y-1">
-              <div className="flex justify-between items-center">
-                <span>Transportation Cost:</span>
-              <input  name="transportationCost" type="text" placeholder="Type here" className="input input-bordered input-sm w-28" />
-              </div>
-              <div className="flex justify-between items-center">
-                <span>Other Cost:</span>
-              <input  name="otherCost" type="text" placeholder="Type here" className="input input-bordered input-sm w-28" />
-              </div>
-              <div className="flex justify-between items-center">
-                <span>Update Stock:</span>
-              <input  name="UpdateStock" type="text" placeholder="Type here" className="input input-bordered input-sm w-28" />
-              </div>
+            {
+              data.image ? <img className='w-full h-20 sm:h-24 md:h-20 lg:h-28 rounded' src={data.image}></img> : <img src={blankImg} className='w-full h-20 sm:h-24 md:h-20 lg:h-28 rounded'></img>
+            }
+            <div className="p-2">
+              <h2 className="text-sm sm:text-base md:text-sm lg:text-sm font-semibold mx-auto my-1 md:my-1 lg:my-2">Phone X</h2>
+              <p className="text-sm sm:text-base md:text-sm">Stock : 20</p>
+              <form onSubmit={addStockData} className="space-y-1">
+                <div className="flex justify-between items-center">
+                  <span>Transportation Cost:</span>
+                  <input name="transportationCost" type="text" placeholder="Type here" className="input input-bordered input-sm w-28" />
+                </div>
+                <div className="flex justify-between items-center">
+                  <span>Other Cost:</span>
+                  <input name="otherCost" type="text" placeholder="Type here" className="input input-bordered input-sm w-28" />
+                </div>
+                <div className="flex justify-between items-center">
+                  <span>Update Stock:</span>
+                  <input name="UpdateStock" type="text" placeholder="Type here" className="input input-bordered input-sm w-28" />
+                </div>
 
-              <input type="submit" className="bg-green-500 text-white  w-full my-2 btn btn-md uppercase rounded-full" value="update"></input>
-            </form>
-            
-          </div>
-        </div>)
+                <input type="submit" className="bg-green-500 text-white  w-full my-2 btn btn-md uppercase rounded-full" value="update"></input>
+              </form>
+
+            </div>
+          </div>)
         }
       </div>
-      
+
     </div>
   );
 };

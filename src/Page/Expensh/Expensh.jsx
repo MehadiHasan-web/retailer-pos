@@ -1,22 +1,24 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "./../../Providers/AuthProvider";
+import { ToastContainer, toast } from "react-toastify";
 
 const Expensh = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [userData, setUserData] = useState([]);
 
-  const [modalData, setModalData] = useState({});
   const [selectedOption, setSelectedOption] = useState(1); // 1 == all data, 2==approve, 3==pending
   const [filteredData, setFilteredData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage, setPostPerPage] = useState(20);
   const [searchText, setSearchText] = useState("");
   const { baseURL } = useContext(AuthContext);
+  const [category, setCategory] = useState([]);
 
   const lastPostIndex = currentPage * postPerPage;
   const firstPostIndex = lastPostIndex - postPerPage;
   const currentPosts = filteredData.slice(firstPostIndex, lastPostIndex);
+  const token = "9ac442b59213b41034c5a6ab90835e20ae92f158"
 
   let page = [];
   for (let i = 1; i <= Math.ceil(filteredData.length / postPerPage); i++) {
@@ -39,23 +41,80 @@ const Expensh = () => {
   useEffect(() => {
     const user_id = localStorage.getItem("user_id");
     axios
-      .get(`${baseURL}/myinventoryrequest/${user_id}/`)
+      .get(`https://rpos.pythonanywhere.com/api/v1/expenses/`, {
+        headers: { 'Authorization': 'token ' + token }
+      })
       .then((res) => res.data)
       .then((data) => setUserData(data))
       .catch((error) => console.error("Error fetching data:", error));
   }, [baseURL]);
 
-  // open modal
-  const openModal = async (data) => {
-    console.log(data);
-    try {
-      const response = await axios.get(`${baseURL}/inventory/${data}/`);
-      setModalData(response.data);
-      console.log(response.data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
+  // category get 
+  useEffect(() => {
+    axios.get(`https://rpos.pythonanywhere.com/api/v1/categories/`, {
+      headers: { 'Authorization': 'token ' + token }
+    })
+      .then(response => {
+        setCategory(response.data)
+        // console.log('Response:', response.data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        toast.error(`${error.message} .Try again`);
+      });
+  }, [])
+
+
+  // category post 
+  const handleCategoryData = (e) => {
+    e.preventDefault()
+    const form = e.target;
+    const name = form.name.value;
+    const additionalInfo = form.categoryDetails.value;
+    const categoryData = {
+      name: name,
+      additionalInfo: additionalInfo,
     }
-  };
+    console.log(categoryData)
+    axios.post(`https://rpos.pythonanywhere.com/api/v1/categories/`, categoryData, {
+      headers: { 'Authorization': 'token ' + token }
+    })
+      .then(response => {
+        console.log('Response:', response.data);
+        toast.success("Successfully created");
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        toast.error(`${error.message} .Try again`);
+      });
+  }
+  // entry data 
+  const handleEntryData = (e) => {
+    e.preventDefault()
+    const form = e.target;
+    const price = form.price.value;
+    const note = form.userDetails.value;
+    const category = form.category.value;
+    const expensesData = {
+      category: category,
+      note: note,
+      amount: price,
+      date: new Date().toISOString().split('T')[0]
+    }
+    console.log(expensesData)
+    axios.post(`https://rpos.pythonanywhere.com/api/v1/expenses/`, expensesData, {
+      headers: { 'Authorization': 'token ' + token }
+    })
+      .then(response => {
+        console.log('Response:', response.data);
+        toast.success("Successfully created");
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        toast.error(`${error.message} .Try again`);
+      });
+  }
+
 
   // clear search
   const handleClearSearch = (e) => {
@@ -66,7 +125,6 @@ const Expensh = () => {
   // Filtering Data
   useEffect(() => {
     let filteredResults = userData;
-
     // Applying the search filter
     if (searchText.trim() !== "") {
       filteredResults = filteredResults.filter(
@@ -79,9 +137,10 @@ const Expensh = () => {
           item.approve_status.toLowerCase().includes(searchText.toLowerCase())
       );
     }
-
     setFilteredData(filteredResults);
-  }, [selectedOption, userData, searchText]);
+
+
+  }, [selectedOption, userData, searchText,]);
 
   // Handle search input change
   const handleSearchInputChange = (e) => {
@@ -245,18 +304,18 @@ const Expensh = () => {
                       Entry
                     </h1>
                     <div className="card shadow-2xl bg-base-100">
-                      <form className="card-body">
+                      <form className="card-body" onSubmit={handleEntryData}>
                         <div className="form-control">
                           <label className="label">
                             <span className="label-text">Selection:</span>
                           </label>
-                          <select className="select select-bordered select-sm w-full">
-                            <option disabled selected>
-                              Small
-                            </option>
-                            <option>Small Apple</option>
-                            <option>Small Orange</option>
-                            <option>Small Tomato</option>
+                          <select name="category" className="select select-bordered select-sm w-full">
+                            <option disabled selected>Select Category</option>
+                            {category.map((item) => (
+                              <option key={item.id} value={item.id}>
+                                {item.name}
+                              </option>
+                            ))}
                           </select>
                         </div>
                         <div className="form-control">
@@ -267,6 +326,7 @@ const Expensh = () => {
                             type="number"
                             placeholder="enter price"
                             className="input input-bordered input-sm w-full "
+                            name="price"
                           />
                         </div>
                         <div className="form-control">
@@ -276,6 +336,7 @@ const Expensh = () => {
                           <textarea
                             placeholder="details"
                             className="textarea textarea-bordered textarea-md w-full"
+                            name="userDetails"
                           ></textarea>
                         </div>
                         <div className="form-control mt-6">
@@ -306,7 +367,7 @@ const Expensh = () => {
                       Category
                     </h1>
                     <div className="card shadow-2xl bg-base-100">
-                      <form className="card-body">
+                      <form className="card-body" onSubmit={handleCategoryData}>
                         <div className="form-control">
                           <label className="label">
                             <span className="label-text">Category Name:</span>
@@ -327,6 +388,7 @@ const Expensh = () => {
                           <textarea
                             placeholder="category details"
                             className="textarea textarea-bordered textarea-md w-full"
+                            name="categoryDetails"
                           ></textarea>
                         </div>
                         <div className="form-control mt-6">
@@ -349,6 +411,7 @@ const Expensh = () => {
             </dialog>
             {/* category modal section end */}
           </div>
+          <ToastContainer />
         </div>
       </div>
     </div>
