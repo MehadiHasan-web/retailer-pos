@@ -1,12 +1,12 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "./../../Providers/AuthProvider";
+import { ToastContainer, toast } from "react-toastify";
 
 const Expensh = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [userData, setUserData] = useState([]);
-
-  const [modalData, setModalData] = useState({});
+ 
   const [selectedOption, setSelectedOption] = useState(1); // 1 == all data, 2==approve, 3==pending
   const [filteredData, setFilteredData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -17,6 +17,7 @@ const Expensh = () => {
   const lastPostIndex = currentPage * postPerPage;
   const firstPostIndex = lastPostIndex - postPerPage;
   const currentPosts = filteredData.slice(firstPostIndex, lastPostIndex);
+  const token ="9ac442b59213b41034c5a6ab90835e20ae92f158"
 
   let page = [];
   for (let i = 1; i <= Math.ceil(filteredData.length / postPerPage); i++) {
@@ -45,17 +46,53 @@ const Expensh = () => {
       .catch((error) => console.error("Error fetching data:", error));
   }, [baseURL]);
 
-  // open modal
-  const openModal = async (data) => {
-    console.log(data);
-    try {
-      const response = await axios.get(`${baseURL}/inventory/${data}/`);
-      setModalData(response.data);
-      console.log(response.data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
+ // category data
+const handleCategoryData = (e) => {
+  e.preventDefault()
+  const form = e.target;
+  const name = form.name.value;
+  const categoryDetails = form.categoryDetails.value;
+  console.log(name)
+  const categoryData = { 
+    name:name,
+    additionalInfo:categoryDetails,
+   }
+   console.log(categoryData)
+  axios.post(`https://rpos.pythonanywhere.com/api/v1/categories/`, categoryData,{
+    headers: { 'Authorization': token }
+  })
+  .then(response => {
+    console.log('Response:', response.data);
+    toast.success("Successfully created");
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    toast.error(`${error.message} .Try again`);
+  });
+} 
+const handleEntryData = (e) => {
+  e.preventDefault()
+  const form = e.target;
+  const price = form.name.value;
+  const categoryDetails = form.categoryDetails.value;
+  console.log(name)
+  const categoryData = { 
+    name:name,
+    additionalInfo:categoryDetails,
+   }
+   console.log(categoryData)
+  axios.post(`https://rpos.pythonanywhere.com/api/v1/categories/`, categoryData)
+
+  .then(response => {
+    console.log('Response:', response.data);
+    toast.success("Successfully created");
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    toast.error(`${error.message} .Try again`);
+  });
+} 
+ 
 
   // clear search
   const handleClearSearch = (e) => {
@@ -245,7 +282,7 @@ const Expensh = () => {
                       Entry
                     </h1>
                     <div className="card shadow-2xl bg-base-100">
-                      <form className="card-body">
+                      <form className="card-body" onSubmit={handleEntryData}>
                         <div className="form-control">
                           <label className="label">
                             <span className="label-text">Selection:</span>
@@ -267,6 +304,7 @@ const Expensh = () => {
                             type="number"
                             placeholder="enter price"
                             className="input input-bordered input-sm w-full "
+                            name="price"
                           />
                         </div>
                         <div className="form-control">
@@ -276,6 +314,7 @@ const Expensh = () => {
                           <textarea
                             placeholder="details"
                             className="textarea textarea-bordered textarea-md w-full"
+                            name="userDetails"
                           ></textarea>
                         </div>
                         <div className="form-control mt-6">
@@ -306,9 +345,9 @@ const Expensh = () => {
                       Category
                     </h1>
                     <div className="card shadow-2xl bg-base-100">
-                      <form className="card-body">
+                      <form className="card-body" onSubmit={handleCategoryData}>
                         <div className="form-control">
-                          <label className="label">
+                          <label className="label"> 
                             <span className="label-text">Category Name:</span>
                           </label>
                           <input
@@ -327,6 +366,7 @@ const Expensh = () => {
                           <textarea
                             placeholder="category details"
                             className="textarea textarea-bordered textarea-md w-full"
+                          name="categoryDetails"
                           ></textarea>
                         </div>
                         <div className="form-control mt-6">
@@ -349,6 +389,7 @@ const Expensh = () => {
             </dialog>
             {/* category modal section end */}
           </div>
+          <ToastContainer/>
         </div>
       </div>
     </div>
