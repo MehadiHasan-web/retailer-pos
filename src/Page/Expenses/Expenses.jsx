@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { AuthContext } from "./../../Providers/AuthProvider";
+import { AuthContext } from "../../Providers/AuthProvider";
 import { ToastContainer, toast } from "react-toastify";
 
-const Expensh = () => {
+const Expenses = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [userData, setUserData] = useState([]);
 
@@ -418,4 +418,4 @@ const Expensh = () => {
   );
 };
 
-export default Expensh;
+export default Expenses;
