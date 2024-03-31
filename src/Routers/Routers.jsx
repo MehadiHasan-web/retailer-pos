@@ -25,9 +25,11 @@ import Dashboard from "../Page/Practice/Dashboard";
 import MyInventoryRequest from "../Page/MyInventoryRequest/MyInventoryRequest";
 import UserProfile from "../Page/UserProfile/UserProfile";
 import InventoryRequestDetails from "../Page/Dashboard/InventoryRequest/InventoryRequestDetails";
-import Expensh from './../Page/Expensh/Expensh';
-import SalesReturn from "../Page/SalesReturn/SalesReturn";
-import Scanner from './../Page/Scanner';
+import Invoice from "../Page/Invoice/Invoice";
+import SalesRequest from "../Page/SalesRequest/SalesRequest";
+import Expenses from "../Page/Expenses/Expenses";
+import Scanner from "../Page/Scanner";
+import SalesReturn from './../Page/SalesReturn/SalesReturn';
 
 
 const router = createBrowserRouter([
@@ -71,12 +73,17 @@ const router = createBrowserRouter([
         element: <PrivateRoute><MyInventoryRequest></MyInventoryRequest></PrivateRoute>
       },
       {
-        path: 'sales/sales-entry',
+        path: 'sales/sales-request/sales-entry',
         element: <PrivateRoute><Home></Home></PrivateRoute>
       },
       {
         path: 'sales/sales-request',
-        element: <PrivateRoute><MyInventoryRequest></MyInventoryRequest></PrivateRoute>
+        element: <PrivateRoute><SalesRequest /></PrivateRoute>
+      },
+      {
+        path: `sales/sales-request/:id`,
+        element: <PrivateRoute><Invoice></Invoice></PrivateRoute>
+
       },
       {
         path: "/manageInventory/subcategory",
@@ -130,7 +137,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/expenses',
-        element: <PrivateRoute><Expensh></Expensh></PrivateRoute>
+        element: <PrivateRoute><Expenses></Expenses></PrivateRoute>
       },
       {
         path: '/user-profile',

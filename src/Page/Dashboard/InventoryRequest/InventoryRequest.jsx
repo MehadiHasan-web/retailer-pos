@@ -47,7 +47,7 @@ function InventoryRequest() {
         const user_id = localStorage.getItem('user_id');
         console.log(user_id);
 
-        axios.get(`${baseURL}/inventory/?user_id=${user_id}`)
+        axios.get(`${baseURL}/inventory/?user_id=${7}`)
             .then((res) => res.data)
             .then((data) => setAdminData(data))
             .catch((error) => console.error("Error fetching data:", error));
