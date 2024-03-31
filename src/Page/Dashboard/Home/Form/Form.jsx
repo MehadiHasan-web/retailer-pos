@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useContext } from "react";
 import { AuthContext } from "./../../../../Providers/AuthProvider";
 // eslint-disable-next-line react/prop-types
-const Form = ({ wishlist, setWishlist, calculateTotalPrice }) => {
+const Form = ({ wishlist, calculateTotalPrice }) => {
   const [cardTable, setCardTable] = useState([]);
   const [approverList, setApprover] = useState([]);
   const user_id = localStorage.getItem("user_id");
@@ -55,7 +55,8 @@ const Form = ({ wishlist, setWishlist, calculateTotalPrice }) => {
     const tax = form.Tax.value;
     const discount = form.discount.value;
     const deliveryCost = form.delivery.value;
-    const total = calculateTotalPrice - vat - tax - discount-deliveryCost;
+    const total = form.total.value;
+    const totalAmount = calculateTotalPrice - vat - tax - discount-deliveryCost;
     setTotal(total);
     const user = { user_id, name, number, information };
     console.log(user)
@@ -102,8 +103,9 @@ const Form = ({ wishlist, setWishlist, calculateTotalPrice }) => {
                   <span className="font-bold">$ <input  name="delivery" className=" w-14 bg-slate-50 shadow-inner rounded text-end"/></span>
                 </p>
                 <p className="border-b-2 border-dashed border-black mt-2"></p>
-                <p className="flex justify-between mt-3 font-bold">
-                  <span>Total</span> <span>$ {total}</span>
+                <p className="flex justify-between mt-3 ">
+                  <span>Total</span>
+                  <span className="font-bold">$ <input  name="total" defaultValue={calculateTotalPrice} className=" w-14 bg-slate-50 shadow-inner rounded text-end"/></span>
                 </p>
               </div>
               <h3 className="mt-5"></h3>
@@ -137,7 +139,7 @@ const Form = ({ wishlist, setWishlist, calculateTotalPrice }) => {
                   className="bg-green-500 text-white md:text-sm lg:text-base md:px-2 md:py-1 lg:px-3 lg:py-2 uppercase rounded"
                   type="submit"
                 >
-                  Inventory Request
+                 Sales Entry
                 </button>
               </div>
             </form>
