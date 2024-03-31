@@ -8,7 +8,6 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { AuthContext } from './../../../Providers/AuthProvider';
-import { Link } from "react-router-dom";
 
 function InventoryRequest() {
     const [startDate, setStartDate] = useState(new Date());
@@ -60,19 +59,6 @@ function InventoryRequest() {
             .then((data) => setAdminData(data))
             .catch((error) => console.error("Error fetching data:", error));
     }, [baseURL]);
-
-
-
-    const openModal = async (data) => {
-        console.log(data);
-        try {
-            const response = await axios.get(`${baseURL}/inventory/${data}/`);
-            setModalData(response.data);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-
-        }
-    };
 
     // increment Quantity 
     const incrementQuantity = (data) => {
@@ -236,6 +222,7 @@ function InventoryRequest() {
                                         </td>
                                         <td>  <p>4 march</p></td>
                                         <td>  <p>$ 700</p></td>
+                                        
                                         
 
                                     </tr>)

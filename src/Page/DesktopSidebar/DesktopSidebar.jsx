@@ -9,6 +9,7 @@ import { FaSquareCaretRight, FaSquareCaretLeft } from "react-icons/fa6";
 import { MdOutlineInventory, MdInventory } from "react-icons/md";
 // import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { GiExpense } from "react-icons/gi";
+import Sales from "../Sales/Sales";
 
 
 // eslint-disable-next-line react/prop-types
@@ -97,7 +98,7 @@ const DesktopSidebar = ({ open, setOpen }) => {
           {is_manager && (
             <li className="flex justify-center items-center">
                
-              <PurchaseManagement open ={open} ></PurchaseManagement>
+              <Sales open={open}></Sales>
             </li>
           )}
            {is_manager && (
