@@ -67,8 +67,8 @@ function InventoryRequest() {
 
     // clear search
     const handleClearSearch = (e) => {
-    e.preventDefault();
-    setSearchText("");
+        e.preventDefault();
+        setSearchText("");
     };
 
     useEffect(() => {
@@ -76,10 +76,10 @@ function InventoryRequest() {
         // Applying the search filter
         if (searchText.trim() !== "") {
             filteredResults = filteredResults.filter((item) =>
-                item.user.username.toLowerCase().includes(searchText.toLowerCase()) ||
-                item.id.toString().toLowerCase().includes(searchText.toLowerCase()) ||
-                item.manager_status.toLowerCase().includes(searchText.toLowerCase()) ||
-                item.approve_status.toLowerCase().includes(searchText.toLowerCase())
+                item.customer.name.toLowerCase().includes(searchText.toLowerCase()) ||
+                item.customer.phone_number.toLowerCase().includes(searchText.toLowerCase()) ||
+                item.customer.address.toLowerCase().includes(searchText.toLowerCase()) ||
+                item.id.toString().toLowerCase().includes(searchText.toLowerCase())
             );
         }
 

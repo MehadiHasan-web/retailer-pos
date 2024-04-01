@@ -126,15 +126,11 @@ const Expenses = () => {
   useEffect(() => {
     let filteredResults = userData;
     // Applying the search filter
-    if (searchText.trim() !== "") {
+    if (searchText) {
       filteredResults = filteredResults.filter(
         (item) =>
-          item.user.username.toLowerCase().includes(searchText.toLowerCase()) ||
           item.id.toString().toLowerCase().includes(searchText.toLowerCase()) ||
-          item.manager_status
-            .toLowerCase()
-            .includes(searchText.toLowerCase()) ||
-          item.approve_status.toLowerCase().includes(searchText.toLowerCase())
+          item.category.toString().toLowerCase().includes(searchText.toLowerCase())
       );
     }
     setFilteredData(filteredResults);
@@ -144,7 +140,7 @@ const Expenses = () => {
 
   // Handle search input change
   const handleSearchInputChange = (e) => {
-    setSearchText(e.target.data);
+    setSearchText(e.target.value);
   };
 
   // show data PerPage
@@ -174,6 +170,9 @@ const Expenses = () => {
                   className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1   shadow hover:shadow-lg"
                   onChange={showDataPerPage}
                 >
+                  <option value={5} className="font-bold">
+                    Show 5
+                  </option>
                   <option value={20} className="font-bold">
                     Show 20
                   </option>
