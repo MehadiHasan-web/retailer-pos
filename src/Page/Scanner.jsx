@@ -45,7 +45,7 @@ const Scanner = () => {
     //send request to server
     useEffect(() => {
         if (result) {
-            axios.get(`https://rpos.pythonanywhere.com/api/v1/sales/`, {
+            axios.post(`https://rpos.pythonanywhere.com/api/v1/salesReturn/`, result, {
                 headers: { 'Authorization': 'token ' + token }
             })
                 .then((res) => res.data)
