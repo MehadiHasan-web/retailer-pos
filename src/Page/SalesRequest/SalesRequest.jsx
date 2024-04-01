@@ -70,26 +70,12 @@ const SalesRequest = () => {
   useEffect(() => {
     let filteredResults = userData;
 
-    if (selectedOption === 2) {
-      filteredResults = filteredResults.filter(
-        (item) => item.approve_status === "Approved"
-      );
-    } else if (selectedOption === 3) {
-      filteredResults = filteredResults.filter(
-        (item) => item.approve_status === "pending"
-      );
-    }
-
     // Applying the search filter
-    if (searchText.trim() !== "") {
+    if (searchText) {
       filteredResults = filteredResults.filter(
         (item) =>
           item.user.username.toLowerCase().includes(searchText.toLowerCase()) ||
-          item.id.toString().toLowerCase().includes(searchText.toLowerCase()) ||
-          item.manager_status
-            .toLowerCase()
-            .includes(searchText.toLowerCase()) ||
-          item.approve_status.toLowerCase().includes(searchText.toLowerCase())
+          item.id.toString().toLowerCase().includes(searchText.toLowerCase())
       );
     }
 
@@ -148,15 +134,6 @@ const SalesRequest = () => {
                     Show 100
                   </option>
                 </select>
-                {/* date end */}
-                <select
-                  className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1  shadow hover:shadow-lg"
-                  onChange={handleSelectChange}
-                >
-                  <option value={1}>All Application</option>
-                  <option value={2}>Complete Application</option>
-                  <option value={3}>Pending Application</option>
-                </select>
                 {/* date  */}
                 <div className="w-full xl:w-44 mx-1 mb-1">
                   <DatePicker
@@ -207,7 +184,7 @@ const SalesRequest = () => {
               </thead>
               <tbody>
                 {currentPosts.map((data, index) => (
-                  <tr key={data.id} className="hover:bg-slate-200">
+                  <tr key={data.id} className={`${index % 2 == 1 ? 'bg-slate-200' : 'bg-white'}`}>
                     <td className="text-center">{++index}</td>
                     <td className="text-center">{data.id}</td>
                     <td className="text-center">

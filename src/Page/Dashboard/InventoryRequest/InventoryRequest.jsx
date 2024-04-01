@@ -65,6 +65,12 @@ function InventoryRequest() {
         setSearchText(e.target.value);
     };
 
+    // clear search
+    const handleClearSearch = (e) => {
+    e.preventDefault();
+    setSearchText("");
+    };
+
     useEffect(() => {
         let filteredResults = adminData;
         // Applying the search filter
@@ -111,7 +117,7 @@ function InventoryRequest() {
                                 {/* search bar  */}
                                 <input value={searchText} onChange={handleSearchInputChange} type="text" placeholder="Type here" className="input input-bordered input-sm max-w-xs w-full xl:w-44 rounded-full mx-1 mb-1  shadow hover:shadow-lg" />
                                 <button type="submit" className="btn btn-outline btn-sm rounded-full mx-3  hover:text-white ">Search</button>
-                                <button type="button" className="btn btn-outline btn-sm rounded-full mx-1  hover:text-white ">Clear filter</button>
+                                <button onClick={handleClearSearch} type="button" className="btn btn-outline btn-sm rounded-full mx-1  hover:text-white ">Clear filter</button>
 
                                 <Link to={'/scanner'} type="button" className="btn btn-outline btn-sm rounded mx-1  hover:text-white "><BiBarcodeReader className="text-2xl" /></Link>
 
@@ -121,7 +127,7 @@ function InventoryRequest() {
                     {/* search bar end  */}
 
                     <div className="overflow-x-auto  shadow-lg rounded">
-                        <table className="table text-base">
+                        <table className="table table-base">
                             {/* head */}
                             <thead className="bg-slate-200	">
                                 <tr>
@@ -137,7 +143,7 @@ function InventoryRequest() {
                             </thead>
                             <tbody>
                                 {
-                                    currentPosts.map((tableData, index) => <tr key={tableData.id}>
+                                    currentPosts.map((tableData, index) => <tr key={tableData.id} className={`${index % 2 == 1 ? 'bg-slate-200' : 'bg-white'}`}>
                                         <td>{++index}</td>
                                         <td>{tableData.id}</td>
                                         <td>

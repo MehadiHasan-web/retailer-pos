@@ -31,6 +31,7 @@ import Expenses from "../Page/Expenses/Expenses";
 import Scanner from "../Page/Scanner";
 import AddInventoryProduct from "../Page/AddInventoryProduct";
 import SalesReturn from './../Page/SalesReturn/SalesReturn';
+import NotAllow from "../Page/NotAllow/NotAllow";
 
 
 const router = createBrowserRouter([
@@ -155,6 +156,10 @@ const router = createBrowserRouter([
       {
         path: '/management/add-inventory',
         element: <PrivateRoute><AddInventoryProduct /></PrivateRoute>
+      },
+      {
+        path: '/notAllow',
+        element: <NotAllow></NotAllow>
       }
       // {
       //   path : '/practice',

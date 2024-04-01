@@ -96,7 +96,6 @@ const Sidebar = () => {
             </ul>
             <div className="border-[1px] border-x-slate-50 my-5"></div>
             <ul className="mt-5 space-y-5 relative">
-              <li className="text-sm text-gray-500">Title heading</li>
               <li>
                 <Link
                   className="flex justify-start items-center gap-2"

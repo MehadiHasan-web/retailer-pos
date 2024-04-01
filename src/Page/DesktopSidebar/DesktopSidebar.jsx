@@ -1,14 +1,14 @@
 import { FaPlusSquare, FaPowerOff } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 // import ManageInventory from "../ManageInventory/ManageInventory";
-import { MdDashboard, MdOutlineInventory, } from "react-icons/md";
+import { MdDashboard } from "react-icons/md";
 import { IoPersonCircleSharp } from "react-icons/io5";
 // import { GoHomeFill } from "react-icons/go";
 import { FaSquareCaretRight, FaSquareCaretLeft } from "react-icons/fa6";
 import { MdInventory } from "react-icons/md";
 // import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { GiExpense } from "react-icons/gi";
-import Sales from "../Sales/Sales";
+// import Sales from "../Sales/Sales";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 
 
@@ -57,9 +57,7 @@ const DesktopSidebar = ({ open, setOpen }) => {
       <div className="overflow-auto touch-auto h-screen pb-40">
 
         <ul className="mt-5 space-y-5  ">
-          {
-            open ? '' : <li className="text-sm text-gray-500">Title heading</li>
-          }
+          
           <li>
             {
               open ? <Link
@@ -94,14 +92,11 @@ const DesktopSidebar = ({ open, setOpen }) => {
                 <span className=" font-semibold text-slate-200">Sales</span></Link>
             }
           </li>
-
           {/* {is_manager && (
             <li className="flex justify-center items-center">
-               
               <Sales open={open}></Sales>
             </li>
           )} */}
-         
             <li>
               {
                 open ? <Link to="/sales-return" className="flex justify-center items-center">
