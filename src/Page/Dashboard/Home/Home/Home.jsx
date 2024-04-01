@@ -57,7 +57,7 @@ const Home = () => {
   //get all categories
   const getAllCategories = useCallback(() => {
     axios
-      .get(`https://rpos.pythonanywhere.com/api/v1/categories/`,{
+      .get(`https://rpos.pythonanywhere.com/api/v1/categories/`, {
         headers: { 'Authorization': 'token ' + token }
       })
       .then((response) => {
@@ -93,8 +93,6 @@ const Home = () => {
     event.preventDefault();
     const quantity = event.target.elements.quantity.value;
     const size = event.target.elements.size.value;
-    const randomPrice = Math.floor(Math.random() * (99 - 10 + 1) + 10);
-    console.log(wishlist);
 
     const filterItem = wishlist.find((item) => item.id === product.id && item.size === size);
 
@@ -125,7 +123,7 @@ const Home = () => {
           id: product.id,
           name: product.itemName,
           quantity: 1,
-          price: randomPrice,
+          price: product?.productCost || 0,
           size: size
         };
         setWishlist([...wishlist, newData]);
@@ -134,7 +132,7 @@ const Home = () => {
           id: product.id,
           name: product.itemName,
           quantity: parseInt(quantity),
-          price: randomPrice,
+          price: product?.productCost || 0,
           size: size,
         };
         setWishlist([...wishlist, newData]);
@@ -285,10 +283,10 @@ const Home = () => {
                       key={product.id}
                     >
                       <div className="flex justify-between items-center">
-                        <div className="w-1/4">
+                        <div className="w-1/2">
                           <figure>
                             <img
-                              className="w-60 h-40"
+                              className="w-68 h-40"
                               src={bottol}
                               alt="Movie"
                             />
@@ -299,7 +297,7 @@ const Home = () => {
                           {/* <p className="text-xs">{product.description}</p> */}
                           <ul className="flex items-start justify-between mt-2">
                             <li>
-                              <p className="text-sm">Netto</p>
+                              <p className="text-sm">{product?.category?.name}</p>
                               <p className="text-base font-bold">
                                 {/* {product.net_weight} */}
                               </p>
@@ -380,7 +378,7 @@ const Home = () => {
                         </div> */}
                           <div className="w-full flex items-center gap-2">
                             <div className="flex-2">
-                              <p className="text-lg font-bold" >Price: $20</p>
+                              <p className="text-lg font-bold" >Price: {product?.productCost ? product?.productCost : 0} TK</p>
                             </div>
                             <ul className=" flex-1 rounded-full w-full">
                               {/* <li className="flex items-center">
@@ -429,7 +427,7 @@ const Home = () => {
         <div className="hidden lg:block  p-4 bg-white  ">
           <div className="flex justify-between ">
             <h3 className="text-xl text-black font-medium">Whitelist</h3>
-           
+
           </div>
           <p className="text-bold font-medium my-2">
             Detail Products
@@ -519,7 +517,7 @@ const Home = () => {
           </div>
 
           <div className="">
-            <Form wishlist={wishlist} setWishlist={setWishlist} calculateTotalPrice={calculateTotalPrice()}></Form>
+            <Form wishlist={wishlist} clearData={clearData} setWishlist={setWishlist} calculateTotalPrice={calculateTotalPrice()}></Form>
           </div>
         </div>
       </div>
@@ -555,7 +553,7 @@ const Home = () => {
             <div className=" lg:hidden md:col-span-1 p-4 bg-white ">
               <div className="flex justify-between ">
                 <h3 className="text-xl text-black font-medium">Whitelist</h3>
-                
+
               </div>
               <p className="text-bold font-medium my-2">
                 Detail Prescription{" "}

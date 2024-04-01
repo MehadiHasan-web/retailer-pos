@@ -10,7 +10,7 @@ import { AuthContext } from "./../../../../Providers/AuthProvider";
 
 
 
-const Form = ({ wishlist, calculateTotalPrice }) => {
+const Form = ({ wishlist, calculateTotalPrice, clearData }) => {
   const [cardTable, setCardTable] = useState([]);
   const [approverList, setApprover] = useState([]);
   const user_id = localStorage.getItem("user_id");
@@ -36,9 +36,11 @@ const Form = ({ wishlist, calculateTotalPrice }) => {
       const response = await axios.post(`https://rpos.pythonanywhere.com/api/v1/sales/`, finalArray, {
         headers: { 'Authorization': 'token ' + token }
       });
-      toast.success("Successfully Send");
+      toast.success("Successfully Sold");
+      clearData()
     } catch (error) {
       toast.error(`${error.message} .Try again`);
+      clearData();
     }
   }
 
@@ -56,18 +58,18 @@ const Form = ({ wishlist, calculateTotalPrice }) => {
     const tax = form.Tax.value;
     const discount = form.discount.value;
     const deliveryCost = form.delivery.value;
-    const productCost = form.productCost.value;
     const total = form.total.value;
     // const totalAmount = calculateTotalPrice - vat - tax - discount - deliveryCost;
     setTotal(total);
     const products = wishlist.map(item => ({ id: item.id, quantity: item.quantity, size: item.size }))
 
-    const finalArray = { customer: userInfo, saleitems: products, vat_percentage: parseInt(vat), tax_percentage: parseInt(tax), discount_percentage: parseInt(discount), delivery_cost: parseInt(deliveryCost), productCost: parseInt(productCost), total: parseInt(total), subtotal: parseInt(0) }
+    const finalArray = { customer: userInfo, saleitems: products, vat_percentage: parseInt(vat), tax_percentage: parseInt(tax), discount_percentage: parseInt(discount), delivery_cost: parseInt(deliveryCost), total: parseInt(total), subtotal: parseInt(0) }
 
     // setCardTable((wishlist) => [...wishlist, user]);
     // const updatedCardTable = [...wishlist, user];
     sendData(finalArray);
     console.log(finalArray)
+    form.reset()
   };
 
   return (
@@ -99,10 +101,6 @@ const Form = ({ wishlist, calculateTotalPrice }) => {
                   <span>Delivery Cost</span>
                   <span className="font-bold">TK <input name="delivery" className=" w-14 bg-slate-50 shadow-inner rounded text-end" /></span>
                 </p>
-                <p className="flex justify-between mt-3 ">
-                  <span>Product Cost</span>
-                  <span className="font-bold">TK <input name="productCost" className=" w-14 bg-slate-50 shadow-inner rounded text-end" /></span>
-                </p>
                 <p className="border-b-2 border-dashed border-black mt-2"></p>
                 <p className="flex justify-between mt-3 ">
                   <span>Total</span>
@@ -127,7 +125,7 @@ const Form = ({ wishlist, calculateTotalPrice }) => {
               {/* textarea section start */}
               <textarea
                 type="text"
-                placeholder="Additional information"
+                placeholder="Enter Customer address"
                 className="textarea textarea-lg w-full mt-1"
                 id="bio"
                 name="information"
