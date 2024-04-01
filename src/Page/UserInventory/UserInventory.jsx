@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 const UserInventory = () => {
   const [card, setCard] = useState([])
   const token = localStorage.getItem('token');
-  
+
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchInput, setSearchInput] = useState('');
 
@@ -24,19 +24,14 @@ const UserInventory = () => {
   const handleClearSearch = (e) => {
     e.preventDefault();
     setSearchInput("");
+    setFilteredProducts('');
   };
 
 
 
-  // useEffect(() => {
-  //   fetch('card.json')
-  //     .then((res) => res.json())
-  //     .then((data) => setCard(data))
-  // }, [])
-
   // get data
   useEffect(() => {
-    const user_id = localStorage.getItem("user_id");
+
     axios
       .get(`https://rpos.pythonanywhere.com/api/v1/inventory/`, {
         headers: { 'Authorization': 'token ' + token }
@@ -48,7 +43,7 @@ const UserInventory = () => {
       })
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
-
+  console.log(filteredProducts)
 
   const addStockData = (event) => {
     event.preventDefault();
@@ -112,12 +107,19 @@ const UserInventory = () => {
           >
             {/* search bar  */}
             <input
-            value={searchInput}
-            onChange={e => setSearchInput(e.target.value)}
-            type="text"
+              value={searchInput}
+              onChange={e => setSearchInput(e.target.value)}
+              type="text"
               placeholder="Type here"
               className="input input-bordered input-sm max-w-xs w-full xl:w-44 rounded-full mx-1 mb-1 shadow hover:shadow-lg"
             />
+            <button
+              onClick={handleSearch}
+              type="button"
+              className="btn btn-outline btn-sm rounded-full mx-1 hover:text-white shadow hover:shadow-lg"
+            >
+              Search
+            </button>
             <button
               onClick={handleClearSearch}
               type="button"
@@ -146,7 +148,7 @@ const UserInventory = () => {
       {/* products  */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-1 sm:gap-2 md:gap-1 lg:gap-2 mt-5">
         {
-          card.map((data, index) => <div key={index} className=" p-2 flex flex-col justify-between rounded shadow-lg bg-slate-50">
+          (filteredProducts.length > 0 ? filteredProducts : card).map((data, index) => <div key={index} className=" p-2 flex flex-col justify-between rounded shadow-lg bg-slate-50">
             {
               data.image ? <img className='w-full h-20 sm:h-24 md:h-20 lg:h-28 rounded' src={data.image}></img> : <img src={blankImg} className='w-full h-20 sm:h-24 md:h-20 lg:h-28 rounded'></img>
             }
