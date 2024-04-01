@@ -78,28 +78,28 @@ const Form = ({ wishlist, calculateTotalPrice }) => {
                 <h2 className="text-2xl font-semibold ">Summary</h2>
                 <p className="flex justify-between mt-3 ">
                   <span>Subtotal</span>{" "}
-                  <span className="font-bold">${calculateTotalPrice}</span>
+                  <span className="font-bold">TK {calculateTotalPrice}</span>
                 </p>
                 <p className="flex justify-between mt-3 ">
                   <span>Vat</span>
-                  <span className="font-bold">$ <input name="vat" className=" w-14 bg-slate-50 shadow-inner rounded text-end" /></span>
+                  <span className="font-bold">% <input name="vat" className=" w-14 bg-slate-50 shadow-inner rounded text-end" /></span>
                 </p>
                 <p className="flex justify-between mt-3 ">
                   <span>Tax</span>
-                  <span className="font-bold">$ <input name="Tax" className=" w-14 bg-slate-50 shadow-inner rounded text-end" /></span>
+                  <span className="font-bold">% <input name="Tax" className=" w-14 bg-slate-50 shadow-inner rounded text-end" /></span>
                 </p>
                 <p className="flex justify-between mt-3 ">
                   <span>Discount</span>
-                  <span className="font-bold">$ <input name="discount" className=" w-14 bg-slate-50 shadow-inner rounded text-end" /></span>
+                  <span className="font-bold">TK <input name="discount" className=" w-14 bg-slate-50 shadow-inner rounded text-end" /></span>
                 </p>
                 <p className="flex justify-between mt-3 ">
                   <span>Delivery Cost</span>
-                  <span className="font-bold">$ <input name="delivery" className=" w-14 bg-slate-50 shadow-inner rounded text-end" /></span>
+                  <span className="font-bold">TK <input name="delivery" className=" w-14 bg-slate-50 shadow-inner rounded text-end" /></span>
                 </p>
                 <p className="border-b-2 border-dashed border-black mt-2"></p>
                 <p className="flex justify-between mt-3 ">
                   <span>Total</span>
-                  <span className="font-bold">$ <input name="total" defaultValue={calculateTotalPrice} className=" w-14 bg-slate-50 shadow-inner rounded text-end" /></span>
+                  <span className="font-bold">TK <input name="total" defaultValue={calculateTotalPrice} className=" w-14 bg-slate-50 shadow-inner rounded text-end" /></span>
                 </p>
               </div>
               <h3 className="mt-5"></h3>

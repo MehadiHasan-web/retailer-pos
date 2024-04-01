@@ -144,7 +144,7 @@ const Expenses = () => {
 
   // Handle search input change
   const handleSearchInputChange = (e) => {
-    setSearchText(e.target.value);
+    setSearchText(e.target.data);
   };
 
   // show data PerPage
@@ -195,6 +195,7 @@ const Expenses = () => {
                   value={searchText}
                   onChange={handleSearchInputChange}
                   type="text"
+                  name="data"
                   placeholder="Type here"
                   className="input input-bordered input-sm max-w-xs w-full xl:w-44 rounded-full mx-1 mb-1 shadow hover:shadow-lg"
                 />
@@ -258,7 +259,7 @@ const Expenses = () => {
                       <p>{data.date}</p>
                     </td>
                     <td>
-                      <p>{Math.floor(data.amount)}</p>
+                      <p>{Math.floor(data.amount)} TK</p>
                     </td>
                   </tr>
                 ))}
