@@ -1,8 +1,7 @@
 import Title from "../../../Title/Title"
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
 import { AuthContext } from './../../../Providers/AuthProvider';
 
 import { BiBarcodeReader } from "react-icons/bi";
@@ -75,10 +74,10 @@ function InventoryRequest() {
         // Applying the search filter
         if (searchText.trim() !== "") {
             filteredResults = filteredResults.filter((item) =>
-                item.customer.name.toLowerCase().includes(searchText.toLowerCase()) ||
-                item.customer.phone_number.toLowerCase().includes(searchText.toLowerCase()) ||
-                item.customer.address.toLowerCase().includes(searchText.toLowerCase()) ||
-                item.id.toString().toLowerCase().includes(searchText.toLowerCase())
+                item.sale?.customer.name.toLowerCase().includes(searchText.toLowerCase()) ||
+                item.sale?.customer.phone_number.toLowerCase().includes(searchText.toLowerCase()) ||
+                item.sale?.customer.address.toLowerCase().includes(searchText.toLowerCase()) ||
+                item.sale?.id.toString().toLowerCase().includes(searchText.toLowerCase())
             );
         }
 
