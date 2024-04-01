@@ -18,7 +18,7 @@ const Expenses = () => {
   const lastPostIndex = currentPage * postPerPage;
   const firstPostIndex = lastPostIndex - postPerPage;
   const currentPosts = filteredData.slice(firstPostIndex, lastPostIndex);
-  const token = "9ac442b59213b41034c5a6ab90835e20ae92f158"
+  const token = localStorage.getItem("token");
 
   let page = [];
   for (let i = 1; i <= Math.ceil(filteredData.length / postPerPage); i++) {
@@ -144,7 +144,7 @@ const Expenses = () => {
 
   // Handle search input change
   const handleSearchInputChange = (e) => {
-    setSearchText(e.target.value);
+    setSearchText(e.target.data);
   };
 
   // show data PerPage
@@ -195,6 +195,7 @@ const Expenses = () => {
                   value={searchText}
                   onChange={handleSearchInputChange}
                   type="text"
+                  name="data"
                   placeholder="Type here"
                   className="input input-bordered input-sm max-w-xs w-full xl:w-44 rounded-full mx-1 mb-1 shadow hover:shadow-lg"
                 />
@@ -258,7 +259,7 @@ const Expenses = () => {
                       <p>{data.date}</p>
                     </td>
                     <td>
-                      <p>{Math.floor(data.amount)}</p>
+                      <p>{Math.floor(data.amount)} TK</p>
                     </td>
                   </tr>
                 ))}

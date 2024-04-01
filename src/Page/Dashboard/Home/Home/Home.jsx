@@ -21,7 +21,6 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
-import WaitingList from "./WaitingList";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -59,7 +58,9 @@ const Home = () => {
   //get all categories
   const getAllCategories = useCallback(() => {
     axios
-      .get(`${baseURL}/catagorylist/`)
+      .get(`https://rpos.pythonanywhere.com/api/v1/categories/`,{
+        headers: { 'Authorization': 'token ' + token }
+      })
       .then((response) => {
         setCategories(response.data);
         console.log("All Category:", response.data);
@@ -203,7 +204,7 @@ const Home = () => {
     console.log("Category ID:", category.id);
 
     const filteredProducts = products.filter((product) => {
-      return product.catagory === category.id;
+      return product.category.id === category.id;
     });
     setSelectedProduct(filteredProducts);
 
@@ -214,37 +215,13 @@ const Home = () => {
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  bg-slate-100">
         <div className="col-span-2 px-5 ">
-          {/* subscription section start */}
-          {/* <div className="flex justify-between items-center h-32 titleCon p-5 rounded-2xl opacity-90">
-            <div>
-              <h3 className="text-2xl font-bold text-slate-300 flex items-center gap-3">
-                Your subscription is almost expired{" "}
-                <span className="text-base font-normal flex items-center gap-1">
-                  <MdOutlineWatchLater></MdOutlineWatchLater> 7 days left
-                </span>
-              </h3>
-              <p className="text-gray-400">
-                Upgrade your plane to superior to enjoy various additional
-                benefits
-              </p>
-            </div>
-            <div>
-              <button className="btn btn-success font-bold text-lg text-white">
-                Upgrade Plane
-              </button>
-            </div>
-          </div> */}
-          {/* subscription section end */}
-          {/* waiting list section start */}
-          <WaitingList></WaitingList>
-          {/* waiting list section end */}
           {/* medicines section start */}
           <div className="my-5">
             <ul className="flex justify-between items-center">
               <li className="text-2xl font-semibold">Products</li>
-              <li className="text-lg font-bold text-green-500 border-b-green-500 border-b-2">
+              {/* <li className="text-lg font-bold text-green-500 border-b-green-500 border-b-2">
                 See all
-              </li>
+              </li> */}
             </ul>
             {/* products  list*/}
             <div className="mt-4">
@@ -453,13 +430,11 @@ const Home = () => {
         <div className="hidden lg:block  p-4 bg-white  ">
           <div className="flex justify-between ">
             <h3 className="text-xl text-black font-medium">Whitelist</h3>
-            <p className="text-xl font-bold text-black">
-              A1<span className="text-slate-300">#12910</span>
-            </p>
+           
           </div>
           <p className="text-bold font-medium my-2">
             Detail Products
-            <span className="text-green-500">{wishlist.length}</span>
+            <span className="text-green-500 pl-1">{wishlist.length}</span>
           </p>
           <div className="bg-slate-100 rounded-lg p-4 w-full h-32 overflow-auto touch-auto">
             <ul className=" max-w-none h-auto">
@@ -510,8 +485,8 @@ const Home = () => {
                       <p className="flex justify-between items-center ">
                         <h4 className="font-bold">{item.name}</h4>
                         <h4 className="font-bold mr-5">
-                          <span className="text-green-500">$</span>
                           {item.price * item.quantity}
+                          <span className="text-green-500 pl-1">TK</span>
                         </h4>
                       </p>
                       <div className="flex justify-between items-center mt-7">
@@ -581,9 +556,7 @@ const Home = () => {
             <div className=" lg:hidden md:col-span-1 p-4 bg-white ">
               <div className="flex justify-between ">
                 <h3 className="text-xl text-black font-medium">Whitelist</h3>
-                <p className="text-xl font-bold text-black">
-                  A1<span className="text-slate-100">#12910</span>
-                </p>
+                
               </div>
               <p className="text-bold font-medium my-2">
                 Detail Prescription{" "}
