@@ -94,7 +94,7 @@ function InventoryRequest() {
             {/* title section end */}
             {/* table history  */}
             <div >
-                <div className="container mx-auto px-12">
+                <div className="md:container md:mx-auto md:px-12 px-2">
                     <div className="flex justify-center my-3 ">
                         <h2 className="font-semibold border-b-[1px] border-indigo-500 text-2xl  ">Sales Return</h2>
                     </div>
@@ -102,7 +102,7 @@ function InventoryRequest() {
                     {/* search bar  */}
                     <div className="py-2 mb-3 bg-slate-100 rounded-lg">
                         <div className="flex justify-center mt-1">
-                            <form action="" className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-2  lg:flex md:gap-0 lg:justify-around lg:items-center">
+                            <form action="" className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-1 sm:gap-2  lg:flex md:gap-0 lg:justify-around lg:items-center">
                                 <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1   shadow hover:shadow-lg"
                                     onChange={showDataPerPage}>
                                     <option value={20} className="font-bold">Show 20</option>
@@ -143,7 +143,7 @@ function InventoryRequest() {
                             </thead>
                             <tbody>
                                 {
-                                    currentPosts.map((tableData, index) => <tr key={tableData.id} className={`${index % 2 == 1 ? 'bg-slate-200' : 'bg-white'}`}>
+                                    currentPosts.map((tableData, index) => <tr key={tableData.id} className={`${index % 2 == 1 ? 'bg-slate-200 border-b-[1px] border-slate-300' : 'bg-white border-b-[1px] border-slate-300'}`}>
                                         <td>{++index}</td>
                                         <td>{tableData.id}</td>
                                         <td>

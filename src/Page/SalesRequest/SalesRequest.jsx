@@ -102,7 +102,7 @@ const SalesRequest = () => {
       {/* title section end */}
       {/* table history  */}
       <div>
-        <div className="container mx-auto px-12">
+        <div className="md:container md:mx-auto px-2 md:px-12">
           <div className="flex justify-start my-3 ">
             <h2 className="w-34  font-semibold border-b-[1px] border-indigo-500 mx-auto text-lg">
               Sales Request:
@@ -114,7 +114,7 @@ const SalesRequest = () => {
             <div className="flex justify-center mt-1">
               <form
                 action=""
-                className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-2  lg:flex md:gap-0 lg:justify-around lg:items-center"
+                className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-1 sm:gap-2 lg:flex md:gap-0 lg:justify-around lg:items-center"
               >
                 <select
                   className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1   shadow hover:shadow-lg"
@@ -160,7 +160,7 @@ const SalesRequest = () => {
                   Clear filter
                 </button>
                 <Link to={"sales-entry"}>
-                  <button className="btn bg-green-500 text-white btn-sm rounded-full ">
+                  <button className="btn bg-green-500 text-white btn-sm rounded-full w-full ">
                     Sales Entry
                   </button>
                 </Link>
@@ -186,7 +186,7 @@ const SalesRequest = () => {
               </thead>
               <tbody>
                 {currentPosts.map((data, index) => (
-                  <tr key={data.id} className={`${index % 2 == 1 ? 'bg-slate-200' : 'bg-white'}`}>
+                  <tr key={data.id} className={`${index % 2 == 1 ? 'bg-slate-200 border-b-[1px] border-slate-300' : 'bg-white border-b-[1px] border-slate-300'}`}>
                     <td className="text-center">{++index}</td>
                     <td className="text-center">{data.id}</td>
                     <td className="text-center">
