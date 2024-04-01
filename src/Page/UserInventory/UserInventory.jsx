@@ -10,6 +10,7 @@ const UserInventory = () => {
   const [card, setCard] = useState([])
   const token = localStorage.getItem('token');
 
+
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchInput, setSearchInput] = useState('');
 
@@ -70,6 +71,8 @@ const UserInventory = () => {
       });
   }
 
+  
+
   // category create 
   const handleCategoryData = (e) => {
     e.preventDefault()
@@ -87,6 +90,8 @@ const UserInventory = () => {
       .then(response => {
         console.log('Response:', response.data);
         toast.success("Successfully created");
+        const modal = document.getElementById("my_modal_5");
+        modal.close();
       })
       .catch(error => {
         console.error('Error:', error);
@@ -170,7 +175,7 @@ const UserInventory = () => {
                 </div>
 
                 <input name="id" type="number" value={data.id} className="hidden" />
-                <button type="submit" className="bg-green-500 text-white  w-full my-2 btn btn-md uppercase rounded-full" >Update</button>
+                <button type="submit"  className="bg-green-500 text-white  w-full my-2 btn btn-md uppercase rounded-full" >Update</button>
               </form>
 
             </div>
@@ -220,9 +225,9 @@ const UserInventory = () => {
             </div>
           </div>
           {/* footer button  */}
+
           <div className="modal-action">
-            <form method="dialog">
-              {/* if there is a button, it will close the modal */}
+            <form method='dialog'>
               <button className="btn">Close</button>
             </form>
           </div>

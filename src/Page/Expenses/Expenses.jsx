@@ -82,10 +82,13 @@ const Expenses = () => {
       .then(response => {
         console.log('Response:', response.data);
         toast.success("Successfully created");
+        const modal = document.getElementById('my_modal_5');
+        modal.close();
       })
       .catch(error => {
         console.error('Error:', error);
         toast.error(`${error.message} .Try again`);
+        
       });
   }
   // entry create 
@@ -108,6 +111,8 @@ const Expenses = () => {
       .then(response => {
         console.log('Response:', response.data);
         toast.success("Successfully created");
+        const model = document.getElementById('my_modal_4');
+        model.close()
       })
       .catch(error => {
         console.error('Error:', error);
