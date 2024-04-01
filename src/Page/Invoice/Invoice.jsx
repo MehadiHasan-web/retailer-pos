@@ -47,7 +47,7 @@ const Invoice = () => {
                 Holos Technologies
               </h2>
               <div>
-                <p>#{detailsData.id}</p>
+                <p>#{detailsData?.id}</p>
               </div>
             </div>
             <h2
@@ -57,14 +57,14 @@ const Invoice = () => {
               INVOICE
             </h2>
             <p className="font-bold mt-10 text-lg">
-              Date : <span className="font-normal">{detailsData.created_date}</span>
+              Date : <span className="font-normal">{detailsData?.created_date}</span>
             </p>
             <div className="flex justify-between mt-8 ">
               <div>
                 <h5 className="font-bold mb-1">Customer info:</h5>
-                <p>Name: {detailsData.customer.name}</p>
-                <p>Phone: {detailsData.customer.phone_number}</p>
-                <p>Details: {detailsData.customer.address}</p>
+                <p>Name: {detailsData.customer?.name}</p>
+                <p>Phone: {detailsData.customer?.phone_number}</p>
+                <p>Details: {detailsData.customer?.address}</p>
               </div>
             </div>
             <div className="mt-8">
@@ -81,9 +81,9 @@ const Invoice = () => {
                 <tbody>
                   {detailsData.saleitems?.map((tableData, index) => (
                     <tr key={index}>
-                      <td>{tableData.item_name}</td>
-                      <td className=" text-end">{tableData.quantity}</td>
-                      <td className=" text-end">{tableData.size}</td>
+                      <td>{tableData?.item_name}</td>
+                      <td className=" text-end">{tableData?.quantity}</td>
+                      <td className=" text-end">{tableData?.size}</td>
                       {/* <td className=" text-end">
                         <p>$ 600</p>
                       </td> */}
@@ -94,7 +94,7 @@ const Invoice = () => {
               <div className="border-b-2"></div>
               <div className="flex justify-end mr-4 my-2 font-bold">
                 <p className="mr-16">Total</p>
-                <span>TK {detailsData.total}</span>
+                <span>TK {detailsData?.total}</span>
               </div>
               <div className="border-b-2"></div>
               <div className="mt-14 flex justify-between items-center">

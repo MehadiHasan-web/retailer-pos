@@ -32,9 +32,8 @@ const Home = () => {
   const [activeButton, setActiveButton] = useState("All");
   const [categories, setCategories] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState([]);
-  const [size, setSize] = useState("");
   const token = localStorage.getItem("token");
-  console.log(size);
+
 
   const clearData = () => {
     setWishlist([]);

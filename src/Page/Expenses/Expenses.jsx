@@ -18,7 +18,7 @@ const Expenses = () => {
   const lastPostIndex = currentPage * postPerPage;
   const firstPostIndex = lastPostIndex - postPerPage;
   const currentPosts = filteredData.slice(firstPostIndex, lastPostIndex);
-  const token = "9ac442b59213b41034c5a6ab90835e20ae92f158"
+  const token = localStorage.getItem('token');
 
   let page = [];
   for (let i = 1; i <= Math.ceil(filteredData.length / postPerPage); i++) {
