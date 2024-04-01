@@ -40,7 +40,7 @@ const ProgressBars = () => {
       <div className='overflow-hidden p-2'>
         <ul>
           {
-            items.map((data) => <li key={data.id} className="flex items-center gap-5 my-1"><span className="lg:text-lg text-gray-500 font-bold">{data.name}</span><ProgressBar className="w-full" completed={data.percents} /><span className="lg:text-lg text-gray-500 font-semibold">{data.percent}</span></li>)
+            items.map((data) => <li key={data.id} className="flex items-center gap-5 my-1"><span className="lg:text-lg text-gray-500 font-bold">{data.name}</span><ProgressBar className="w-full " completed={data.percents} /><span className="lg:text-lg text-gray-500  font-semibold">{data.percent}</span></li>)
           }
         </ul>
       </div>
