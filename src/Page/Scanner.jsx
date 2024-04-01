@@ -45,7 +45,8 @@ const Scanner = () => {
     //send request to server
     useEffect(() => {
         if (result) {
-            axios.post(`https://rpos.pythonanywhere.com/api/v1/salesReturn/`, result, {
+            const data = { sale_id: result };
+            axios.post(`https://rpos.pythonanywhere.com/api/v1/salesReturn/`, data, {
                 headers: { 'Authorization': 'token ' + token }
             })
                 .then((res) => res.data)
@@ -56,6 +57,7 @@ const Scanner = () => {
                 .catch((error) => console.error("Error fetching data:", error));
             play();
         }
+
     }, [result])
 
 
