@@ -49,7 +49,7 @@ const DesktopSidebar = ({ open, setOpen }) => {
             <li>
               <FaPlusSquare className="text-green-500"></FaPlusSquare>
             </li>
-            <li className="lg:text-xl font-semibold text-slate-200">Holos Technologies</li>
+            <li className="lg:text-xl font-semibold text-slate-200">Ara Creation</li>
           </Link>
         }
       </ul>

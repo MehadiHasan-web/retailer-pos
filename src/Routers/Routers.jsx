@@ -90,7 +90,6 @@ const router = createBrowserRouter([
       {
         path: "/manageInventory/subcategory",
         element: <PrivateRoute><SubCategory></SubCategory></PrivateRoute>
-
       },
       {
         path: "/manageInventory/category",
