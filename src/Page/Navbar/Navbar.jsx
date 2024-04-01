@@ -78,8 +78,8 @@ function Navbar() {
             </div>
           </div>
           <ul>
-            <li className="font-bold">{user.name}</li>
-            <li className="text-sm">{user.user_type}</li>
+            <li className="font-bold">{user?.name}</li>
+            <li className="text-sm">{user?.user_type}</li>
             <li></li>
           </ul>
         </div>

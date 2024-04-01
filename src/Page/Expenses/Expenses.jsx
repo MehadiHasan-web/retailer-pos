@@ -242,7 +242,7 @@ const Expenses = () => {
               </thead>
               <tbody>
                 {currentPosts.map((data, index) => (
-                  <tr key={data.id} className="hover:bg-slate-200">
+                  <tr key={data.id} className={`${index % 2 == 1 ? 'bg-slate-200' : 'bg-white'}`}>
                     <td>{++index}</td>
                     <td>{data.id}</td>
                     <td>

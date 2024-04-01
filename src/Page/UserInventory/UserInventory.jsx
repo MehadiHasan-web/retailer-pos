@@ -8,7 +8,24 @@ import { Link } from 'react-router-dom';
 
 const UserInventory = () => {
   const [card, setCard] = useState([])
-  const token = localStorage.getItem('token')
+  const token = localStorage.getItem('token');
+  
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [searchInput, setSearchInput] = useState('');
+
+  function handleSearch() {
+    const filteredResults = card.filter(product =>
+      product.itemName.toLowerCase().includes(searchInput.toLowerCase())
+    );
+    setFilteredProducts(filteredResults);
+  }
+
+  // clear search
+  const handleClearSearch = (e) => {
+    e.preventDefault();
+    setSearchInput("");
+  };
+
 
 
   // useEffect(() => {
@@ -95,11 +112,14 @@ const UserInventory = () => {
           >
             {/* search bar  */}
             <input
-              type="text"
+            value={searchInput}
+            onChange={e => setSearchInput(e.target.value)}
+            type="text"
               placeholder="Type here"
               className="input input-bordered input-sm max-w-xs w-full xl:w-44 rounded-full mx-1 mb-1 shadow hover:shadow-lg"
             />
             <button
+              onClick={handleClearSearch}
               type="button"
               className="btn btn-outline btn-sm rounded-full mx-1 hover:text-white shadow hover:shadow-lg"
             >
@@ -124,7 +144,7 @@ const UserInventory = () => {
       </div>
       {/* search bar end  */}
       {/* products  */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 gap-1 sm:gap-2 md:gap-1 lg:gap-2 mt-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-1 sm:gap-2 md:gap-1 lg:gap-2 mt-5">
         {
           card.map((data, index) => <div key={index} className=" p-2 flex flex-col justify-between rounded shadow-lg bg-slate-50">
             {
