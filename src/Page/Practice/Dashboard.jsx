@@ -13,8 +13,11 @@ const Dashboard = () => {
   // get Dashboard data 
   const [data, setData] = useState([])
   const { accountURL } = useContext(AuthContext)
+  const token = localStorage.getItem('token');
   useEffect(() => {
-    axios.get(`${accountURL}/dashboard/`)
+    axios.get(`https://rpos.pythonanywhere.com/api/v1/dashboard/`, {
+      headers: { 'Authorization': 'token ' + token }
+    })
       .then((res) => {
         setData(res.data);
         console.log(res.data);
@@ -22,7 +25,6 @@ const Dashboard = () => {
       .catch((error) => console.error("Error fetching data:", error));
   }, [accountURL]);
 
-  console.log(data)
 
   return (
     <div className=" p-5">
@@ -43,10 +45,10 @@ const Dashboard = () => {
         </div>
       </div>
       <div className="md:flex md:justify-between md:items-center gap-5 mt-5">
-        <div className="md:flex-1">
+        <div className="md:flex-1 hidden">
           <ProgressBars></ProgressBars>
         </div>
-        <div className="md:flex-2 my-5 md:my-0">
+        <div className="md:flex-2 my-5 md:my-0 hidden">
           <PieChartWithPadding></PieChartWithPadding>
         </div>
       </div>

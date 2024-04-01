@@ -28,12 +28,14 @@ function AddInventoryProduct() {
         const category = parseInt(form.category.value);
         const itemName = form.itemName.value;
         const otherCost = form.otherCost.value;
+        const inventoryCost = form.inventoryCost.value;
         const transportationCost = form.transportationCost.value;
         const unit = form.unit.value;
         const data = {
             category,
             itemName,
             otherCost,
+            inventoryCost,
             transportationCost,
             unit,
         }
@@ -98,6 +100,7 @@ function AddInventoryProduct() {
                         type="file"
                         className=" w-64 mb-2"
                     /> */}
+                        <input type="text" name="inventoryCost" placeholder="Cost" className="input input-bordered input-sm w-64 mb-4" />
                         <button type="submit" className="bg-green-500 text-white px-4 py-2 w-64 rounded hover:bg-green-600 mt">
                             Create
                         </button>

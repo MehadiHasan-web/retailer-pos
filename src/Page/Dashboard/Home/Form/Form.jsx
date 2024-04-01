@@ -54,12 +54,13 @@ const Form = ({ wishlist, calculateTotalPrice }) => {
     const tax = form.Tax.value;
     const discount = form.discount.value;
     const deliveryCost = form.delivery.value;
+    const productCost = form.productCost.value;
     const total = form.total.value;
     // const totalAmount = calculateTotalPrice - vat - tax - discount - deliveryCost;
     setTotal(total);
     const products = wishlist.map(item => ({ id: item.id, quantity: item.quantity, size: item.size }))
 
-    const finalArray = { customer: userInfo, saleitems: products, vat_percentage: parseInt(vat), tax_percentage: parseInt(tax), discount_percentage: parseInt(discount), delivery_cost: parseInt(deliveryCost), total: parseInt(total), subtotal: parseInt(0) }
+    const finalArray = { customer: userInfo, saleitems: products, vat_percentage: parseInt(vat), tax_percentage: parseInt(tax), discount_percentage: parseInt(discount), delivery_cost: parseInt(deliveryCost), productCost: parseInt(productCost), total: parseInt(total), subtotal: parseInt(0) }
 
     // setCardTable((wishlist) => [...wishlist, user]);
     // const updatedCardTable = [...wishlist, user];
@@ -96,6 +97,10 @@ const Form = ({ wishlist, calculateTotalPrice }) => {
                   <span>Delivery Cost</span>
                   <span className="font-bold">TK <input name="delivery" className=" w-14 bg-slate-50 shadow-inner rounded text-end" /></span>
                 </p>
+                <p className="flex justify-between mt-3 ">
+                  <span>Product Cost</span>
+                  <span className="font-bold">TK <input name="productCost" className=" w-14 bg-slate-50 shadow-inner rounded text-end" /></span>
+                </p>
                 <p className="border-b-2 border-dashed border-black mt-2"></p>
                 <p className="flex justify-between mt-3 ">
                   <span>Total</span>
@@ -108,19 +113,19 @@ const Form = ({ wishlist, calculateTotalPrice }) => {
                 <input type="number" hidden name="user_id" value={user_id} />
                 {/* file section start */}
                 <div className="form-control w-full flex-1">
-                  <input type="text" placeholder="enter your name" className="input input-bordered w-full h-6 lg:h-9 " name="name" />
+                  <input type="text" placeholder="Enter customer name" className="input input-bordered w-full h-6 lg:h-9 " name="name" />
                 </div>
                 {/* file section end */}
                 {/* file section start */}
                 <div className="form-control w-full flex-1">
-                  <input type="number" placeholder="enter your number" className="input input-bordered w-full h-6 lg:h-9 " name="number" />
+                  <input type="number" placeholder="Enter customer number" className="input input-bordered w-full h-6 lg:h-9 " name="number" />
                 </div>
                 {/* file section end */}
               </div>
               {/* textarea section start */}
               <textarea
                 type="text"
-                placeholder="additional information"
+                placeholder="Additional information"
                 className="textarea textarea-lg w-full mt-1"
                 id="bio"
                 name="information"

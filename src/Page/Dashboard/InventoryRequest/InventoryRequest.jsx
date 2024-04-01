@@ -9,8 +9,7 @@ import { BiBarcodeReader } from "react-icons/bi";
 import { Link } from "react-router-dom";
 function InventoryRequest() {
     const [startDate, setStartDate] = useState(new Date());
-    const [adminData, setAdminData] = useState([])
-    const [modalData, setModalData] = useState({});
+    const [adminData, setAdminData] = useState([]);
     const { baseURL } = useContext(AuthContext)
     const [searchText, setSearchText] = useState("");
     const [filteredData, setFilteredData] = useState([]);
@@ -42,7 +41,7 @@ function InventoryRequest() {
     useEffect(() => {
         const token = localStorage.getItem('token');
 
-        axios.get(`https://rpos.pythonanywhere.com/api/v1/sales/`, {
+        axios.get(`https://rpos.pythonanywhere.com/api/v1/salesReturn/`, {
             headers: { 'Authorization': 'token ' + token }
         })
             .then((res) => res.data)
@@ -90,13 +89,13 @@ function InventoryRequest() {
 
     return (
         <div>
-            <Title pageName={"Inventory Complete"}></Title>
+            <Title pageName={"Sales Return"}></Title>
             {/* title section end */}
             {/* table history  */}
             <div >
                 <div className="md:container md:mx-auto md:px-12 px-2">
                     <div className="flex justify-center my-3 ">
-                        <h2 className="font-semibold border-b-[1px] border-indigo-500 text-2xl  ">Sales Return</h2>
+                        <h2 className="font-semibold border-b-[1px] border-indigo-500 text-2xl  ">Sales Return </h2>
                     </div>
 
                     {/* search bar  */}
@@ -145,26 +144,26 @@ function InventoryRequest() {
                                 {
                                     currentPosts.map((tableData, index) => <tr key={tableData.id} className={`${index % 2 == 1 ? 'bg-slate-200 border-b-[1px] border-slate-300' : 'bg-white border-b-[1px] border-slate-300'}`}>
                                         <td>{++index}</td>
-                                        <td>{tableData.id}</td>
+                                        <td>{tableData.sale?.id}</td>
                                         <td>
                                             <div className="flex items-center gap-3">
 
                                                 <div>
-                                                    <div className="font-bold">{tableData.customer?.name}</div>
+                                                    <div className="font-bold">{tableData.sale?.customer?.name}</div>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
-                                            <p>{tableData.customer?.phone_number}</p>
+                                            <p>{tableData.sale?.customer?.phone_number}</p>
                                         </td>
                                         <td>
-                                            <p>{tableData.customer?.address}</p>
+                                            <p>{tableData.sale?.customer?.address}</p>
                                         </td>
                                         <td>
-                                            <p>{tableData.created_date}</p>
+                                            <p>{tableData.sale_created_date}</p>
                                         </td>
-                                        <td>  <p>{tableData?.returned_date}</p></td>
-                                        <td>  <p>TK. {tableData?.total}</p></td>
+                                        <td>  <p>{tableData?.date}</p></td>
+                                        <td>  <p>TK. {tableData?.sale?.total}</p></td>
 
 
                                     </tr>)
