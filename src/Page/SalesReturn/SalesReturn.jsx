@@ -126,12 +126,12 @@ function SalesReturn() {
             {/* title section end */}
             {/* table history  */}
             <div >
-                <div className="container mx-auto px-12">
+                <div className="md:container md:mx-auto px-2 md:px-12">
                     {/* search bar  */}
                     <div className="py-2 mb-3 bg-slate-100 rounded-lg">
                         <div className="flex justify-center mt-1">
-                            <form action="" className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-2  lg:flex md:gap-0 lg:justify-around lg:items-center">
-                                <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1   shadow hover:shadow-lg"
+                            <form action="" className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-1 sm:gap-2  lg:flex md:gap-0 lg:justify-around lg:items-center">
+                                <select className="select select-sm select-bordered w-full xl:w-44 max-w-xs rounded-full mx-1 mb-1  shadow hover:shadow-lg"
                                     onChange={showDataPerPage}>
                                     <option value={20} className="font-bold">Show 20</option>
                                     <option value={30} className="font-bold">Show 30</option>
@@ -146,7 +146,6 @@ function SalesReturn() {
                                 <input value={searchText} onChange={handleSearchInputChange} type="text" placeholder="Type here" className="input input-bordered input-sm max-w-xs w-full xl:w-44 rounded-full mx-1 mb-1  shadow hover:shadow-lg" />
                                 <button type="submit" className="btn btn-outline btn-sm rounded-full mx-3  hover:text-white ">Search</button>
                                 <button type="button" className="btn btn-outline btn-sm rounded-full mx-1  hover:text-white ">Clear filter</button>
-
                             </form>
                         </div>
                     </div>
