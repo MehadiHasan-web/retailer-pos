@@ -5,8 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { Link } from "react-router-dom";
-
-function MyInventoryRequest() {
+const SalesRequest = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [userData, setUserData] = useState([]);
 
@@ -41,14 +40,19 @@ function MyInventoryRequest() {
 
   // get data
   useEffect(() => {
-    const user_id = localStorage.getItem("user_id");
+    const token = localStorage.getItem("token");
     axios
-      .get(`${baseURL}/myinventoryrequest/${user_id}/`)
+      .get(`https://rpos.pythonanywhere.com/api/v1/sales/`, {
+        headers: { 'Authorization': 'token ' + token }
+      })
       .then((res) => res.data)
-      .then((data) => setUserData(data))
+      .then((data) => {
+        console.log(data)
+        setUserData(data)
+      })
       .catch((error) => console.error("Error fetching data:", error));
   }, [baseURL]);
-  
+
   // handle search
   const handleSelectChange = (e) => {
     e.preventDefault();
@@ -113,7 +117,7 @@ function MyInventoryRequest() {
         <div className="container mx-auto px-12">
           <div className="flex justify-start my-3 ">
             <h2 className="w-34  font-semibold border-b-[1px] border-indigo-500 mx-auto text-lg">
-              Sales Request
+              Sales Request:
             </h2>
           </div>
 
@@ -176,6 +180,11 @@ function MyInventoryRequest() {
                 >
                   Clear filter
                 </button>
+                <Link to={"sales-entry"}>
+                  <button className="btn bg-green-500 text-white btn-sm rounded-full ">
+                    Sales Entry
+                  </button>
+                </Link>
               </form>
             </div>
           </div>
@@ -205,24 +214,23 @@ function MyInventoryRequest() {
                       <div className="flex items-center gap-1">
                         <div>
                           <div className="font-bold capitalize">
-                            {data.user.username}
+                            {data.customer.name}
                           </div>
                         </div>
                       </div>
                     </td>
                     <td className="text-center">
-                      <p>01879009988 </p>
+                      <p>{data.customer.phone_number} </p>
                     </td>
                     <td className="text-center">
-                      <p>Billa Road,Bogura</p>
+                      <p>{data.customer.address}</p>
                     </td>
                     <td className="text-center">
-                      <p>20 january </p>
+                      <p>{data.created_date} </p>
                     </td>
                     <td className="text-center">
-                      <p>$ 508</p>
+                      <p>TK {data.total}</p>
                     </td>
-
                     <td className="text-center">
                       <Link to={`${data.id}`}>
                         <button className="btn btn-outline btn-success btn-sm">
@@ -301,7 +309,7 @@ function MyInventoryRequest() {
                           </th>
                           <th className="text-slate-600 text-sm">Quantity</th>
                           {/* <th className='text-slate-600 text-sm'>Inc/Dec</th>
-                                                    <th className='text-slate-600 text-sm'>Delete</th> */}
+                                                      <th className='text-slate-600 text-sm'>Delete</th> */}
                         </thead>
                         <tbody className="bg-slate-100">
                           {/* row 1 */}
@@ -323,14 +331,14 @@ function MyInventoryRequest() {
                                 {data.quantity}
                               </td>
                               {/* <td className='text-center text-sm'>
-                                                                <div className='flex justify-around items-center'>
-                                                                    <button ><FiPlus onClick={() => incrementQuantity(data)} className='bg-green-500 text-white text-xl p-[1px] rounded'></FiPlus></button>
-                                                                    <button><FiMinus onClick={() => decrementQuantity(data)} className='bg-red-500 text-white text-xl p-[1px] rounded'></FiMinus></button>
-                                                                </div>
-                                                            </td>
-                                                            <td className=''>
-                                                                <MdDelete className='mx-auto bg-red-500 text-white text-xl p-[1px] rounded'></MdDelete>
-                                                            </td> */}
+                                                                  <div className='flex justify-around items-center'>
+                                                                      <button ><FiPlus onClick={() => incrementQuantity(data)} className='bg-green-500 text-white text-xl p-[1px] rounded'></FiPlus></button>
+                                                                      <button><FiMinus onClick={() => decrementQuantity(data)} className='bg-red-500 text-white text-xl p-[1px] rounded'></FiMinus></button>
+                                                                  </div>
+                                                              </td>
+                                                              <td className=''>
+                                                                  <MdDelete className='mx-auto bg-red-500 text-white text-xl p-[1px] rounded'></MdDelete>
+                                                              </td> */}
                             </tr>
                           ))}
                         </tbody>
@@ -391,6 +399,6 @@ function MyInventoryRequest() {
       </div>
     </>
   );
-}
+};
 
-export default MyInventoryRequest;
+export default SalesRequest;

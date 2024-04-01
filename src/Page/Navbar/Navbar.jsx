@@ -6,11 +6,9 @@ import { AuthContext } from "../../Providers/AuthProvider";
 
 function Navbar() {
   const userToken = localStorage.getItem('token')
-  const userDesignation = localStorage.getItem('designation')
+  // const userDesignation = localStorage.getItem('designation')
 
-  const { searchFun, changeLanguage, lang } = useContext(AuthContext)
-
-  console.log(lang)
+  const { searchFun, changeLanguage, lang, user } = useContext(AuthContext)
 
   return (
     <>
@@ -20,7 +18,7 @@ function Navbar() {
           <Sidebar></Sidebar>
         </div>
         <div className="navbar-center">
-          <label className="input focus-within:outline-none focus-visible:border-none w-32 md:w-64 lg:w-96 rounded-2xl flex items-center gap-2 mx-5 bg-slate-200 ">
+          {/* <label className="input focus-within:outline-none focus-visible:border-none w-32 md:w-64 lg:w-96 rounded-2xl flex items-center gap-2 mx-5 bg-slate-200 ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
@@ -39,7 +37,7 @@ function Navbar() {
               placeholder="search medicine"
               onChange={(evt) => { searchFun(evt.target.value); }}
             />
-          </label>
+          </label> */}
 
           {/* <Link to="/" className="btn btn-ghost text-xl">NTRCA Store </Link> */}
         </div>
@@ -79,20 +77,10 @@ function Navbar() {
 
             </div>
           </div>
-          <ul className="menu lg:menu-horizontal rounded-box hidden lg:block">
-            <li>
-              <details open>
-                <summary>
-                  <ul>
-                    <li className="font-bold">Mohammad Nabi</li>
-
-                    {
-                      userDesignation && <li className="text-center">{userDesignation}</li>
-                    }
-                  </ul>
-                </summary>
-              </details>
-            </li>
+          <ul>
+            <li className="font-bold">{user.name}</li>
+            <li className="text-sm">{user.user_type}</li>
+            <li></li>
           </ul>
         </div>
       </div>

@@ -1,15 +1,15 @@
-import { FaPlusSquare, FaPowerOff, FaUser } from "react-icons/fa";
+import { FaPlusSquare, FaPowerOff } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import PurchaseManagement from "./../PurchaseManagement/PurchaseManagement";
-import ManageInventory from "../ManageInventory/ManageInventory";
-import { MdDashboard, MdManageHistory, MdSettingsApplications } from "react-icons/md";
+// import ManageInventory from "../ManageInventory/ManageInventory";
+import { MdDashboard } from "react-icons/md";
 import { IoPersonCircleSharp } from "react-icons/io5";
-import { GoHomeFill } from "react-icons/go";
+// import { GoHomeFill } from "react-icons/go";
 import { FaSquareCaretRight, FaSquareCaretLeft } from "react-icons/fa6";
-import { MdOutlineInventory, MdInventory } from "react-icons/md";
-import { RiMoneyDollarCircleFill } from "react-icons/ri";
+import { MdInventory } from "react-icons/md";
+// import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { GiExpense } from "react-icons/gi";
-import { FaSellsy } from "react-icons/fa";
+// import Sales from "../Sales/Sales";
+import { RiMoneyDollarCircleFill } from "react-icons/ri";
 
 
 // eslint-disable-next-line react/prop-types
@@ -57,9 +57,7 @@ const DesktopSidebar = ({ open, setOpen }) => {
       <div className="overflow-auto touch-auto h-screen pb-40">
 
         <ul className="mt-5 space-y-5  ">
-          {
-            open ? '' : <li className="text-sm text-gray-500">Title heading</li>
-          }
+          
           <li>
             {
               open ? <Link
@@ -77,61 +75,40 @@ const DesktopSidebar = ({ open, setOpen }) => {
               </Link>
             }
           </li>
-          <ul className="menu menu-horizontal p-0 w-full">
-              <li className="w-full">
-                <details className="w-full">
-                  <summary className="text-white">
-                  {
-                    open ? <FaSellsy className="text-green-500 text-lg"></FaSellsy> : <span className=" font-semibold text-slate-200 flex justify-center items-center gap-2 text-lg"><FaSellsy className="text-green-500 text-lg"></FaSellsy>Sells
-                    </span>
-                  }
-                  </summary>
-                  <ul className="rounded-t-none p-0 bg-black z-40">
-                  <li>
-                    {
-                      open ? <Link to="/" className="">
-                        <GoHomeFill className="text-green-500 text-2xl"></GoHomeFill></Link> : <Link className="flex justify-start items-center gap-2" to="/">
-                        <GoHomeFill className="text-green-500"></GoHomeFill>
-                        <span className=" font-semibold text-slate-200">
-                          Request for Sales
-                        </span>
-                      </Link>
-                    }
-                  </li>
-                  
+          {/* <li>
+            {
+              open ? <Link to="/" className="flex justify-center items-center">
+                <GoHomeFill className="text-green-500 text-2xl"></GoHomeFill></Link> : <Link className="flex justify-start items-center gap-2" to="/">
+                <GoHomeFill className="text-green-500"></GoHomeFill>
+                <span className=" font-semibold text-slate-200">
+                  Request for Sales
+                </span>
+              </Link>
+            }
+          </li> */}
           <li >
             {
-              open ? <Link to="/my-inventory-request" className="flex justify-center items-center"><MdOutlineInventory className="text-green-500 text-2xl"></MdOutlineInventory></Link> : <Link className="flex justify-start items-center gap-2" to="/my-inventory-request"><MdOutlineInventory className="text-green-500"></MdOutlineInventory>
-                <span className=" font-semibold text-slate-200">My Sales Requests</span></Link>
+              open ? <Link to="sales/sales-request" className="flex justify-center items-center"><RiMoneyDollarCircleFill className="text-green-500 text-2xl"></RiMoneyDollarCircleFill></Link> : <Link className="flex justify-start items-center gap-2" to="sales/sales-request"><RiMoneyDollarCircleFill className="text-green-500 text-2xl"></RiMoneyDollarCircleFill>
+                <span className=" font-semibold text-slate-200">Sales</span></Link>
             }
           </li>
-          {is_manager && (
+          {/* {is_manager && (
+            <li className="flex justify-center items-center">
+              <Sales open={open}></Sales>
+            </li>
+          )} */}
             <li>
               {
-                open ? <Link to="/inventoryRequest" className="flex justify-center items-center">
+                open ? <Link to="/sales-return" className="flex justify-center items-center">
                   <MdInventory className="text-green-500 text-2xl"></MdInventory></Link> : <Link className="flex justify-start items-center gap-2"
-                    to="/inventoryRequest">
+                    to="/sales-return">
                   <MdInventory className="text-green-500"></MdInventory>
                   <span className=" font-semibold text-slate-200">
-                    Sales Request
+                    Sales Return
                   </span>
                 </Link>
               }
             </li>
-          )}
-                  </ul>
-                </details>
-              </li>
-            </ul>
-          
-          {/* {is_manager && (
-            <li className="flex justify-center items-center">
-              {
-                open ? <RiMoneyDollarCircleFill className="text-2xl text-green-500 flex justify-center items-center"/> :
-              <PurchaseManagement></PurchaseManagement>
-              }
-            </li>
-          )} */}
           {/* {isApprover && (
             <li >
               {
@@ -148,22 +125,9 @@ const DesktopSidebar = ({ open, setOpen }) => {
               }
             </li>
           )} */}
-          <li>
-            {
-              open ? <Link to="/myInventory" className="flex justify-center items-center">
-                <IoPersonCircleSharp className="text-green-500 text-2xl"></IoPersonCircleSharp></Link> : <Link
-                  className="flex justify-start items-center gap-2"
-                  to="/myInventory"
-                >
-                <IoPersonCircleSharp className="text-green-500"></IoPersonCircleSharp>
-                <span className=" font-semibold text-slate-200">
-                  My Inventory
-                </span>
-              </Link>
-            }
-          </li>
 
-          {is_admin && (
+
+          {/* {is_admin && (
             <li>
               {
                 open ? <Link to="/createUser" className="flex justify-center items-center">
@@ -178,26 +142,36 @@ const DesktopSidebar = ({ open, setOpen }) => {
                 </Link>
               }
             </li>
-          )}
-          {/* daisyUI */}
-
-            
-          {/* daisyUI */}
+          )} */}
           <li>
             {
-              open ? <Link to="/expensh" className="flex justify-center items-center">
+              open ? <Link to="/expenses" className="flex justify-center items-center">
                 <GiExpense className="text-green-500 text-2xl"></GiExpense></Link> : <Link
                   className="flex justify-start items-center gap-2"
-                  to="/expensh"
+                  to="/expenses"
                 >
                 <GiExpense className="text-green-500"></GiExpense>
                 <span className=" font-semibold text-slate-200">
-                  Expensh
+                  Expenses
                 </span>
               </Link>
             }
           </li>
           <li>
+            {
+              open ? <Link to="/management" className="flex justify-center items-center">
+                <IoPersonCircleSharp className="text-green-500 text-2xl"></IoPersonCircleSharp></Link> : <Link
+                  className="flex justify-start items-center gap-2"
+                  to="/management"
+                >
+                <IoPersonCircleSharp className="text-green-500"></IoPersonCircleSharp>
+                <span className=" font-semibold text-slate-200">
+                  Management
+                </span>
+              </Link>
+            }
+          </li>
+          {/* <li>
             {
               open ? <Link to="/user-profile" className="flex justify-center items-center">
                 <FaPlusSquare className="text-green-500 text-2xl"></FaPlusSquare></Link> : <Link
@@ -210,7 +184,7 @@ const DesktopSidebar = ({ open, setOpen }) => {
                 </span>
               </Link>
             }
-          </li>
+          </li> */}
           {/* <li>
             <Link
               className="flex justify-start items-center gap-2"
@@ -224,14 +198,14 @@ const DesktopSidebar = ({ open, setOpen }) => {
           </li> */}
           {adminAndManager && (
             <>
-              {is_manager && (
+              {/* {is_manager && (
                 <li className="flex justify-center items-center">
                   {
                     open ? <MdManageHistory className="text-2xl mr-2 text-green-500 link" /> : <ManageInventory></ManageInventory>
                   }
 
                 </li>
-              )}
+              )} */}
               {/* <li><InstituteManagement></InstituteManagement></li> */}
             </>
           )}

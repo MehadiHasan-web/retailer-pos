@@ -1,15 +1,12 @@
 import Title from "../../../Title/Title"
 import React, { useContext, useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
-import { MdDelete } from "react-icons/md";
-import { FiMinus } from 'react-icons/fi';
-import { FiPlus } from 'react-icons/fi';
-import Swal from "sweetalert2";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { AuthContext } from './../../../Providers/AuthProvider';
-import { Link } from "react-router-dom";
 
+import { BiBarcodeReader } from "react-icons/bi";
+import { Link } from "react-router-dom";
 function InventoryRequest() {
     const [startDate, setStartDate] = useState(new Date());
     const [adminData, setAdminData] = useState([])
@@ -45,17 +42,12 @@ function InventoryRequest() {
     const isApprover = localStorage.getItem('is_approver') === 'true';
     const is_manager = localStorage.getItem('is_manager') === 'true';
 
-    // const adminAndManager = isApprover || is_manager;
-    // useEffect(() => {
-    //     fetch('card.json')
-    //     .then((res) => res.json())
-    //     .then((data) => setAdminData(data))
-    // },[])
+
     useEffect(() => {
         const user_id = localStorage.getItem('user_id');
         console.log(user_id);
 
-        axios.get(`${baseURL}/inventory/?user_id=${user_id}`)
+        axios.get(`${baseURL}/inventory/?user_id=${7}`)
             .then((res) => res.data)
             .then((data) => setAdminData(data))
             .catch((error) => console.error("Error fetching data:", error));
@@ -63,51 +55,7 @@ function InventoryRequest() {
 
 
 
-    const openModal = async (data) => {
-        console.log(data);
-        try {
-            const response = await axios.get(`${baseURL}/inventory/${data}/`);
-            setModalData(response.data);
-        } catch (error) {
-            console.error('Error fetching data:', error);
 
-        }
-    };
-
-    // increment Quantity 
-    const incrementQuantity = (data) => {
-        const updatedTable = adminData.map(value => {
-            if (value.id === data.id) {
-                // Increment the quantity for the specific item
-                return { ...value, quantity: value.quantity + 1 }
-            }
-            return value;
-        })
-        setAdminData(updatedTable);
-    };
-
-    const [set, setSet] = useState({})
-
-
-    // decrement Quantity
-    const decrementQuantity = (data) => {
-        const updatedTable = adminData.map((value) => {
-            if (value.id === data.id) {
-                if (value.quantity > 1) {
-                    return { ...value, quantity: value.quantity - 1 };
-                } else {
-                    Swal.fire({
-                        icon: "error",
-                        title: "Oops...",
-                        text: "Sorry, quantity cannot be less than 1!",
-                    });
-                }
-            }
-            return value;
-        });
-
-        setAdminData(updatedTable);
-    };
     const takeAction = async (event) => {
         event.preventDefault();
         const form = event.target;
@@ -169,7 +117,7 @@ function InventoryRequest() {
             <div >
                 <div className="container mx-auto px-12">
                     <div className="flex justify-center my-3 ">
-                        <h2 className="w-34  font-semibold border-b-[1px] border-indigo-500 text-lg">Inventory History:</h2> <span className="ms-2"> Branch Name</span>
+                        <h2 className="font-semibold border-b-[1px] border-indigo-500 text-2xl  ">Sales Return</h2>
                     </div>
 
                     {/* search bar  */}
@@ -192,6 +140,8 @@ function InventoryRequest() {
                                 <button type="submit" className="btn btn-outline btn-sm rounded-full mx-3  hover:text-white ">Search</button>
                                 <button type="button" className="btn btn-outline btn-sm rounded-full mx-1  hover:text-white ">Clear filter</button>
 
+                                <Link to={'/scanner'} type="button" className="btn btn-outline btn-sm rounded mx-1  hover:text-white "><BiBarcodeReader className="text-2xl" /></Link>
+
                             </form>
                         </div>
                     </div>
@@ -203,11 +153,13 @@ function InventoryRequest() {
                             <thead className="bg-slate-200	">
                                 <tr>
                                     <th className="text-black">No.</th>
-                                    <th className="text-black">Serial Number</th>
-                                    <th className="text-black">Name</th>
-                                    <th className="text-black">Request Date</th>
-                                    <th className="text-black">Approver Name</th>
-                                    <th className="text-black">Details </th>
+                                    <th className="text-black">Sales ID</th>
+                                    <th className="text-black">Customer Name</th>
+                                    <th className="text-black">Customer Number</th>
+                                    <th className="text-black">Customer Address</th>
+                                    <th className="text-black">Date</th>
+                                    <th className="text-black">Return Date</th>
+                                    <th className="text-black">Total Price</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -224,17 +176,17 @@ function InventoryRequest() {
                                             </div>
                                         </td>
                                         <td>
+                                            <p>018303030303 </p>
+                                        </td>
+                                        <td>
+                                            <p>Billa Road,Bogura </p>
+                                        </td>
+                                        <td>
                                             <p>20 january </p>
                                         </td>
-                                        <td>  <p>{tableData.approver.username} </p></td>
-                                        <td onClick={() => openModal(tableData.id)}><Link to={`${tableData.id}`}>
-                                            <button className="btn btn-outline btn-success btn-sm" >
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z" />
-                                                </svg>
-                                            </button>
-                                        </Link>
-                                        </td>
+                                        <td>  <p>4 march</p></td>
+                                        <td>  <p>$ 700</p></td>
+
 
                                     </tr>)
                                 }
@@ -243,11 +195,13 @@ function InventoryRequest() {
                             <tfoot className="bg-slate-200	">
                                 <tr>
                                     <th className="text-black">No.</th>
-                                    <th className="text-black">Serial Number</th>
-                                    <th className="text-black">Name</th>
-                                    <th className="text-black">Request Date</th>
-                                    <th className="text-black">Approver Name</th>
-                                    <th className="text-black">Details</th>
+                                    <th className="text-black">Sales ID</th>
+                                    <th className="text-black">Customer Name</th>
+                                    <th className="text-black">Customer Number</th>
+                                    <th className="text-black">Customer Address</th>
+                                    <th className="text-black">Date</th>
+                                    <th className="text-black">Return Date</th>
+                                    <th className="text-black">Total Price</th>
                                 </tr>
                             </tfoot>
 
@@ -277,8 +231,6 @@ function InventoryRequest() {
                                                     <th className='text-slate-600 text-sm'>SL</th>
                                                     <th className='text-slate-600 text-sm'>Product Name</th>
                                                     <th className='text-slate-600 text-sm'>Quantity</th>
-                                                    {/* <th className='text-slate-600 text-sm'>Inc/Dec</th>
-                                                    <th className='text-slate-600 text-sm'>Delete</th> */}
                                                 </thead>
                                                 <tbody className='bg-slate-100'>
                                                     {/* row 1 */}
@@ -293,16 +245,6 @@ function InventoryRequest() {
                                                             <td className='text-center text-sm'>
                                                                 {data.quantity}
                                                             </td>
-                                                            {/* <td className='text-center text-sm'>
-                                                                <div className='flex justify-around items-center'>
-                                                                    <button ><FiPlus onClick={() => incrementQuantity(data)} className='bg-green-500 text-white text-xl p-[1px] rounded'></FiPlus></button>
-                                                                    <button><FiMinus onClick={() => decrementQuantity(data)} className='bg-red-500 text-white text-xl p-[1px] rounded'></FiMinus></button>
-                                                                </div>
-                                                            </td>
-                                                            <td className=''>
-                                                                <MdDelete className='mx-auto bg-red-500 text-white text-xl p-[1px] rounded'></MdDelete>
-
-                                                            </td> */}
                                                         </tr>)
                                                     }
                                                 </tbody>

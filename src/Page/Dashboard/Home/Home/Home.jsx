@@ -1,32 +1,20 @@
 // import { useEffect } from 'react';
 import "./Home.css";
-import { MdOutlineWatchLater } from "react-icons/md";
-import { GoDotFill } from "react-icons/go";
-import { IoPerson } from "react-icons/io5";
 
 import {
   FaChevronLeft,
   FaChevronRight,
-  FaLongArrowAltRight,
 } from "react-icons/fa";
 import { useCallback, useContext, useEffect, useState } from "react";
 import "react-tabs/style/react-tabs.css";
 import { GrSubtractCircle } from "react-icons/gr";
-import { CiEdit } from "react-icons/ci";
 import bottol from "../../../../../public/bottol.png";
 import { FaCirclePlus } from "react-icons/fa6";
-import { FaCircleMinus } from "react-icons/fa6";
 import { AuthContext } from "../../../../Providers/AuthProvider";
 import { MdDelete } from "react-icons/md";
 import axios from "axios";
 import Form from "../Form/Form";
 
-// swiper slider functionality
-// import { Swiper, SwiperSlide } from 'swiper/react';
-// import 'swiper/css';
-// import 'swiper/css/pagination';
-// import 'swiper/css/navigation';
-// import { Navigation } from 'swiper/modules';
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -45,6 +33,7 @@ const Home = () => {
   const [categories, setCategories] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState([]);
   const [size, setSize] = useState("");
+  const token = localStorage.getItem("token");
   console.log(size);
 
   const clearData = () => {
@@ -54,7 +43,7 @@ const Home = () => {
   // search function
   useEffect(() => {
     const findSearchData = products.filter((product) =>
-      product.name.toLowerCase().includes(searchData.toLowerCase())
+      product.itemName.toLowerCase().includes(searchData.toLowerCase())
     );
     if (findSearchData?.length > 0) {
       setSelectedProduct(findSearchData);
@@ -87,7 +76,9 @@ const Home = () => {
   //get all Products
   useEffect(() => {
     axios
-      .get(`${baseURL}/itemlist/`)
+      .get(`https://rpos.pythonanywhere.com/api/v1/inventory/`, {
+        headers: { 'Authorization': 'token ' + token }
+      })
       .then((response) => {
         setProducts(response.data);
         console.log("All Products:", response.data);
@@ -132,7 +123,7 @@ const Home = () => {
       if (!quantity) {
         const newData = {
           id: product.id,
-          name: product.name,
+          name: product.itemName,
           quantity: 1,
           price: randomPrice,
           size: size
@@ -141,7 +132,7 @@ const Home = () => {
       } else {
         const newData = {
           id: product.id,
-          name: product.name,
+          name: product.itemName,
           quantity: parseInt(quantity),
           price: randomPrice,
           size: size,
@@ -150,7 +141,7 @@ const Home = () => {
       }
     }
   };
-
+  console.log(wishlist)
 
 
   // Update wishlist Quantity
@@ -328,19 +319,19 @@ const Home = () => {
                           </figure>
                         </div>
                         <div className="w-3/4">
-                          <h2 className="text-xl font-bold">{product.name}</h2>
-                          <p className="text-xs">{product.description}</p>
+                          <h2 className="text-xl font-bold">{product.itemName}</h2>
+                          {/* <p className="text-xs">{product.description}</p> */}
                           <ul className="flex items-start justify-between mt-2">
                             <li>
                               <p className="text-sm">Netto</p>
                               <p className="text-base font-bold">
-                                {product.net_weight}
+                                {/* {product.net_weight} */}
                               </p>
                             </li>
                             <li>
                               <p className="text-sm">Stock</p>
                               <p className="text-base font-bold">
-                                {product.stock} Available
+                                {product.unit} Available
                               </p>
                             </li>
                           </ul>
@@ -356,6 +347,7 @@ const Home = () => {
                               name="size" value="S"
                               id="size"
                               className="radio radio-success"
+                              required
                             />
                             <label htmlFor="size" className="text-lg font-semibold">S</label>
                           </div>
@@ -365,6 +357,7 @@ const Home = () => {
                               name="size" value="M"
                               id="radio-4"
                               className="radio radio-success"
+                              required
                             />
                             <label htmlFor="radio-4" className="text-lg font-semibold">M</label>
                           </div>
@@ -374,6 +367,7 @@ const Home = () => {
                               name="size" value="L"
                               id="radio-3"
                               className="radio radio-success"
+                              required
                             />
                             <label htmlFor="radio-3" className="text-lg font-semibold">L</label>
                           </div>
@@ -383,6 +377,7 @@ const Home = () => {
                               name="size" value="XL"
                               id="radio-2"
                               className="radio radio-success"
+                              required
                             />
                             <label htmlFor="radio-2" className="text-lg font-semibold">XL</label>
                           </div>
@@ -392,6 +387,7 @@ const Home = () => {
                               name="size" value="XXL"
                               id="radio-1"
                               className="radio radio-success"
+                              required
                             />
                             <label htmlFor="size" className="text-lg font-semibold">XXL</label>
                           </div>
