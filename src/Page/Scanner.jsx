@@ -1,9 +1,17 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useZxing } from "react-zxing";
+import useSound from 'use-sound';
+import bipSound from '../../public/scanner-beep.mp3'
+import axios from 'axios';
+import { ToastContainer, toast } from "react-toastify";
+
 
 const Scanner = () => {
     const [scanning, setScanning] = useState(true);
+    const token = localStorage.getItem('token');
+    const [play] = useSound(bipSound)
+
     // barcode 
     const [result, setResult] = useState("");
     const { ref } = useZxing({
@@ -13,6 +21,7 @@ const Scanner = () => {
     });
 
 
+    // scanner animation effects
     useEffect(() => {
         const animateScanner = () => {
             if (scanning) {
@@ -26,12 +35,28 @@ const Scanner = () => {
             }
         };
 
-        const scannerInterval = setInterval(animateScanner, 1500); // Adjust the interval as needed
+        const scannerInterval = setInterval(animateScanner, 1500);
 
         return () => {
             clearInterval(scannerInterval);
         };
     }, [scanning]);
+
+    //send request to server
+    useEffect(() => {
+        if (result) {
+            axios.get(`https://rpos.pythonanywhere.com/api/v1/sales/`, {
+                headers: { 'Authorization': 'token ' + token }
+            })
+                .then((res) => res.data)
+                .then((data) => {
+                    toast.success("Successfully Returned");
+                    console.log(data)
+                })
+                .catch((error) => console.error("Error fetching data:", error));
+            play();
+        }
+    }, [result])
 
 
 
@@ -55,6 +80,7 @@ const Scanner = () => {
                 <span>{result}</span>
             </p>
             <Link to={'/'} className="text-white mt-2 underline">Back to Home Page</Link>
+            <ToastContainer position="bottom-right" />
         </div>
     );
 };
