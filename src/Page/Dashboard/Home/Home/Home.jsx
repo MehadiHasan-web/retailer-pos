@@ -519,7 +519,7 @@ const Home = () => {
           </div>
 
           <div className="">
-            <Form wishlist={wishlist} setWishlist={setWishlist} calculateTotalPrice={calculateTotalPrice()}></Form>
+            <Form wishlist={wishlist} clearData={clearData} setWishlist={setWishlist} calculateTotalPrice={calculateTotalPrice()}></Form>
           </div>
         </div>
       </div>

@@ -10,7 +10,7 @@ import { AuthContext } from "./../../../../Providers/AuthProvider";
 
 
 
-const Form = ({ wishlist, calculateTotalPrice }) => {
+const Form = ({ wishlist, calculateTotalPrice,clearData }) => {
   const [cardTable, setCardTable] = useState([]);
   const [approverList, setApprover] = useState([]);
   const user_id = localStorage.getItem("user_id");
@@ -36,7 +36,8 @@ const Form = ({ wishlist, calculateTotalPrice }) => {
       const response = await axios.post(`https://rpos.pythonanywhere.com/api/v1/sales/`, finalArray, {
         headers: { 'Authorization': 'token ' + token }
       });
-      toast.success("Successfully Send");
+      toast.success("Successfully Sold");
+      clearData()
     } catch (error) {
       toast.error(`${error.message} .Try again`);
     }
@@ -67,6 +68,7 @@ const Form = ({ wishlist, calculateTotalPrice }) => {
     // const updatedCardTable = [...wishlist, user];
     sendData(finalArray);
     console.log(finalArray)
+    form.reset()
   };
 
   return (
@@ -110,19 +112,19 @@ const Form = ({ wishlist, calculateTotalPrice }) => {
                 <input type="number" hidden name="user_id" value={user_id} />
                 {/* file section start */}
                 <div className="form-control w-full flex-1">
-                  <input type="text" placeholder="enter your name" className="input input-bordered w-full h-6 lg:h-9 " name="name" />
+                  <input type="text" placeholder="Enter your name" className="input input-bordered w-full h-6 lg:h-9 " name="name" />
                 </div>
                 {/* file section end */}
                 {/* file section start */}
                 <div className="form-control w-full flex-1">
-                  <input type="number" placeholder="enter your number" className="input input-bordered w-full h-6 lg:h-9 " name="number" />
+                  <input type="number" placeholder="Enter your number" className="input input-bordered w-full h-6 lg:h-9 " name="number" />
                 </div>
                 {/* file section end */}
               </div>
               {/* textarea section start */}
               <textarea
                 type="text"
-                placeholder="additional information"
+                placeholder="Enter your address"
                 className="textarea textarea-lg w-full mt-1"
                 id="bio"
                 name="information"
