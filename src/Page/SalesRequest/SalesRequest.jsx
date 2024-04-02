@@ -1,17 +1,20 @@
 import Title from "../../Title/Title";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { Link } from "react-router-dom"; import { IoQrCodeOutline } from "react-icons/io5";
+import { FaBarcode } from "react-icons/fa6";
+import { PiPrinterThin } from "react-icons/pi";
+import { QRCodeSVG } from 'qrcode.react';
+import { useReactToPrint } from "react-to-print";
+import Barcode from "react-barcode";
 
 
 const SalesRequest = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [userData, setUserData] = useState([]);
-
-  const [modalData, setModalData] = useState({});
   const [selectedOption, setSelectedOption] = useState(1); // 1 == all data, 2==approve, 3==pending
   const [filteredData, setFilteredData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -22,6 +25,7 @@ const SalesRequest = () => {
   const lastPostIndex = currentPage * postPerPage;
   const firstPostIndex = lastPostIndex - postPerPage;
   const currentPosts = filteredData.slice(firstPostIndex, lastPostIndex);
+  const contentToPrint = useRef(null);
 
   let page = [];
   for (let i = 1; i <= Math.ceil(filteredData.length / postPerPage); i++) {
@@ -90,6 +94,12 @@ const SalesRequest = () => {
     e.preventDefault();
     setPostPerPage(parseInt(e.target.value));
   };
+
+  // qr code print 
+  const handlePrintClick = useReactToPrint({
+    content: () => contentToPrint.current,
+  });
+
 
   return (
     <>
@@ -178,6 +188,7 @@ const SalesRequest = () => {
                   <th className="text-black text-center">Date</th>
                   <th className="text-black text-center">Total Price</th>
                   <th className="text-black text-center">Invoice</th>
+                  <th className="text-black text-center">QRcode</th>
                   <th className="text-black text-center">Barcode</th>
                 </tr>
               </thead>
@@ -190,16 +201,16 @@ const SalesRequest = () => {
                       <div className="flex items-center gap-1">
                         <div>
                           <div className="font-bold capitalize">
-                            {data.customer.name}
+                            {data.customer?.name}
                           </div>
                         </div>
                       </div>
                     </td>
                     <td className="text-center">
-                      <p>{data.customer.phone_number} </p>
+                      <p>{data.customer?.phone_number} </p>
                     </td>
                     <td className="text-center">
-                      <p>{data.customer.address}</p>
+                      <p>{data.customer?.address}</p>
                     </td>
                     <td className="text-center">
                       <p>{data.created_date} </p>
@@ -227,8 +238,59 @@ const SalesRequest = () => {
                         </button>
                       </Link>
                     </td>
+                    {/* qr code  */}
                     <td>
-                      <button className="btn btn-outline btn-info btn-sm"><IoQrCodeOutline /></button>
+                      <button onClick={() => document.getElementById(`my_modal_${index}`).showModal()} className="btn btn-outline btn-default btn-sm"><IoQrCodeOutline className="text-lg" /></button>
+                      {/* qr code display */}
+                      <dialog id={`my_modal_${index}`} className="modal">
+                        <div className="modal-box " style={{ maxWidth: '300px' }}>
+                          <h3 className="font-bold text-lg text-center"> {data.customer?.name}</h3>
+                          <h4 className="font-bold text-md text-center"> {data.customer?.phone_number}</h4>
+                          <div className="flex justify-center">
+                            {/* barcode  */}
+                            <div ref={contentToPrint} className='p-2 mb-2'>
+                              <QRCodeSVG size={140} value={data.id} className="p-2 border" />
+                            </div>
+                          </div>
+
+                          <div className="float-right flex gap-2">
+                            <button onClick={() => { handlePrintClick() }} className="btn btn-active btn-ghost btn-sm">Print <PiPrinterThin /></button>
+                            <form method="dialog">
+                              <button className="btn btn-sm">Close</button>
+                            </form>
+                          </div>
+                        </div>
+                        <form method="dialog" className="modal-backdrop">
+                          <button>close</button>
+                        </form>
+                      </dialog>
+                    </td>
+                    {/* barcode  */}
+                    <td>
+                      <button onClick={() => document.getElementById(`my_modal_bar_${index}`).showModal()} className="btn btn-outline btn-default btn-sm"><FaBarcode className="text-lg" /></button>
+                      {/* qr code display */}
+                      <dialog id={`my_modal_bar_${index}`} className="modal">
+                        <div className="modal-box " style={{ maxWidth: '300px' }}>
+                          <h3 className="font-bold text-lg text-center"> {data.customer?.name}</h3>
+                          <h4 className="font-bold text-md text-center"> {data.customer?.phone_number}</h4>
+                          <div className="flex justify-center">
+                            {/* barcode  */}
+                            <div ref={contentToPrint} className='p-2 mb-2'>
+                              <Barcode value={data.id} className="rounded w-64" />
+                            </div>
+                          </div>
+
+                          <div className="float-right flex gap-2">
+                            <button onClick={() => { handlePrintClick() }} className="btn btn-active btn-ghost btn-sm">Print <PiPrinterThin /></button>
+                            <form method="dialog">
+                              <button className="btn btn-sm">Close</button>
+                            </form>
+                          </div>
+                        </div>
+                        <form method="dialog" className="modal-backdrop">
+                          <button>close</button>
+                        </form>
+                      </dialog>
                     </td>
                   </tr>
                 ))}
@@ -244,6 +306,7 @@ const SalesRequest = () => {
                   <th className="text-black text-center">Date</th>
                   <th className="text-black text-center">Total Price</th>
                   <th className="text-black text-center">Invoice</th>
+                  <th className="text-black text-center">QRcode</th>
                   <th className="text-black text-center">Barcode</th>
                 </tr>
               </tfoot>
@@ -269,102 +332,7 @@ const SalesRequest = () => {
               </div>
             </div>
             {/* pagination section end */}
-            {/* modal section start */}
-            <dialog id="my_modal_4" className="modal">
-              <div className="modal-box w-[90%] max-w-5xl">
-                <div className="flex md:flex-row flex-col">
-                  <div className="w-full md:w-[45%] order-1">
-                    <h3 className="font-bold text-lg">
-                      {modalData?.user?.username}
-                    </h3>
 
-                    <div className="w-full  rounded mt-6 ">
-                      {/* table start */}
-                      <table className="w-full overflow-y-scroll rounded-md mb-2">
-                        {/* head */}
-                        <thead className="bg-cyan-100 text-dark text-slate-100 h-6  shadow-lg">
-                          <th className="text-slate-600 text-sm">SL</th>
-                          <th className="text-slate-600 text-sm">
-                            Product Name
-                          </th>
-                          <th className="text-slate-600 text-sm">Quantity</th>
-                          {/* <th className='text-slate-600 text-sm'>Inc/Dec</th>
-                                                      <th className='text-slate-600 text-sm'>Delete</th> */}
-                        </thead>
-                        <tbody className="bg-slate-100">
-                          {/* row 1 */}
-                          {modalData?.items?.map((data, index) => (
-                            <tr
-                              key={index}
-                              className="h-7 hover:bg-slate-300 mb-2"
-                            >
-                              <td className="text-center text-sm">
-                                {index + 1}
-                              </td>
-                              <td className=" text-sm text-center">
-                                <h3 className="font-semibold">
-                                  {" "}
-                                  {data.item.name}
-                                </h3>
-                              </td>
-                              <td className="text-center text-sm">
-                                {data.quantity}
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                      {/* table end */}
-                    </div>
-                    <p className="font-semibold">
-                      Request Date : <span>20 january</span>
-                    </p>
-                    <p className="text-justify mt-2">{modalData.note}</p>
-                  </div>
-                  <div className="md:divider md:divider-horizontal md:divider-info mt-8 order-2 hidden mb:block">
-                    {" "}
-                    OR{" "}
-                  </div>
-                  <div className="w-full md:w-[55%] order-3">
-                    <h2 className="font-bold">Additional Information</h2>
-                    <form>
-                      <textarea
-                        placeholder="Bio"
-                        className="textarea textarea-bordered textarea-sm w-full mt-2"
-                      ></textarea>
-                      <h3 className="mt-3 font-semibold">Attach File</h3>
-                      <div className="flex gap-3">
-                        <input
-                          type="file"
-                          className="file-input file-input-bordered file-input-md w-3/6"
-                        />
-                        <button
-                          type="submit"
-                          className="btn btn-md btn-success btn-outline"
-                        >
-                          Update
-                        </button>
-                      </div>
-                    </form>
-                    <div className=" mt-4">
-                      <div>
-                        <button className="btn btn-success btn-md">
-                          Download File
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/* footer button  */}
-                <div className="modal-action">
-                  <form method="dialog">
-                    {/* if there is a button, it will close the modal */}
-                    <button className="btn">Close</button>
-                  </form>
-                </div>
-              </div>
-            </dialog>
-            {/* modal section end */}
           </div>
         </div>
       </div>
