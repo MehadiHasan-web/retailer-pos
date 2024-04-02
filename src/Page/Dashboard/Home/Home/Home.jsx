@@ -123,7 +123,7 @@ const Home = () => {
           id: product.id,
           name: product.itemName,
           quantity: 1,
-          price: product?.productCost || 0,
+          price: product?.productCost || 10,
           size: size
         };
         setWishlist([...wishlist, newData]);
@@ -132,7 +132,7 @@ const Home = () => {
           id: product.id,
           name: product.itemName,
           quantity: parseInt(quantity),
-          price: product?.productCost || 0,
+          price: product?.productCost || 10,
           size: size,
         };
         setWishlist([...wishlist, newData]);
