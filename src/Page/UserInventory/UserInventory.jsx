@@ -53,11 +53,16 @@ const UserInventory = () => {
     const unit = form.unit.value;
     const transportationCost = form.transportationCost.value;
     const otherCost = form.otherCost.value;
+    const inventoryCost = form.inventoryCost.value;
+    const productCost = form.productCost.value;
     const updateData = {
       unit: unit,
       transportationCost: transportationCost,
       otherCost: otherCost,
+      inventoryCost:inventoryCost,
+      productCost:productCost,
     }
+    console.log(updateData)
     axios.put(`https://rpos.pythonanywhere.com/api/v1/inventory/${id}/`, updateData, {
       headers: { 'Authorization': 'token ' + token }
     })
@@ -151,7 +156,7 @@ const UserInventory = () => {
       </div>
       {/* search bar end  */}
       {/* products  */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-1 sm:gap-2 md:gap-1 lg:gap-2 mt-5">
+      <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-1 sm:gap-2 md:gap-1 lg:gap-2 mt-5">
         {
           (filteredProducts.length > 0 ? filteredProducts : card).map((data, index) => <div key={index} className=" p-2 flex flex-col justify-between rounded shadow-lg bg-slate-50">
             {
@@ -171,11 +176,11 @@ const UserInventory = () => {
                 </div>
                 <div className="flex justify-between items-center">
                   <span>Inventory Cost:</span>
-                  <input name="otherCost" type="text" defaultValue={data?.inventoryCost || 0} placeholder="Type here" className="input input-bordered input-sm w-28" />
+                  <input name="inventoryCost" type="text" defaultValue={data?.inventoryCost || 0} placeholder="Type here" className="input input-bordered input-sm w-28" />
                 </div>
                 <div className="flex justify-between items-center">
                   <span>Product Cost:</span>
-                  <input name="otherCost" type="text" defaultValue={data?.productCost || 0} placeholder="Type here" className="input input-bordered input-sm w-28" />
+                  <input name="productCost" type="text" defaultValue={data?.productCost || 0} placeholder="Type here" className="input input-bordered input-sm w-28" />
                 </div>
                 <div className="flex justify-between items-center">
                   <span>Update Stock:</span>
