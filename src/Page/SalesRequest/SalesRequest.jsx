@@ -194,7 +194,7 @@ const SalesRequest = () => {
               </thead>
               <tbody>
                 {currentPosts.map((data, index) => (
-                  <tr key={data.id} className={`${index % 2 == 1 ? 'bg-slate-200 border-b-[1px] border-slate-300' : 'bg-white border-b-[1px] border-slate-300'}`}>
+                  <tr key={data.id} className={`${index % 2 == 1 ? 'bg-slate-100 border-b-[1px] border-slate-100' : 'bg-white border-b-[1px] border-slate-100'} hover:bg-green-50`}>
                     <td className="text-center">{++index}</td>
                     <td className="text-center">{data.id}</td>
                     <td className="text-center">
@@ -218,6 +218,7 @@ const SalesRequest = () => {
                     <td className="text-center">
                       <p>TK {data.total}</p>
                     </td>
+                    {/* invoice  */}
                     <td className="text-center">
                       <Link to={`${data.id}`}>
                         <button className="btn btn-outline btn-success btn-sm">
@@ -268,7 +269,7 @@ const SalesRequest = () => {
                     {/* barcode  */}
                     <td>
                       <button onClick={() => document.getElementById(`my_modal_bar_${index}`).showModal()} className="btn btn-outline btn-default btn-sm"><FaBarcode className="text-lg" /></button>
-                      {/* qr code display */}
+                      {/* bar code display */}
                       <dialog id={`my_modal_bar_${index}`} className="modal">
                         <div className="modal-box " style={{ maxWidth: '300px' }}>
                           <h3 className="font-bold text-lg text-center"> {data.customer?.name}</h3>
@@ -276,7 +277,7 @@ const SalesRequest = () => {
                           <div className="flex justify-center">
                             {/* barcode  */}
                             <div ref={contentToPrint} className='p-2 mb-2'>
-                              <Barcode value={data.id} className="rounded w-64" />
+                              <Barcode value='mjhad;iSed' className="rounded w-64" />
                             </div>
                           </div>
 

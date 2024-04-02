@@ -24,7 +24,7 @@ import { Navigation, Pagination } from "swiper/modules";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
-  const { baseURL, searchData } = useContext(AuthContext);
+  const { baseURL, searchData ,searchFun} = useContext(AuthContext);
   const initialCardTable = JSON.parse(localStorage.getItem("wishlist")) || [];
   const [wishlist, setWishlist] = useState(initialCardTable);
   const [open, setOpen] = useState(false);
@@ -123,7 +123,7 @@ const Home = () => {
           id: product.id,
           name: product.itemName,
           quantity: 1,
-          price: product?.productCost || 0,
+          price: product?.productCost || 10,
           size: size
         };
         setWishlist([...wishlist, newData]);
@@ -132,7 +132,7 @@ const Home = () => {
           id: product.id,
           name: product.itemName,
           quantity: parseInt(quantity),
-          price: product?.productCost || 0,
+          price: product?.productCost || 10,
           size: size,
         };
         setWishlist([...wishlist, newData]);
@@ -219,9 +219,15 @@ const Home = () => {
               {/* <li className="text-lg font-bold text-green-500 border-b-green-500 border-b-2">
                 See all
               </li> */}
+              <li className="mt-2 sm:mt-0">
+            <label className="input input-bordered flex items-center gap-2">
+              <input type="text" className="grow" placeholder="Search" onChange={(e)=>{searchFun(e.target.value)}} />
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-10 h-10 p-1 opacity-70 bg-green-500 -mr-3 rounded-lg text-white"><path fillRule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clipRule="evenodd" /></svg>
+            </label>
+          </li>
             </ul>
             {/* products  list*/}
-            <div className="mt-4">
+            <div className="mt-8">
               {/* categories  */}
               <div className="flex gap-2 items-center">
                 <button

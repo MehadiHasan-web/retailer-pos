@@ -32,7 +32,6 @@ const Form = ({ wishlist, calculateTotalPrice, clearData }) => {
       return 'submit failed';
     }
   }
-
   // from handeling
   const userData = (event) => {
     event.preventDefault()
@@ -42,8 +41,9 @@ const Form = ({ wishlist, calculateTotalPrice, clearData }) => {
     const address = form.information.value;
     const userInfo = { name, phone_number, address };
 
-    const vat = form.vat.value;
-    const tax = form.Tax.value;
+
+    const vat =calculateTotalPrice % parseInt(form.vat.value);
+    const tax =calculateTotalPrice % parseInt(form.Tax.value);
     const discount = form.discount.value;
     const deliveryCost = form.delivery.value;
     const total = form.total.value;

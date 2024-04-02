@@ -159,19 +159,27 @@ const UserInventory = () => {
             }
             <div className="p-2">
               <h2 className="text-sm sm:text-base md:text-sm lg:text-sm font-semibold mx-auto my-1 md:my-1 lg:my-2">{data.itemName}</h2>
-              <p className="text-sm sm:text-base md:text-sm">Stock : {data.unit}</p>
+              <p className="text-sm sm:text-base md:text-sm">Stock : {data.unit ||0}</p>
               <form onSubmit={addStockData} className="space-y-1">
                 <div className="flex justify-between items-center">
                   <span>Transportation Cost:</span>
-                  <input name="transportationCost" type="text" placeholder="Type here" defaultValue={data.transportationCost} className="input input-bordered input-sm w-28" />
+                  <input name="transportationCost" type="text" placeholder="Type here" defaultValue={data.transportationCost || 0} className="input input-bordered input-sm w-28" />
                 </div>
                 <div className="flex justify-between items-center">
                   <span>Other Cost:</span>
-                  <input name="otherCost" type="text" defaultValue={data.otherCost} placeholder="Type here" className="input input-bordered input-sm w-28" />
+                  <input name="otherCost" type="text" defaultValue={data.otherCost|| 0} placeholder="Type here" className="input input-bordered input-sm w-28" />
+                </div>
+                <div className="flex justify-between items-center">
+                  <span>Inventory Cost:</span>
+                  <input name="otherCost" type="text" defaultValue={data?.inventoryCost || 0} placeholder="Type here" className="input input-bordered input-sm w-28" />
+                </div>
+                <div className="flex justify-between items-center">
+                  <span>Product Cost:</span>
+                  <input name="otherCost" type="text" defaultValue={data?.productCost || 0} placeholder="Type here" className="input input-bordered input-sm w-28" />
                 </div>
                 <div className="flex justify-between items-center">
                   <span>Update Stock:</span>
-                  <input name="unit" type="text" defaultValue={data.unit} placeholder="Type here" className="input input-bordered input-sm w-28" />
+                  <input name="unit" type="text" defaultValue={data.unit || 0} placeholder="Type here" className="input input-bordered input-sm w-28" />
                 </div>
 
                 <input name="id" type="number" value={data.id} className="hidden" />
