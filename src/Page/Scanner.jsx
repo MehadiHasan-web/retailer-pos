@@ -45,7 +45,8 @@ const Scanner = () => {
     //send request to server
     useEffect(() => {
         if (result) {
-            const data = { sale_id: result };
+            console.log(token)
+            const data = { sale_id: '4b082bc6-136b-4ffb-a987-d6a6005111f3' };
             axios.post(`https://rpos.pythonanywhere.com/api/v1/salesReturn/`, data, {
                 headers: { 'Authorization': 'token ' + token }
             })
