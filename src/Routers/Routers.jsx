@@ -19,7 +19,6 @@ import MyInventory from './../Page/My Inventory/MyInventory';
 import ErrorPage from "../Page/ErrorPage/ErrorPage";
 import AllUserInventory from "../Page/AllUserInventory/AllUserInventory";
 import UserInventory from "../Page/UserInventory/UserInventory";
-import HomeExtra from './../Page/Dashboard/Home/Home/HomeExtra';
 // import Practice from "../Page/Practice/Practice";
 import Dashboard from "../Page/Practice/Dashboard";
 import MyInventoryRequest from "../Page/MyInventoryRequest/MyInventoryRequest";
@@ -30,7 +29,6 @@ import SalesRequest from "../Page/SalesRequest/SalesRequest";
 import Expenses from "../Page/Expenses/Expenses";
 import Scanner from "../Page/Scanner";
 import AddInventoryProduct from "../Page/AddInventoryProduct";
-import SalesReturn from './../Page/SalesReturn/SalesReturn';
 import NotAllow from "../Page/NotAllow/NotAllow";
 
 
@@ -135,10 +133,6 @@ const router = createBrowserRouter([
       {
         path: '/management',
         element: <PrivateRoute><UserInventory></UserInventory></PrivateRoute>
-      },
-      {
-        path: '/homeExtra',
-        element: <PrivateRoute><HomeExtra></HomeExtra></PrivateRoute>
       },
       {
         path: '/expenses',
