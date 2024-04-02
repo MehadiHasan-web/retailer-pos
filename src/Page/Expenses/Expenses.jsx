@@ -236,7 +236,7 @@ const Expenses = () => {
           <div className="overflow-x-auto  shadow-lg rounded">
             <table className="table text-base w-full">
               {/* head */}
-              <thead className="bg-slate-200	">
+              <thead className="bg-slate-200">
                 <tr>
                   <th className="text-black">No.</th>
                   <th className="text-black">Serial Number</th>
@@ -249,21 +249,21 @@ const Expenses = () => {
                 {currentPosts.map((data, index) => (
                   <tr key={data.id} className={`${index % 2 == 1 ? 'bg-slate-100  ' : 'bg-stone-50'} hover:bg-green-50`}>
                     <td>{++index}</td>
-                    <td>{data.id}</td>
+                    <td>{data?.id}</td>
                     <td>
                       <div className="flex items-center gap-1">
                         <div>
                           <div className="font-bold capitalize">
-                            {data.category}
+                            {data?.category?.name}
                           </div>
                         </div>
                       </div>
                     </td>
                     <td>
-                      <p>{data.date}</p>
+                      <p>{data?.date}</p>
                     </td>
                     <td>
-                      <p>{Math.floor(data.amount)} TK</p>
+                      <p>{Math.floor(data?.amount)} TK</p>
                     </td>
                   </tr>
                 ))}
