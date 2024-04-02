@@ -1,8 +1,6 @@
 
 import { useContext, useEffect, useState } from "react";
 import MemberCard from "./MemberCard";
-import PieChartWithPadding from "./PieChartWithPadding";
-import ProgressBars from "./ProgressBars";
 import axios from "axios";
 import { AuthContext } from "../../Providers/AuthProvider";
 // import TinyLineChart from "./TinyLineChart";
@@ -33,14 +31,7 @@ const Dashboard = () => {
           <MemberCard data={data} ></MemberCard>
         </div>
       </div>
-      <div className="md:flex md:justify-between md:items-center gap-5 mt-5">
-        <div className="md:flex-1 hidden">
-          <ProgressBars></ProgressBars>
-        </div>
-        <div className="md:flex-2 my-5 md:my-0 hidden">
-          <PieChartWithPadding></PieChartWithPadding>
-        </div>
-      </div>
+     
 
     </div>
   );
