@@ -11,25 +11,13 @@ import { AuthContext } from "./../../../../Providers/AuthProvider";
 
 
 const Form = ({ wishlist, calculateTotalPrice, clearData }) => {
-  const [cardTable, setCardTable] = useState([]);
-  const [approverList, setApprover] = useState([]);
   const user_id = localStorage.getItem("user_id");
   const { baseURL, accountURL } = useContext(AuthContext);
   const [total, setTotal] = useState(calculateTotalPrice)
   const token = localStorage.getItem("token");
 
-  useEffect(() => {
-    axios
-      .get(`${accountURL}/approvers/`)
-      .then((res) => res.data)
-      .then((data) => setApprover(data))
-      .catch((error) => console.error("Error fetching data:", error));
-  }, [accountURL]);
 
-  // const clearData = () => {
-  //   setWishlist([]);
-  //   setCardTable([]);
-  // };
+
 
   async function sendData(finalArray) {
     try {
@@ -38,9 +26,10 @@ const Form = ({ wishlist, calculateTotalPrice, clearData }) => {
       });
       toast.success("Successfully Sold");
       clearData()
+      return 'submit';
     } catch (error) {
       toast.error(`${error.message} .Try again`);
-      clearData();
+      return 'submit failed';
     }
   }
 
@@ -53,7 +42,6 @@ const Form = ({ wishlist, calculateTotalPrice, clearData }) => {
     const address = form.information.value;
     const userInfo = { name, phone_number, address };
 
-
     const vat = form.vat.value;
     const tax = form.Tax.value;
     const discount = form.discount.value;
@@ -65,11 +53,23 @@ const Form = ({ wishlist, calculateTotalPrice, clearData }) => {
 
     const finalArray = { customer: userInfo, saleitems: products, vat_percentage: parseInt(vat), tax_percentage: parseInt(tax), discount_percentage: parseInt(discount), delivery_cost: parseInt(deliveryCost), total: parseInt(total), subtotal: parseInt(0) }
 
-    // setCardTable((wishlist) => [...wishlist, user]);
-    // const updatedCardTable = [...wishlist, user];
-    sendData(finalArray);
+    if (wishlist.length > 0 && userInfo) {
+      sendData(finalArray)
+        .then((result) => {
+          console.log('Success:', result);
+          form.reset()
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    } else {
+      toast.error("Please add one product")
+    }
+
+
+
     console.log(finalArray)
-    form.reset()
+
   };
 
   return (
@@ -85,14 +85,14 @@ const Form = ({ wishlist, calculateTotalPrice, clearData }) => {
                   <span>Subtotal</span>{" "}
                   <span className="font-bold">TK {calculateTotalPrice}</span>
                 </p>
-                <p className="flex justify-between mt-3 ">
+                {/* <p className="flex justify-between mt-3 ">
                   <span>Vat</span>
                   <span className="font-bold">% <input name="vat" className=" w-14 bg-slate-50 shadow-inner rounded text-end" /></span>
                 </p>
                 <p className="flex justify-between mt-3 ">
                   <span>Tax</span>
                   <span className="font-bold">% <input name="Tax" className=" w-14 bg-slate-50 shadow-inner rounded text-end" /></span>
-                </p>
+                </p> */}
                 <p className="flex justify-between mt-3 ">
                   <span>Discount</span>
                   <span className="font-bold">TK <input name="discount" className=" w-14 bg-slate-50 shadow-inner rounded text-end" /></span>
@@ -132,9 +132,7 @@ const Form = ({ wishlist, calculateTotalPrice, clearData }) => {
               ></textarea>
               {/* textarea section end */}
               <div className="flex gap-2 mt-1">
-
                 <button
-                  // onClick={() => userData()}
                   className="bg-green-500 text-white md:text-sm lg:text-base md:px-2 md:py-1 lg:px-3 lg:py-2 uppercase rounded"
                   type="submit"
                 >

@@ -4,7 +4,9 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import { AuthContext } from "../../Providers/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"; import { IoQrCodeOutline } from "react-icons/io5";
+
+
 const SalesRequest = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [userData, setUserData] = useState([]);
@@ -53,12 +55,6 @@ const SalesRequest = () => {
       .catch((error) => console.error("Error fetching data:", error));
   }, [baseURL]);
 
-  // handle search
-  const handleSelectChange = (e) => {
-    e.preventDefault();
-    const newSelectedOption = parseInt(e.target.value);
-    setSelectedOption(newSelectedOption);
-  };
 
   // clear search
   const handleClearSearch = (e) => {
@@ -182,6 +178,7 @@ const SalesRequest = () => {
                   <th className="text-black text-center">Date</th>
                   <th className="text-black text-center">Total Price</th>
                   <th className="text-black text-center">Invoice</th>
+                  <th className="text-black text-center">Barcode</th>
                 </tr>
               </thead>
               <tbody>
@@ -230,6 +227,9 @@ const SalesRequest = () => {
                         </button>
                       </Link>
                     </td>
+                    <td>
+                      <button className="btn btn-outline btn-info btn-sm"><IoQrCodeOutline /></button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -244,6 +244,7 @@ const SalesRequest = () => {
                   <th className="text-black text-center">Date</th>
                   <th className="text-black text-center">Total Price</th>
                   <th className="text-black text-center">Invoice</th>
+                  <th className="text-black text-center">Barcode</th>
                 </tr>
               </tfoot>
             </table>
@@ -309,15 +310,6 @@ const SalesRequest = () => {
                               <td className="text-center text-sm">
                                 {data.quantity}
                               </td>
-                              {/* <td className='text-center text-sm'>
-                                                                  <div className='flex justify-around items-center'>
-                                                                      <button ><FiPlus onClick={() => incrementQuantity(data)} className='bg-green-500 text-white text-xl p-[1px] rounded'></FiPlus></button>
-                                                                      <button><FiMinus onClick={() => decrementQuantity(data)} className='bg-red-500 text-white text-xl p-[1px] rounded'></FiMinus></button>
-                                                                  </div>
-                                                              </td>
-                                                              <td className=''>
-                                                                  <MdDelete className='mx-auto bg-red-500 text-white text-xl p-[1px] rounded'></MdDelete>
-                                                              </td> */}
                             </tr>
                           ))}
                         </tbody>
