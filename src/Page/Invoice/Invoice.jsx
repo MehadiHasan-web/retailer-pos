@@ -13,7 +13,6 @@ const Invoice = () => {
   const [detailsData, setDetailsData] = useState([]);
   const contentToPrint = useRef(null);
 
-  console.log(id);
   useEffect(() => {
     axios
       .get(`https://rpos.pythonanywhere.com/api/v1/sales/${id}/`)

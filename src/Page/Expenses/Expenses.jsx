@@ -88,7 +88,7 @@ const Expenses = () => {
       .catch(error => {
         console.error('Error:', error);
         toast.error(`${error.message} .Try again`);
-        
+
       });
   }
   // entry create 
@@ -247,7 +247,7 @@ const Expenses = () => {
               </thead>
               <tbody>
                 {currentPosts.map((data, index) => (
-                  <tr key={data.id} className={`${index % 2 == 1 ? 'bg-slate-200 border-b-[1px] border-slate-300' : 'bg-white border-b-[1px] border-slate-300'}`}>
+                  <tr key={data.id} className={`${index % 2 == 1 ? 'bg-slate-100  ' : 'bg-stone-50'} hover:bg-green-50`}>
                     <td>{++index}</td>
                     <td>{data.id}</td>
                     <td>

@@ -58,6 +58,10 @@ const router = createBrowserRouter([
         element: <PrivateRoute><InventoryRequest></InventoryRequest></PrivateRoute>
       },
       {
+        path: '/sales-return/:id',
+        element: <PrivateRoute><Invoice></Invoice></PrivateRoute>
+      },
+      {
         path: `/inventoryRequest/:id`,
         element: <PrivateRoute><InventoryRequestDetails></InventoryRequestDetails></PrivateRoute>
 
@@ -143,10 +147,6 @@ const router = createBrowserRouter([
       {
         path: '/user-profile',
         element: <PrivateRoute><UserProfile></UserProfile></PrivateRoute>
-      },
-      {
-        path: '/sales-return',
-        element: <PrivateRoute> <SalesReturn /> </PrivateRoute>
       },
       {
         path: '/scanner',
