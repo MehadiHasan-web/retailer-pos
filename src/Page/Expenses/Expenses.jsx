@@ -154,6 +154,12 @@ const Expenses = () => {
     setPostPerPage(parseInt(e.target.value));
   };
 
+
+const getTotalAmount = currentPosts.reduce((acc, item)=> parseInt(acc) + parseInt(item.amount), 0);
+
+
+
+
   return (
     <div>
       <div>
@@ -275,7 +281,7 @@ const Expenses = () => {
                   <th className="text-black">Serial Number</th>
                   <th className="text-black">Category</th>
                   <th className="text-black"> Date</th>
-                  <th className="text-black"> Amount</th>
+                  <th className="text-black"> Total {getTotalAmount} Tk</th>
                 </tr>
               </tfoot>
             </table>
