@@ -29,7 +29,6 @@ function Navbar() {
             {/* <li className="text-xl opacity-80 cursor-pointer">
               <button className="btn" onClick={() => changeLanguage()}>{lang ? "En" : "Bn"}</button>
             </li> */}
-            </li> */}
           </ul>
           <div className="avatar">
             <div className="w-10 rounded-full">
