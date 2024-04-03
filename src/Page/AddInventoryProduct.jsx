@@ -33,19 +33,12 @@ function AddInventoryProduct() {
     e.preventDefault();
     const form = e.target;
     const category = parseInt(form.category.value);
-    const itemName = parseInt(form.itemName.value);
-    const otherCost = parseInt(form.otherCost.value);
-    const inventoryCost = parseInt(form.inventoryCost.value);
-    const transportationCost = parseInt(form.transportationCost.value);
+    const itemName = form.itemName.value;
+    const otherCost = parseFloat(form.otherCost.value);
+    const inventoryCost = parseFloat(form.inventoryCost.value);
+    const transportationCost = parseFloat(form.transportationCost.value);
     const unit = parseInt(form.unit.value);
-    // const data = {
-    //   category,
-    //   itemName,
-    //   otherCost,
-    //   inventoryCost,
-    //   transportationCost,
-    //   unit,
-    // };
+
     const formData = new FormData();
     formData.append('category', category);
     formData.append('itemName', itemName);

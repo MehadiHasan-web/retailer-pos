@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Form.css";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -10,15 +10,18 @@ import { AuthContext } from "./../../../../Providers/AuthProvider";
 
 
 
-const Form = ({ wishlist, calculateTotalPrice, clearData }) => {
+const Form = ({ wishlist, clearData }) => {
   const user_id = localStorage.getItem("user_id");
   const { baseURL, accountURL } = useContext(AuthContext);
-  const [total, setTotal] = useState(calculateTotalPrice)
   const token = localStorage.getItem("token");
+  const subTotal = wishlist.reduce((acc, item) => parseInt(acc) + (parseFloat(item.price) * parseFloat(item.quantity)), 0);
+  const [total, setTotal] = useState('');
 
+  useEffect(() => {
+    setTotal(parseFloat(subTotal))
+  }, [subTotal])
 
-
-
+  // send data to server
   async function sendData(finalArray) {
     try {
       const response = await axios.post(`https://rpos.pythonanywhere.com/api/v1/sales/`, finalArray, {
@@ -42,18 +45,23 @@ const Form = ({ wishlist, calculateTotalPrice, clearData }) => {
     const userInfo = { name, phone_number, address };
 
 
-    const vat = parseInt(calculateTotalPrice) % parseInt(form.vat.value);
-    const tax = parseInt(calculateTotalPrice) % parseInt(form.Tax.value);
+    // const vat = parseInt(calculateTotalPrice) % parseInt(form.vat.value);
+    // const tax = parseInt(calculateTotalPrice) % parseInt(form.Tax.value);
     const discount = parseInt(form.discount.value);
     const deliveryCost = parseInt(form.delivery.value);
     const total = parseInt(form.total.value);
     // const totalAmount = calculateTotalPrice - vat - tax - discount - deliveryCost;
-    setTotal(total);
+    setDiscount(total);
     const products = wishlist.map(item => ({ id: item.id, quantity: item.quantity, size: item.size }))
 
-    const finalArray = { customer: userInfo, saleitems: products, vat_percentage: parseInt(vat), tax_percentage: parseInt(tax), discount_percentage: parseInt(discount), delivery_cost: parseInt(deliveryCost), total: parseInt(total), subtotal: parseInt(0) }
+    // const finalArray = { customer: userInfo, saleitems: products, vat_percentage: parseInt(vat), tax_percentage: parseInt(tax), discount_percentage: parseInt(discount), delivery_cost: parseInt(deliveryCost), total: parseInt(total), subtotal: parseInt(0) }
+    const finalArray = {
+      customer: userInfo, saleitems: products, discount_percentage: parseInt(discount), delivery_cost: parseInt(
 
-    if (wishlist.length > 0 && userInfo) {
+      ), total: parseInt(total), subtotal: parseInt(0)
+    }
+
+    if (wishlist.length > 0) {
       sendData(finalArray)
         .then((result) => {
           console.log('Success:', result);
@@ -72,6 +80,24 @@ const Form = ({ wishlist, calculateTotalPrice, clearData }) => {
 
   };
 
+  // calculate discount 
+  const calculateDiscount = (event) => {
+    const discount = event.target.value;
+    const totalAmount = parseFloat(total) - parseFloat(discount);
+    setTotal(totalAmount);
+  };
+
+  // calculate delivery cost 
+  const calculateDeliveryCost = (event) => {
+    const deliveryCost = event.target.value;
+    console.log('delivery cost:' + deliveryCost)
+    const totalAmount = parseFloat(total) + parseFloat(deliveryCost);
+    console.log('delivery totalAmount:' + totalAmount)
+    setTotal(totalAmount);
+    console.log('total :' + total)
+  };
+
+
   return (
     <div>
       <div className="collapse bg-slate-200 collapse-open mt-5">
@@ -82,8 +108,8 @@ const Form = ({ wishlist, calculateTotalPrice, clearData }) => {
               <div className=" ">
                 <h2 className="text-2xl font-semibold ">Summary</h2>
                 <p className="flex justify-between mt-3 ">
-                  <span>Subtotal</span>{" "}
-                  <span className="font-bold">TK {calculateTotalPrice}</span>
+                  <span>Subtotal</span>
+                  <span className="font-bold">TK {subTotal}</span>
                 </p>
                 {/* <p className="flex justify-between mt-3 ">
                   <span>Vat</span>
@@ -95,16 +121,16 @@ const Form = ({ wishlist, calculateTotalPrice, clearData }) => {
                 </p> */}
                 <p className="flex justify-between mt-3 ">
                   <span>Discount</span>
-                  <span className="font-bold">TK <input name="discount" className=" w-14 bg-slate-50 shadow-inner rounded text-end" /></span>
+                  <span className="font-bold">TK <input type="number" onChange={calculateDiscount} name="discount" className=" w-20 bg-slate-50 shadow-inner rounded text-end" /></span>
                 </p>
                 <p className="flex justify-between mt-3 ">
                   <span>Delivery Cost</span>
-                  <span className="font-bold">TK <input name="delivery" className=" w-14 bg-slate-50 shadow-inner rounded text-end" /></span>
+                  <span className="font-bold">TK <input type="number" onChange={calculateDeliveryCost} name="delivery" className=" w-20 bg-slate-50 shadow-inner rounded text-end" /></span>
                 </p>
                 <p className="border-b-2 border-dashed border-black mt-2"></p>
                 <p className="flex justify-between mt-3 ">
                   <span>Total</span>
-                  <span className="font-bold">TK <input name="total" defaultValue={calculateTotalPrice} className=" w-14 bg-slate-50 shadow-inner rounded text-end" /></span>
+                  <span className="font-bold">TK  <input name="total" type="number" defaultValue={subTotal} className=" w-24 bg-slate-50 shadow-inner rounded text-end" /></span>
                 </p>
               </div>
               <h3 className="mt-5"></h3>

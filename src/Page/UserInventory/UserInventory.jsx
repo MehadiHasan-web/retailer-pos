@@ -59,8 +59,8 @@ const UserInventory = () => {
       unit: unit,
       transportationCost: transportationCost,
       otherCost: otherCost,
-      inventoryCost:inventoryCost,
-      productCost:productCost,
+      inventoryCost: inventoryCost,
+      productCost: productCost,
     }
     console.log(updateData)
     axios.put(`https://rpos.pythonanywhere.com/api/v1/inventory/${id}/`, updateData, {
@@ -76,7 +76,7 @@ const UserInventory = () => {
       });
   }
 
-  
+
 
   // category create 
   const handleCategoryData = (e) => {
@@ -160,11 +160,11 @@ const UserInventory = () => {
         {
           (filteredProducts.length > 0 ? filteredProducts : card).map((data, index) => <div key={index} className=" p-2 flex flex-col justify-between rounded shadow-lg bg-slate-50">
             {
-              data.image ? <img className='w-full h-20 sm:h-24 md:h-20 lg:h-28 rounded' src={data.image}></img> : <img src={blankImg} className='w-full h-20 sm:h-24 md:h-20 lg:h-28 rounded'></img>
+              data.invImage ? <img className='w-full h-32 sm:h-24 md:h-20 lg:h-32 rounded' src={'https://rpos.pythonanywhere.com/' + data?.invImage}></img> : <img src={blankImg} className='w-full h-20 sm:h-24 md:h-20 lg:h-28 rounded'></img>
             }
             <div className="p-2">
               <h2 className="text-sm sm:text-base md:text-sm lg:text-sm font-semibold mx-auto my-1 md:my-1 lg:my-2">{data.itemName}</h2>
-              <p className="text-sm sm:text-base md:text-sm">Stock : {data.unit ||0}</p>
+              <p className="text-sm sm:text-base md:text-sm">Stock : {data.unit || 0}</p>
               <form onSubmit={addStockData} className="space-y-1">
                 <div className="flex justify-between items-center">
                   <span>Transportation Cost:</span>
@@ -172,7 +172,7 @@ const UserInventory = () => {
                 </div>
                 <div className="flex justify-between items-center">
                   <span>Other Cost:</span>
-                  <input name="otherCost" type="text" defaultValue={data.otherCost|| 0} placeholder="Type here" className="input input-bordered input-sm w-28" />
+                  <input name="otherCost" type="text" defaultValue={data.otherCost || 0} placeholder="Type here" className="input input-bordered input-sm w-28" />
                 </div>
                 <div className="flex justify-between items-center">
                   <span>Inventory Cost:</span>
@@ -188,7 +188,7 @@ const UserInventory = () => {
                 </div>
 
                 <input name="id" type="number" value={data.id} className="hidden" />
-                <button type="submit"  className="bg-green-500 text-white  w-full my-2 btn btn-md uppercase rounded-full" >Update</button>
+                <button type="submit" className="bg-green-500 text-white  w-full my-2 btn btn-md uppercase rounded-full" >Update</button>
               </form>
 
             </div>

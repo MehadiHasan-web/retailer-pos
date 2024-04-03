@@ -8,7 +8,7 @@ import {
 import { useCallback, useContext, useEffect, useState } from "react";
 import "react-tabs/style/react-tabs.css";
 import { GrSubtractCircle } from "react-icons/gr";
-import bottol from "../../../../../public/bottol.png";
+import blankImage from "../../../../../public/bottol.png";
 import { FaCirclePlus } from "react-icons/fa6";
 import { AuthContext } from "../../../../Providers/AuthProvider";
 import { MdDelete } from "react-icons/md";
@@ -122,8 +122,9 @@ const Home = () => {
         const newData = {
           id: product.id,
           name: product.itemName,
+          image: product.invImage,
           quantity: 1,
-          price: product?.productCost || 10,
+          price: product?.productCost || 0,
           size: size
         };
         setWishlist([...wishlist, newData]);
@@ -131,8 +132,9 @@ const Home = () => {
         const newData = {
           id: product.id,
           name: product.itemName,
+          image: product.invImage,
           quantity: parseInt(quantity),
-          price: product?.productCost || 10,
+          price: product?.productCost || 0,
           size: size,
         };
         setWishlist([...wishlist, newData]);
@@ -191,7 +193,7 @@ const Home = () => {
   //  Total price show
   function calculateTotalPrice() {
     return wishlist.reduce(
-      (total, product) => total + product.price * product.quantity,
+      (total, product) => total + (parseFloat(product.price) * parseFloat(product.quantity)),
       0
     );
   }
@@ -293,13 +295,13 @@ const Home = () => {
                           <figure>
                             <img
                               className="w-68 h-40"
-                              src={'https://rpos.pythonanywhere.com/' + product?.invImag}
-                              alt="Movie"
+                              src={'https://rpos.pythonanywhere.com/' + product?.invImage ? 'https://rpos.pythonanywhere.com/' + product?.invImage : blankImage}
+                              alt="Image"
                             />
                           </figure>
                         </div>
                         <div className="w-3/4">
-                          <h2 className="text-xl font-bold">{product.itemName}</h2>
+                          <h2 className="text-xl font-bold">{product?.itemName}</h2>
                           {/* <p className="text-xs">{product.description}</p> */}
                           <ul className="flex items-start justify-between mt-2">
                             <li>
@@ -311,7 +313,7 @@ const Home = () => {
                             <li>
                               <p className="text-sm">Stock</p>
                               <p className="text-base font-bold">
-                                {product.unit} Available
+                                {product?.unit} Available
                               </p>
                             </li>
                           </ul>
@@ -479,8 +481,8 @@ const Home = () => {
                   >
                     <div className="w-1/4 p-2 bg-slate-100 rounded-lg">
                       <img
-                        src="https://media.istockphoto.com/id/1304186549/vector/automatic-spring-ballpoint-pen-in-black-case-vector-illustration.jpg?s=612x612&w=0&k=20&c=R_yPawneqKX8J-NeiKmNXuYx36tCoPSCFEHx0Bd4dEg="
-                        alt=""
+                        src={'https://rpos.pythonanywhere.com/' + item?.image}
+                        alt="Image"
                         className="w-3/4 mx-auto "
                       />
                     </div>
@@ -523,7 +525,7 @@ const Home = () => {
           </div>
 
           <div className="">
-            <Form wishlist={wishlist} clearData={clearData} setWishlist={setWishlist} calculateTotalPrice={calculateTotalPrice()}></Form>
+            <Form wishlist={wishlist} clearData={clearData} setWishlist={setWishlist}></Form>
           </div>
         </div>
       </div>
@@ -562,7 +564,7 @@ const Home = () => {
 
               </div>
               <p className="text-bold font-medium my-2">
-                Detail Prescription{" "}
+                Detail Prescription
                 <span className="text-green-500">{wishlist.length}</span>
               </p>
               <div className="bg-slate-100 rounded-lg p-4 w-full h-32 overflow-auto touch-auto">
@@ -575,7 +577,7 @@ const Home = () => {
                       key={item.id}
                       className="font-bold flex justify-between mt-2"
                     >
-                      <h5>{item.name}</h5>{" "}
+                      <h5>{item.name}</h5>
                       <span className="text-slate-500 text-sm">
                         ${item.price}
                       </span>
