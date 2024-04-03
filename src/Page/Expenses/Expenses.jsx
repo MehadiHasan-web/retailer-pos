@@ -4,10 +4,7 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import { ToastContainer, toast } from "react-toastify";
 
 const Expenses = () => {
-  const [startDate, setStartDate] = useState(new Date());
   const [userData, setUserData] = useState([]);
-
-  const [selectedOption, setSelectedOption] = useState(1); // 1 == all data, 2==approve, 3==pending
   const [filteredData, setFilteredData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage, setPostPerPage] = useState(20);
@@ -49,6 +46,7 @@ const Expenses = () => {
       .catch((error) => console.error("Error fetching data:", error));
   }, [baseURL]);
   console.log(userData)
+
   // category get 
   useEffect(() => {
     axios.get(`https://rpos.pythonanywhere.com/api/v1/expense-categories/`, {
@@ -141,7 +139,7 @@ const Expenses = () => {
     setFilteredData(filteredResults);
 
 
-  }, [selectedOption, userData, searchText,]);
+  }, [userData, searchText,]);
 
   // Handle search input change
   const handleSearchInputChange = (e) => {
@@ -155,10 +153,7 @@ const Expenses = () => {
   };
 
 
-const getTotalAmount = currentPosts.reduce((acc, item)=> parseInt(acc) + parseInt(item.amount), 0);
-
-
-
+  const getTotalAmount = currentPosts.reduce((acc, item) => parseInt(acc) + parseInt(item.amount), 0);
 
   return (
     <div>
