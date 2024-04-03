@@ -29,6 +29,7 @@ function AddInventoryProduct() {
     setSelectedFile(file);
   };
 
+  // products add 
   const handleAddInventoryProduct = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -65,8 +66,8 @@ function AddInventoryProduct() {
   return (
     <div>
       <div className="bg-[#d9efee] h-screen  flex justify-center items-center ">
-        <form onSubmit={handleAddInventoryProduct} className="w-2/4" encType="">
-          <div className="  border bg-white rounded-xl shadow-xl  w-full flex w-full justify-center flex-col items-center p-10 ">
+        <form onSubmit={handleAddInventoryProduct} className=" lg:w-2/4 sm:w-full" encType="">
+          <div className="  border bg-white rounded-xl shadow-xl  w-full flex  justify-center flex-col items-center p-10  ">
             <h1 className=" text-2xl font-bold mb-4">Product Entry</h1>
 
             <div className="form-control w-full">
@@ -97,12 +98,24 @@ function AddInventoryProduct() {
               />
             </div>
             <div className="form-control w-full">
-              <label htmlFor="itemName">Other Cost</label>
+              <label htmlFor="unit">Unit</label>
               <input
-                name="otherCost"
-                id="otherCost"
+                name="unit"
+                id="unit"
                 type="text"
-                placeholder="Other Cost"
+                placeholder="Unit"
+                className="input input-bordered  w-full my-2 "
+              />
+            </div>
+
+            <div className="form-control w-full">
+              <label htmlFor="inventoryCost">Inventory Cost</label>
+
+              <input
+                type="text"
+                name="inventoryCost"
+                id="inventoryCost"
+                placeholder="Cost"
                 className="input input-bordered  w-full my-2 "
               />
             </div>
@@ -117,26 +130,17 @@ function AddInventoryProduct() {
               />
             </div>
             <div className="form-control w-full">
-              <label htmlFor="unit">Unit</label>
+              <label htmlFor="itemName">Other Cost</label>
               <input
-                name="unit"
-                id="unit"
+                name="otherCost"
+                id="otherCost"
                 type="text"
-                placeholder="Unit"
+                placeholder="Other Cost"
                 className="input input-bordered  w-full my-2 "
               />
             </div>
-            <div className="form-control w-full">
-              <label htmlFor="inventoryCost">Inventory Cost</label>
 
-              <input
-                type="text"
-                name="inventoryCost"
-                id="inventoryCost"
-                placeholder="Cost"
-                className="input input-bordered  w-full my-2 "
-              />
-            </div>
+
             <div className="form-control w-full">
               <label htmlFor="invImage">Product Image</label>
               <input type="file" onChange={handleFileChange} className="file-input file-input-bordered file-input-accent w-full " />

@@ -45,11 +45,11 @@ const router = createBrowserRouter([
         element: <PrivateRoute><Invoice></Invoice></PrivateRoute>
       },
       {
-        path: 'sales/sales-request/sales-entry',
+        path: '/sales/sales-request/sales-entry',
         element: <PrivateRoute><Home></Home></PrivateRoute>
       },
       {
-        path: 'sales/sales-request',
+        path: '/sales/sales-request',
         element: <PrivateRoute><SalesRequest /></PrivateRoute>
       },
       {

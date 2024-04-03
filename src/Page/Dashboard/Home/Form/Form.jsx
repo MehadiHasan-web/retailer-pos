@@ -51,7 +51,7 @@ const Form = ({ wishlist, clearData }) => {
     const deliveryCost = parseInt(form.delivery.value);
     const total = parseInt(form.total.value);
     // const totalAmount = calculateTotalPrice - vat - tax - discount - deliveryCost;
-    setDiscount(total);
+
     const products = wishlist.map(item => ({ id: item.id, quantity: item.quantity, size: item.size }))
 
     // const finalArray = { customer: userInfo, saleitems: products, vat_percentage: parseInt(vat), tax_percentage: parseInt(tax), discount_percentage: parseInt(discount), delivery_cost: parseInt(deliveryCost), total: parseInt(total), subtotal: parseInt(0) }
@@ -130,7 +130,7 @@ const Form = ({ wishlist, clearData }) => {
                 <p className="border-b-2 border-dashed border-black mt-2"></p>
                 <p className="flex justify-between mt-3 ">
                   <span>Total</span>
-                  <span className="font-bold">TK  <input name="total" type="number" defaultValue={subTotal} className=" w-24 bg-slate-50 shadow-inner rounded text-end" /></span>
+                  <span className="font-bold">TK  <input name="total" defaultValue={subTotal} className=" w-24 bg-slate-50 shadow-inner rounded text-end" /></span>
                 </p>
               </div>
               <h3 className="mt-5"></h3>
