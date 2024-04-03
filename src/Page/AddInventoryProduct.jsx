@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function AddInventoryProduct() {
   const [category, setCategory] = useState([]);
   const token = localStorage.getItem("token");
   const [selectedFile, setSelectedFile] = useState(null);
-
+  const navigate = useNavigate();
 
   // get category
   useEffect(() => {
@@ -57,6 +58,7 @@ function AddInventoryProduct() {
       .then((response) => {
         console.log("Response:", response.data);
         toast.success("Successfully created");
+        navigate("/management");
       })
       .catch((error) => {
         console.error("Error:", error);
