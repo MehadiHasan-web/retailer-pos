@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 
 function AddInventoryProduct() {
   const [category, setCategory] = useState([]);
@@ -62,7 +62,8 @@ function AddInventoryProduct() {
       })
       .then((response) => {
         console.log("Response:", response.data);
-        toast.success("Successfully created");
+        toast.success("Successfully Product add");
+        form.reset()
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -157,6 +158,7 @@ function AddInventoryProduct() {
           </div>
         </form>
       </div>
+      <ToastContainer></ToastContainer>
     </div>
   );
 }

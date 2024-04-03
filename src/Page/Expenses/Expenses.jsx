@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { ToastContainer, toast } from "react-toastify";
+import { Link } from "react-router-dom";
+import { FaRegEye } from "react-icons/fa";
 
 const Expenses = () => {
   const [startDate, setStartDate] = useState(new Date());
@@ -47,7 +49,7 @@ const Expenses = () => {
       .then((res) => res.data)
       .then((data) => setUserData(data))
       .catch((error) => console.error("Error fetching data:", error));
-  }, [baseURL]);
+  },[]);
   console.log(userData)
   // category get 
   useEffect(() => {
@@ -249,6 +251,8 @@ const getTotalAmount = currentPosts.reduce((acc, item)=> parseInt(acc) + parseIn
                   <th className="text-black">Category</th>
                   <th className="text-black"> Date</th>
                   <th className="text-black"> Amount</th>
+                  <th className="text-black"> Show</th>
+
                 </tr>
               </thead>
               <tbody>
@@ -271,6 +275,9 @@ const getTotalAmount = currentPosts.reduce((acc, item)=> parseInt(acc) + parseIn
                     <td>
                       <p>{Math.floor(data?.amount)} TK</p>
                     </td>
+                    <td>
+                      <p><Link to={`${data?.id}`}><FaRegEye className="text-green-500" /></Link></p>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -282,6 +289,7 @@ const getTotalAmount = currentPosts.reduce((acc, item)=> parseInt(acc) + parseIn
                   <th className="text-black">Category</th>
                   <th className="text-black"> Date</th>
                   <th className="text-black"> Total {getTotalAmount} Tk</th>
+                  <th className="text-black"> Show </th>
                 </tr>
               </tfoot>
             </table>

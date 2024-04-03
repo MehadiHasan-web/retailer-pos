@@ -15,6 +15,7 @@ import Expenses from "../Page/Expenses/Expenses";
 import Scanner from "../Page/Scanner";
 import AddInventoryProduct from "../Page/AddInventoryProduct";
 import NotAllow from "../Page/NotAllow/NotAllow";
+import ExpensesDetails from "../Page/Expenses/ExpensesDetails";
 
 
 const router = createBrowserRouter([
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
       {
         path: '/expenses',
         element: <PrivateRoute><Expenses></Expenses></PrivateRoute>
+      },
+      {
+        path: '/expenses/:id',
+        element: <PrivateRoute><ExpensesDetails></ExpensesDetails></PrivateRoute>
       },
       {
         path: '/user-profile',

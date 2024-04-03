@@ -8,7 +8,7 @@ function Navbar() {
   const userToken = localStorage.getItem('token')
   // const userDesignation = localStorage.getItem('designation')
 
-  const { searchFun, changeLanguage, lang, user } = useContext(AuthContext)
+  const {  user } = useContext(AuthContext)
 
   return (
     <>
@@ -65,9 +65,9 @@ function Navbar() {
             <li className="text-xl opacity-80 cursor-pointer">
               <HiOutlineBell className="text-2xl"></HiOutlineBell>
             </li>
-            <li className="text-xl opacity-80 cursor-pointer">
+            {/* <li className="text-xl opacity-80 cursor-pointer">
               <button className="btn" onClick={() => changeLanguage()}>{lang ? "En" : "Bn"}</button>
-            </li>
+            </li> */}
           </ul>
           <div className="avatar">
             <div className="w-10 rounded-full">
