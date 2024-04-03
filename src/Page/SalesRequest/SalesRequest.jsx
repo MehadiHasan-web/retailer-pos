@@ -25,7 +25,9 @@ const SalesRequest = () => {
   const lastPostIndex = currentPage * postPerPage;
   const firstPostIndex = lastPostIndex - postPerPage;
   const currentPosts = filteredData.slice(firstPostIndex, lastPostIndex);
-  const contentToPrint = useRef(null);
+  const contentToPrintQR = useRef(null);
+  const contentToPrintCustomer = useRef(null);
+  const contentToPrintBR = useRef(null);
   const [URL, setUrl] = useState('');
   useEffect(() => {
     setUrl(window.location.href)
@@ -100,8 +102,17 @@ const SalesRequest = () => {
   };
 
   // qr code print 
-  const handlePrintClick = useReactToPrint({
-    content: () => contentToPrint.current,
+  const handlePrintClickQR = useReactToPrint({
+    content: () => contentToPrintQR.current,
+  });
+
+  // qr invoice customer code print 
+  const handlePrintCustomer = useReactToPrint({
+    content: () => contentToPrintCustomer.current,
+  });
+  // barcode  code print 
+  const handlePrintBarcode = useReactToPrint({
+    content: () => contentToPrintBR.current,
   });
 
 
@@ -254,13 +265,13 @@ const SalesRequest = () => {
                           <h4 className="font-bold text-md text-center"> {data.customer?.phone_number}</h4>
                           <div className="flex justify-center">
                             {/* qrcode  */}
-                            <div ref={contentToPrint} className='p-2 mb-2'>
+                            <div ref={contentToPrintQR} className='p-2 mb-2'>
                               <QRCodeSVG size={140} value={data.id} className="p-2 border" />
                             </div>
                           </div>
 
                           <div className="float-right flex gap-2">
-                            <button onClick={() => { handlePrintClick() }} className="btn btn-active btn-ghost btn-sm">Print <PiPrinterThin /></button>
+                            <button onClick={() => { handlePrintClickQR() }} className="btn btn-active btn-ghost btn-sm">Print <PiPrinterThin /></button>
                             <form method="dialog">
                               <button className="btn btn-sm">Close</button>
                             </form>
@@ -282,13 +293,13 @@ const SalesRequest = () => {
                           <h4 className="font-bold text-md text-center"> {data.customer?.phone_number}</h4>
                           <div className="flex justify-center">
                             {/* qrcode  */}
-                            <div ref={contentToPrint} className='p-2 mb-2'>
+                            <div ref={contentToPrintCustomer} className='p-2 mb-2'>
                               <QRCodeSVG size={140} value={URL + '/' + data.id} className="p-2 border" />
                             </div>
                           </div>
 
                           <div className="float-right flex gap-2">
-                            <button onClick={() => { handlePrintClick() }} className="btn btn-active btn-ghost btn-sm">Print <PiPrinterThin /></button>
+                            <button onClick={() => { handlePrintCustomer() }} className="btn btn-active btn-ghost btn-sm">Print <PiPrinterThin /></button>
                             <form method="dialog">
                               <button className="btn btn-sm">Close</button>
                             </form>
@@ -309,13 +320,13 @@ const SalesRequest = () => {
                           <h4 className="font-bold text-md text-center"> {data.customer?.phone_number}</h4>
                           <div className="flex justify-center">
                             {/* barcode  */}
-                            <div ref={contentToPrint} className='p-2 mb-2'>
+                            <div ref={contentToPrintBR} className='p-2 mb-2'>
                               <Barcode value={data.id} className="rounded w-64 border" />
                             </div>
                           </div>
 
                           <div className="float-right flex gap-2">
-                            <button onClick={() => { handlePrintClick() }} className="btn btn-active btn-ghost btn-sm">Print <PiPrinterThin /></button>
+                            <button onClick={() => { handlePrintBarcode() }} className="btn btn-active btn-ghost btn-sm">Print <PiPrinterThin /></button>
                             <form method="dialog">
                               <button className="btn btn-sm">Close</button>
                             </form>
