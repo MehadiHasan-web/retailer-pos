@@ -8,6 +8,7 @@ import { FaSquareCaretRight, FaSquareCaretLeft } from "react-icons/fa6";
 import { MdInventory } from "react-icons/md";
 // import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { GiExpense } from "react-icons/gi";
+import { IoMdSettings } from "react-icons/io";
 // import Sales from "../Sales/Sales";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 
@@ -167,6 +168,20 @@ const DesktopSidebar = ({ open, setOpen }) => {
                 <IoPersonCircleSharp className="text-green-500"></IoPersonCircleSharp>
                 <span className=" font-semibold text-slate-200">
                   Management
+                </span>
+              </Link>
+            }
+          </li>
+          <li>
+            {
+              open ? <Link to="/settings" className="flex justify-center items-center">
+                <IoMdSettings className="text-green-500 text-2xl"></IoMdSettings></Link> : <Link
+                  className="flex justify-start items-center gap-2"
+                  to="/settings"
+                >
+                <IoMdSettings className="text-green-500"></IoMdSettings>
+                <span className=" font-semibold text-slate-200">
+                  Settings
                 </span>
               </Link>
             }
