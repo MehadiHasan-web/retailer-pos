@@ -159,9 +159,9 @@ const UserInventory = () => {
       <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-1 sm:gap-2 md:gap-1 lg:gap-2 mt-5">
         {
           (filteredProducts.length > 0 ? filteredProducts : card).map((data, index) => <div key={index} className=" p-2 flex flex-col justify-between rounded shadow-lg bg-slate-50">
-            {
-              data.invImage ? <img className='w-full h-32 sm:h-24 md:h-20 lg:h-32 rounded' src={'https://rpos.pythonanywhere.com/' + data?.invImage}></img> : <img src={blankImg} className='w-full h-20 sm:h-24 md:h-20 lg:h-28 rounded'></img>
-            }
+
+            <img className='w-full h-32 sm:h-24 md:h-20 lg:h-32 rounded' src={'https://rpos.pythonanywhere.com/' + data?.invImage}></img>
+
             <div className="p-2">
               <h2 className="text-sm sm:text-base md:text-sm lg:text-sm font-semibold mx-auto my-1 md:my-1 lg:my-2">{data.itemName}</h2>
               <p className="text-sm sm:text-base md:text-sm">Stock : {data.unit || 0}</p>
