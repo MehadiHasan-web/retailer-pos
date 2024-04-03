@@ -33,7 +33,7 @@ function AddInventoryProduct() {
     e.preventDefault();
     const form = e.target;
     const category = parseInt(form.category.value);
-    const itemName = parseInt(form.itemName.value);
+    const itemName = form.itemName.value;
     const otherCost = parseInt(form.otherCost.value);
     const inventoryCost = parseInt(form.inventoryCost.value);
     const transportationCost = parseInt(form.transportationCost.value);

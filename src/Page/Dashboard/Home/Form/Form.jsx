@@ -42,8 +42,8 @@ const Form = ({ wishlist, calculateTotalPrice, clearData }) => {
     const userInfo = { name, phone_number, address };
 
 
-    const vat = parseInt(calculateTotalPrice) % parseInt(form.vat.value);
-    const tax = parseInt(calculateTotalPrice) % parseInt(form.Tax.value);
+    // const vat = parseInt(calculateTotalPrice) % parseInt(form.vat.value);
+    // const tax = parseInt(calculateTotalPrice) % parseInt(form.Tax.value);
     const discount = parseInt(form.discount.value);
     const deliveryCost = parseInt(form.delivery.value);
     const total = parseInt(form.total.value);
@@ -51,9 +51,10 @@ const Form = ({ wishlist, calculateTotalPrice, clearData }) => {
     setTotal(total);
     const products = wishlist.map(item => ({ id: item.id, quantity: item.quantity, size: item.size }))
 
-    const finalArray = { customer: userInfo, saleitems: products, vat_percentage: parseInt(vat), tax_percentage: parseInt(tax), discount_percentage: parseInt(discount), delivery_cost: parseInt(deliveryCost), total: parseInt(total), subtotal: parseInt(0) }
+    // const finalArray = { customer: userInfo, saleitems: products, vat_percentage: parseInt(vat), tax_percentage: parseInt(tax), discount_percentage: parseInt(discount), delivery_cost: parseInt(deliveryCost), total: parseInt(total), subtotal: parseInt(0) }
+    const finalArray = { customer: userInfo, saleitems: products, discount_percentage: parseInt(discount), delivery_cost: parseInt(deliveryCost), total: parseInt(total), subtotal: parseInt(0) }
 
-    if (wishlist.length > 0 && userInfo) {
+    if (wishlist.length > 0) {
       sendData(finalArray)
         .then((result) => {
           console.log('Success:', result);
