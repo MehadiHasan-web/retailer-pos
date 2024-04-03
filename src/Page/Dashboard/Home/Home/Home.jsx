@@ -8,7 +8,7 @@ import {
 import { useCallback, useContext, useEffect, useState } from "react";
 import "react-tabs/style/react-tabs.css";
 import { GrSubtractCircle } from "react-icons/gr";
-import bottol from "../../../../../public/bottol.png";
+import blankImage from "../../../../../public/bottol.png";
 import { FaCirclePlus } from "react-icons/fa6";
 import { AuthContext } from "../../../../Providers/AuthProvider";
 import { MdDelete } from "react-icons/md";
@@ -122,8 +122,9 @@ const Home = () => {
         const newData = {
           id: product.id,
           name: product.itemName,
+          image: product.invImage,
           quantity: 1,
-          price: product?.productCost || 10,
+          price: product?.productCost || 0,
           size: size
         };
         setWishlist([...wishlist, newData]);
@@ -131,8 +132,9 @@ const Home = () => {
         const newData = {
           id: product.id,
           name: product.itemName,
+          image: product.invImage,
           quantity: parseInt(quantity),
-          price: product?.productCost || 10,
+          price: product?.productCost || 0,
           size: size,
         };
         setWishlist([...wishlist, newData]);
@@ -191,7 +193,7 @@ const Home = () => {
   //  Total price show
   function calculateTotalPrice() {
     return wishlist.reduce(
-      (total, product) => total + product.price * product.quantity,
+      (total, product) => total + (parseFloat(product.price) * parseFloat(product.quantity)),
       0
     );
   }
@@ -293,13 +295,13 @@ const Home = () => {
                           <figure>
                             <img
                               className="w-68 h-40"
-                              src={'https://rpos.pythonanywhere.com/' + product?.invImage}
-                              alt="Movie"
+                              src={'https://rpos.pythonanywhere.com/' + product?.invImage ? 'https://rpos.pythonanywhere.com/' + product?.invImage : blankImage}
+                              alt="Image"
                             />
                           </figure>
                         </div>
                         <div className="w-3/4">
-                          <h2 className="text-xl font-bold">{product.itemName}</h2>
+                          <h2 className="text-xl font-bold">{product?.itemName}</h2>
                           {/* <p className="text-xs">{product.description}</p> */}
                           <ul className="flex items-start justify-between mt-2">
                             <li>
@@ -311,7 +313,7 @@ const Home = () => {
                             <li>
                               <p className="text-sm">Stock</p>
                               <p className="text-base font-bold">
-                                {product.unit} Available
+                                {product?.unit} Available
                               </p>
                             </li>
                           </ul>
@@ -373,27 +375,11 @@ const Home = () => {
                           </div>
                         </div>
                         <div className="flex justify-between items-center mt-2 gap-4">
-                          {/* <div className=" flex items-center justify-center">
-                          <sup className="text-green-600 font-bold">$</sup>
-                          <p className="text-center">
-                            <span className="text-2xl font-bold">
-                              {product.price}
-                            </span>
-                            <span className="text-gray-500">/Bottle</span>
-                          </p>
-                        </div> */}
                           <div className="w-full flex items-center gap-2">
                             <div className="flex-2">
                               <p className="text-lg font-bold" >Price: {product?.productCost ? product?.productCost : 0} TK</p>
                             </div>
                             <ul className=" flex-1 rounded-full w-full">
-                              {/* <li className="flex items-center">
-                              <button
-                                onClick={() => decreaseQuantity(product.id)}
-                              >
-                                <FaCircleMinus className="text-white text-xl"></FaCircleMinus>
-                              </button>
-                            </li> */}
 
                               <li className="w-full">
                                 <input
@@ -401,18 +387,9 @@ const Home = () => {
                                   type="number"
                                   className="p-1 w-full rounded-full text-center bg-slate-200"
                                   min={1}
-                                  max={30}
                                   placeholder="Write Quantity"
                                 />
                               </li>
-                              {/* <li className="flex items-center ">
-                              <button
-                                onClick={() => updateQuantity(product.id)}
-                                className="m-0 p-0"
-                              >
-                                <FaCirclePlus className="text-green-600 text-xl"></FaCirclePlus>
-                              </button>
-                            </li> */}
                             </ul>
                           </div>
                           <button className=" bg-green-500 py-1 font-bold rounded-full w-2/5 text-white">
@@ -479,8 +456,8 @@ const Home = () => {
                   >
                     <div className="w-1/4 p-2 bg-slate-100 rounded-lg">
                       <img
-                        src="https://media.istockphoto.com/id/1304186549/vector/automatic-spring-ballpoint-pen-in-black-case-vector-illustration.jpg?s=612x612&w=0&k=20&c=R_yPawneqKX8J-NeiKmNXuYx36tCoPSCFEHx0Bd4dEg="
-                        alt=""
+                        src={'https://rpos.pythonanywhere.com/' + item?.image}
+                        alt="Image"
                         className="w-3/4 mx-auto "
                       />
                     </div>
@@ -523,14 +500,14 @@ const Home = () => {
           </div>
 
           <div className="">
-            <Form wishlist={wishlist} clearData={clearData} setWishlist={setWishlist} calculateTotalPrice={calculateTotalPrice()}></Form>
+            <Form wishlist={wishlist} clearData={clearData} setWishlist={setWishlist}></Form>
           </div>
         </div>
       </div>
 
       {/* mobile wishlist  */}
       <div
-        className={`block lg:hidden case-in duration-500 w-full h-full fixed top-16 pt-10 bottom-0 z-30 overflow-auto touch-auto bg-slate-200 pb-20 ${open ? "right-2" : "-right-[800px]"
+        className={`block lg:hidden case-in duration-500 w-full h-full fixed top-16  bottom-0 z-30 overflow-auto touch-auto bg-slate-200 pb-20 ${open ? "right-2" : "-right-[800px]"
           }`}
       >
         <div className="fixed top-2/4 -right-6 z-10">
@@ -553,7 +530,7 @@ const Home = () => {
             </span>
           )}
         </div>
-        <div className="pl-12">
+        <div className="">
           <div className=" top-20 p-2 ">
             {/* table section start */}
             <div className=" lg:hidden md:col-span-1 p-4 bg-white ">
@@ -562,7 +539,7 @@ const Home = () => {
 
               </div>
               <p className="text-bold font-medium my-2">
-                Detail Prescription{" "}
+                Detail Prescription
                 <span className="text-green-500">{wishlist.length}</span>
               </p>
               <div className="bg-slate-100 rounded-lg p-4 w-full h-32 overflow-auto touch-auto">
@@ -575,7 +552,7 @@ const Home = () => {
                       key={item.id}
                       className="font-bold flex justify-between mt-2"
                     >
-                      <h5>{item.name}</h5>{" "}
+                      <h5>{item.name}</h5>
                       <span className="text-slate-500 text-sm">
                         ${item.price}
                       </span>
@@ -602,7 +579,7 @@ const Home = () => {
                       >
                         <div className="w-1/4 p-2 bg-slate-100 rounded-lg">
                           <img
-                            src="https://media.istockphoto.com/id/1304186549/vector/automatic-spring-ballpoint-pen-in-black-case-vector-illustration.jpg?s=612x612&w=0&k=20&c=R_yPawneqKX8J-NeiKmNXuYx36tCoPSCFEHx0Bd4dEg="
+                            src={'https://rpos.pythonanywhere.com/' + item?.image}
                             alt=""
                             className="w-3/4 mx-auto "
                           />
