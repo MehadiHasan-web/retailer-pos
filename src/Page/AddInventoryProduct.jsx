@@ -5,6 +5,8 @@ import { toast } from "react-toastify";
 function AddInventoryProduct() {
   const [category, setCategory] = useState([]);
   const token = localStorage.getItem("token");
+  const [selectedFile, setSelectedFile] = useState(null);
+
 
   // get category
   useEffect(() => {
@@ -22,26 +24,41 @@ function AddInventoryProduct() {
       });
   }, []);
 
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedFile(file);
+  };
+
   const handleAddInventoryProduct = (e) => {
     e.preventDefault();
     const form = e.target;
     const category = parseInt(form.category.value);
-    const itemName = form.itemName.value;
-    const otherCost = form.otherCost.value;
-    const inventoryCost = form.inventoryCost.value;
-    const transportationCost = form.transportationCost.value;
-    const unit = form.unit.value;
-    const data = {
-      category,
-      itemName,
-      otherCost,
-      inventoryCost,
-      transportationCost,
-      unit,
-    };
+    const itemName = parseInt(form.itemName.value);
+    const otherCost = parseInt(form.otherCost.value);
+    const inventoryCost = parseInt(form.inventoryCost.value);
+    const transportationCost = parseInt(form.transportationCost.value);
+    const unit = parseInt(form.unit.value);
+    // const data = {
+    //   category,
+    //   itemName,
+    //   otherCost,
+    //   inventoryCost,
+    //   transportationCost,
+    //   unit,
+    // };
+    const formData = new FormData();
+    formData.append('category', category);
+    formData.append('itemName', itemName);
+    formData.append('otherCost', otherCost);
+    formData.append('inventoryCost', inventoryCost);
+    formData.append('transportationCost', transportationCost);
+    formData.append('unit', unit);
+    formData.append('image', selectedFile);
+
     axios
-      .post(`https://rpos.pythonanywhere.com/api/v1/inventory/`, data, {
+      .post(`https://rpos.pythonanywhere.com/api/v1/inventory/`, formData, {
         headers: { Authorization: "token " + token },
+        'Content-Type': 'multipart/form-data',
       })
       .then((response) => {
         console.log("Response:", response.data);
@@ -55,7 +72,7 @@ function AddInventoryProduct() {
   return (
     <div>
       <div className="bg-[#d9efee] h-screen  flex justify-center items-center ">
-        <form onSubmit={handleAddInventoryProduct} className="w-2/4">
+        <form onSubmit={handleAddInventoryProduct} className="w-2/4" encType="">
           <div className="  border bg-white rounded-xl shadow-xl  w-full flex w-full justify-center flex-col items-center p-10 ">
             <h1 className=" text-2xl font-bold mb-4">Product Entry</h1>
 
@@ -129,7 +146,7 @@ function AddInventoryProduct() {
             </div>
             <div className="form-control w-full">
               <label htmlFor="invImage">Product Image</label>
-              <input type="file" className="file-input file-input-bordered file-input-accent w-full " />
+              <input type="file" onChange={handleFileChange} className="file-input file-input-bordered file-input-accent w-full " />
             </div>
             <button
               type="submit"

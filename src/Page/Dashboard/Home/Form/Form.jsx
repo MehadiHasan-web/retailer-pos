@@ -42,11 +42,11 @@ const Form = ({ wishlist, calculateTotalPrice, clearData }) => {
     const userInfo = { name, phone_number, address };
 
 
-    const vat =calculateTotalPrice % parseInt(form.vat.value);
-    const tax =calculateTotalPrice % parseInt(form.Tax.value);
-    const discount = form.discount.value;
-    const deliveryCost = form.delivery.value;
-    const total = form.total.value;
+    const vat = parseInt(calculateTotalPrice) % parseInt(form.vat.value);
+    const tax = parseInt(calculateTotalPrice) % parseInt(form.Tax.value);
+    const discount = parseInt(form.discount.value);
+    const deliveryCost = parseInt(form.delivery.value);
+    const total = parseInt(form.total.value);
     // const totalAmount = calculateTotalPrice - vat - tax - discount - deliveryCost;
     setTotal(total);
     const products = wishlist.map(item => ({ id: item.id, quantity: item.quantity, size: item.size }))
