@@ -8,15 +8,17 @@ const Settings = () => {
         <div className='space-y-5'>
           <LuArrowLeft className='text-xl sm:text-2xl md:text-3xl lg:text-4xl'></LuArrowLeft>
           <h4 className='text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold'>Settings</h4>
-          <div className='shadow-xl'>
+          <div className='shadow-xl space-y-1'>
             <div className="collapse collapse-arrow bg-white rounded-b-none">
               <input type="radio" name="my-accordion-2" defaultChecked /> 
               <div className="collapse-title text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium">
                 Discount Set
               </div>
               <div className="collapse-content"> 
-                <p className='text-base sm:text-lg md:text-xl'>Item1</p>
-                <p className='text-base sm:text-lg md:text-xl'>Item1</p>
+                <form className='sm:flex items-center gap-2'>
+                  <input type="text" placeholder="Type here" className="input input-bordered w-full" />
+                <input type="submit" value="Save" className="btn btn-neutral mt-1 sm:mt-0 w-full sm:w-auto" />
+                </form>
               </div>
             </div>
             <div className="collapse collapse-arrow bg-white rounded-none">
@@ -25,8 +27,10 @@ const Settings = () => {
               Profile Info Change
               </div>
               <div className="collapse-content"> 
-                <p className='text-base sm:text-lg md:text-xl'>Item1</p>
-                <p className='text-base sm:text-lg md:text-xl'>Item1</p>
+                <form className='sm:flex items-center gap-2'>
+                  <input type="text" placeholder="Type here" className="input input-bordered w-full" />
+                <input type="submit" value="Save" className="btn btn-neutral mt-1 sm:mt-0 w-full sm:w-auto" />
+                </form>
               </div>
             </div>
             <div className="collapse collapse-arrow bg-white rounded-none">
@@ -35,8 +39,10 @@ const Settings = () => {
               Password Change Option (1)
               </div>
               <div className="collapse-content"> 
-                <p className='text-base sm:text-lg md:text-xl'>Item1</p>
-                <p className='text-base sm:text-lg md:text-xl'>Item1</p>
+                <form className='sm:flex items-center gap-2'>
+                  <input type="text" placeholder="Type here" className="input input-bordered w-full" />
+                <input type="submit" value="Save" className="btn btn-neutral mt-1 sm:mt-0 w-full sm:w-auto" />
+                </form>
               </div>
             </div>
             <div className="collapse collapse-arrow bg-white rounded-t-none">
@@ -45,8 +51,10 @@ const Settings = () => {
               Tex Set
               </div>
               <div className="collapse-content"> 
-                <p className='text-base sm:text-lg md:text-xl'>Item1</p>
-                <p className='text-base sm:text-lg md:text-xl'>Item1</p>
+                <form className='sm:flex items-center gap-2'>
+                  <input type="text" placeholder="Type here" className="input input-bordered w-full" />
+                <input type="submit" value="Save" className="btn btn-neutral mt-1 sm:mt-0 w-full sm:w-auto" />
+                </form>
               </div>
             </div>
           </div>

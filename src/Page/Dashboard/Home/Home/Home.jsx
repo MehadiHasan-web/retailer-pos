@@ -293,7 +293,7 @@ const Home = () => {
                           <figure>
                             <img
                               className="w-68 h-40"
-                              src={'https://rpos.pythonanywhere.com/' + product?.invImage}
+                              src={'https://rpos.pythonanywhere.com/' + product?.invImag}
                               alt="Movie"
                             />
                           </figure>
