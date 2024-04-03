@@ -248,7 +248,7 @@ const SalesRequest = () => {
                           <h3 className="font-bold text-lg text-center"> {data.customer?.name}</h3>
                           <h4 className="font-bold text-md text-center"> {data.customer?.phone_number}</h4>
                           <div className="flex justify-center">
-                            {/* barcode  */}
+                            {/* qrcode  */}
                             <div ref={contentToPrint} className='p-2 mb-2'>
                               <QRCodeSVG size={140} value={data.id} className="p-2 border" />
                             </div>
@@ -277,7 +277,7 @@ const SalesRequest = () => {
                           <div className="flex justify-center">
                             {/* barcode  */}
                             <div ref={contentToPrint} className='p-2 mb-2'>
-                              <Barcode value='mjhad;iSed' className="rounded w-64" />
+                              <Barcode value={data.id} className="rounded w-64 border" />
                             </div>
                           </div>
 
