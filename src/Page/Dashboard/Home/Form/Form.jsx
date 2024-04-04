@@ -42,7 +42,8 @@ const Form = ({ wishlist, clearData }) => {
     const name = form.name.value;
     const phone_number = form.number.value;
     const address = form.information.value;
-    const userInfo = { name, phone_number, address };
+    const curierImgoice = form.curierImgoice.value;
+    const userInfo = { name, phone_number, address, curierImgoice };
 
 
     // const vat = parseInt(calculateTotalPrice) % parseInt(form.vat.value);
@@ -134,7 +135,11 @@ const Form = ({ wishlist, clearData }) => {
                 </p>
               </div>
               <h3 className="mt-5"></h3>
-              <div className="flex justify-between items-center gap-1">
+
+              <div className="form-control w-full flex-1 mb-2">
+                <input type="text" placeholder="State Fast number" className="input input-bordered w-full h-6 lg:h-9 " name="curierImgoice" />
+              </div>
+              <div className="flex justify-between items-center gap-1 mb-2">
                 {/* user id  */}
                 <input type="number" hidden name="user_id" value={user_id} />
                 {/* file section start */}
