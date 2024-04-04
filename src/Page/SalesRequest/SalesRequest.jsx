@@ -10,6 +10,7 @@ import { PiPrinterThin } from "react-icons/pi";
 import { QRCodeSVG } from 'qrcode.react';
 import { useReactToPrint } from "react-to-print";
 import Barcode from "react-barcode";
+import { format } from "date-fns";
 
 
 const SalesRequest = () => {
@@ -71,7 +72,14 @@ const SalesRequest = () => {
     e.preventDefault();
     setSearchText("");
   };
-
+  useEffect(()=>{
+    const originalDate = new Date(startDate)
+    const formattedDate = format(originalDate, 'yyyy-MM-dd');
+    const dateSearch = userData.filter((item) => item.created_date
+    === formattedDate)
+    setFilteredData(dateSearch)
+   console.log(dateSearch)
+},[userData, setFilteredData,startDate]) 
   // Filtering Data
   useEffect(() => {
     let filteredResults = userData;

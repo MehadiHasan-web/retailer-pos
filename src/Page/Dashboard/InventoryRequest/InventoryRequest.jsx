@@ -6,6 +6,7 @@ import { AuthContext } from './../../../Providers/AuthProvider';
 
 import { BiBarcodeReader } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import { format } from "date-fns";
 function InventoryRequest() {
     const [startDate, setStartDate] = useState(new Date());
     const [adminData, setAdminData] = useState([]);
@@ -62,13 +63,24 @@ function InventoryRequest() {
     const handleSearchInputChange = (e) => {
         setSearchText(e.target.value);
     };
-
+    // const handleDateSearch = () => {
+        
+    // }
+    console.log(startDate)
     // clear search
     const handleClearSearch = (e) => {
         e.preventDefault();
         setSearchText("");
     };
 
+    useEffect(()=>{
+        const originalDate = new Date(startDate)
+        const formattedDate = format(originalDate, 'yyyy-MM-dd');
+        const dateSearch = adminData.filter((item) => item.sale_created_date
+        === formattedDate)
+        setFilteredData(dateSearch)
+       console.log(dateSearch)
+    },[adminData, setFilteredData,startDate]) 
     useEffect(() => {
         let filteredResults = adminData;
         // Applying the search filter
