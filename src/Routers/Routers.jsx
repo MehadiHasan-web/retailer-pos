@@ -16,6 +16,7 @@ import Scanner from "../Page/Scanner";
 import AddInventoryProduct from "../Page/AddInventoryProduct";
 import NotAllow from "../Page/NotAllow/NotAllow";
 import ExpensesDetails from "../Page/Expenses/ExpensesDetails";
+import Settings from './../Page/Settings/Settings';
 
 
 const router = createBrowserRouter([
@@ -92,6 +93,10 @@ const router = createBrowserRouter([
       {
         path: '/notAllow',
         element: <NotAllow></NotAllow>
+      },
+      {
+        path : '/settings',
+        element: <Settings></Settings>
       }
       // {
       //   path : '/practice',

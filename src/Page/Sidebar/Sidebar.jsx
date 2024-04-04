@@ -9,6 +9,7 @@ import {
 import { IoPersonCircleSharp } from "react-icons/io5";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { GiExpense } from "react-icons/gi";
+import { IoMdSettings } from "react-icons/io";
 
 const Sidebar = () => {
   const isApprover = localStorage.getItem("is_approver") === "true";
@@ -155,6 +156,17 @@ const Sidebar = () => {
                   </span>
                 </Link>
               </li>
+              <li>
+              <Link
+                  className="flex justify-start items-center gap-2"
+                  to="/settings"
+                >
+                <IoMdSettings className="text-green-500"></IoMdSettings>
+                <span className=" font-semibold text-slate-200">
+                  Settings
+                </span>
+              </Link>
+              </li>
               {/* {
                 is_manager && <li>
                   <Link className="flex justify-start items-center gap-2" to="/inventoryRequest"><FaPlusSquare className="text-green-500"></FaPlusSquare>
@@ -188,13 +200,13 @@ const Sidebar = () => {
                   {/* <li><InstituteManagement></InstituteManagement></li> */}
                 </>
               )}
-            </ul>
-            <li className="absolute bottom-0 text-white left-[35%] mb-5 flex gap-2 items-center lg:text-xs">
-              {" "}
-              <Link onClick={logout}>
-                <FaPowerOff className="text-green-500" /> Logout{" "}
-              </Link>
-            </li>
+              </ul>
+              <li className="absolute bottom-0 text-white left-[35%] mb-5 flex gap-2 items-center lg:text-xs">
+                {" "}
+                <Link onClick={logout}>
+                  <FaPowerOff className="text-green-500" /> Logout{" "}
+                </Link>
+              </li>
           </ul>
         </div>
       </div>
