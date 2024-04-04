@@ -270,8 +270,8 @@ const Expenses = () => {
                     <td>
                       <p>{Math.floor(data?.amount)} TK</p>
                     </td>
-                    <td>
-                      <p><Link to={`${data?.id}`}><FaRegEye className="text-green-500" /></Link></p>
+                    <td className="text-center">
+                      <p><Link to={`${data?.id}`}><FaRegEye className="text-green-500 text-xl" /></Link></p>
                     </td>
                   </tr>
                 ))}
