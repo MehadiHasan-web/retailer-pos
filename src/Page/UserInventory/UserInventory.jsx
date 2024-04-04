@@ -113,7 +113,7 @@ const UserInventory = () => {
         <div className="flex justify-center mt-1">
           <form
             action=""
-            className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-2  lg:flex md:gap-0 lg:justify-around lg:items-center"
+            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-2  lg:flex md:gap-0 lg:justify-around lg:items-center"
           >
             {/* search bar  */}
             <input
@@ -137,10 +137,8 @@ const UserInventory = () => {
             >
               Clear filter
             </button>
-            <Link to={"add-inventory"}>
-              <button className="btn bg-green-500 text-white btn-sm rounded-full ">
-                Product Entry
-              </button>
+            <Link to={"add-inventory"} className=" bg-green-500  btn btn-outline btn-sm rounded-full mx-1 hover:text-white shadow hover:shadow-lg sm:w-full lg:w-1/4">
+              Product Entry
             </Link>
             <button
               type="button"
@@ -158,39 +156,40 @@ const UserInventory = () => {
       {/* products  */}
       <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-1 sm:gap-2 md:gap-1 lg:gap-2 mt-5">
         {
-          (filteredProducts.length > 0 ? filteredProducts : card).map((data, index) => <div key={index} className=" p-2 flex flex-col justify-between rounded shadow-lg bg-slate-50">
-            {
-              data.invImage ? <img className='w-full h-32 sm:h-24 md:h-20 lg:h-32 rounded' src={'https://rpos.pythonanywhere.com/' + data?.invImage}></img> : <img src={blankImg} className='w-full h-20 sm:h-24 md:h-20 lg:h-28 rounded'></img>
-            }
-            <div className="p-2">
-              <h2 className="text-sm sm:text-base md:text-sm lg:text-sm font-semibold mx-auto my-1 md:my-1 lg:my-2">{data.itemName}</h2>
-              <p className="text-sm sm:text-base md:text-sm">Stock : {data.unit || 0}</p>
-              <form onSubmit={addStockData} className="space-y-1">
-                <div className="flex justify-between items-center">
-                  <span>Transportation Cost:</span>
-                  <input name="transportationCost" type="text" placeholder="Type here" defaultValue={data.transportationCost || 0} className="input input-bordered input-sm w-28" />
-                </div>
-                <div className="flex justify-between items-center">
-                  <span>Other Cost:</span>
-                  <input name="otherCost" type="text" defaultValue={data.otherCost || 0} placeholder="Type here" className="input input-bordered input-sm w-28" />
-                </div>
-                <div className="flex justify-between items-center">
-                  <span>Inventory Cost:</span>
-                  <input name="inventoryCost" type="text" defaultValue={data?.inventoryCost || 0} placeholder="Type here" className="input input-bordered input-sm w-28" />
-                </div>
-                <div className="flex justify-between items-center">
-                  <span>Product Cost:</span>
-                  <input name="productCost" type="text" defaultValue={data?.productCost || 0} placeholder="Type here" className="input input-bordered input-sm w-28" />
-                </div>
-                <div className="flex justify-between items-center">
-                  <span>Update Stock:</span>
-                  <input name="unit" type="text" defaultValue={data.unit || 0} placeholder="Type here" className="input input-bordered input-sm w-28" />
-                </div>
+          (filteredProducts.length > 0 ? filteredProducts : card).map((data, index) => <div key={index} className=" p-4">
 
-                <input name="id" type="number" value={data.id} className="hidden" />
-                <button type="submit" className="bg-green-500 text-white  w-full my-2 btn btn-md uppercase rounded-full" >Update</button>
-              </form>
+            <div className=" flex flex-col justify-between rounded shadow-lg bg-slate-50 mb-6 ">
+              <img className='w-full h-[250px]  rounded' src={'https://rpos.pythonanywhere.com/' + data?.invImage}></img>
+              <div className="p-2">
+                <h2 className="text-sm sm:text-base md:text-sm lg:text-sm font-semibold mx-auto my-1 md:my-1 lg:my-2">{data.itemName}</h2>
+                <p className="text-sm sm:text-base md:text-sm">Stock : {data.unit || 0}</p>
+                <form onSubmit={addStockData} className="space-y-1">
+                  <div className="flex justify-between items-center">
+                    <span>Transportation Cost:</span>
+                    <input name="transportationCost" type="text" placeholder="Type here" defaultValue={data.transportationCost || 0} className="input input-bordered input-sm w-28" />
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span>Other Cost:</span>
+                    <input name="otherCost" type="text" defaultValue={data.otherCost || 0} placeholder="Type here" className="input input-bordered input-sm w-28" />
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span>Inventory Cost:</span>
+                    <input name="inventoryCost" type="text" defaultValue={data?.inventoryCost || 0} placeholder="Type here" className="input input-bordered input-sm w-28" />
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span>Product Cost:</span>
+                    <input name="productCost" type="text" defaultValue={data?.productCost || 0} placeholder="Type here" className="input input-bordered input-sm w-28" />
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span>Update Stock:</span>
+                    <input name="unit" type="text" defaultValue={data.unit || 0} placeholder="Type here" className="input input-bordered input-sm w-28" />
+                  </div>
 
+                  <input name="id" type="number" value={data.id} className="hidden" />
+                  <button type="submit" className="bg-green-500 text-white  w-full my-2 btn btn-md uppercase rounded-full " >Update</button>
+                </form>
+
+              </div>
             </div>
           </div>)
         }

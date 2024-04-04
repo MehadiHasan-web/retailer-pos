@@ -25,7 +25,13 @@ const SalesRequest = () => {
   const lastPostIndex = currentPage * postPerPage;
   const firstPostIndex = lastPostIndex - postPerPage;
   const currentPosts = filteredData.slice(firstPostIndex, lastPostIndex);
-  const contentToPrint = useRef(null);
+  const contentToPrintQR = useRef(null);
+  const contentToPrintCustomer = useRef(null);
+  const contentToPrintBR = useRef(null);
+  const [URL, setUrl] = useState('');
+  useEffect(() => {
+    setUrl(window.location.href)
+  }, [URL, setUrl])
 
   let page = [];
   for (let i = 1; i <= Math.ceil(filteredData.length / postPerPage); i++) {
@@ -96,8 +102,17 @@ const SalesRequest = () => {
   };
 
   // qr code print 
-  const handlePrintClick = useReactToPrint({
-    content: () => contentToPrint.current,
+  const handlePrintClickQR = useReactToPrint({
+    content: () => contentToPrintQR.current,
+  });
+
+  // qr invoice customer code print 
+  const handlePrintCustomer = useReactToPrint({
+    content: () => contentToPrintCustomer.current,
+  });
+  // barcode  code print 
+  const handlePrintBarcode = useReactToPrint({
+    content: () => contentToPrintBR.current,
   });
 
 
@@ -189,6 +204,7 @@ const SalesRequest = () => {
                   <th className="text-black text-center">Total Price</th>
                   <th className="text-black text-center">Invoice</th>
                   <th className="text-black text-center">QRcode</th>
+                  <th className="text-black text-center">Customer QR</th>
                   <th className="text-black text-center">Barcode</th>
                 </tr>
               </thead>
@@ -240,7 +256,7 @@ const SalesRequest = () => {
                       </Link>
                     </td>
                     {/* qr code  */}
-                    <td>
+                    <td className="text-center">
                       <button onClick={() => document.getElementById(`my_modal_${index}`).showModal()} className="btn btn-outline btn-default btn-sm"><IoQrCodeOutline className="text-lg" /></button>
                       {/* qr code display */}
                       <dialog id={`my_modal_${index}`} className="modal">
@@ -248,14 +264,42 @@ const SalesRequest = () => {
                           <h3 className="font-bold text-lg text-center"> {data.customer?.name}</h3>
                           <h4 className="font-bold text-md text-center"> {data.customer?.phone_number}</h4>
                           <div className="flex justify-center">
-                            {/* barcode  */}
-                            <div ref={contentToPrint} className='p-2 mb-2'>
+                            {/* qrcode  */}
+                            <div ref={contentToPrintQR} className='p-2 mb-2'>
                               <QRCodeSVG size={140} value={data.id} className="p-2 border" />
                             </div>
                           </div>
 
                           <div className="float-right flex gap-2">
-                            <button onClick={() => { handlePrintClick() }} className="btn btn-active btn-ghost btn-sm">Print <PiPrinterThin /></button>
+                            <button onClick={() => { handlePrintClickQR() }} className="btn btn-active btn-ghost btn-sm">Print <PiPrinterThin /></button>
+                            <form method="dialog">
+                              <button className="btn btn-sm">Close</button>
+                            </form>
+                          </div>
+                        </div>
+                        <form method="dialog" className="modal-backdrop">
+                          <button>close</button>
+                        </form>
+                      </dialog>
+                    </td>
+
+                    {/*customer QR*/}
+                    <td className="text-center">
+                      <button onClick={() => document.getElementById(`my_modal_customer_${index}`).showModal()} className="btn btn-outline btn-default btn-sm"><IoQrCodeOutline className="text-lg" /></button>
+                      {/* qr code display */}
+                      <dialog id={`my_modal_customer_${index}`} className="modal">
+                        <div className="modal-box " style={{ maxWidth: '300px' }}>
+                          <h3 className="font-bold text-lg text-center"> {data.customer?.name}</h3>
+                          <h4 className="font-bold text-md text-center"> {data.customer?.phone_number}</h4>
+                          <div className="flex justify-center">
+                            {/* qrcode  */}
+                            <div ref={contentToPrintCustomer} className='p-2 mb-2'>
+                              <QRCodeSVG size={140} value={URL + '/' + data.id} className="p-2 border" />
+                            </div>
+                          </div>
+
+                          <div className="float-right flex gap-2">
+                            <button onClick={() => { handlePrintCustomer() }} className="btn btn-active btn-ghost btn-sm">Print <PiPrinterThin /></button>
                             <form method="dialog">
                               <button className="btn btn-sm">Close</button>
                             </form>
@@ -267,7 +311,7 @@ const SalesRequest = () => {
                       </dialog>
                     </td>
                     {/* barcode  */}
-                    <td>
+                    <td className="text-center">
                       <button onClick={() => document.getElementById(`my_modal_bar_${index}`).showModal()} className="btn btn-outline btn-default btn-sm"><FaBarcode className="text-lg" /></button>
                       {/* bar code display */}
                       <dialog id={`my_modal_bar_${index}`} className="modal">
@@ -276,13 +320,13 @@ const SalesRequest = () => {
                           <h4 className="font-bold text-md text-center"> {data.customer?.phone_number}</h4>
                           <div className="flex justify-center">
                             {/* barcode  */}
-                            <div ref={contentToPrint} className='p-2 mb-2'>
-                              <Barcode value='mjhad;iSed' className="rounded w-64" />
+                            <div ref={contentToPrintBR} className='p-2 mb-2'>
+                              <Barcode value={data.id} className="rounded w-64 border" />
                             </div>
                           </div>
 
                           <div className="float-right flex gap-2">
-                            <button onClick={() => { handlePrintClick() }} className="btn btn-active btn-ghost btn-sm">Print <PiPrinterThin /></button>
+                            <button onClick={() => { handlePrintBarcode() }} className="btn btn-active btn-ghost btn-sm">Print <PiPrinterThin /></button>
                             <form method="dialog">
                               <button className="btn btn-sm">Close</button>
                             </form>
@@ -308,6 +352,7 @@ const SalesRequest = () => {
                   <th className="text-black text-center">Total Price</th>
                   <th className="text-black text-center">Invoice</th>
                   <th className="text-black text-center">QRcode</th>
+                  <th className="text-black text-center">Customer QR	</th>
                   <th className="text-black text-center">Barcode</th>
                 </tr>
               </tfoot>

@@ -1,7 +1,28 @@
-import React from 'react';
+
+import axios from "axios";
 import { LuArrowLeft } from "react-icons/lu";
+import { ToastContainer, toast } from "react-toastify";
 
 const Settings = () => {
+
+  const passChgFun =  (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const password = form.password.value;
+    axios.post('', {
+      password: password
+    })
+    .then(function (response) {
+      console.log(response);
+      toast.success('success your response');
+      form.reset()
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
+
   return (
     <div>
       <div className='container mx-auto p-4 sm:p-5 md:p-8 lg:p-10 '>
@@ -39,8 +60,8 @@ const Settings = () => {
               Password Change Option (1)
               </div>
               <div className="collapse-content"> 
-                <form className='sm:flex items-center gap-2'>
-                  <input type="text" placeholder="Type here" className="input input-bordered w-full" />
+                <form onSubmit={passChgFun} className='sm:flex items-center gap-2'>
+                  <input type="password" name="password" placeholder="Enter your password" className="input input-bordered w-full" />
                 <input type="submit" value="Save" className="btn btn-neutral mt-1 sm:mt-0 w-full sm:w-auto" />
                 </form>
               </div>
@@ -60,6 +81,7 @@ const Settings = () => {
           </div>
         </div>
       </div>
+      <ToastContainer></ToastContainer>
     </div>
   );
 };

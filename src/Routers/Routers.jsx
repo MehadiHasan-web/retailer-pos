@@ -15,7 +15,8 @@ import Expenses from "../Page/Expenses/Expenses";
 import Scanner from "../Page/Scanner";
 import AddInventoryProduct from "../Page/AddInventoryProduct";
 import NotAllow from "../Page/NotAllow/NotAllow";
-import Settings from "../Page/Settings/Settings";
+import ExpensesDetails from "../Page/Expenses/ExpensesDetails";
+import Settings from './../Page/Settings/Settings';
 
 
 const router = createBrowserRouter([
@@ -46,11 +47,11 @@ const router = createBrowserRouter([
         element: <PrivateRoute><Invoice></Invoice></PrivateRoute>
       },
       {
-        path: 'sales/sales-request/sales-entry',
+        path: '/sales/sales-request/sales-entry',
         element: <PrivateRoute><Home></Home></PrivateRoute>
       },
       {
-        path: 'sales/sales-request',
+        path: '/sales/sales-request',
         element: <PrivateRoute><SalesRequest /></PrivateRoute>
       },
       {
@@ -72,6 +73,10 @@ const router = createBrowserRouter([
       {
         path: '/expenses',
         element: <PrivateRoute><Expenses></Expenses></PrivateRoute>
+      },
+      {
+        path: '/expenses/:id',
+        element: <PrivateRoute><ExpensesDetails></ExpensesDetails></PrivateRoute>
       },
       {
         path: '/user-profile',
