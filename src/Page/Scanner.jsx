@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useZxing } from "react-zxing";
 import useSound from 'use-sound';
 import bipSound from '../../public/scanner-beep.mp3'
@@ -11,6 +11,8 @@ const Scanner = () => {
     const [scanning, setScanning] = useState(true);
     const token = localStorage.getItem('token');
     const [play] = useSound(bipSound)
+    const location = useLocation();
+
 
     // barcode 
     const [result, setResult] = useState("");
@@ -44,9 +46,13 @@ const Scanner = () => {
 
     //send request to server
     useEffect(() => {
+        const baseUrl = `${window.location.protocol}//${window.location.host}`;
+        const url = `${baseUrl}/sales/sales-request/`;
+        const get_sale = result.replace(url, '')
+
         if (result) {
             console.log(token)
-            const data = { sale_id: result };
+            const data = { sale_id: get_sale };
             axios.post(`https://rpos.pythonanywhere.com/api/v1/salesReturn/`, data, {
                 headers: { 'Authorization': 'token ' + token }
             })
@@ -59,7 +65,7 @@ const Scanner = () => {
             play();
         }
 
-    }, [result])
+    }, [result, location])
 
 
 
