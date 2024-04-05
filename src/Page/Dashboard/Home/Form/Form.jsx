@@ -137,19 +137,19 @@ const Form = ({ wishlist, clearData }) => {
               <h3 className="mt-5"></h3>
 
               <div className="form-control w-full flex-1 mb-2">
-                <input type="text" placeholder="State Fast number" className="input input-bordered w-full h-6 lg:h-9 " name="curierImgoice" />
+                <input type="text" placeholder="Enter Courier ID" className="input input-bordered w-full h-6 lg:h-9 " name="curierImgoice" />
               </div>
               <div className="flex justify-between items-center gap-1 mb-2">
                 {/* user id  */}
                 <input type="number" hidden name="user_id" value={user_id} />
                 {/* file section start */}
                 <div className="form-control w-full flex-1">
-                  <input type="text" placeholder="Enter customer name" className="input input-bordered w-full h-6 lg:h-9 " name="name" />
+                  <input type="text" placeholder="Customer name" className="input input-bordered w-full h-6 lg:h-9 " name="name" />
                 </div>
                 {/* file section end */}
                 {/* file section start */}
                 <div className="form-control w-full flex-1">
-                  <input type="number" placeholder="Enter customer number" className="input input-bordered w-full h-6 lg:h-9 " name="number" />
+                  <input type="number" placeholder="Customer number" className="input input-bordered w-full h-6 lg:h-9 " name="number" />
                 </div>
                 {/* file section end */}
               </div>

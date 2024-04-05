@@ -46,7 +46,7 @@ const Expenses = () => {
       .then((res) => res.data)
       .then((data) => setUserData(data))
       .catch((error) => console.error("Error fetching data:", error));
-  },[]);
+  }, []);
   console.log(userData)
 
   // category get 
@@ -135,7 +135,7 @@ const Expenses = () => {
       filteredResults = filteredResults.filter(
         (item) =>
           item.id.toString().toLowerCase().includes(searchText.toLowerCase()) ||
-          item.category.toString().toLowerCase().includes(searchText.toLowerCase())
+          item.category.name.toString().toLowerCase().includes(searchText.toLowerCase())
       );
     }
     setFilteredData(filteredResults);

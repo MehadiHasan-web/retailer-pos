@@ -58,7 +58,7 @@ const DesktopSidebar = ({ open, setOpen }) => {
       <div className="overflow-auto touch-auto h-screen pb-40">
 
         <ul className="mt-5 space-y-5  ">
-          
+
           <li>
             {
               open ? <Link
@@ -98,18 +98,18 @@ const DesktopSidebar = ({ open, setOpen }) => {
               <Sales open={open}></Sales>
             </li>
           )} */}
-            <li>
-              {
-                open ? <Link to="/sales-return" className="flex justify-center items-center">
-                  <MdInventory className="text-green-500 text-2xl"></MdInventory></Link> : <Link className="flex justify-start items-center gap-2"
-                    to="/sales-return">
-                  <MdInventory className="text-green-500"></MdInventory>
-                  <span className=" font-semibold text-slate-200">
-                    Sales Return
-                  </span>
-                </Link>
-              }
-            </li>
+          <li>
+            {
+              open ? <Link to="/sales-return" className="flex justify-center items-center">
+                <MdInventory className="text-green-500 text-2xl"></MdInventory></Link> : <Link className="flex justify-start items-center gap-2"
+                  to="/sales-return">
+                <MdInventory className="text-green-500"></MdInventory>
+                <span className=" font-semibold text-slate-200">
+                  Sales Return
+                </span>
+              </Link>
+            }
+          </li>
           {/* {isApprover && (
             <li >
               {
@@ -172,7 +172,7 @@ const DesktopSidebar = ({ open, setOpen }) => {
               </Link>
             }
           </li>
-          <li>
+          <li className="hidden">
             {
               open ? <Link to="/settings" className="flex justify-center items-center">
                 <IoMdSettings className="text-green-500 text-2xl"></IoMdSettings></Link> : <Link
@@ -186,44 +186,6 @@ const DesktopSidebar = ({ open, setOpen }) => {
               </Link>
             }
           </li>
-          {/* <li>
-            {
-              open ? <Link to="/user-profile" className="flex justify-center items-center">
-                <FaPlusSquare className="text-green-500 text-2xl"></FaPlusSquare></Link> : <Link
-                  className="flex justify-start items-center gap-2"
-                  to="/user-profile"
-                >
-                <FaPlusSquare className="text-green-500"></FaPlusSquare>
-                <span className=" font-semibold text-slate-200">
-                  User Profile
-                </span>
-              </Link>
-            }
-          </li> */}
-          {/* <li>
-            <Link
-              className="flex justify-start items-center gap-2"
-              to="/practice"
-            >
-              <IoPersonCircleSharp className="text-green-500"></IoPersonCircleSharp>
-              <span className=" font-semibold text-slate-200">
-                Practice
-              </span>
-            </Link>
-          </li> */}
-          {adminAndManager && (
-            <>
-              {/* {is_manager && (
-                <li className="flex justify-center items-center">
-                  {
-                    open ? <MdManageHistory className="text-2xl mr-2 text-green-500 link" /> : <ManageInventory></ManageInventory>
-                  }
-
-                </li>
-              )} */}
-              {/* <li><InstituteManagement></InstituteManagement></li> */}
-            </>
-          )}
         </ul>
       </div>
       {

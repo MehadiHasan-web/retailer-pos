@@ -65,6 +65,10 @@ const Invoice = () => {
                 <p>Phone: {detailsData.customer?.phone_number}</p>
                 <p>Details: {detailsData.customer?.address}</p>
               </div>
+              <div>
+                <h5 className="font-bold mb-1">Courier Id:</h5>
+                <p>{detailsData?.customer?.curierImgoice}</p>
+              </div>
             </div>
             <div className="mt-8">
               <table className="table text-base">
@@ -111,7 +115,7 @@ const Invoice = () => {
                 {/* barcode  */}
                 <div>
                   <div>
-                    <Barcode value={detailsData.id} className="rounded w-96" />
+                    <Barcode value={detailsData?.id} className="rounded w-96" />
                   </div>
                 </div>
               </div>
