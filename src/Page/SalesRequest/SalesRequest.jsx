@@ -7,14 +7,19 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import { Link } from "react-router-dom"; import { IoQrCodeOutline } from "react-icons/io5";
 import { FaBarcode } from "react-icons/fa6";
 import { PiPrinterThin } from "react-icons/pi";
+import { SiMicrosoftexcel } from "react-icons/si";
 import { QRCodeSVG } from 'qrcode.react';
 import { useReactToPrint } from "react-to-print";
 import Barcode from "react-barcode";
 import { format } from "date-fns";
+import * as XLSX from 'xlsx/xlsx.mjs';
+import * as fs from 'fs';
+XLSX.set_fs(fs);
 
 
 const SalesRequest = () => {
   const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
   const [userData, setUserData] = useState([]);
   const [selectedOption, setSelectedOption] = useState(1); // 1 == all data, 2==approve, 3==pending
   const [filteredData, setFilteredData] = useState([]);
@@ -29,6 +34,9 @@ const SalesRequest = () => {
   const contentToPrintCustomer = useRef(null);
   const contentToPrintBR = useRef(null);
   const [URL, setUrl] = useState('');
+  const [sheet, setSheet] = useState([]);
+
+
   useEffect(() => {
     setUrl(window.location.href)
   }, [URL, setUrl])
@@ -71,14 +79,40 @@ const SalesRequest = () => {
     e.preventDefault();
     setSearchText("");
   };
+
+  // date filtering 
   useEffect(() => {
-    const originalDate = new Date(startDate)
-    const formattedDate = format(originalDate, 'yyyy-MM-dd');
-    const dateSearch = userData.filter((item) => item.created_date
-      === formattedDate)
+
+    const formattedStartDate = format(startDate, 'yyyy-MM-dd');
+    const formattedEndDate = format(endDate, 'yyyy-MM-dd');
+
+    const dateSearch = userData.filter((record) => {
+      const recordDate = new Date(record.created_date);
+      const formattedRecordDate = format(recordDate, 'yyyy-MM-dd');
+      return formattedRecordDate >= formattedStartDate && formattedRecordDate <= formattedEndDate;
+
+    })
+
+    // make new array for excel sheet 
+    const newData = dateSearch.map((record) => {
+      return {
+        Sales_ID: record.id,
+        Customer_Name: record.customer?.name,
+        Customer_Number: record.customer?.phone_number,
+        Customer_Address: record.customer?.address,
+        Date: record?.created_date,
+        Price: record?.total,
+        Courier_ID: record.customer?.curierImgoice,
+      };
+    });
+    setSheet(newData)
+
+
+
     setFilteredData(dateSearch)
     console.log(dateSearch)
-  }, [userData, setFilteredData, startDate])
+  }, [userData, setFilteredData, startDate, endDate, setSheet])
+
   // Filtering Data
   useEffect(() => {
     let filteredResults = userData;
@@ -119,6 +153,30 @@ const SalesRequest = () => {
     content: () => contentToPrintBR.current,
   });
 
+  // download excel file   
+  // useEffect(() => {
+  //   fetch('../../../public/excel.json')
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       setSheet(data);
+  //     })
+  //     .catch(error => {
+  //       console.error('Error  data:', error);
+  //     });
+  // }, [setSheet]);
+
+  const handleExcel = (e) => {
+    e.preventDefault();
+    console.log(sheet)
+
+    // var XLSX = require("xlsx");
+    var workbook = XLSX.utils.book_new();
+    var worksheet = XLSX.utils.json_to_sheet(sheet);
+
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Mysheet');
+    XLSX.writeFileXLSX(workbook, 'MyExcelFile.xlsx');
+
+  };
 
   return (
     <>
@@ -161,11 +219,21 @@ const SalesRequest = () => {
                     Show 100
                   </option>
                 </select>
-                {/* date  */}
+
+                {/*start date  */}
                 <div className="w-full xl:w-44 mx-1 mb-1">
                   <DatePicker
                     selected={startDate}
                     onChange={(date) => setStartDate(date)}
+                    className="w-full overflow-hidden border input input-sm  rounded-full shadow hover:shadow-lg"
+                  />
+                </div>
+
+                {/*end date  */}
+                <div className="w-full xl:w-44 mx-1 mb-1">
+                  <DatePicker
+                    selected={endDate}
+                    onChange={(date) => setEndDate(date)}
                     className="w-full overflow-hidden border input input-sm  rounded-full shadow hover:shadow-lg"
                   />
                 </div>
@@ -189,6 +257,7 @@ const SalesRequest = () => {
                     Sales Entry
                   </button>
                 </Link>
+                <button type="button" onClick={handleExcel} className="btn btn-outline btn-sm rounded-full mx-1 hover:text-white shadow hover:shadow-lg hover:gap-3">Download <SiMicrosoftexcel className="text-lg " /></button>
               </form>
             </div>
           </div>
