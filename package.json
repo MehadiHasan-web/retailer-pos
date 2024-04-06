@@ -36,7 +36,8 @@
     "sort-by": "^1.2.0",
     "sweetalert2": "^11.10.3",
     "swiper": "^11.0.7",
-    "use-sound": "^4.0.1"
+    "use-sound": "^4.0.1",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",

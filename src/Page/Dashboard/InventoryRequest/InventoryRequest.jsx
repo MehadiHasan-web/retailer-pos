@@ -64,7 +64,7 @@ function InventoryRequest() {
         setSearchText(e.target.value);
     };
     // const handleDateSearch = () => {
-        
+
     // }
     console.log(startDate)
     // clear search
@@ -73,14 +73,14 @@ function InventoryRequest() {
         setSearchText("");
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         const originalDate = new Date(startDate)
         const formattedDate = format(originalDate, 'yyyy-MM-dd');
         const dateSearch = adminData.filter((item) => item.sale_created_date
-        === formattedDate)
+            === formattedDate)
         setFilteredData(dateSearch)
-       console.log(dateSearch)
-    },[adminData, setFilteredData,startDate]) 
+        console.log(dateSearch)
+    }, [adminData, setFilteredData, startDate])
     useEffect(() => {
         let filteredResults = adminData;
         // Applying the search filter
@@ -174,7 +174,7 @@ function InventoryRequest() {
                                         <td>
                                             <p>{tableData.sale_created_date}</p>
                                         </td>
-                                        <td>  <p>{tableData?.date}</p></td>
+                                        <td>  <p>{tableData?.return_date}</p></td>
                                         <td>  <p>TK. {tableData?.sale?.total}</p></td>
                                         {/* invoice  */}
                                         <td className="text-center">
