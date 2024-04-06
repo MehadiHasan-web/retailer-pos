@@ -104,7 +104,6 @@ const Expenses = () => {
       amount: parseInt(price),
       date: new Date().toISOString().split('T')[0]
     }
-    console.log(expensesData)
     axios.post(`https://rpos.pythonanywhere.com/api/v1/expenses/`, expensesData, {
       headers: { 'Authorization': 'token ' + token }
     })
