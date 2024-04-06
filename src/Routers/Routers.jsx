@@ -17,6 +17,7 @@ import AddInventoryProduct from "../Page/AddInventoryProduct";
 import NotAllow from "../Page/NotAllow/NotAllow";
 import ExpensesDetails from "../Page/Expenses/ExpensesDetails";
 import Settings from './../Page/Settings/Settings';
+import UserCreate from "../Page/UserCreate/UserCreate";
 
 
 const router = createBrowserRouter([
@@ -97,6 +98,10 @@ const router = createBrowserRouter([
       {
         path : '/settings',
         element: <Settings></Settings>
+      },
+      {
+        path : '/user-create',
+        element : <UserCreate></UserCreate>
       }
       // {
       //   path : '/practice',

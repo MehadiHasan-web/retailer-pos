@@ -172,7 +172,7 @@ const DesktopSidebar = ({ open, setOpen }) => {
               </Link>
             }
           </li>
-          <li className="hidden">
+          <li>
             {
               open ? <Link to="/settings" className="flex justify-center items-center">
                 <IoMdSettings className="text-green-500 text-2xl"></IoMdSettings></Link> : <Link

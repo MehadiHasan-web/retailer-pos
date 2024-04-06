@@ -1,6 +1,7 @@
 
 import axios from "axios";
 import { LuArrowLeft } from "react-icons/lu";
+import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 
 const Settings = () => {
@@ -30,7 +31,9 @@ const Settings = () => {
     <div>
       <div className='container mx-auto p-4 sm:p-5 md:p-8 lg:p-10 '>
         <div className='space-y-5'>
+          <Link to="/user-create">
           <LuArrowLeft className='text-xl sm:text-2xl md:text-3xl lg:text-4xl'></LuArrowLeft>
+          </Link>
           <h4 className='text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold'>Settings</h4>
           <div className='shadow-xl space-y-1'>
             <div className="collapse collapse-arrow bg-white rounded-b-none">

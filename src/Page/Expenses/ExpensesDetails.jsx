@@ -19,7 +19,7 @@ const ExpensesDetails = () => {
       .then((data) => setExpensesDetails(data))
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
-  console.log(expensesDetails);
+
   const findData = expensesDetails.find((item) => item.id === parseInt(id));
   console.log(findData);
   return (
