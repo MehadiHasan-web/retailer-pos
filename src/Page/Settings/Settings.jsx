@@ -5,16 +5,19 @@ import { ToastContainer, toast } from "react-toastify";
 
 const Settings = () => {
 
+  const token = localStorage.getItem("token");
+
   const passChgFun =  (event) => {
     event.preventDefault();
     const form = event.target;
-    const password = form.password.value;
-    axios.post('', {
-      password: password
+    const password = {password: form.password.value}
+    axios.put(`https://rpos.pythonanywhere.com/api/v1/change-password/`,password, 
+    {
+      headers: { 'Authorization': 'token ' + token }
     })
     .then(function (response) {
       console.log(response);
-      toast.success('success your response');
+      toast.success('password update');
       form.reset()
     })
     .catch(function (error) {
