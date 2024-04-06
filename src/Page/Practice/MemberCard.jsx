@@ -4,6 +4,8 @@ import { LuDot } from "react-icons/lu";
 import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
 import { SiAwesomewm } from "react-icons/si";
 import { GiReturnArrow, } from "react-icons/gi";
+import { MdOutlineAttachMoney } from "react-icons/md";
+import { TbCoinTakaFilled } from "react-icons/tb";
 import Aos from "aos";
 import 'aos/dist/aos.css';
 import { Link } from 'react-router-dom';
@@ -50,7 +52,7 @@ const MemberCard = (data) => {
           <div className="w-full">
             <ul className="space-y-2">
               <li className="flex justify-between items-center"><span className="text-gray-500 text-xs sm:text-sm md:text-base lg:text-lg font-semibold">Total Amount Sold</span><AiOutlineExclamationCircle className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-500"></AiOutlineExclamationCircle></li>
-              <li className="text-xl sm:text-2xl md:text-3xl lg:text-2xl text-gray-500 font-semibold">{data.data.total_amount_sold?.today}</li>
+              <li className="text-xl sm:text-2xl md:text-3xl lg:text-2xl text-gray-500 font-semibold flex items-center gap-1"><TbCoinTakaFilled ></TbCoinTakaFilled>{data.data.total_amount_sold?.today}</li>
 
             </ul>
           </div>
@@ -105,7 +107,7 @@ const MemberCard = (data) => {
           <div className="w-full">
             <ul className="space-y-2">
               <li className="flex justify-between items-center"><span className="text-gray-500 text-xs sm:text-sm md:text-base lg:text-lg font-semibold">Total Amount Sold</span><AiOutlineExclamationCircle className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-500"></AiOutlineExclamationCircle></li>
-              <li className="text-xl sm:text-2xl md:text-3xl lg:text-2xl text-gray-500 font-semibold">{data.data.total_amount_sold?.yesterday}</li>
+              <li className="text-xl sm:text-2xl md:text-3xl lg:text-2xl text-gray-500 font-semibold flex items-center gap-1"><TbCoinTakaFilled></TbCoinTakaFilled>{data.data.total_amount_sold?.yesterday}</li>
             </ul>
           </div>
         </div>
@@ -158,7 +160,7 @@ const MemberCard = (data) => {
           <div className="w-full">
             <ul className="space-y-2">
               <li className="flex justify-between items-center"><span className="text-gray-500 text-xs sm:text-sm md:text-base lg:text-lg font-semibold">Total Amount Sold</span><AiOutlineExclamationCircle className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-500"></AiOutlineExclamationCircle></li>
-              <li className="text-xl sm:text-2xl md:text-3xl lg:text-2xl text-gray-500 font-semibold">{data.data.total_amount_sold?.week}</li>
+              <li className="text-xl sm:text-2xl md:text-3xl lg:text-2xl text-gray-500 font-semibold flex items-center gap-1"><TbCoinTakaFilled ></TbCoinTakaFilled>{data.data.total_amount_sold?.week}</li>
             </ul>
           </div>
         </div>
@@ -210,7 +212,7 @@ const MemberCard = (data) => {
           <div className="w-full">
             <ul className="space-y-2">
               <li className="flex justify-between items-center"><span className="text-gray-500 text-xs sm:text-sm md:text-base lg:text-lg font-semibold">Total Amount Sold</span><AiOutlineExclamationCircle className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-500"></AiOutlineExclamationCircle></li>
-              <li className="text-xl sm:text-2xl md:text-3xl lg:text-2xl text-gray-500 font-semibold">{data.data.total_amount_sold?.month}</li>
+              <li className="text-xl sm:text-2xl md:text-3xl lg:text-2xl text-gray-500 font-semibold flex items-center gap-1"><TbCoinTakaFilled ></TbCoinTakaFilled>{data.data.total_amount_sold?.month}</li>
             </ul>
           </div>
         </div>

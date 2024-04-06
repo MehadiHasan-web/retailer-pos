@@ -66,8 +66,8 @@ const Invoice = () => {
                 <p>Details: {detailsData.customer?.address}</p>
               </div>
               <div>
-                <h5 className="font-bold mb-1">Courier Id:</h5>
-                <p>{detailsData?.customer?.curierImgoice}</p>
+                <h5 className="font-bold mb-1 lg:text-xl">Courier Invoice Id:</h5>
+                <p className="lg:text-lg font-semibold">{detailsData?.customer?.curierImgoice}</p>
               </div>
             </div>
             <div className="mt-8">

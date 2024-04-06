@@ -223,7 +223,7 @@ const Expenses = () => {
                 </button>
                 <button
                   type="button"
-                  className="btn btn-outline btn-sm rounded-full mx-1 hover:text-white shadow hover:shadow-lg"
+                  className="btn  btn-sm bg-green-500 rounded-full mx-1 hover:text-white shadow hover:shadow-lg"
                   onClick={() =>
                     document.getElementById("my_modal_5").showModal()
                   }
@@ -269,8 +269,15 @@ const Expenses = () => {
                     <td>
                       <p>{Math.floor(data?.amount)} TK</p>
                     </td>
-                    <td className="text-center">
-                      <p><Link to={`${data?.id}`}><FaRegEye className="text-green-500 text-xl" /></Link></p>
+                    <td>
+                    <button
+                  type="button"
+                  className="btn btn-sm bg-green-500 rounded-full mx-1 hover:text-white shadow hover:shadow-lg"
+                  
+                >
+                  <p><Link to={`${data?.id}`}><FaRegEye className="text-white hover:text-green-500 text-xl" /></Link></p>
+                </button>
+                      
                     </td>
                   </tr>
                 ))}

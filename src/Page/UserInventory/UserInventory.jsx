@@ -142,7 +142,7 @@ const UserInventory = () => {
             </Link>
             <button
               type="button"
-              className="btn btn-outline btn-sm rounded-full mx-1 hover:text-white shadow hover:shadow-lg"
+              className="btn bg-green-500 btn-sm rounded-full mx-1 hover:text-white shadow hover:shadow-lg"
               onClick={() =>
                 document.getElementById("my_modal_5").showModal()
               }
