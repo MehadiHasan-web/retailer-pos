@@ -5,10 +5,16 @@ import axios from "axios";
 import { AuthContext } from './../../../Providers/AuthProvider';
 
 import { BiBarcodeReader } from "react-icons/bi";
+import { SiMicrosoftexcel } from "react-icons/si";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
+import * as XLSX from 'xlsx/xlsx.mjs';
+import * as fs from 'fs';
+XLSX.set_fs(fs);
+
 function InventoryRequest() {
     const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
     const [adminData, setAdminData] = useState([]);
     const { baseURL } = useContext(AuthContext)
     const [searchText, setSearchText] = useState("");
@@ -19,6 +25,7 @@ function InventoryRequest() {
     const lastPostIndex = currentPage * postPerPage;
     const firstPostIndex = lastPostIndex - postPerPage;
     const currentPosts = filteredData.slice(firstPostIndex, lastPostIndex)
+    const [sheet, setSheet] = useState([]);
 
     let page = [];
     for (let i = 1; i <= Math.ceil(filteredData.length / postPerPage); i++) {
@@ -73,14 +80,54 @@ function InventoryRequest() {
         setSearchText("");
     };
 
+
+    // date filtering 
     useEffect(() => {
-        const originalDate = new Date(startDate)
-        const formattedDate = format(originalDate, 'yyyy-MM-dd');
-        const dateSearch = adminData.filter((item) => item.sale_created_date
-            === formattedDate)
+
+        const formattedStartDate = format(startDate, 'yyyy-MM-dd');
+        const formattedEndDate = format(endDate, 'yyyy-MM-dd');
+
+        const dateSearch = adminData.filter((record) => {
+            const recordDate = new Date(record.return_date);
+            const formattedRecordDate = format(recordDate, 'yyyy-MM-dd');
+            return formattedRecordDate >= formattedStartDate && formattedRecordDate <= formattedEndDate;
+
+        })
+
+        // make new array for excel sheet 
+        const newData = dateSearch.map((record) => {
+            return {
+                Sales_ID: record.sale.id,
+                Customer_Name: record.sale.customer?.name,
+                Customer_Number: record.sale.customer?.phone_number,
+                Customer_Address: record.sale.customer?.address,
+                Order_Date: record?.sale.created_date,
+                Return_date: format(record?.return_date, 'yyyy-MM-dd'),
+                Price: record?.sale.total,
+                Courier_ID: record.sale.customer?.curierImgoice,
+            };
+        });
+        setSheet(newData)
+
         setFilteredData(dateSearch)
-        console.log(dateSearch)
-    }, [adminData, setFilteredData, startDate])
+        console.log(newData)
+    }, [adminData, setFilteredData, startDate, endDate, setSheet])
+
+    // download excel file   
+    const handleExcel = (e) => {
+        e.preventDefault();
+        console.log(sheet)
+
+        // var XLSX = require("xlsx");
+        var workbook = XLSX.utils.book_new();
+        var worksheet = XLSX.utils.json_to_sheet(sheet);
+
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Mysheet');
+        XLSX.writeFileXLSX(workbook, 'MyExcelFile.xlsx');
+
+    };
+
+    // search filtering 
     useEffect(() => {
         let filteredResults = adminData;
         // Applying the search filter
@@ -124,11 +171,14 @@ function InventoryRequest() {
                                 <div className="w-full xl:w-44 mx-1 mb-1">
                                     <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} className="w-full overflow-hidden border input input-sm  rounded-full" />
                                 </div>
+                                <div className="w-full xl:w-44 mx-1 mb-1">
+                                    <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} className="w-full overflow-hidden border input input-sm  rounded-full" />
+                                </div>
                                 {/* search bar  */}
                                 <input value={searchText} onChange={handleSearchInputChange} type="text" placeholder="Type here" className="input input-bordered input-sm max-w-xs w-full xl:w-44 rounded-full mx-1 mb-1  shadow hover:shadow-lg" />
                                 <button type="submit" className="btn btn-outline btn-sm rounded-full mx-3  hover:text-white ">Search</button>
                                 <button onClick={handleClearSearch} type="button" className="btn btn-outline btn-sm rounded-full mx-1  hover:text-white ">Clear filter</button>
-
+                                <button type="button" onClick={handleExcel} className="btn btn-outline btn-sm rounded-full mx-1 hover:text-white shadow hover:shadow-lg hover:gap-3">Download <SiMicrosoftexcel className="text-lg " /></button>
                                 <Link to={'/scanner'} type="button" className="btn btn-outline btn-sm rounded mx-1  hover:text-white "><BiBarcodeReader className="text-2xl" /></Link>
 
                             </form>

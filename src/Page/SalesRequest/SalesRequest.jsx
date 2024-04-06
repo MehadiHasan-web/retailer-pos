@@ -154,17 +154,6 @@ const SalesRequest = () => {
   });
 
   // download excel file   
-  // useEffect(() => {
-  //   fetch('../../../public/excel.json')
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       setSheet(data);
-  //     })
-  //     .catch(error => {
-  //       console.error('Error  data:', error);
-  //     });
-  // }, [setSheet]);
-
   const handleExcel = (e) => {
     e.preventDefault();
     console.log(sheet)
