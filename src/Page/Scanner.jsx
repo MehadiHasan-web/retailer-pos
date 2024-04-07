@@ -48,10 +48,9 @@ const Scanner = () => {
     useEffect(() => {
         const baseUrl = `${window.location.protocol}//${window.location.host}`;
         const url = `${baseUrl}/sales/sales-request/`;
-        const get_sale = result.replace(url, '')
 
-        if (result) {
-            console.log(token)
+        if (result.includes(url)) {
+            const get_sale = result.replace(url, '')
             const data = { sale_id: get_sale };
             axios.post(`https://rpos.pythonanywhere.com/api/v1/salesReturn/`, data, {
                 headers: { 'Authorization': 'token ' + token }
@@ -61,11 +60,28 @@ const Scanner = () => {
                     toast.success("Successfully Returned");
                     console.log(data)
                 })
-                .catch((error) => console.error("Error fetching data:", error));
+                .catch((error) => {
+                    toast.error("Please try again");
+                    console.error("Error fetching data:", error)
+                });
+            play();
+        } else {
+            const data = { sale_id: result };
+            axios.post(`https://rpos.pythonanywhere.com/api/v1/salesReturn/`, data, {
+                headers: { 'Authorization': 'token ' + token }
+            })
+                .then((res) => res.data)
+                .then((data) => {
+                    toast.success("Successfully Returned");
+                    console.log(data)
+                })
+                .catch((error) => {
+                    toast.error("Please try again");
+                    console.error("Error fetching data:", error)
+                });
             play();
         }
-
-    }, [result, location])
+    }, [result, location, play, token])
 
 
 

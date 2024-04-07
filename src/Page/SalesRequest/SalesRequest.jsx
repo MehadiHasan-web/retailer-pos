@@ -21,7 +21,6 @@ const SalesRequest = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [userData, setUserData] = useState([]);
-  const [selectedOption, setSelectedOption] = useState(1); // 1 == all data, 2==approve, 3==pending
   const [filteredData, setFilteredData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage, setPostPerPage] = useState(20);
@@ -94,20 +93,18 @@ const SalesRequest = () => {
     })
 
     // make new array for excel sheet 
-    const newData = dateSearch.map((record) => {
+    const newData = (dateSearch.length > 0 ? dateSearch : userData).map((record) => {
       return {
-        Sales_ID: record.id,
-        Customer_Name: record.customer?.name,
-        Customer_Number: record.customer?.phone_number,
-        Customer_Address: record.customer?.address,
-        Date: record?.created_date,
-        Price: record?.total,
-        Courier_ID: record.customer?.curierImgoice,
+        'Sales ID': record.id,
+        'Customer Name': record.customer?.name,
+        'Customer Number': record.customer?.phone_number,
+        'Customer Address': record.customer?.address,
+        'Date': record?.created_date,
+        'Price': record?.total,
+        'Courier ID': record.customer?.curierImgoice,
       };
     });
     setSheet(newData)
-
-
 
     setFilteredData(dateSearch)
     console.log(dateSearch)
@@ -129,7 +126,7 @@ const SalesRequest = () => {
     }
 
     setFilteredData(filteredResults);
-  }, [selectedOption, userData, searchText]);
+  }, [userData, searchText]);
 
   // Handle search input change
   const handleSearchInputChange = (e) => {
@@ -156,14 +153,16 @@ const SalesRequest = () => {
   // download excel file   
   const handleExcel = (e) => {
     e.preventDefault();
-    console.log(sheet)
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-    // var XLSX = require("xlsx");
+    var sDate = new Date(format(startDate, 'dd-MM-yyyy'))
+    var eDate = new Date(format(endDate, 'yyyy-MM-dd'))
+    var dates = sDate.getDate() + '/' + months[sDate.getMonth()] + ' To ' + eDate.getDate() + '/' + months[eDate.getMonth()];
+
     var workbook = XLSX.utils.book_new();
     var worksheet = XLSX.utils.json_to_sheet(sheet);
-
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Mysheet');
-    XLSX.writeFileXLSX(workbook, 'MyExcelFile.xlsx');
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sales Request');
+    XLSX.writeFileXLSX(workbook, `Sales Request ${dates}.xlsx`);
 
   };
 
@@ -217,7 +216,6 @@ const SalesRequest = () => {
                     className="w-full overflow-hidden border input input-sm  rounded-full shadow hover:shadow-lg"
                   />
                 </div>
-
                 {/*end date  */}
                 <div className="w-full xl:w-44 mx-1 mb-1">
                   <DatePicker
@@ -252,21 +250,22 @@ const SalesRequest = () => {
           </div>
           {/* search bar end  */}
 
+          {/* table  */}
           <div className="overflow-x-auto  shadow-lg rounded">
             <table className="table text-base">
               {/* head */}
               <thead className="bg-slate-200	">
                 <tr>
-                  <th className="text-black text-center">No.</th>
+                  <th className="text-black ">No.</th>
                   <th className="text-black text-center">Sales ID</th>
-                  <th className="text-black text-center">Customer Name</th>
-                  <th className="text-black text-center">Customer Number</th>
-                  <th className="text-black text-center">Customer Address</th>
-                  <th className="text-black text-center">Date</th>
-                  <th className="text-black text-center">Total Price</th>
-                  <th className="text-black text-center">Invoice</th>
-                  <th className="text-black text-center">Invoice QR</th>
-                  <th className="text-black text-center">Barcode</th>
+                  <th className="text-black">Customer Name</th>
+                  <th className="text-black ">Customer Number</th>
+                  <th className="text-black ">Customer Address</th>
+                  <th className="text-black ">Date</th>
+                  <th className="text-black ">Total Price</th>
+                  <th className="text-black ">Invoice</th>
+                  <th className="text-black ">Invoice QR</th>
+                  <th className="text-black ">Barcode</th>
                 </tr>
               </thead>
               <tbody>
@@ -283,20 +282,20 @@ const SalesRequest = () => {
                         </div>
                       </div>
                     </td>
-                    <td className="text-center">
+                    <td className="">
                       <p>{data.customer?.phone_number} </p>
                     </td>
-                    <td className="text-center">
+                    <td className="">
                       <p>{data.customer?.address}</p>
                     </td>
-                    <td className="text-center">
+                    <td className="">
                       <p>{data.created_date} </p>
                     </td>
-                    <td className="text-center">
+                    <td className="">
                       <p>TK {data.total}</p>
                     </td>
                     {/* invoice  */}
-                    <td className="text-center">
+                    <td className="">
                       <Link to={`${data.id}`}>
                         <button className="btn btn-outline btn-success btn-sm">
                           <svg
@@ -318,7 +317,7 @@ const SalesRequest = () => {
                     </td>
 
                     {/*customer QR*/}
-                    <td className="text-center">
+                    <td className="">
                       <button onClick={() => document.getElementById(`my_modal_customer_${index}`).showModal()} className="btn btn-outline btn-default btn-sm"><IoQrCodeOutline className="text-lg" /></button>
                       {/* qr code display */}
                       <dialog id={`my_modal_customer_${index}`} className="modal">
@@ -345,7 +344,7 @@ const SalesRequest = () => {
                       </dialog>
                     </td>
                     {/* barcode  */}
-                    <td className="text-center">
+                    <td className="">
                       <button onClick={() => document.getElementById(`my_modal_bar_${index}`).showModal()} className="btn btn-outline btn-default btn-sm"><FaBarcode className="text-lg" /></button>
                       {/* bar code display */}
                       <dialog id={`my_modal_bar_${index}`} className="modal">
@@ -377,16 +376,16 @@ const SalesRequest = () => {
               {/* foot */}
               <tfoot className="bg-slate-200	">
                 <tr>
-                  <th className="text-black text-center">No.</th>
-                  <th className="text-black text-center">Sales ID</th>
-                  <th className="text-black text-center">Customer Name</th>
-                  <th className="text-black text-center">Customer Number</th>
-                  <th className="text-black text-center">Customer Address</th>
-                  <th className="text-black text-center">Date</th>
-                  <th className="text-black text-center">Total Price</th>
-                  <th className="text-black text-center">Invoice</th>
-                  <th className="text-black text-center">Invoice QR	</th>
-                  <th className="text-black text-center">Barcode</th>
+                  <th className="text-black ">No.</th>
+                  <th className="text-black ">Sales ID</th>
+                  <th className="text-black ">Customer Name</th>
+                  <th className="text-black ">Customer Number</th>
+                  <th className="text-black ">Customer Address</th>
+                  <th className="text-black ">Date</th>
+                  <th className="text-black ">Total Price</th>
+                  <th className="text-black ">Invoice</th>
+                  <th className="text-black ">Invoice QR	</th>
+                  <th className="text-black ">Barcode</th>
                 </tr>
               </tfoot>
             </table>
