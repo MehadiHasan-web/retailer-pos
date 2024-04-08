@@ -35,10 +35,14 @@ const LogIn = () => {
         navigate('/dashboard')
       }
     } catch (error) {
+
       if (error.response.status === 400) {
         setErrorMessage(error.response.data.non_field_errors[0])
       } else if (error.response.status === 404) {
         toast.error('network error');
+      } else {
+        toast.error(error.response.data.error);
+        console.log(error.response.data.error)
       }
     }
   }
@@ -52,7 +56,7 @@ const LogIn = () => {
       <div className='container mx-auto w-full h-screen'>
         <div className='flex justify-center items-center w-full h-full'>
           <div className='bg-slate-100 rounded-md p-5 lg:w-[450px] lg:h-80'>
-            <h1 className='text-center lg:text-3xl mb-4 font-bold'>Ara Creation</h1>
+            <h1 className='text-center lg:text-3xl mb-4 font-bold'>Xcode</h1>
             <form onSubmit={submitData} className=' space-y-5'>
               <input type='text' className='w-full border-[1px] border-blue-600 p-3 rounded-md' placeholder='please enter your email' name="email" defaultValue={"kminchelle"}></input>
               <input type='password' className='w-full border-[1px] border-blue-600 p-3 rounded-md' placeholder='please enter your password' name="password" defaultValue={"0lelplR"}></input>
