@@ -1,10 +1,10 @@
-import { Helmet} from 'react-helmet-async';
+import { Helmet } from 'react-helmet-async';
 
-const Title = ({pageName}) => {
+const Title = ({ pageName }) => {
   return (
     <>
       <Helmet>
-          <title>Holos-techies | {pageName}</title>
+        <title>Xcode | {pageName}</title>
       </Helmet>
     </>
   );
