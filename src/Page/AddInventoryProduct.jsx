@@ -8,6 +8,17 @@ function AddInventoryProduct() {
   const token = localStorage.getItem("token");
   const [selectedFile, setSelectedFile] = useState(null);
   const navigate = useNavigate();
+  const [toggleBtn, setToggleBtn] = useState(false);
+  const [sizeName, setSizeName] = useState('');
+  const [sizeQuantity, setSizeQuantity] = useState('');
+  const [totalSize, setTotalSize] = useState();
+
+  function addNameQuantity() {
+    const sizeObject = { ...totalSize, [sizeName]: parseInt(sizeQuantity) };
+    setTotalSize(sizeObject)
+  }
+  console.log(totalSize);
+
 
   // get category
   useEffect(() => {
@@ -66,94 +77,145 @@ function AddInventoryProduct() {
         toast.error(`${error.message} .Try again`);
       });
   };
+
   return (
     <div>
       <div className="bg-[#d9efee] h-screen  flex justify-center items-center ">
         <form onSubmit={handleAddInventoryProduct} className=" lg:w-2/4 sm:w-full" encType="">
           <div className="  border bg-white rounded-xl shadow-xl  w-full flex  justify-center flex-col items-center p-10  ">
             <h1 className=" text-2xl font-bold mb-4">Product Entry</h1>
-
-            <div className="form-control w-full">
-              <label htmlFor="category">Category</label>
-              <select
-                name="category"
-                className="select select-bordered my-2 "
-                id="category"
-              >
-                <option disabled selected>
-                  Select Category
-                </option>
-                {category.map((item) => (
-                  <option key={item.id} value={item.id}>
-                    {item.name}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 w-full">
+              <div className="form-control w-full">
+                <label htmlFor="category">Category</label>
+                <select
+                  name="category"
+                  className="select select-bordered my-2 "
+                  id="category"
+                >
+                  <option disabled selected>
+                    Select Category
                   </option>
-                ))}
-              </select>
+                  {category.map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="form-control w-full">
+                <label htmlFor="itemName">Item Name</label>
+                <input
+                  name="itemName"
+                  id="itemName"
+                  type="text"
+                  placeholder="Item Name"
+                  className="input input-bordered  w-full my-2 "
+                />
+              </div>
             </div>
-            <div className="form-control w-full">
-              <label htmlFor="itemName">Item Name</label>
-              <input
-                name="itemName"
-                id="itemName"
-                type="text"
-                placeholder="Item Name"
-                className="input input-bordered  w-full my-2 "
-              />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 w-full">
+              <div className="form-control w-full">
+                <label htmlFor="unit">Unit</label>
+                <input
+                  name="unit"
+                  id="unit"
+                  type="text"
+                  placeholder="Unit"
+                  className="input input-bordered  w-full my-2 "
+                />
+              </div>
+              <div className="form-control w-full">
+                <label htmlFor="inventoryCost">Inventory Cost</label>
+
+                <input
+                  type="text"
+                  name="inventoryCost"
+                  id="inventoryCost"
+                  placeholder="Cost"
+                  className="input input-bordered  w-full my-2 "
+                />
+              </div>
             </div>
-            <div className="form-control w-full">
-              <label htmlFor="unit">Unit</label>
-              <input
-                name="unit"
-                id="unit"
-                type="text"
-                placeholder="Unit"
-                className="input input-bordered  w-full my-2 "
-              />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 w-full">
+              <div className="form-control w-full">
+                <label htmlFor="transportationCost">Transportation Cost</label>
+                <input
+                  name="transportationCost"
+                  id="transportationCost"
+                  type="text"
+                  placeholder="Transportation  Cost"
+                  className="input input-bordered  w-full my-2 "
+                />
+              </div>
+              <div className="form-control w-full">
+                <label htmlFor="itemName">Other Cost</label>
+                <input
+                  name="otherCost"
+                  id="otherCost"
+                  type="text"
+                  placeholder="Other Cost"
+                  className="input input-bordered  w-full my-2 "
+                />
+              </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 w-full">
+              <div className="form-control w-full">
+                <label htmlFor="invImage">Product Image</label>
+                <input type="file" onChange={handleFileChange} className="file-input file-input-bordered file-input-accent w-full " />
+              </div>
+              <div className="form-control w-full">
+                <label htmlFor="color">Color</label>
+                <input
+                  name="color"
+                  id="color"
+                  type="text"
+                  placeholder="Color"
+                  className="input input-bordered  w-full "
+                />
+              </div>
             </div>
 
-            <div className="form-control w-full">
-              <label htmlFor="inventoryCost">Inventory Cost</label>
+            {/* Product Size & Quantity */}
+            <div className="w-full  md:mt-8 md:mb-5 border-2 border-green-400 rounded-md p-2 ">
+              <div className="flex justify-between items-center w-full my-2">
+                <p>Product Size & Quantity</p>
+                <input type="checkbox" className="toggle" onClick={() => setToggleBtn(!toggleBtn)} />
+              </div>
+              <div className={`grid grid-cols-1 md:grid-cols-3 gap-2 w-full ${toggleBtn === true ? 'block' : 'hidden'}`}>
+                <div className="form-control w-full">
+                  <label htmlFor="sizeName">Size Name</label>
+                  <input
+                    onChange={(event) => setSizeName(event.target.value)}
+                    type="text"
+                    placeholder="Size name"
+                    className="input input-bordered  w-full my-2 "
+                  />
+                </div>
+                <div className="form-control w-full">
+                  <label htmlFor="size">Quantity</label>
+                  <input
+                    onChange={(event) => setSizeQuantity(event.target.value)}
+                    type="number"
+                    placeholder="Quantity"
+                    className="input input-bordered  w-full my-2 "
+                  />
+                </div>
+                <div className="form-control w-full md:mt-4">
+                  <button type="button" className="bg-green-500 text-white px-4 py-3 w-full rounded hover:bg-green-600 mt-4" onClick={addNameQuantity}>Add</button>
+                </div>
+              </div>
+              <div className="flex">
+                {totalSize ? (
+                  Object.keys(totalSize).map((key) => (
+                    <p className="badge badge-outline me-2 px-[4px] rounded  font-bold mt-2" key={key}>{`${key} : ${totalSize[key]}`}</p>
+                  ))) : (
+                  <p className={`${toggleBtn === true ? 'block' : 'hidden'}`} >No size available.</p>
+                )}
+              </div>
 
-              <input
-                type="text"
-                name="inventoryCost"
-                id="inventoryCost"
-                placeholder="Cost"
-                className="input input-bordered  w-full my-2 "
-              />
-            </div>
-            <div className="form-control w-full">
-              <label htmlFor="transportationCost">Transportation Cost</label>
-              <input
-                name="transportationCost"
-                id="transportationCost"
-                type="text"
-                placeholder="Transportation  Cost"
-                className="input input-bordered  w-full my-2 "
-              />
-            </div>
-            <div className="form-control w-full">
-              <label htmlFor="itemName">Other Cost</label>
-              <input
-                name="otherCost"
-                id="otherCost"
-                type="text"
-                placeholder="Other Cost"
-                className="input input-bordered  w-full my-2 "
-              />
             </div>
 
-
-            <div className="form-control w-full">
-              <label htmlFor="invImage">Product Image</label>
-              <input type="file" onChange={handleFileChange} className="file-input file-input-bordered file-input-accent w-full " />
-            </div>
-            <button
-              type="submit"
-              className="bg-green-500 text-white px-4 py-3 w-full rounded hover:bg-green-600 mt-4"
-            >
-              Create
-            </button>
+            <button type="submit" className="bg-green-500 text-white px-4 py-3 w-full rounded hover:bg-green-600 mt-4">Create</button>
           </div>
         </form>
       </div>

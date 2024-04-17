@@ -23,6 +23,8 @@ const Dashboard = () => {
       .catch((error) => console.error("Error fetching data:", error));
   }, [accountURL]);
 
+  console.log(data)
+
 
   return (
     <div className=" p-5">
