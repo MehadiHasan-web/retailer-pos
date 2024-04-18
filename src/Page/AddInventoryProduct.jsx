@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import { CiTrash } from "react-icons/ci";
+import { FaTrash } from "react-icons/fa";
 
 function AddInventoryProduct() {
   const [category, setCategory] = useState([]);
@@ -14,6 +14,10 @@ function AddInventoryProduct() {
   const [sizeName, setSizeName] = useState('');
   const [sizeQuantity, setSizeQuantity] = useState('');
   const [totalSize, setTotalSize] = useState();
+  const [productCost, setProductCost] = useState({
+    unit: 0, inventoryCost: 0, transportation: 0, otherCost: 0,
+  });
+  const [singleProductCost, setSingleProductCost] = useState(0)
 
   // custom size and add quantity 
   function addNameQuantity() {
@@ -37,7 +41,7 @@ function AddInventoryProduct() {
 
 
   // get category
-  useEffect(() => {
+  function getCategory() {
     axios
       .get(`https://rpos.pythonanywhere.com/api/v1/categories/`, {
         headers: { Authorization: "token " + token },
@@ -50,7 +54,9 @@ function AddInventoryProduct() {
         console.error("Error:", error);
         toast.error(`${error.message} .Try again`);
       });
-  }, []);
+  }
+
+
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -67,6 +73,8 @@ function AddInventoryProduct() {
     const inventoryCost = parseFloat(form.inventoryCost.value);
     const transportationCost = parseFloat(form.transportationCost.value);
     const unit = parseInt(form.unit.value);
+    const mrp = parseInt(form.mrp.value);
+    const color = parseInt(form.color.value);
 
     const formData = new FormData();
     formData.append('category', category);
@@ -75,7 +83,10 @@ function AddInventoryProduct() {
     formData.append('inventoryCost', inventoryCost);
     formData.append('transportationCost', transportationCost);
     formData.append('unit', unit);
+    formData.append('mrp', mrp);
     formData.append('image', selectedFile);
+    formData.append('color', color);
+    formData.append('unit_per_size', totalSize);
 
     axios
       .post(`https://rpos.pythonanywhere.com/api/v1/inventory/`, formData, {
@@ -93,6 +104,23 @@ function AddInventoryProduct() {
         toast.error(`${error.message} .Try again`);
       });
   };
+
+  // calculate product cost 
+  function calculateProductCost(value, fildName) {
+    setProductCost(prevProductCost => ({ ...prevProductCost, [fildName]: parseInt(value) }))
+  }
+  console.log(productCost)
+
+  useEffect(() => {
+    getCategory();
+
+    // show total cost 
+    let totalCost = parseInt(productCost.inventoryCost) + parseInt(productCost.transportation) + parseInt(productCost.otherCost);
+    let cost = parseInt(productCost.unit) / totalCost;
+    setSingleProductCost(cost)
+
+  }, [productCost, setSingleProductCost]);
+  console.log(totalSize)
 
   return (
     <div >
@@ -135,20 +163,22 @@ function AddInventoryProduct() {
                 <input
                   name="unit"
                   id="unit"
-                  type="text"
+                  type="number"
                   placeholder="Unit"
                   className="input input-bordered  w-full my-2 "
+                  onChange={(e) => { calculateProductCost(e.target.value, 'unit') }}
                 />
               </div>
               <div className="form-control w-full">
                 <label htmlFor="inventoryCost">Inventory Cost</label>
 
                 <input
-                  type="text"
+                  type="number"
                   name="inventoryCost"
                   id="inventoryCost"
                   placeholder="Cost"
                   className="input input-bordered  w-full my-2 "
+                  onChange={(e) => { calculateProductCost(e.target.value, 'inventoryCost') }}
                 />
               </div>
             </div>
@@ -158,9 +188,10 @@ function AddInventoryProduct() {
                 <input
                   name="transportationCost"
                   id="transportationCost"
-                  type="text"
+                  type="number"
                   placeholder="Transportation  Cost"
                   className="input input-bordered  w-full my-2 "
+                  onChange={(e) => { calculateProductCost(e.target.value, 'transportation') }}
                 />
               </div>
               <div className="form-control w-full">
@@ -168,10 +199,23 @@ function AddInventoryProduct() {
                 <input
                   name="otherCost"
                   id="otherCost"
-                  type="text"
+                  type="number"
                   placeholder="Other Cost"
                   className="input input-bordered  w-full my-2 "
+                  onChange={(e) => { calculateProductCost(e.target.value, 'otherCost') }}
                 />
+              </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 w-full">
+              <div className="form-control w-full">
+                <label htmlFor="productCost">Product Cost</label>
+                {/* <input name="productCost" id="productCost" type="text" placeholder="Product Cost" className="input input-bordered  w-full my-2 " /> */}
+                <div className="input input-bordered  w-full my-2 flex items-center bg-sky-50" >{singleProductCost.toFixed(2)} TK</div>
+              </div>
+              <div className="form-control w-full">
+                <label htmlFor="itemName">Mrp</label>
+                <input name="mrp" id="mrp" type="number" placeholder="Mrp" className="input input-bordered  w-full my-2 " />
+
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2 w-full">
@@ -192,15 +236,15 @@ function AddInventoryProduct() {
             </div>
 
             {/* Product Size & Quantity */}
-            <div className={`w-full md:mt-8 md:mb-5 border-2 ${toggleBtn === true ? 'border-green-400' : 'border-gray-200'}  rounded-md p-2`}>
+            <div className={`w-full md:mt-8 md:mb-5 border-[1px] ${toggleBtn === true ? 'border-green-400' : 'border-gray-200'}  rounded-md p-2`}>
               <div className="flex justify-between items-center w-full my-2">
-                <p>Product Size & Quantity</p>
+                <p className={`${toggleBtn === true ? 'text-black-500' : 'text-slate-400'}`}>Product Size & Quantity</p>
                 <input type="checkbox" className="toggle" onClick={() => setToggleBtn(!toggleBtn)} />
               </div>
               <div className={`w-full md:mt-5 md:mb-5 border-[1px] ${customBtn === true ? 'border-green-400' : 'border-gray-200'} rounded-md p-2 ${toggleBtn === true ? 'block' : 'hidden'}`}>
 
                 <div className="flex justify-between items-center w-full my-2 ">
-                  <p className="text-sm">Default Size</p>
+                  <p className={`text-sm ${customBtn === true ? 'text-black-500' : 'text-slate-400'}`}>Default Size</p>
                   <input type="checkbox" className="toggle toggle-sm" onClick={() => setCustomBtn(!customBtn)} />
                 </div>
                 <div className={`w-full ${customBtn === true ? 'block' : 'hidden'}`}>
@@ -301,7 +345,7 @@ function AddInventoryProduct() {
               <div className="flex">
                 {totalSize ? (
                   Object.keys(totalSize).map((key) => (
-                    <div className="badge badge-outline me-2 px-[6px] rounded  font-bold mt-2 flex product-custom-size" key={key}>{`${key} : ${totalSize[key]}`} <button type="button" className="ms-2" onClick={() => sizeDelete(key)} ><CiTrash className="text-red-400 hover:text-red-800 text-2xl" /></button>  </div>
+                    <div className="badge badge-outline me-2 px-[6px] rounded  font-bold mt-2 flex product-custom-size" key={key}>{`${key} : ${totalSize[key]}`} <button type="button" className="ms-2" onClick={() => sizeDelete(key)} ><FaTrash className="text-red-400 hover:text-red-800 text-xl" /></button>  </div>
                   ))) : (
                   <p className={`${toggleBtn === true ? 'block' : 'hidden'}`} >No size available.</p>
                 )}
