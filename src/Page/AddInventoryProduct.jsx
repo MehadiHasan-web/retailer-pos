@@ -10,6 +10,7 @@ function AddInventoryProduct() {
   const [selectedFile, setSelectedFile] = useState(null);
   const navigate = useNavigate();
   const [toggleBtn, setToggleBtn] = useState(false);
+  const [customBtn, setCustomBtn] = useState(false);
   const [sizeName, setSizeName] = useState('');
   const [sizeQuantity, setSizeQuantity] = useState('');
   const [totalSize, setTotalSize] = useState();
@@ -19,12 +20,19 @@ function AddInventoryProduct() {
     const sizeObject = { ...totalSize, [sizeName]: parseInt(sizeQuantity) };
     setTotalSize(sizeObject)
   }
+
   //delete size
   function sizeDelete(key) {
     const newSizeObject = { ...totalSize };
     delete newSizeObject[key];
     setTotalSize(newSizeObject);
 
+  }
+
+  //add default size quantity
+  function defaultSize(value, name) {
+    const sizeObject = { ...totalSize, [name]: value };
+    setTotalSize(sizeObject)
   }
 
 
@@ -87,9 +95,9 @@ function AddInventoryProduct() {
   };
 
   return (
-    <div>
+    <div >
       <div className="bg-[#d9efee] h-screen  flex justify-center items-center ">
-        <form onSubmit={handleAddInventoryProduct} className=" lg:w-2/4 sm:w-full" encType="">
+        <form onSubmit={handleAddInventoryProduct} className="md:w-5/6 lg:w-2/4 sm:w-full" encType="">
           <div className="  border bg-white rounded-xl shadow-xl  w-full flex  justify-center flex-col items-center p-10  ">
             <h1 className=" text-2xl font-bold mb-4">Product Entry</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2 w-full">
@@ -184,10 +192,87 @@ function AddInventoryProduct() {
             </div>
 
             {/* Product Size & Quantity */}
-            <div className="w-full  md:mt-8 md:mb-5 border-2 border-green-400 rounded-md p-2 ">
+            <div className={`w-full md:mt-8 md:mb-5 border-2 ${toggleBtn === true ? 'border-green-400' : 'border-gray-200'}  rounded-md p-2`}>
               <div className="flex justify-between items-center w-full my-2">
                 <p>Product Size & Quantity</p>
                 <input type="checkbox" className="toggle" onClick={() => setToggleBtn(!toggleBtn)} />
+              </div>
+              <div className={`w-full md:mt-5 md:mb-5 border-[1px] ${customBtn === true ? 'border-green-400' : 'border-gray-200'} rounded-md p-2 ${toggleBtn === true ? 'block' : 'hidden'}`}>
+
+                <div className="flex justify-between items-center w-full my-2 ">
+                  <p className="text-sm">Default Size</p>
+                  <input type="checkbox" className="toggle toggle-sm" onClick={() => setCustomBtn(!customBtn)} />
+                </div>
+                <div className={`w-full ${customBtn === true ? 'block' : 'hidden'}`}>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 w-full">
+                    {/* XS  */}
+                    <div className="form-control w-full relative">
+                      <input
+                        type="number"
+                        placeholder="XS"
+                        className="input input-bordered input-sm w-full"
+                        onChange={(e) => defaultSize(e.target.value, 'XS')}
+                      />
+                      <button type="button" className="btn btn-xs hover:bg-green-400 bg-green-400 absolute right-2 top-1 rounded-full text-white">Add</button>
+                    </div>
+                    {/*  */}
+                    {/* S */}
+                    <div className="form-control w-full relative">
+                      <input
+                        type="number"
+                        placeholder="S"
+                        className="input input-bordered input-sm w-full"
+                        onChange={(e) => defaultSize(e.target.value, 'S')}
+                      />
+                      <button type="button" className="btn btn-xs hover:bg-green-400 bg-green-400 absolute right-2 top-1 rounded-full text-white">Add</button>
+                    </div>
+                    {/*  */}
+                    {/*  */}
+                    <div className="form-control w-full relative">
+                      <input
+                        type="number"
+                        placeholder="M"
+                        className="input input-bordered input-sm w-full"
+                        onChange={(e) => defaultSize(e.target.value, 'M')}
+                      />
+                      <button type="button" className="btn btn-xs hover:bg-green-400 bg-green-400 absolute right-2 top-1 rounded-full text-white">Add</button>
+                    </div>
+                    {/*  */}
+                    {/*L  */}
+                    <div className="form-control w-full relative">
+                      <input
+                        type="number"
+                        placeholder="L"
+                        className="input input-bordered input-sm w-full"
+                        onChange={(e) => defaultSize(e.target.value, 'L')}
+                      />
+                      <button type="button" className="btn btn-xs hover:bg-green-400 bg-green-400 absolute right-2 top-1 rounded-full text-white">Add</button>
+                    </div>
+                    {/*  */}
+                    {/*  */}
+                    <div className="form-control w-full relative">
+                      <input
+                        type="number"
+                        placeholder="XL"
+                        className="input input-bordered input-sm w-full"
+                        onChange={(e) => defaultSize(e.target.value, 'XL')}
+                      />
+                      <button type="button" className="btn btn-xs hover:bg-green-400 bg-green-400 absolute right-2 top-1 rounded-full text-white">Add</button>
+                    </div>
+                    {/*  */}
+                    {/*  */}
+                    <div className="form-control w-full relative">
+                      <input
+                        type="number"
+                        placeholder="XXL"
+                        className="input input-bordered input-sm w-full"
+                        onChange={(e) => defaultSize(e.target.value, 'XXL')}
+                      />
+                      <button type="button" className="btn btn-xs hover:bg-green-400 bg-green-400 absolute right-2 top-1 rounded-full text-white">Add</button>
+                    </div>
+                    {/*  */}
+                  </div>
+                </div>
               </div>
               <div className={`grid grid-cols-1 md:grid-cols-3 gap-2 w-full ${toggleBtn === true ? 'block' : 'hidden'}`}>
                 <div className="form-control w-full">
