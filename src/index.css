@@ -22,3 +22,23 @@
 -webkit-box-shadow: 0px 0px 43px 10px rgba(60,81,194,0.79);
 -moz-box-shadow: 0px 0px 43px 10px rgba(60,81,194,0.79);
 }
+
+/* Product Entry page css  */
+.product-custom-size{
+    cursor: pointer;
+    
+}
+.product-custom-size {
+    height: 30px;
+}
+
+.product-custom-size button {
+    display: none;
+    transition: width 3s;
+    transition-delay: 3s;
+}
+
+.product-custom-size:hover button {
+    display: block;
+    transition-delay: 2s; 
+}

@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import { CiTrash } from "react-icons/ci";
 
 function AddInventoryProduct() {
   const [category, setCategory] = useState([]);
@@ -13,11 +14,18 @@ function AddInventoryProduct() {
   const [sizeQuantity, setSizeQuantity] = useState('');
   const [totalSize, setTotalSize] = useState();
 
+  // custom size and add quantity 
   function addNameQuantity() {
     const sizeObject = { ...totalSize, [sizeName]: parseInt(sizeQuantity) };
     setTotalSize(sizeObject)
   }
-  console.log(totalSize);
+  //delete size
+  function sizeDelete(key) {
+    const newSizeObject = { ...totalSize };
+    delete newSizeObject[key];
+    setTotalSize(newSizeObject);
+
+  }
 
 
   // get category
@@ -191,6 +199,7 @@ function AddInventoryProduct() {
                     className="input input-bordered  w-full my-2 "
                   />
                 </div>
+                {/* Quantity */}
                 <div className="form-control w-full">
                   <label htmlFor="size">Quantity</label>
                   <input
@@ -207,7 +216,7 @@ function AddInventoryProduct() {
               <div className="flex">
                 {totalSize ? (
                   Object.keys(totalSize).map((key) => (
-                    <p className="badge badge-outline me-2 px-[4px] rounded  font-bold mt-2" key={key}>{`${key} : ${totalSize[key]}`}</p>
+                    <div className="badge badge-outline me-2 px-[6px] rounded  font-bold mt-2 flex product-custom-size" key={key}>{`${key} : ${totalSize[key]}`} <button type="button" className="ms-2" onClick={() => sizeDelete(key)} ><CiTrash className="text-red-400 hover:text-red-800 text-2xl" /></button>  </div>
                   ))) : (
                   <p className={`${toggleBtn === true ? 'block' : 'hidden'}`} >No size available.</p>
                 )}
