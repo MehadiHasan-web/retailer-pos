@@ -33,6 +33,8 @@ const Home = () => {
   const [selectedProduct, setSelectedProduct] = useState([]);
   const token = localStorage.getItem("token");
 
+  console.log(selectedProduct)
+
 
   const clearData = () => {
     setWishlist([]);
@@ -326,12 +328,10 @@ const Home = () => {
                         <div className="flex flex-wrap items-center gap-4 justify-center m-5">
                           {product.variants?.map((item, index) => (
                             <div className="flex items-center gap-2" key={index}>
-                              <input type="radio" name="size" value={item.size} id="size" className="radio radio-success" />
+                              <input type="radio" name="size"  value={item.size} id="size" className="radio radio-success" />
                               <label htmlFor="size" className="text-lg font-semibold">{item.size}</label>
                             </div>
                           ))}
-
-
                         </div>
                         {/* size end  */}
                         <div className="flex justify-between items-center mt-2 gap-4">
