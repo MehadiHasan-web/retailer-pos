@@ -32,6 +32,7 @@ const Home = () => {
   const [categories, setCategories] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState([]);
   const token = localStorage.getItem("token");
+  const is_varient =false;
 
 
   const clearData = () => {
@@ -321,8 +322,9 @@ const Home = () => {
                         </div>
                       </div>
 
-                      <form onSubmit={(event) => cardData(product, event)}>
-                        <div className="flex flex-wrap items-center gap-4 justify-center m-5">
+                     <form onSubmit={(event) => cardData(product, event)}>
+                     {
+                        is_varient && <div className="flex flex-wrap items-center gap-4 justify-center m-5">
                           <div className="flex items-center gap-2">
                             <input
                               type="radio"
@@ -374,6 +376,7 @@ const Home = () => {
                             <label htmlFor="size" className="text-lg font-semibold">XXL</label>
                           </div>
                         </div>
+                      }
                         <div className="flex justify-between items-center mt-2 gap-4">
                           <div className="w-full flex items-center gap-2">
                             <div className="flex-2">
@@ -397,6 +400,7 @@ const Home = () => {
                           </button>
                         </div>
                       </form>
+                      
                     </div>
                   ))}
                 </div>
