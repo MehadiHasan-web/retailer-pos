@@ -295,7 +295,7 @@ const Home = () => {
                           <figure>
                             <img
                               className="w-68 h-40"
-                              src={'https://rpos.pythonanywhere.com/' + product?.invImage ? 'https://rpos.pythonanywhere.com/' + product?.invImage : blankImage}
+                              src={product?.invImage ? 'https://rpos.pythonanywhere.com/' + product?.invImage : blankImage}
                               alt="Image"
                             />
                           </figure>
@@ -322,58 +322,18 @@ const Home = () => {
                       </div>
 
                       <form onSubmit={(event) => cardData(product, event)}>
+                        {/* size  */}
                         <div className="flex flex-wrap items-center gap-4 justify-center m-5">
-                          <div className="flex items-center gap-2">
-                            <input
-                              type="radio"
-                              name="size" value="S"
-                              id="size"
-                              className="radio radio-success"
-                              required
-                            />
-                            <label htmlFor="size" className="text-lg font-semibold">S</label>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <input
-                              type="radio"
-                              name="size" value="M"
-                              id="radio-4"
-                              className="radio radio-success"
-                              required
-                            />
-                            <label htmlFor="radio-4" className="text-lg font-semibold">M</label>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <input
-                              type="radio"
-                              name="size" value="L"
-                              id="radio-3"
-                              className="radio radio-success"
-                              required
-                            />
-                            <label htmlFor="radio-3" className="text-lg font-semibold">L</label>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <input
-                              type="radio"
-                              name="size" value="XL"
-                              id="radio-2"
-                              className="radio radio-success"
-                              required
-                            />
-                            <label htmlFor="radio-2" className="text-lg font-semibold">XL</label>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <input
-                              type="radio"
-                              name="size" value="XXL"
-                              id="radio-1"
-                              className="radio radio-success"
-                              required
-                            />
-                            <label htmlFor="size" className="text-lg font-semibold">XXL</label>
-                          </div>
+                          {product.variants?.map((item, index) => (
+                            <div className="flex items-center gap-2" key={index}>
+                              <input type="radio" name="size" value={item.size} id="size" className="radio radio-success" />
+                              <label htmlFor="size" className="text-lg font-semibold">{item.size}</label>
+                            </div>
+                          ))}
+
+
                         </div>
+                        {/* size end  */}
                         <div className="flex justify-between items-center mt-2 gap-4">
                           <div className="w-full flex items-center gap-2">
                             <div className="flex-2">
@@ -456,7 +416,7 @@ const Home = () => {
                   >
                     <div className="w-1/4 p-2 bg-slate-100 rounded-lg">
                       <img
-                        src={'https://rpos.pythonanywhere.com/' + item?.image}
+                        src={item?.image ? 'https://rpos.pythonanywhere.com/' + item?.image : blankImage}
                         alt="Image"
                         className="w-3/4 mx-auto "
                       />
