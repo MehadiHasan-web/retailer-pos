@@ -116,14 +116,16 @@ function InventoryRequest() {
     // download excel file   
     const handleExcel = (e) => {
         e.preventDefault();
-        console.log(sheet)
+        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-        // var XLSX = require("xlsx");
+        var sDate = new Date(format(startDate, 'dd-MM-yyyy'))
+        var eDate = new Date(format(endDate, 'yyyy-MM-dd'))
+        var dates = sDate.getDate() + '/' + months[sDate.getMonth()] + ' To ' + eDate.getDate() + '/' + months[eDate.getMonth()];
+
         var workbook = XLSX.utils.book_new();
         var worksheet = XLSX.utils.json_to_sheet(sheet);
-
-        XLSX.utils.book_append_sheet(workbook, worksheet, 'Mysheet');
-        XLSX.writeFileXLSX(workbook, 'MyExcelFile.xlsx');
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Sales Return');
+        XLSX.writeFileXLSX(workbook, `Sales Return ${dates}.xlsx`);
 
     };
 
