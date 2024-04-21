@@ -55,12 +55,14 @@ const UserInventory = () => {
     const otherCost = form.otherCost.value;
     const inventoryCost = form.inventoryCost.value;
     const productCost = form.productCost.value;
+    const mrp = form.mrpValue.value;
     const updateData = {
       unit: unit,
       transportationCost: transportationCost,
       otherCost: otherCost,
       inventoryCost: inventoryCost,
       productCost: productCost,
+      mrp : mrp
     }
     console.log(updateData)
     axios.put(`https://rpos.pythonanywhere.com/api/v1/inventory/${id}/`, updateData, {
@@ -184,7 +186,10 @@ const UserInventory = () => {
                     <span>Update Stock:</span>
                     <input name="unit" type="text" defaultValue={data.unit || 0} placeholder="Type here" className="input input-bordered input-sm w-28" />
                   </div>
-
+                  <div className="flex justify-between items-center">
+                    <span>Mrp:</span>
+                    <input name="mrpValue" type="number" defaultValue={data.mrp || 0} placeholder="Type here" className="input input-bordered input-sm w-28" />
+                  </div>
                   <input name="id" type="number" value={data.id} className="hidden" />
                   <button type="submit" className="bg-green-500 text-white  w-full my-2 btn btn-md uppercase rounded-full " >Update</button>
                 </form>
