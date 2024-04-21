@@ -94,7 +94,7 @@ const Form = ({ wishlist, clearData }) => {
   const calculateDeliveryCost = (event) => {
     event.preventDefault();
     setDeliveryCost(event.target.value)
-    
+
   };
   console.log(total)
 
@@ -125,12 +125,12 @@ const Form = ({ wishlist, clearData }) => {
                 </p>
                 <p className="flex justify-between mt-3 ">
                   <span>Delivery Cost</span>
-                  <span className="font-bold">TK <input type="number" onChange={calculateDeliveryCost}  value={deliveryCost}name="delivery" className=" w-20 bg-slate-50 shadow-inner rounded text-end" /></span>
+                  <span className="font-bold">TK <input type="number" onChange={calculateDeliveryCost} value={deliveryCost} name="delivery" className=" w-20 bg-slate-50 shadow-inner rounded text-end" /></span>
                 </p>
                 <p className="border-b-2 border-dashed border-black mt-2"></p>
                 <p className="flex justify-between mt-3 ">
                   <span>Total</span>
-                  <span className="font-bold">TK  <input name="total" value={totalAmount} className=" w-24 bg-slate-50 shadow-inner rounded text-end" /></span>
+                  <span className="font-bold">TK {totalAmount}   <input placeholder={totalAmount} name="total" type="number" className=" w-24 bg-slate-50 shadow-inner rounded text-end" /></span>
                 </p>
               </div>
               <h3 className="mt-5"></h3>
