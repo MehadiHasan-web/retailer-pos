@@ -132,7 +132,7 @@ const Home = () => {
           name: product.itemName,
           image: product.invImage,
           quantity: 1,
-          price: product?.productCost || 0,
+          price: product?.mrp || 0,
           size: size
         };
         setWishlist([...wishlist, newData]);
@@ -142,7 +142,7 @@ const Home = () => {
           name: product.itemName,
           image: product.invImage,
           quantity: parseInt(quantity),
-          price: product?.productCost || 0,
+          price: product?.mrp || 0,
           size: size,
         };
         setWishlist([...wishlist, newData]);
