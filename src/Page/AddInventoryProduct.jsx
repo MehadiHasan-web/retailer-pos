@@ -91,29 +91,37 @@ function AddInventoryProduct() {
     formData.append('color', color);
     const camelCaseValue = toggleBtn ? "True" : "False";
     formData.append('is_variant', camelCaseValue)
+
+    const cleanedTotalSize = {};
+    Object.keys(totalSize).forEach(key => {
+      const cleanedKey = key.replace(/"/g, '');
+      cleanedTotalSize[cleanedKey] = totalSize[key];
+    });
+
     if (toggleBtn) {
-      formData.append('unit_per_size', totalSize);
+      const totalSizeString = JSON.stringify(cleanedTotalSize);
+      formData.append('unit_per_size', totalSizeString);
     } else {
       console.log('is_variant :' + toggleBtn)
     }
 
     console.log(totalSize)
 
-    // axios
-    //   .post(`https://rpos.pythonanywhere.com/api/v1/inventory/`, formData, {
-    //     headers: { Authorization: "token " + token },
-    //     'Content-Type': 'multipart/form-data',
-    //   })
-    //   .then((response) => {
-    //     console.log("Response:", response.data);
-    //     toast.success("Successfully Product add");
-    //     form.reset()
-    //     navigate("/management");
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error:", error);
-    //     toast.error(`${error.message} .Try again`);
-    //   });
+    axios
+      .post(`https://rpos.pythonanywhere.com/api/v1/inventory/`, formData, {
+        headers: { Authorization: "token " + token },
+        'Content-Type': 'multipart/form-data',
+      })
+      .then((response) => {
+        console.log("Response:", response.data);
+        toast.success("Successfully Product add");
+        form.reset()
+        navigate("/management");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        toast.error(`${error.message} .Try again`);
+      });
 
     // for (const pair of formData.entries()) {
     //   console.log(pair[0] + ', ' + pair[1]);

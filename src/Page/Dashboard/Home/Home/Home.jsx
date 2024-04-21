@@ -336,8 +336,9 @@ const Home = () => {
                         {/* size end  */}
                         <div className="flex justify-between items-center mt-2 gap-4">
                           <div className="w-full flex items-center gap-2">
-                            <div className="flex-2">
-                              <p className="text-lg font-bold" >Price: {product?.productCost ? product?.productCost : 0} TK</p>
+                            <div className="flex">
+                              <p className="text-lg font-bold me-2" >Price: {product?.productCost ? product?.productCost : 0} TK</p>
+                              <p className="text-lg font-bold" >MRP: {product?.mrp ? product?.mrp : 0} TK</p>
                             </div>
                             <ul className=" flex-1 rounded-full w-full">
 
@@ -352,9 +353,7 @@ const Home = () => {
                               </li>
                             </ul>
                           </div>
-                          <button className=" bg-green-500 py-1 font-bold rounded-full w-2/5 text-white">
-                            Add
-                          </button>
+                          <button className=" bg-green-500 py-1 font-bold rounded-full w-2/5 text-white"> Add </button>
                         </div>
                       </form>
                     </div>
