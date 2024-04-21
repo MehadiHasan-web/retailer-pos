@@ -31,7 +31,15 @@ const Home = () => {
   const [activeButton, setActiveButton] = useState("All");
   const [categories, setCategories] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState([]);
+  const [value, setValue] = useState(null)
   const token = localStorage.getItem("token");
+  
+  function funData(unit, id){
+    setValue({unit, id})
+  }
+
+  console.log(value)
+
 
 
   const clearData = () => {
@@ -315,6 +323,10 @@ const Home = () => {
                               <p className="text-base font-bold">
                                 {product?.unit} Available
                               </p>
+                              <p className="text-base font-bold">
+                                Unit : {product?.id === value?.id ? value?.unit : 0}
+                              </p>
+                              
                             </li>
                           </ul>
                           <div></div>
@@ -326,12 +338,10 @@ const Home = () => {
                         <div className="flex flex-wrap items-center gap-4 justify-center m-5">
                           {product.variants?.map((item, index) => (
                             <div className="flex items-center gap-2" key={index}>
-                              <input type="radio" name="size" value={item.size} id="size" className="radio radio-success" />
+                              <input type="radio" name="size" onChange={() => funData(item.unit, product.id)} value={item.size} id="size" className="radio radio-success" />
                               <label htmlFor="size" className="text-lg font-semibold">{item.size}</label>
                             </div>
                           ))}
-
-
                         </div>
                         {/* size end  */}
                         <div className="flex justify-between items-center mt-2 gap-4">
