@@ -18,6 +18,7 @@ import NotAllow from "../Page/NotAllow/NotAllow";
 import ExpensesDetails from "../Page/Expenses/ExpensesDetails";
 import Settings from './../Page/Settings/Settings';
 import UserCreate from "../Page/UserCreate/UserCreate";
+import Management from './../Page/Management';
 
 
 const router = createBrowserRouter([
@@ -70,6 +71,10 @@ const router = createBrowserRouter([
         path: '/management',
         element: <PrivateRoute><UserInventory></UserInventory></PrivateRoute>
       },
+      {
+        path: '/management2',
+        element: <PrivateRoute> <Management />  </PrivateRoute>
+      },
 
       {
         path: '/expenses',
@@ -96,12 +101,12 @@ const router = createBrowserRouter([
         element: <NotAllow></NotAllow>
       },
       {
-        path : '/settings',
+        path: '/settings',
         element: <Settings></Settings>
       },
       {
-        path : '/user-create',
-        element : <UserCreate></UserCreate>
+        path: '/user-create',
+        element: <UserCreate></UserCreate>
       }
       // {
       //   path : '/practice',
