@@ -21,8 +21,11 @@ function AddInventoryProduct() {
 
   // custom size and add quantity 
   function addNameQuantity() {
-    const sizeObject = { ...totalSize, [sizeName]: parseInt(sizeQuantity) };
+    const sizeObject = { ...totalSize, [`"${sizeName}"`]: parseInt(sizeQuantity) };
+    // const sizeArray = Object.entries(sizeObject);
     setTotalSize(sizeObject)
+    console.log(typeof (totalSize))
+    console.log(sizeObject)
   }
 
   //delete size
@@ -35,7 +38,7 @@ function AddInventoryProduct() {
 
   //add default size quantity
   function defaultSize(value, name) {
-    const sizeObject = { ...totalSize, [name]: value };
+    const sizeObject = { ...totalSize, [`"${name}"`]: parseInt(value) };
     setTotalSize(sizeObject)
   }
 
@@ -74,7 +77,7 @@ function AddInventoryProduct() {
     const transportationCost = parseFloat(form.transportationCost.value);
     const unit = parseInt(form.unit.value);
     const mrp = parseInt(form.mrp.value);
-    const color = parseInt(form.color.value);
+    const color = form.color.value;
 
     const formData = new FormData();
     formData.append('category', category);
@@ -86,7 +89,23 @@ function AddInventoryProduct() {
     formData.append('mrp', mrp);
     formData.append('image', selectedFile);
     formData.append('color', color);
-    formData.append('unit_per_size', totalSize);
+    const camelCaseValue = toggleBtn ? "True" : "False";
+    formData.append('is_variant', camelCaseValue)
+
+    const cleanedTotalSize = {};
+    Object.keys(totalSize).forEach(key => {
+      const cleanedKey = key.replace(/"/g, '');
+      cleanedTotalSize[cleanedKey] = totalSize[key];
+    });
+
+    if (toggleBtn) {
+      const totalSizeString = JSON.stringify(cleanedTotalSize);
+      formData.append('unit_per_size', totalSizeString);
+    } else {
+      console.log('is_variant :' + toggleBtn)
+    }
+
+    console.log(totalSize)
 
     axios
       .post(`https://rpos.pythonanywhere.com/api/v1/inventory/`, formData, {
@@ -103,11 +122,16 @@ function AddInventoryProduct() {
         console.error("Error:", error);
         toast.error(`${error.message} .Try again`);
       });
+
+    // for (const pair of formData.entries()) {
+    //   console.log(pair[0] + ', ' + pair[1]);
+    // }
+
   };
 
   // calculate product cost 
   function calculateProductCost(value, fildName) {
-    setProductCost(prevProductCost => ({ ...prevProductCost, [fildName]: parseInt(value) }))
+    setProductCost(prevProductCost => ({ ...prevProductCost, [fildName]: parseInt(value) || 0 }))
   }
   console.log(productCost)
 
@@ -116,7 +140,8 @@ function AddInventoryProduct() {
 
     // show total cost 
     let totalCost = parseInt(productCost.inventoryCost) + parseInt(productCost.transportation) + parseInt(productCost.otherCost);
-    let cost = parseInt(productCost.unit) / totalCost;
+    let cost = totalCost / parseInt(productCost.unit);
+    console.log(cost);
     setSingleProductCost(cost)
 
   }, [productCost, setSingleProductCost]);
