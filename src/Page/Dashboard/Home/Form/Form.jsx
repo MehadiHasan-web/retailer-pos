@@ -16,8 +16,8 @@ const Form = ({ wishlist, clearData }) => {
   const token = localStorage.getItem("token");
   const subTotal = wishlist.reduce((acc, item) => parseInt(acc) + (parseFloat(item.price) * parseFloat(item.quantity)), 0);
   const [total, setTotal] = useState();
-  // const [discount, setDiscount] = useState();
-  // const [deliveryCost, setDeliveryCost] = useState();
+  const [discount, setDiscount] = useState(0);
+  const [deliveryCost, setDeliveryCost] = useState(0);
 
   useEffect(() => {
     setTotal(parseFloat(subTotal))
@@ -82,24 +82,19 @@ const Form = ({ wishlist, clearData }) => {
     console.log(finalArray)
 
   };
+  const totalAfterDiscount = subTotal - discount;
+  const totalAmount = totalAfterDiscount - deliveryCost;
 
   // calculate discount 
   const calculateDiscount = (event) => {
-    const discount = event.target.value;
-    const totalAmount = parseFloat(total) - parseFloat(discount);
-    console.log(total)
-    setTotal(totalAmount);
+    event.preventDefault();
+    setDiscount(event.target.value);
   };
-
   // calculate delivery cost 
   const calculateDeliveryCost = (event) => {
-    console.log(event.target.value)
-    const deliveryCost = event.target.value;
-    console.log('delivery cost:' + deliveryCost)
-    const totalAmount = parseFloat(total) + parseFloat(deliveryCost);
-    console.log('delivery totalAmount:' + totalAmount)
-    setTotal(totalAmount);
-    console.log('total :' + total)
+    event.preventDefault();
+    setDeliveryCost(event.target.value)
+    
   };
   console.log(total)
 
@@ -126,16 +121,16 @@ const Form = ({ wishlist, clearData }) => {
                 </p> */}
                 <p className="flex justify-between mt-3 ">
                   <span>Discount</span>
-                  <span className="font-bold">TK <input type="number" onChange={calculateDiscount} name="discount" className=" w-20 bg-slate-50 shadow-inner rounded text-end" /></span>
+                  <span className="font-bold">TK <input type="number" onChange={calculateDiscount} name="discount" className=" w-20 bg-slate-50 shadow-inner rounded text-end" value={discount} /></span>
                 </p>
                 <p className="flex justify-between mt-3 ">
                   <span>Delivery Cost</span>
-                  <span className="font-bold">TK <input type="number" onChange={calculateDeliveryCost} name="delivery" className=" w-20 bg-slate-50 shadow-inner rounded text-end" /></span>
+                  <span className="font-bold">TK <input type="number" onChange={calculateDeliveryCost}  value={deliveryCost}name="delivery" className=" w-20 bg-slate-50 shadow-inner rounded text-end" /></span>
                 </p>
                 <p className="border-b-2 border-dashed border-black mt-2"></p>
                 <p className="flex justify-between mt-3 ">
                   <span>Total</span>
-                  <span className="font-bold">TK  <input name="total" defaultValue={subTotal} className=" w-24 bg-slate-50 shadow-inner rounded text-end" /></span>
+                  <span className="font-bold">TK  <input name="total" value={totalAmount} className=" w-24 bg-slate-50 shadow-inner rounded text-end" /></span>
                 </p>
               </div>
               <h3 className="mt-5"></h3>
