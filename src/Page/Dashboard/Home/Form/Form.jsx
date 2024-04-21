@@ -83,7 +83,7 @@ const Form = ({ wishlist, clearData }) => {
 
   };
   const totalAfterDiscount = subTotal - discount;
-  const totalAmount = totalAfterDiscount - deliveryCost;
+  const totalAmount = totalAfterDiscount + parseInt(deliveryCost);
 
   // calculate discount 
   const calculateDiscount = (event) => {
