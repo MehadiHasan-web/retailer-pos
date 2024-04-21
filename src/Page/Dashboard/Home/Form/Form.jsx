@@ -15,7 +15,9 @@ const Form = ({ wishlist, clearData }) => {
   const { baseURL, accountURL } = useContext(AuthContext);
   const token = localStorage.getItem("token");
   const subTotal = wishlist.reduce((acc, item) => parseInt(acc) + (parseFloat(item.price) * parseFloat(item.quantity)), 0);
-  const [total, setTotal] = useState('');
+  const [total, setTotal] = useState();
+  // const [discount, setDiscount] = useState();
+  // const [deliveryCost, setDeliveryCost] = useState();
 
   useEffect(() => {
     setTotal(parseFloat(subTotal))
@@ -85,11 +87,13 @@ const Form = ({ wishlist, clearData }) => {
   const calculateDiscount = (event) => {
     const discount = event.target.value;
     const totalAmount = parseFloat(total) - parseFloat(discount);
+    console.log(total)
     setTotal(totalAmount);
   };
 
   // calculate delivery cost 
   const calculateDeliveryCost = (event) => {
+    console.log(event.target.value)
     const deliveryCost = event.target.value;
     console.log('delivery cost:' + deliveryCost)
     const totalAmount = parseFloat(total) + parseFloat(deliveryCost);
@@ -97,7 +101,7 @@ const Form = ({ wishlist, clearData }) => {
     setTotal(totalAmount);
     console.log('total :' + total)
   };
-
+  console.log(total)
 
   return (
     <div>
