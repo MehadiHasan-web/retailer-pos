@@ -32,7 +32,6 @@ const Home = () => {
   const [categories, setCategories] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState([]);
   const token = localStorage.getItem("token");
-  const is_varient =false;
 
 
   const clearData = () => {
