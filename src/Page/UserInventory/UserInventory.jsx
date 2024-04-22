@@ -193,7 +193,6 @@ const UserInventory = () => {
                   <input name="id" type="number" value={data.id} className="hidden" />
                   <button type="submit" className="bg-green-500 text-white  w-full my-2 btn btn-md uppercase rounded-full " >Update</button>
                 </form>
-
               </div>
             </div>
           </div>)
