@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import ManComCard from '../Components/ManComCard';
+
+
+
 
 const Management = () => {
   const [position, setPosition] = useState({ x: 0 });
@@ -108,7 +112,7 @@ const Management = () => {
           onMouseUp={handleMouseUp}
           className="cursor-col-resize px-[6px] shadow bg-black"
         ></button>
-        <div className="w-2/6  text-black">section 2</div>
+         <div className="w-2/6  text-black"><ManComCard></ManComCard></div>
       </div>
     </>
   );
