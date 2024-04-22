@@ -39,8 +39,8 @@ const Settings = () => {
     const sizeObject = { ...totalSize, [`"${sizeName}"`]: parseInt(sizeQuantity) };
     // const sizeArray = Object.entries(sizeObject);
     setTotalSize(sizeObject)
-    console.log(typeof (totalSize))
-    console.log(sizeObject)
+    // console.log(typeof (totalSize))
+    // console.log(sizeObject)
   }
 
   //add default size quantity
@@ -55,6 +55,28 @@ const Settings = () => {
     delete newSizeObject[key];
     setTotalSize(newSizeObject);
 
+  }
+
+  const sizeBtn = (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+    const camelCaseValue = toggleBtn ? "True" : "False";
+    formData.append('is_variant', camelCaseValue)
+
+    const cleanedTotalSize = {};
+    Object.keys(totalSize).forEach(key => {
+      const cleanedKey = key.replace(/"/g, '');
+      cleanedTotalSize[cleanedKey] = totalSize[key];
+    });
+
+    if (toggleBtn) {
+      const totalSizeString = JSON.stringify(cleanedTotalSize);
+      formData.append('unit_per_size', totalSizeString);
+    } else {
+      console.log('is_variant :' + toggleBtn)
+    }
+
+    console.log(totalSize)
   }
 
 
@@ -108,7 +130,8 @@ const Settings = () => {
         </div>
         {/* size form section start */}
         <div className="w-full h-full bg-white p-2 mt-5">
-          <form>
+          <h1 className="text-sm sm:text-base md:text-lg lg:text-2xl font-bold my-2">Add Default Size</h1>
+          <form onSubmit={sizeBtn}>
             <div className={`w-full md:mt-8 md:mb-5 border-[1px] ${toggleBtn === true ? 'border-green-400' : 'border-gray-200'}  rounded-md p-2`}>
                 <div className="flex justify-between items-center w-full my-2">
                   <p className={`${toggleBtn === true ? 'text-black-500' : 'text-slate-400'}`}>Product Size & Quantity</p>
@@ -212,7 +235,7 @@ const Settings = () => {
                     />
                   </div>
                   <div className="form-control w-full md:mt-4">
-                    <button type="button" className="bg-green-500 text-white px-4 py-3 w-full rounded hover:bg-green-600 mt-4" onClick={addNameQuantity}>Add</button>
+                    <button type="submit" className="bg-green-500 text-white px-4 py-3 w-full rounded hover:bg-green-600 mt-4" onClick={addNameQuantity}>Add</button>
                   </div>
                 </div>
                 <div className="flex">
