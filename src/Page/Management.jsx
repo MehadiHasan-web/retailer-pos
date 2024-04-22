@@ -1,5 +1,6 @@
 
 import { useState } from 'react';
+import ManComCard from '../Components/ManComCard';
 
 
 
@@ -41,7 +42,7 @@ const Management = () => {
             <div className="flex h-full " >
                 <div className="w-4/6 bg-slate-50 text-black ">section {count} </div>
                 <button onClick={handleMouseDown} onMouseUp={handleMouseUp} className="cursor-col-resize px-[6px] shadow bg-black"></button>
-                <div className="w-2/6  text-black">section 2</div>
+                <div className="w-2/6  text-black"><ManComCard></ManComCard></div>
             </div>
         </>
     )
