@@ -11,7 +11,7 @@ const Management = () => {
   const [isHit, setIsHit] = useState(false);
   const [count, setCount] = useState(0);
   const [tableData, setTableData] = useState([]);
-  const [itemId,setItemId] = useState()
+  const [itemId,setItemId] = useState(1)
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -112,7 +112,7 @@ const Management = () => {
           onMouseUp={handleMouseUp}
           className="cursor-col-resize px-[6px] shadow bg-black"
         ></button>
-         <div className="w-2/6  text-black"><ManComCard></ManComCard></div>
+         <div className="w-2/6  text-black"><ManComCard selectItem={selectItem ||[]}></ManComCard></div>
       </div>
     </>
   );
