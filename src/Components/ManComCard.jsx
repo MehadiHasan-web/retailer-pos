@@ -56,7 +56,7 @@ const ManComCard = () => {
                   </div>
                   <div className="flex justify-between items-center">
                     <span>Inventory Cost:</span>
-                    <input name="inventoryCost" type="text" defaultValue="inventoryCost" placeholder="Type here" className="input input-bordered input-sm w-28" />
+                    <input name="inventoryCost" type="text" defaultValue="inventoryCost" placeholder="Type here" className="input input-bordered input-sm w-28"/>
                   </div>
                   <div className="flex justify-between items-center">
                     <span>Product Cost:</span>
