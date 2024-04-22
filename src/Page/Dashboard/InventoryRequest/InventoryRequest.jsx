@@ -101,10 +101,10 @@ function InventoryRequest() {
                 Customer_Name: record.sale.customer?.name,
                 Customer_Number: record.sale.customer?.phone_number,
                 Customer_Address: record.sale.customer?.address,
-                Order_Date: record?.sale.created_date,
+                // Order_Date: record?.sale.created_date,
                 Return_date: format(record?.return_date, 'yyyy-MM-dd'),
                 Price: record?.sale.total,
-                Courier_ID: record.sale.customer?.curierImgoice,
+                // Courier_ID: record.sale.customer?.curierImgoice,
             };
         });
         setSheet(newData)
