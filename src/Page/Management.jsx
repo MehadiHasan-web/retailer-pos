@@ -14,6 +14,7 @@ const Management = () => {
   const [count, setCount] = useState(0);
   const [tableData, setTableData] = useState([]);
   const [itemId, setItemId] = useState(1)
+  const [filteredData, setFilteredData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage, setPostPerPage] = useState(20);
   const [searchText, setSearchText] = useState("");
@@ -73,6 +74,24 @@ const Management = () => {
     setPostPerPage(parseInt(e.target.value));
   };
 
+  // Filtering Data
+  useEffect(() => {
+    let filteredResults = tableData;
+
+    // Applying the search filter
+    if (searchText.trim() !== "") {
+      filteredResults = filteredResults.filter(
+        (item) =>
+          item.category.name.toLowerCase().includes(searchText.toLowerCase()) ||
+          item.itemName.toLowerCase().includes(searchText.toLowerCase()) ||
+          item.inventoryCost.toLowerCase().includes(searchText.toLowerCase()) ||
+          item.mrp.toString().toLowerCase().includes(searchText.toLowerCase())
+      );
+    }
+
+    setFilteredData(filteredResults);
+  }, [tableData, searchText]);
+
   // Handle search input change
   const handleSearchInputChange = (e) => {
     setSearchText(e.target.value);
@@ -80,7 +99,7 @@ const Management = () => {
 
   //pagination section start
   let page = [];
-  for (let i = 1; i <= Math.ceil(tableData.length / postPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(filteredData.length / postPerPage); i++) {
     page.push(i);
   }
 
