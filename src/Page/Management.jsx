@@ -25,6 +25,7 @@ const Management = () => {
       .get(`https://rpos.pythonanywhere.com/api/v1/inventory/`, {
         headers: { Authorization: "token " + token },
       })
+      
       .then((res) => res.data)
       .then((data) => {
         console.log(data);
