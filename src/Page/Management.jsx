@@ -12,7 +12,7 @@ const Management = () => {
   const token = localStorage.getItem('token');
   const [count, setCount] = useState(0);
   const [tableData, setTableData] = useState([]);
-  const [itemId, setItemId] = useState(1)
+  const [item, setItem] = useState([])
   const [filteredData, setFilteredData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage, setPostPerPage] = useState(20);
@@ -34,9 +34,9 @@ const Management = () => {
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
 
-  const selectItem = tableData.find((item) => item.id === itemId);
+//   const selectItem = tableData.find((item) => item.id === itemId);
 
-  console.log(selectItem)
+//   console.log(selectItem)
 
   const handleMouseMove = (event) => {
     const x = event.clientX;
@@ -226,7 +226,7 @@ const Management = () => {
                 {tableData.map((data, index) => (
                   <tr
                     key={data.id}
-                    onClick={() => {setItemId(data.id), setOpen(!open) }}
+                    onClick={() => {setItem(data), setOpen(!open) }}
                     className={`${index % 2 == 1
                       ? "bg-slate-100 border-b-[1px] border-slate-100"
                       : "bg-white border-b-[1px] border-slate-100"
@@ -334,7 +334,7 @@ const Management = () => {
         <button onClick={handleMouseDown} onMouseUp={handleMouseUp} className="cursor-col-resize px-[1px] shadow bg-black" ></button>
         {/* two part end */}
         {/* three part start */}
-        <div className="hidden md:block md:w-2/6  text-black"><ManComCard selectItem={selectItem || []}></ManComCard></div>
+        <div className="hidden md:block md:w-2/6  text-black"><ManComCard item={item || []}></ManComCard></div>
         {/* three part end */}
       </div>
       <div className={`fixed md:hidden top-16 ${open ? 'left-2 duration-500' : 'left-[98%] duration-500'} w-full text-black bg-slate-300 p-2 h-full z-20`}>
@@ -343,7 +343,7 @@ const Management = () => {
             open && <FaChevronRight onClick={() => {setOpen(!open)}} className="text-xl text-red-600"></FaChevronRight>
           }
         </div>
-      <ManComCard selectItem={selectItem || []}></ManComCard>
+      <ManComCard item={item || []}></ManComCard>
       </div>
       <ToastContainer />
     </>
