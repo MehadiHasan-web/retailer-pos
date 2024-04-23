@@ -25,7 +25,6 @@ const Management = () => {
       .get(`https://rpos.pythonanywhere.com/api/v1/inventory/`, {
         headers: { Authorization: "token " + token },
       })
-      
       .then((res) => res.data)
       .then((data) => {
         console.log(data);
@@ -144,8 +143,9 @@ const Management = () => {
 
   return (
     <>
-      <div className="flex h-full ">
-        <div className="w-4/6 bg-slate-50 text-black ">
+      <div className="md:flex h-full">
+        {/* one part start */}
+        <div className="w-full md:w-4/6 bg-slate-50 text-black ">
           {/* search bar  */}
           <div className="px-8 mt-4">
             <div className="py-2 mb-3 bg-slate-100 rounded-lg">
@@ -209,7 +209,7 @@ const Management = () => {
           </div>
           {/* search bar end  */}
           {/* table section start */}
-          <div className="px-8">
+          <div className="px-8 overflow-x-auto">
             <table className="table text-base  ">
               {/* head */}
               <thead className="bg-slate-200">
@@ -278,7 +278,6 @@ const Management = () => {
             </div>
           </div>
           {/* pagination section end */}
-
           <dialog id="my_modal_5" className="modal">
             <div className="modal-box w-[55%] max-w-5xl">
               <div className="w-full">
@@ -321,7 +320,6 @@ const Management = () => {
                 </div>
               </div>
               {/* footer button  */}
-
               <div className="modal-action">
                 <form method='dialog'>
                   <button className="btn">Close</button>
@@ -330,8 +328,13 @@ const Management = () => {
             </div>
           </dialog>
         </div>
+        {/* one part end */}
+        {/* two part start */}
         <button onClick={handleMouseDown} onMouseUp={handleMouseUp} className="cursor-col-resize px-[1px] shadow bg-black" ></button>
-        <div className="w-2/6  text-black"><ManComCard selectItem={selectItem || []}></ManComCard></div>
+        {/* two part end */}
+        {/* three part start */}
+        <div className="hidden md:block md:w-2/6  text-black"><ManComCard selectItem={selectItem || []}></ManComCard></div>
+        {/* three part end */}
       </div>
       <ToastContainer />
     </>
