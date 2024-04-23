@@ -3,12 +3,11 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import ManComCard from '../Components/ManComCard';
 import { ToastContainer, toast } from "react-toastify";
-
-
-
+import { FaChevronRight } from "react-icons/fa6";
 
 const Management = () => {
   const [position, setPosition] = useState({ x: 0 });
+  const [open, setOpen] = useState(false);
   const [isHit, setIsHit] = useState(false);
   const token = localStorage.getItem('token');
   const [count, setCount] = useState(0);
@@ -18,6 +17,8 @@ const Management = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage, setPostPerPage] = useState(20);
   const [searchText, setSearchText] = useState("");
+
+  console.log(open)
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -143,7 +144,7 @@ const Management = () => {
 
   return (
     <>
-      <div className="md:flex h-full">
+      <div className="md:flex h-full relative">
         {/* one part start */}
         <div className="w-full md:w-4/6 bg-slate-50 text-black ">
           {/* search bar  */}
@@ -225,7 +226,7 @@ const Management = () => {
                 {tableData.map((data, index) => (
                   <tr
                     key={data.id}
-                    onClick={() => setItemId(data.id)}
+                    onClick={() => {setItemId(data.id), setOpen(!open) }}
                     className={`${index % 2 == 1
                       ? "bg-slate-100 border-b-[1px] border-slate-100"
                       : "bg-white border-b-[1px] border-slate-100"
@@ -335,6 +336,14 @@ const Management = () => {
         {/* three part start */}
         <div className="hidden md:block md:w-2/6  text-black"><ManComCard selectItem={selectItem || []}></ManComCard></div>
         {/* three part end */}
+      </div>
+      <div className={`fixed md:hidden top-16 ${open ? 'left-2 duration-500' : 'left-[98%] duration-500'} w-full text-black bg-slate-300 p-2 h-full z-20`}>
+        <div className="absolute top-[50%] -left-2 bg-white p-1 rounded-full">
+          {
+            open && <FaChevronRight onClick={() => {setOpen(!open)}} className="text-xl text-red-600"></FaChevronRight>
+          }
+        </div>
+      <ManComCard selectItem={selectItem || []}></ManComCard>
       </div>
       <ToastContainer />
     </>
