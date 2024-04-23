@@ -176,7 +176,7 @@ const Management = () => {
                   </Link>
                   <button
                     type="button"
-                    className="btn bg-green-500 btn-sm rounded-full mx-1 hover:text-white shadow hover:shadow-lg"
+                    className="btn bg-green-500 btn-sm rounded-full mx-1 text-white hover:text-white shadow hover:shadow-lg"
                     onClick={() =>
                       document.getElementById("my_modal_5").showModal()
                     }
@@ -209,7 +209,7 @@ const Management = () => {
                     className={`${index % 2 == 1
                       ? "bg-slate-100 border-b-[1px] border-slate-100"
                       : "bg-white border-b-[1px] border-slate-100"
-                      } hover:bg-green-50`}
+                      } hover:bg-green-50 hover:cursor-pointer hover:text-teal-500 hover:font-bold hover:border-b-2 hover:border-sky-300`}
                   >
                     <td className="text-center">{++index}</td>
                     <td className="">{data.itemName}</td>
