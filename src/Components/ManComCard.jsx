@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 const ManComCard = ({ selectItem }) => {
-  
+
   const addStockData = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -45,19 +45,13 @@ const ManComCard = ({ selectItem }) => {
             <img className='w-full h-[250px]  rounded' src={'https://rpos.pythonanywhere.com/' + selectItem?.invImage}></img>
             <div className="p-2">
               <h2 className="text-sm sm:text-base md:text-sm lg:text-sm font-semibold mx-auto my-1 md:my-1 lg:my-2">
-               {selectItem.itemName}
+                {selectItem.itemName}
               </h2>
               <p className="text-sm sm:text-base md:text-sm">Stock : {selectItem.unit}</p>
               <form onSubmit={addStockData} className="space-y-1">
                 <div className="flex justify-between items-center">
                   <span>Transportation Cost:</span>
-                  <input
-                    name="transportationCost"
-                    type="text"
-                    placeholder="Type here"
-                    defaultValue={selectItem?.transportationCost}
-                    className="input input-bordered input-sm w-28"
-                  />
+                  <input name="transportationCost" type="text" placeholder="Type here" defaultValue={selectItem?.transportationCost} className="input input-bordered input-sm w-28" />
                 </div>
                 <div className="flex justify-between items-center">
                   <span>Other Cost:</span>
