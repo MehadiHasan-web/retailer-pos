@@ -129,6 +129,7 @@ const Management = () => {
           {/* search bar  */}
           <div className="py-2 mb-3 bg-slate-100 rounded-lg">
             <div className="flex justify-center mt-1">
+            
               <form
                 action=""
                 className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-1 sm:gap-2 lg:flex md:gap-0 lg:justify-around lg:items-center"
