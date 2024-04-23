@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaTrash } from "react-icons/fa";
 /* eslint-disable react/prop-types */
-const ManComCard = ({ selectItem }) => {
+const ManComCard = ({ item }) => {
   const [toggleBtn, setToggleBtn] = useState(false);
   const [customBtn, setCustomBtn] = useState(false);
   const [sizeName, setSizeName] = useState("");
@@ -70,36 +70,31 @@ const ManComCard = ({ selectItem }) => {
           <div className=" flex flex-col justify-between rounded shadow-lg bg-slate-50 mb-6 ">
             {/* <img
               className="w-full h-[250px]  rounded"
-              src={selectItem?.invImage}
+              src={item?.invImage}
             ></img> */}
             <img
               className="w-full h-[250px]  rounded"
-              src={"https://rpos.pythonanywhere.com/" + selectItem?.invImage}
+              src={"https://rpos.pythonanywhere.com/" + item?.invImage}
             ></img>
             <div className="p-2">
               <h2 className="text-sm sm:text-base md:text-sm lg:text-sm font-semibold mx-auto my-1 md:my-1 lg:my-2">
-                {selectItem.itemName}
+                {item.itemName}
+                {item.itemName}
               </h2>
               <p className="text-sm sm:text-base md:text-sm">
-                Stock : {selectItem.unit}
+                Stock : {item.unit}
               </p>
               <form onSubmit={addStockData} className="space-y-1">
                 <div className="flex justify-between items-center">
                   <span>Transportation Cost:</span>
-                  <input
-                    name="transportationCost"
-                    type="text"
-                    placeholder="Type here"
-                    defaultValue={selectItem?.transportationCost}
-                    className="input input-bordered input-sm w-28"
-                  />
+                  <input name="transportationCost" type="text" placeholder="Type here" defaultValue={item?.transportationCost} className="input input-bordered input-sm w-28" />
                 </div>
                 <div className="flex justify-between items-center">
                   <span>Other Cost:</span>
                   <input
                     name="otherCost"
                     type="text"
-                    defaultValue={selectItem?.otherCost}
+                    defaultValue={item?.otherCost}
                     placeholder="Type here"
                     className="input input-bordered input-sm w-28"
                   />
@@ -109,7 +104,7 @@ const ManComCard = ({ selectItem }) => {
                   <input
                     name="inventoryCost"
                     type="text"
-                    defaultValue={selectItem?.inventoryCost}
+                    defaultValue={item?.inventoryCost}
                     placeholder="Type here"
                     className="input input-bordered input-sm w-28"
                   />
@@ -119,7 +114,7 @@ const ManComCard = ({ selectItem }) => {
                   <input
                     name="productCost"
                     type="text"
-                    defaultValue={selectItem?.productCost}
+                    defaultValue={item?.productCost}
                     placeholder="Type here"
                     className="input input-bordered input-sm w-28"
                   />
@@ -129,7 +124,7 @@ const ManComCard = ({ selectItem }) => {
                   <input
                     name="unit"
                     type="text"
-                    defaultValue={selectItem?.unit}
+                    defaultValue={item?.unit}
                     placeholder="Type here"
                     className="input input-bordered input-sm w-28"
                   />
@@ -139,14 +134,14 @@ const ManComCard = ({ selectItem }) => {
                   <input
                     name="mrpValue"
                     type="number"
-                    defaultValue={selectItem?.mrp}
+                    defaultValue={item?.mrp}
                     placeholder="Type here"
                     className="input input-bordered input-sm w-28"
                   />
                 </div>
                      {/* Product Size & Quantity */}
               {
-                selectItem?.is_variant && selectItem.variants.length>0 ? <div className={`w-full md:mt-8 md:mb-5 border-[1px] ${toggleBtn === true ? 'border-green-400' : 'border-gray-200'}  rounded-md p-2`}>
+                item?.is_variant && item.variants.length>0 ? <div className={`w-full md:mt-8 md:mb-5 border-[1px] ${toggleBtn === true ? 'border-green-400' : 'border-gray-200'}  rounded-md p-2`}>
                   <div className="flex justify-between items-center w-full my-2">
                     <p className={`${toggleBtn === true ? 'text-black-500' : 'text-slate-400'}`}>Product Size & Quantity</p>
                     <input type="checkbox" className="toggle" onClick={() => setToggleBtn(!toggleBtn)} />

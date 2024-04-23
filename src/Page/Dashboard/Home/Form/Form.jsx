@@ -44,8 +44,9 @@ const Form = ({ wishlist, clearData }) => {
     const name = form.name.value;
     const phone_number = form.number.value;
     const address = form.information.value;
+    const notes = form.notes.value;
     const curierImgoice = form.curierImgoice.value;
-    const userInfo = { name, phone_number, address, curierImgoice };
+    const userInfo = { name, phone_number, address, curierImgoice, notes };
 
 
     // const vat = parseInt(calculateTotalPrice) % parseInt(form.vat.value);
@@ -159,6 +160,14 @@ const Form = ({ wishlist, clearData }) => {
                 className="textarea textarea-lg w-full mt-1"
                 id="bio"
                 name="information"
+              ></textarea>
+              {/* note */}
+              <textarea
+                type="text"
+                placeholder="Notes"
+                className="textarea textarea-lg w-full mt-1"
+                id="notes"
+                name="notes"
               ></textarea>
               {/* textarea section end */}
               <div className="flex gap-2 mt-1">
