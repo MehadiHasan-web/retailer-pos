@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { FaTrash } from "react-icons/fa";
 
 /* eslint-disable react/prop-types */
@@ -52,7 +52,7 @@ const ManComCard = ({ item }) => {
       });
   };
   // custom size and add quantity
-  function addNameQuantity() {
+  function addNameQuantity(sizeName,sizeQuantity) {
     const sizeObject = {
       ...totalSize,
       [`"${sizeName}"`]: parseInt(sizeQuantity),
@@ -122,7 +122,19 @@ const ManComCard = ({ item }) => {
     const sizeObject = { ...totalSize, [`"${name}"`]: parseInt(value) };
     setTotalSize(sizeObject);
   }
-  return (
+  // variants array to object 
+//   const resultObject = item?.variants?.reduce((acc, obj) => {
+//     acc[Object.values(obj)[1]] = Object.values(obj)[2];
+//     return acc;
+// }, {});
+// const arrayOfObjects = Object?.keys(resultObject||{})?.map(key => ({ [key]: resultObject[key] }));
+// console.log(arrayOfObjects)
+
+useEffect(()=> {const mappedArray = item?.variants?.map(obj => ({ [Object.values(obj)[1]]: Object.values(obj)[2] }));
+const result = mappedArray?.map(obj=> (addNameQuantity(Object.keys(obj),Object.values(obj) )))},[item?.variants])
+
+
+return (
     <div>
       <div className="grid grid-cols-1 mt-5">
         <div className=" p-4">
