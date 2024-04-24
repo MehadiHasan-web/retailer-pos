@@ -145,10 +145,11 @@ const Settings = () => {
                 </form>
               </div>
             </div>
-            <div className="collapse collapse-arrow bg-white rounded-t-none">
+
+            {/* <div className="collapse collapse-arrow bg-white rounded-t-none">
               <input type="radio" name="my-accordion-2" defaultChecked />
               <div className="collapse-title text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium">
-                Tex Set
+                Tax Set
               </div>
               <div className="collapse-content">
                 <form className='sm:flex items-center gap-2'>
@@ -156,7 +157,8 @@ const Settings = () => {
                   <input type="submit" value="Save" className="btn btn-neutral mt-1 sm:mt-0 w-full sm:w-auto" />
                 </form>
               </div>
-            </div>
+            </div> */}
+
             <div className="collapse collapse-arrow bg-white rounded-none">
               <input type="radio" name="my-accordion-2" defaultChecked />
               <div className="collapse-title text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium">
