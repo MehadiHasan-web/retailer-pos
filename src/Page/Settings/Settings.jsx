@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { VscCloseAll } from "react-icons/vsc";
 import { TfiSave } from "react-icons/tfi";
+import Swal from 'sweetalert2'
+
 
 const Settings = () => {
 
@@ -92,11 +94,55 @@ const Settings = () => {
     });
   };
 
-  // remove items 
+  // remove items object
   const removeItem = (indexToRemove) => {
-    setSize(prevItems => {
-      return prevItems.filter((item, index) => index !== indexToRemove);
+
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger"
+      },
+      buttonsStyling: false
     });
+    swalWithBootstrapButtons.fire({
+      title: "Are you sure?",
+      text: "You won't be able to delete this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "No, cancel!",
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setSize(prevItems => {
+          return prevItems.filter((item, index) => index !== indexToRemove);
+        });
+
+        // axios.delete(`https://rpos.pythonanywhere.com/api/v1/inventory/${item?.id}/`, {
+        //   headers: { 'Authorization': 'token ' + token }
+        // }).then(response => {
+        //   console.log('Response:', response.data);
+        //   swalWithBootstrapButtons.fire({
+        //     title: "Deleted!",
+        //     text: "Your file has been deleted.",
+        //     icon: "success"
+        //   });
+        // })
+        // .catch(error => {
+        //     console.error('Error:', error);
+        //     toast.error();
+        //     Swal.fire({
+        //       title: 'Sorry..!',
+        //       text: `${error.message}. Please try again`,
+        //       icon: 'error',
+        //       confirmButtonText: 'Ok'
+        //     })
+        // });
+
+      }
+    });
+
+
   };
 
   // add sizes
