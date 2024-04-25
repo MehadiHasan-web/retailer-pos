@@ -157,15 +157,15 @@ const Sidebar = () => {
                 </Link>
               </li>
               <li>
-              <Link
+                <Link
                   className="flex justify-start items-center gap-2"
                   to="/settings"
                 >
-                <IoMdSettings className="text-green-500"></IoMdSettings>
-                <span className=" font-semibold text-slate-200">
-                  Settings
-                </span>
-              </Link>
+                  <IoMdSettings className="text-green-500"></IoMdSettings>
+                  <span className=" font-semibold text-slate-200">
+                    Settings
+                  </span>
+                </Link>
               </li>
               {/* {
                 is_manager && <li>
@@ -200,13 +200,13 @@ const Sidebar = () => {
                   {/* <li><InstituteManagement></InstituteManagement></li> */}
                 </>
               )}
-              </ul>
-              <li className="absolute bottom-0 text-white left-[35%] mb-5 flex gap-2 items-center lg:text-xs">
-                {" "}
-                <Link onClick={logout}>
-                  <FaPowerOff className="text-green-500" /> Logout{" "}
-                </Link>
-              </li>
+            </ul>
+            <li className="absolute bottom-0 text-white left-[35%] mb-5 flex gap-2 items-center lg:text-xs">
+              {" "}
+              <Link onClick={logout}>
+                <FaPowerOff className="text-green-500" /> Logout{" "}
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

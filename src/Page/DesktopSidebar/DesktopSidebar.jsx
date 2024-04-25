@@ -174,6 +174,20 @@ const DesktopSidebar = ({ open, setOpen }) => {
           </li>
           <li>
             {
+              open ? <Link to="/management2" className="flex justify-center items-center">
+                <IoPersonCircleSharp className="text-green-500 text-2xl"></IoPersonCircleSharp></Link> : <Link
+                  className="flex justify-start items-center gap-2"
+                  to="/management"
+                >
+                <IoPersonCircleSharp className="text-green-500"></IoPersonCircleSharp>
+                <span className=" font-semibold text-slate-200">
+                  Management2
+                </span>
+              </Link>
+            }
+          </li>
+          <li>
+            {
               open ? <Link to="/settings" className="flex justify-center items-center">
                 <IoMdSettings className="text-green-500 text-2xl"></IoMdSettings></Link> : <Link
                   className="flex justify-start items-center gap-2"
