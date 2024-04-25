@@ -1,6 +1,6 @@
 
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaTrash } from "react-icons/fa";
 import { LuArrowLeft } from "react-icons/lu";
 import { Link } from "react-router-dom";
@@ -35,7 +35,7 @@ const Settings = () => {
   }
 
 
-  // custome size
+  // custom size
   function addCustomSize(e) {
     e.preventDefault()
     var form = e.target;
@@ -61,15 +61,14 @@ const Settings = () => {
   // add sizes
   function addSize(index, e) {
     e.preventDefault()
-    var form = e.target;
+    let form = e.target;
     setSize(prevItems => {
       return prevItems.map((item, i) => {
         if (i === index) {
           console.log(item)
-
           return {
             ...item,
-            sizes: [...item.sizes, form.name.value]
+            sizes: [...item.sizes, { size: form.name.value }]
           };
         }
         return item;
@@ -145,12 +144,25 @@ const Settings = () => {
 
   };
 
-  // add sizes
+  // save sizes
   function saveItems(index) {
     const item = size[index];
-    if (item) {
+    // console.log(item);
+    const transformedData = {
+      title: item.title,
+      sizes: item.sizes.map(sizeObj => sizeObj.size)
+        .reduce((acc, curr) => {
+          if (!acc.includes(curr)) {
+            acc.push(curr);
+          }
+          return acc;
+        }, [])
+    };
+    console.log(transformedData)
+
+    if (transformedData) {
       // send backend
-      axios.post(`https://rpos.pythonanywhere.com/api/v1/variant-settings/`, item, {
+      axios.post(`https://rpos.pythonanywhere.com/api/v1/variant-settings/`, transformedData, {
         headers: { 'Authorization': 'token ' + token }
       })
         .then(response => {
@@ -162,11 +174,29 @@ const Settings = () => {
           toast.error(`${error.message} .Try again`);
         });
       // end send backend
-
     }
 
   }
 
+  // get size data from backend 
+  function getSizeData() {
+    axios.get(`https://rpos.pythonanywhere.com/api/v1/variant-settings/`, {
+      headers: { 'Authorization': 'token' + token }
+    })
+      .then(response => {
+        console.log('Response:', response.data);
+        setSize(response.data);
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        toast.error(`${error.message} .Try again`);
+      });
+  }
+
+  useEffect(() => {
+    getSizeData();
+  }, [])
 
 
   return (
@@ -241,7 +271,7 @@ const Settings = () => {
               <div className="flex justify-between">
                 <div>
                   {item.sizes.map((size, sizeIndex) => (
-                    <div key={sizeIndex} className="inline-flex items-center rounded-md bg-purple-50 px-2 py-1 text-xs font-medium text-purple-700 ring-1 ring-inset ring-purple-700/10 my-2 mx-2  product-custom-size">{size} <button type="button" className="ms-2" onClick={() => deleteSize(index, sizeIndex)} ><FaTrash className="text-red-400 hover:text-red-800 text-xl" /></button>  </div>
+                    <div key={sizeIndex} className="inline-flex items-center rounded-md bg-purple-50 px-2 py-1 text-xs font-medium text-purple-700 ring-1 ring-inset ring-purple-700/10 my-2 mx-2  product-custom-size">{size.size} <button type="button" className="ms-2" onClick={() => deleteSize(index, sizeIndex)} ><FaTrash className="text-red-400 hover:text-red-800 text-xl" /></button>  </div>
                   ))}
                 </div>
                 <div className="flex gap-2">
