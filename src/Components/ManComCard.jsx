@@ -14,6 +14,7 @@ const ManComCard = ({ item }) => {
   const [sizeQuantity, setSizeQuantity] = useState("");
   const [totalSize, setTotalSize] = useState();
   const token = localStorage.getItem("token");
+  const [size, setSize] = useState([])
 
   const addStockData = (event) => {
     event.preventDefault();
@@ -52,10 +53,10 @@ const ManComCard = ({ item }) => {
       });
   };
   // custom size and add quantity
-  function addNameQuantity(sizeName,sizeQuantity) {
+  function addNameQuantity(size,Quantity) {
     const sizeObject = {
       ...totalSize,
-      [`"${sizeName}"`]: parseInt(sizeQuantity),
+      [`"${sizeName || size}"`]: parseInt(sizeQuantity || Quantity),
     };
     // const sizeArray = Object.entries(sizeObject);
     setTotalSize(sizeObject);
@@ -132,6 +133,28 @@ const ManComCard = ({ item }) => {
 
 useEffect(()=> {const mappedArray = item?.variants?.map(obj => ({ [Object.values(obj)[1]]: Object.values(obj)[2] }));
 const result = mappedArray?.map(obj=> (addNameQuantity(Object.keys(obj),Object.values(obj) )))},[item?.variants])
+
+
+
+function getSizeData() {
+  axios.get(`https://rpos.pythonanywhere.com/api/v1/variant-settings/`, {
+    headers: { 'Authorization': 'token' + token }
+  })
+    .then(response => {
+      console.log('Response:', response.data);
+      setSize(response.data);
+      console.log(response.data);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      toast.error(`${error.message} .Try again`);
+    });
+}
+
+useEffect(() => {
+  getSizeData();
+}, [])
+const filterSize = size.filter(item => item.sizes.length > 0 )
 
 
 return (
@@ -262,142 +285,54 @@ return (
                         onClick={() => setToggleBtn(!toggleBtn)}
                       />
                     </div>
-                    <div
-                      className={`w-full md:mt-5 md:mb-5 border-[1px] ${
-                        customBtn === true
-                          ? "border-green-400"
-                          : "border-gray-200"
-                      } rounded-md p-2 ${
-                        toggleBtn === true ? "block" : "hidden"
+                    {
+                filterSize.map(item => <div key={item.id}
+                  className={`w-full md:mt-5 md:mb-5 border-[1px] ${
+                    customBtn === true ? "border-green-400" : "border-gray-200"
+                  } rounded-md p-2 ${toggleBtn === true ? "block" : "hidden"}`}
+                >
+                  <div className="flex justify-between items-center w-full my-2 ">
+                    <p
+                      className={`text-sm ${
+                        customBtn[0] === item.id && customBtn[1] === true ? "text-black-500" : "text-slate-400"
                       }`}
                     >
-                      <div className="flex justify-between items-center w-full my-2 ">
-                        <p
-                          className={`text-sm ${
-                            customBtn === true
-                              ? "text-black-500"
-                              : "text-slate-400"
-                          }`}
-                        >
-                          Default Size
-                        </p>
+                      {item.title}
+                    </p>
+                    <input
+                      type="checkbox"
+                      className="toggle toggle-sm"
+                      onClick={() => setCustomBtn([item.id,!customBtn[1]])}
+                    />
+                  </div>
+                  <div
+                    className={`w-full ${
+                      customBtn[0] === item.id && customBtn[1] === true ? "block" : "hidden"
+                    }`}
+                  >
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 w-full">
+                     
+                      {
+                        item?.sizes.map(sizeItem => <div key={sizeItem.id} className="form-control w-full relative">
                         <input
-                          type="checkbox"
-                          className="toggle toggle-sm"
-                          onClick={() => setCustomBtn(!customBtn)}
+                          type="number"
+                          placeholder={sizeItem.size}
+                          className="input input-bordered input-sm w-full"
+                          onChange={(e) => defaultSize(e.target.value, `${sizeItem.size}`)}
                         />
-                      </div>
-                      <div
-                        className={`w-full ${
-                          customBtn === true ? "block" : "hidden"
-                        }`}
-                      >
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 w-full">
-                          {/* XS  */}
-                          <div className="form-control w-full relative">
-                            <input
-                              type="number"
-                              placeholder="XS"
-                              className="input input-bordered input-sm w-full"
-                              onChange={(e) =>
-                                defaultSize(e.target.value, "XS")
-                              }
-                            />
-                            <button
-                              type="button"
-                              className="btn btn-xs hover:bg-green-400 bg-green-400 absolute right-2 top-1 rounded-full text-white"
-                            >
-                              Add
-                            </button>
-                          </div>
-                          {/*  */}
-                          {/* S */}
-                          <div className="form-control w-full relative">
-                            <input
-                              type="number"
-                              placeholder="S"
-                              className="input input-bordered input-sm w-full"
-                              onChange={(e) => defaultSize(e.target.value, "S")}
-                            />
-                            <button
-                              type="button"
-                              className="btn btn-xs hover:bg-green-400 bg-green-400 absolute right-2 top-1 rounded-full text-white"
-                            >
-                              Add
-                            </button>
-                          </div>
-                          {/*  */}
-                          {/*  */}
-                          <div className="form-control w-full relative">
-                            <input
-                              type="number"
-                              placeholder="M"
-                              className="input input-bordered input-sm w-full"
-                              onChange={(e) => defaultSize(e.target.value, "M")}
-                            />
-                            <button
-                              type="button"
-                              className="btn btn-xs hover:bg-green-400 bg-green-400 absolute right-2 top-1 rounded-full text-white"
-                            >
-                              Add
-                            </button>
-                          </div>
-                          {/*  */}
-                          {/*L  */}
-                          <div className="form-control w-full relative">
-                            <input
-                              type="number"
-                              placeholder="L"
-                              className="input input-bordered input-sm w-full"
-                              onChange={(e) => defaultSize(e.target.value, "L")}
-                            />
-                            <button
-                              type="button"
-                              className="btn btn-xs hover:bg-green-400 bg-green-400 absolute right-2 top-1 rounded-full text-white"
-                            >
-                              Add
-                            </button>
-                          </div>
-                          {/*  */}
-                          {/*  */}
-                          <div className="form-control w-full relative">
-                            <input
-                              type="number"
-                              placeholder="XL"
-                              className="input input-bordered input-sm w-full"
-                              onChange={(e) =>
-                                defaultSize(e.target.value, "XL")
-                              }
-                            />
-                            <button
-                              type="button"
-                              className="btn btn-xs hover:bg-green-400 bg-green-400 absolute right-2 top-1 rounded-full text-white"
-                            >
-                              Add
-                            </button>
-                          </div>
-                          {/*  */}
-                          {/*  */}
-                          <div className="form-control w-full relative">
-                            <input
-                              type="number"
-                              placeholder="XXL"
-                              className="input input-bordered input-sm w-full"
-                              onChange={(e) =>
-                                defaultSize(e.target.value, "XXL")
-                              }
-                            />
-                            <button
-                              type="button"
-                              className="btn btn-xs hover:bg-green-400 bg-green-400 absolute right-2 top-1 rounded-full text-white"
-                            >
-                              Add
-                            </button>
-                          </div>
-                          {/*  */}
-                        </div>
-                      </div>
+                        <button
+                          type="button"
+                          className="btn btn-xs hover:bg-green-400 bg-green-400 absolute right-2 top-1 rounded-full text-white"
+                        >
+                          Add
+                        </button>
+                      </div>)
+                      }
+                     
                     </div>
+                  </div>
+                </div>)
+              }
 
                     <div
                       className={`grid grid-cols-1 md:grid-cols-3 gap-2 w-full ${

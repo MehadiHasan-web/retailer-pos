@@ -364,7 +364,7 @@ function AddInventoryProduct() {
                           type="number"
                           placeholder={sizeItem.size}
                           className="input input-bordered input-sm w-full"
-                          onChange={(e) => defaultSize(e.target.value, "XS")}
+                          onChange={(e) => defaultSize(e.target.value, `${sizeItem.size}`)}
                         />
                         <button
                           type="button"
