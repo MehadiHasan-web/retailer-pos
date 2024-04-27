@@ -14,7 +14,6 @@ const card = [
     {id: 4, title: 'truck'},
     {id: 5, title: 'bus'},
     {id: 6, title: 'cycle'},
-    {id: 7, title: 'vehicle'},
 ]
 
 
@@ -147,10 +146,13 @@ const Scanner = () => {
         </div>
         {/* scanner section end */}
         {/* card section start */}
-        <div className="grid grid-cols-3 sm:grid-cols-5 md:flex mt-10 gap-5 h-full">
-            {card.map((data, index) => <div onClick={() => deleteFun(data.id)} key={data.id} className={`w-20 h-20 ${deleteId.find((item => item === data.id)) ? 'bg-blue-400' : 'bg-slate-300'} p-1`}>
-                <img src={bottol} className="object-cover w-full h-14"></img>
-                <h3 className="text-sm text-center">{data.title}</h3>
+        <div className="grid grid-cols-3 sm:grid-cols-5 md:flex mt-10 gap-2 h-full">
+            {card.map((data, index) => <div onClick={() => deleteFun(data.id)} key={data.id} className={`w-[100%] h-full xl:h-[60%] overflow-hidden ${deleteId.find((item => item === data.id)) ? 'bg-cyan-500 shadow-md shadow-cyan-100 hoverEffect' : 'bg-white'} hover:border-[3px] hover:border-cyan-500 rounded-lg `}>
+              <div className="flex justify-center items-center flex-col h-full">
+              <img src={bottol} className="w-24 h-24"></img>
+                <button className="text-sm border-2 bg-cyan-500 py-1 px-2 rounded-lg">{data.title}</button>
+              </div>
+                
             </div>)}
         </div>
         {/* card section end */}

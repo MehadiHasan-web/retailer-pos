@@ -42,3 +42,34 @@
     display: block;
     transition-delay: 2s; 
 }
+
+
+.hoverEffect{
+    position: relative;
+    transition: all linear .2s;
+    -webkit-transition: all linear .2s;
+    -moz-transition: all linear .2s;
+    -ms-transition: all linear .2s;
+    -o-transition: all linear .2s;
+}
+
+.hoverEffect:hover>::before{
+    position: absolute;
+    background-color: #06B6D4;
+    content: '';
+    top: -32px;
+    right: 0;
+    height: 55%;
+    width: 38%;
+    right: -10px;
+    transform: rotate(305deg);
+    -webkit-transform: rotate(305deg);
+    -moz-transform: rotate(305deg);
+    -ms-transform: rotate(305deg);
+    -o-transform: rotate(305deg);
+    text-align: center;
+}
+
+
+
+
