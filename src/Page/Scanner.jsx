@@ -5,15 +5,16 @@ import useSound from "use-sound";
 import bipSound from "../../public/scanner-beep.mp3";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-import bottol from '../../public/bottol.png'
+import blank_img from '../../public/bottol.png'
+import { FaCheck } from "react-icons/fa";
 
 const card = [
-    {id: 1, title: 'mobile'},
-    {id: 2, title: 'car'},
-    {id: 3, title: 'jeep'},
-    {id: 4, title: 'truck'},
-    {id: 5, title: 'bus'},
-    {id: 6, title: 'cycle'},
+  { id: 1, title: 'mobile' },
+  { id: 2, title: 'car' },
+  { id: 3, title: 'jeep' },
+  { id: 4, title: 'truck' },
+  { id: 5, title: 'bus' },
+  { id: 6, title: 'cycle' },
 ]
 
 
@@ -22,9 +23,9 @@ const Scanner = () => {
   const token = localStorage.getItem("token");
   const [play] = useSound(bipSound);
   const location = useLocation();
-  const [deleteId, setDeleteId] = useState([])
+  const [selected, setSelected] = useState([])
+  const [responseData, setResponseData] = useState();
 
-  console.log(deleteId)
 
   // barcode
   const [result, setResult] = useState("");
@@ -62,6 +63,67 @@ const Scanner = () => {
 
     if (result.includes(url)) {
       const get_sale = result.replace(url, "");
+      const id = { sale_id: get_sale };
+      axios
+        .get(`https://rpos.pythonanywhere.com/api/v1/salesReturn/${result}/`, {
+          headers: { Authorization: "token " + token },
+        })
+        .then((res) => res.data)
+        .then((data) => {
+          toast.success("Successfully Returned");
+          console.log(data);
+          setResponseData(data)
+        })
+        .catch((error) => {
+          toast.error("Please try again");
+          console.error("Error fetching data:", error);
+        });
+      play();
+    } else {
+      const id = { sale_id: result };
+      axios
+        .get(`https://rpos.pythonanywhere.com/api/v1/salesReturn/${id}/`, {
+          headers: { Authorization: "token " + token },
+        })
+        .then((res) => res.data)
+        .then((data) => {
+          toast.success("Successfully Returned");
+          console.log(data);
+          setResponseData(data)
+        })
+        .catch((error) => {
+          toast.error("Please try again");
+          console.error("Error fetching data:", error);
+        });
+      play();
+    }
+  }, [result, location, play, token]);
+
+  //selected product
+  function selectedFun(id) {
+    const exists = selected.includes(id);
+
+    if (exists) {
+      const index = selected.indexOf(id);
+      const updatedSelected = [...selected];
+      updatedSelected.splice(index, 1);
+      setSelected(updatedSelected);
+    } else {
+      const previousId = selected.filter((data) => data.id !== id);
+      if (!previousId.find(data => data.id === id)) {
+        setSelected([...previousId, id]);
+      }
+    }
+  }
+  console.log(selected);
+
+  // return back 
+  function returnBack() {
+    const baseUrl = `${window.location.protocol}//${window.location.host}`;
+    const url = `${baseUrl}/sales/sales-request/`;
+
+    if (result.includes(url)) {
+      const get_sale = result.replace(url, "");
       const data = { sale_id: get_sale };
       axios
         .post(`https://rpos.pythonanywhere.com/api/v1/salesReturn/`, data, {
@@ -70,7 +132,8 @@ const Scanner = () => {
         .then((res) => res.data)
         .then((data) => {
           toast.success("Successfully Returned");
-          console.log( data);
+          console.log(data);
+
         })
         .catch((error) => {
           toast.error("Please try again");
@@ -94,25 +157,6 @@ const Scanner = () => {
         });
       play();
     }
-  }, [result, location, play, token]);
-
-  //delete data
-  function deleteFun(id){
-    if(id){
-        const previousId = deleteId.filter((data) => data.id !== id);
-        setDeleteId([...previousId, id])
-    }else{
-        setDeleteId(id)
-    }
-
-    // if(id){
-    //     const updateId = deleteId.filter((item) => item === id)
-    //     setDeleteId(updateId)
-    // }
-
-    
-
-
   }
 
   return (
@@ -121,47 +165,52 @@ const Scanner = () => {
       <div className="flex flex-col justify-center items-center h-full">
         {/* scanner section start */}
         <div
-            className="text-center mx-auto"
+          className="text-center mx-auto"
         >
-            <p className="text-white text-lg mb-4">
+          <p className="text-white text-lg mb-4">
             Place the Barcode code inside the area
-            </p>
-            <div className="border-2 border-green-500 rounded-lg w-72 h-52 relative scanner-shadow ml-3">
+          </p>
+          <div className="border-2 border-green-500 rounded-lg w-72 h-52 relative scanner-shadow ml-3">
             {/* QR code scanning area */}
             <video ref={ref} className="w-full h-full object-cover rounded-lg " />
             {/* Scanning animation */}
             <div
-                id="scanner-line"
-                className="absolute bg-green-500 h-1 w-full top-0 left-0 animate-scanner rounded"
+              id="scanner-line"
+              className="absolute bg-green-500 h-1 w-full top-0 left-0 animate-scanner rounded"
             ></div>
-            </div>
-            <p className="text-white">
+          </div>
+          <p className="text-white">
             <span>Last result:</span>
             <span>{result}</span>
-            </p>
-            <Link to={"/"} className="text-white mt-2 underline">
+          </p>
+          <Link to={"/"} className="text-white mt-2 underline">
             Back to Home Page
-            </Link>
-            <ToastContainer position="bottom-right" />
+          </Link>
+          <ToastContainer position="bottom-right" />
         </div>
         {/* scanner section end */}
         {/* card section start */}
-        <div className="grid grid-cols-3 sm:grid-cols-5 md:flex mt-10 gap-2 h-full">
-            {card.map((data, index) => <div onClick={() => deleteFun(data.id)} key={data.id} className={`w-[100%] h-full xl:h-[60%] overflow-hidden ${deleteId.find((item => item === data.id)) ? 'bg-cyan-500 shadow-md shadow-cyan-100 hoverEffect' : 'bg-white'} hover:border-[3px] hover:border-cyan-500 rounded-lg `}>
-              <div className="flex justify-center items-center flex-col h-full">
-              <img src={bottol} className="w-24 h-24"></img>
-                <button className="text-sm border-2 bg-cyan-500 py-1 px-2 rounded-lg">{data.title}</button>
+        <div className="grid grid-cols-3 sm:grid-cols-5 md:flex mt-10 sm:mt-2 gap-2  h-full">
+          {card.map((data) => <div onClick={() => selectedFun(data.id)} key={data.id} className={`w-[100%] overflow-hidden ${selected.find((item => item === data.id)) ? ' shadow-md   bg-white  border-[3px]  border-rose-300' : 'bg-white'}  rounded-lg h-44  `}>
+            <div className=" h-full relative  ">
+              <img src={blank_img} className="w-28 h-28"></img>
+              <div className={` ${selected.find((item => item === data.id)) ? 'activeClass' : ''} absolute top-0 right-0 bg flex justify-center items-center ps-2 pb-2 shadow-sm `}>
+                <FaCheck className="text-white " />
               </div>
-                
-            </div>)}
+              <p className="text-center font-bold">{data?.title}</p>
+            </div>
+          </div>)}
         </div>
         {/* card section end */}
+        <div className="flex justify-center my-6">
+          <button onClick={returnBack} className="btn btn-active btn-neutral">Return</button>
+        </div>
       </div>
 
-      
-        
-    
-    </div>
+
+
+
+    </div >
   );
 };
 

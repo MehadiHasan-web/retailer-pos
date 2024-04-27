@@ -43,8 +43,8 @@
     transition-delay: 2s; 
 }
 
-
-.hoverEffect{
+/* scanner products css  */
+/* .hoverEffect{
     position: relative;
     transition: all linear .2s;
     -webkit-transition: all linear .2s;
@@ -68,8 +68,16 @@
     -ms-transform: rotate(305deg);
     -o-transform: rotate(305deg);
     text-align: center;
+} */
+
+
+.activeClass{
+    border-radius:0% 100% 0% 100% / 0% 0% 100% 100%;
+    background: #27e3b4;
+    background-image: linear-gradient(45deg, #3acedf 0%, #f6c2e1 100%);
+    box-shadow: -10vmin 10vmin #ffffff12;
+    width: 40px;
+    height: 40px;
 }
-
-
 
 
