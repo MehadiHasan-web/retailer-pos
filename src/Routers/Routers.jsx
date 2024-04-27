@@ -67,12 +67,12 @@ const router = createBrowserRouter([
         element: <PrivateRoute><CreateUser></CreateUser></PrivateRoute>
       },
 
+      // {
+      //   path: '/management',
+      //   element: <PrivateRoute><UserInventory></UserInventory></PrivateRoute>
+      // },
       {
         path: '/management',
-        element: <PrivateRoute><UserInventory></UserInventory></PrivateRoute>
-      },
-      {
-        path: '/management2',
         element: <PrivateRoute> <Management />  </PrivateRoute>
       },
 
