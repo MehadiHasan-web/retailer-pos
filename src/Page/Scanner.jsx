@@ -8,14 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import blank_img from '../../public/bottol.png'
 import { FaCheck } from "react-icons/fa";
 
-const card = [
-  { id: 1, title: 'mobile' },
-  { id: 2, title: 'car' },
-  { id: 3, title: 'jeep' },
-  { id: 4, title: 'truck' },
-  { id: 5, title: 'bus' },
-  { id: 6, title: 'cycle' },
-]
+
 
 
 const Scanner = () => {
@@ -129,45 +122,47 @@ const Scanner = () => {
     const baseUrl = `${window.location.protocol}//${window.location.host}`;
     const url = `${baseUrl}/sales/sales-request/`;
 
-    // if (result.includes(url)) {
-    //   const get_sale = result.replace(url, "");
-    //   const data = { sale_id: get_sale };
-    //   axios
-    //     .post(`https://rpos.pythonanywhere.com/api/v1/salesReturn/`, data, {
-    //       headers: { Authorization: "token " + token },
-    //     })
-    //     .then((res) => res.data)
-    //     .then((data) => {
-    //       toast.success("Successfully Returned");
-    //       console.log(data);
+    if (result.includes(url)) {
+      const get_sale = result.replace(url, "");
+      const data = {
+        sale_id: get_sale,
+        items: selected
+      };
+      axios
+        .post(`https://rpos.pythonanywhere.com/api/v1/salesReturn/`, data, {
+          headers: { Authorization: "token " + token },
+        })
+        .then((res) => res.data)
+        .then((data) => {
+          toast.success("Successfully Returned");
+          console.log(data);
 
-    //     })
-    //     .catch((error) => {
-    //       toast.error("Please try again");
-    //       console.error("Error fetching data:", error);
-    //     });
-    //   play();
-    // } else {
-    //   const data = { sale_id: result };
-    //   axios
-    //     .post(`https://rpos.pythonanywhere.com/api/v1/salesReturn/`, data, {
-    //       headers: { Authorization: "token " + token },
-    //     })
-    //     .then((res) => res.data)
-    //     .then((data) => {
-    //       toast.success("Successfully Returned");
-    //       console.log(data);
-    //     })
-    //     .catch((error) => {
-    //       toast.error("Please try again");
-    //       console.error("Error fetching data:", error);
-    //     });
-    //   play();
-    // }
-
-    console.log(selected)
-
-
+        })
+        .catch((error) => {
+          toast.error("Please try again");
+          console.error("Error fetching data:", error);
+        });
+      play();
+    } else {
+      const data = {
+        sale_id: result,
+        items: selected
+      };
+      axios
+        .post(`https://rpos.pythonanywhere.com/api/v1/salesReturn/`, data, {
+          headers: { Authorization: "token " + token },
+        })
+        .then((res) => res.data)
+        .then((data) => {
+          toast.success("Successfully Returned");
+          console.log(data);
+        })
+        .catch((error) => {
+          toast.error("Please try again");
+          console.error("Error fetching data:", error);
+        });
+      play();
+    }
   }
 
   return (
