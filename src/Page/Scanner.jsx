@@ -60,43 +60,49 @@ const Scanner = () => {
   useEffect(() => {
     const baseUrl = `${window.location.protocol}//${window.location.host}`;
     const url = `${baseUrl}/sales/sales-request/`;
+    console.log(baseUrl)
 
-    if (result.includes(url)) {
-      const get_sale = result.replace(url, "");
-      const id = { sale_id: get_sale };
-      axios
-        .get(`https://rpos.pythonanywhere.com/api/v1/salesReturn/${result}/`, {
-          headers: { Authorization: "token " + token },
-        })
-        .then((res) => res.data)
-        .then((data) => {
-          toast.success("Successfully Returned");
-          console.log(data);
-          setResponseData(data)
-        })
-        .catch((error) => {
-          toast.error("Please try again");
-          console.error("Error fetching data:", error);
-        });
-      play();
-    } else {
-      const id = { sale_id: result };
-      axios
-        .get(`https://rpos.pythonanywhere.com/api/v1/salesReturn/${id}/`, {
-          headers: { Authorization: "token " + token },
-        })
-        .then((res) => res.data)
-        .then((data) => {
-          toast.success("Successfully Returned");
-          console.log(data);
-          setResponseData(data)
-        })
-        .catch((error) => {
-          toast.error("Please try again");
-          console.error("Error fetching data:", error);
-        });
-      play();
+    if (result) {
+      if (result.includes(url)) {
+        const get_sale = result.replace(url, "");
+        console.log("get id: " + get_sale)
+        const id = { sale_id: get_sale };
+        axios
+          .get(`https://rpos.pythonanywhere.com/api/v1/sales/${get_sale}/`, {
+            headers: { Authorization: "token " + token },
+          })
+          .then((res) => res.data)
+          .then((data) => {
+            toast.success("Get Data");
+            console.log(data);
+            setResponseData(data)
+          })
+          .catch((error) => {
+            toast.error("Please try again");
+            console.error("Error fetching data:", error);
+          });
+        play();
+      } else {
+        const id = { sale_id: result };
+        const get_sale = result.replace(url, "");
+        axios
+          .get(`https://rpos.pythonanywhere.com/api/v1/sales/${get_sale}/`, {
+            headers: { Authorization: "token " + token },
+          })
+          .then((res) => res.data)
+          .then((data) => {
+            toast.success("Get Data");
+            console.log(data);
+            setResponseData(data)
+          })
+          .catch((error) => {
+            toast.error("Please try again");
+            console.error("Error fetching data:", error);
+          });
+        play();
+      }
     }
+
   }, [result, location, play, token]);
 
   //selected product
@@ -122,41 +128,45 @@ const Scanner = () => {
     const baseUrl = `${window.location.protocol}//${window.location.host}`;
     const url = `${baseUrl}/sales/sales-request/`;
 
-    if (result.includes(url)) {
-      const get_sale = result.replace(url, "");
-      const data = { sale_id: get_sale };
-      axios
-        .post(`https://rpos.pythonanywhere.com/api/v1/salesReturn/`, data, {
-          headers: { Authorization: "token " + token },
-        })
-        .then((res) => res.data)
-        .then((data) => {
-          toast.success("Successfully Returned");
-          console.log(data);
+    // if (result.includes(url)) {
+    //   const get_sale = result.replace(url, "");
+    //   const data = { sale_id: get_sale };
+    //   axios
+    //     .post(`https://rpos.pythonanywhere.com/api/v1/salesReturn/`, data, {
+    //       headers: { Authorization: "token " + token },
+    //     })
+    //     .then((res) => res.data)
+    //     .then((data) => {
+    //       toast.success("Successfully Returned");
+    //       console.log(data);
 
-        })
-        .catch((error) => {
-          toast.error("Please try again");
-          console.error("Error fetching data:", error);
-        });
-      play();
-    } else {
-      const data = { sale_id: result };
-      axios
-        .post(`https://rpos.pythonanywhere.com/api/v1/salesReturn/`, data, {
-          headers: { Authorization: "token " + token },
-        })
-        .then((res) => res.data)
-        .then((data) => {
-          toast.success("Successfully Returned");
-          console.log(data);
-        })
-        .catch((error) => {
-          toast.error("Please try again");
-          console.error("Error fetching data:", error);
-        });
-      play();
-    }
+    //     })
+    //     .catch((error) => {
+    //       toast.error("Please try again");
+    //       console.error("Error fetching data:", error);
+    //     });
+    //   play();
+    // } else {
+    //   const data = { sale_id: result };
+    //   axios
+    //     .post(`https://rpos.pythonanywhere.com/api/v1/salesReturn/`, data, {
+    //       headers: { Authorization: "token " + token },
+    //     })
+    //     .then((res) => res.data)
+    //     .then((data) => {
+    //       toast.success("Successfully Returned");
+    //       console.log(data);
+    //     })
+    //     .catch((error) => {
+    //       toast.error("Please try again");
+    //       console.error("Error fetching data:", error);
+    //     });
+    //   play();
+    // }
+
+    console.log(responseData.saleitems)
+
+
   }
 
   return (
@@ -191,15 +201,21 @@ const Scanner = () => {
         {/* scanner section end */}
         {/* card section start */}
         <div className="grid grid-cols-3 sm:grid-cols-5 md:flex mt-10 sm:mt-2 gap-2  h-full">
-          {card.map((data) => <div onClick={() => selectedFun(data.id)} key={data.id} className={`w-[100%] overflow-hidden ${selected.find((item => item === data.id)) ? ' shadow-md   bg-white  border-[3px]  border-rose-300' : 'bg-white'}  rounded-lg h-44  `}>
-            <div className=" h-full relative  ">
-              <img src={blank_img} className="w-28 h-28"></img>
-              <div className={` ${selected.find((item => item === data.id)) ? 'activeClass' : ''} absolute top-0 right-0 bg flex justify-center items-center ps-2 pb-2 shadow-sm `}>
-                <FaCheck className="text-white " />
+          {/* products  */}
+          {responseData?.saleitems.map((item, index) => (
+            <div key={index} onClick={() => selectedFun(item?.id)} className={`w-[100%] overflow-hidden ${selected.find((item => item === data.id)) ? ' shadow-md   bg-white  border-[3px]  border-rose-300' : 'bg-white'}  rounded-lg h-44  `}>
+              <div className=" h-full relative  ">
+                <img src={blank_img} className="w-28 h-28"></img>
+                <div className={` ${selected.find((item => item === data.id)) ? 'activeClass' : ''} absolute top-0 right-0 bg flex justify-center items-center ps-2 pb-2 shadow-sm `}>
+                  <FaCheck className="text-white " />
+                </div>
+                <p className="text-center font-bold">{item?.item_name}</p>
               </div>
-              <p className="text-center font-bold">{data?.title}</p>
             </div>
-          </div>)}
+          ))
+
+          }
+
         </div>
         {/* card section end */}
         <div className="flex justify-center my-6">
