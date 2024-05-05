@@ -95,9 +95,9 @@ function InventoryRequest() {
         })
 
         // make new array for excel sheet 
-        const newData = dateSearch.map((record) => {
+        const newData = (dateSearch.length > 0 ? dateSearch : adminData).map((record) => {
             return {
-                Sales_ID: record.sale.id,
+                // Sales_ID: record.sale.id,
                 Customer_Name: record.sale.customer?.name,
                 Customer_Number: record.sale.customer?.phone_number,
                 Customer_Address: record.sale.customer?.address,
@@ -105,6 +105,8 @@ function InventoryRequest() {
                 Return_date: format(record?.return_date, 'yyyy-MM-dd'),
                 Price: record?.sale.total,
                 // Courier_ID: record.sale.customer?.curierImgoice,
+                // 'Courier ID': record.customer?.curierImgoice,
+                'Notes': record.customer?.notes,
             };
         });
         setSheet(newData)

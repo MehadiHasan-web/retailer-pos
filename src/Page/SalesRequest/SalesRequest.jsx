@@ -95,13 +95,14 @@ const SalesRequest = () => {
     // make new array for excel sheet 
     const newData = (dateSearch.length > 0 ? dateSearch : userData).map((record) => {
       return {
-        'Sales ID': record.id,
+        // 'Sales ID': record.id,
         'Customer Name': record.customer?.name,
         'Customer Number': record.customer?.phone_number,
         'Customer Address': record.customer?.address,
         'Date': record?.created_date,
         'Price': record?.total,
-        'Courier ID': record.customer?.curierImgoice,
+        // 'Courier ID': record.customer?.curierImgoice,
+        'Notes': record.customer?.notes,
       };
     });
     setSheet(newData)
