@@ -19,7 +19,9 @@ const Management = () => {
   const [searchText, setSearchText] = useState("");
 
   console.log(open)
-
+  const lastPostIndex = currentPage * postPerPage;
+  const firstPostIndex = lastPostIndex - postPerPage;
+  const currentPosts = filteredData.slice(firstPostIndex, lastPostIndex);
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
@@ -223,7 +225,7 @@ const Management = () => {
                 </tr>
               </thead>
               <tbody>
-                {tableData.map((data, index) => (
+                {currentPosts.map((data, index) => (
                   <tr
                     key={data.id}
                     onClick={() => {setItem(data), setOpen(!open) }}
