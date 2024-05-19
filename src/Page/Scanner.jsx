@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useZxing } from "react-zxing";
 import useSound from "use-sound";
@@ -6,6 +6,7 @@ import bipSound from "../../public/scanner-beep.mp3";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import bottol from '../../public/bottol.png'
+import { AuthContext } from "../Providers/AuthProvider";
 
 const card = [
     {id: 1, title: 'mobile'},
@@ -23,6 +24,7 @@ const Scanner = () => {
   const [play] = useSound(bipSound);
   const location = useLocation();
   const [deleteId, setDeleteId] = useState([])
+  const {baseURL} = useContext(AuthContext)
 
   console.log(deleteId)
 
@@ -64,7 +66,7 @@ const Scanner = () => {
       const get_sale = result.replace(url, "");
       const data = { sale_id: get_sale };
       axios
-        .post(`https://rpos.pythonanywhere.com/api/v1/salesReturn/`, data, {
+        .post(`${baseURL}/salesReturn/`, data, {
           headers: { Authorization: "token " + token },
         })
         .then((res) => res.data)
@@ -80,7 +82,7 @@ const Scanner = () => {
     } else {
       const data = { sale_id: result };
       axios
-        .post(`https://rpos.pythonanywhere.com/api/v1/salesReturn/`, data, {
+        .post(`${baseURL}/salesReturn/`, data, {
           headers: { Authorization: "token " + token },
         })
         .then((res) => res.data)

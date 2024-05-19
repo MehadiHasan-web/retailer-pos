@@ -1,14 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import blankImg from '../../../public/blankImg.jpg'
 // import { axios } from 'axios';
 import axios from 'axios';
 import { ToastContainer, toast } from "react-toastify";
 import { Link } from 'react-router-dom';
+import { AuthContext } from "../../Providers/AuthProvider";
 
 
 const UserInventory = () => {
   const [card, setCard] = useState([])
   const token = localStorage.getItem('token');
+  const {baseURL} = useContext(AuthContext)
 
 
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -34,7 +36,7 @@ const UserInventory = () => {
   useEffect(() => {
 
     axios
-      .get(`https://rpos.pythonanywhere.com/api/v1/inventory/`, {
+      .get(`${baseURL}/inventory/`, {
         headers: { 'Authorization': 'token ' + token }
       })
       .then((res) => res.data)
@@ -65,7 +67,7 @@ const UserInventory = () => {
       mrp : mrp
     }
     console.log(updateData)
-    axios.put(`https://rpos.pythonanywhere.com/api/v1/inventory/${id}/`, updateData, {
+    axios.put(`${baseURL}/inventory/${id}/`, updateData, {
       headers: { 'Authorization': 'token ' + token }
     })
       .then(response => {
@@ -91,7 +93,7 @@ const UserInventory = () => {
       additionalInfo: additionalInfo,
     }
     console.log(categoryData)
-    axios.post(`https://rpos.pythonanywhere.com/api/v1/categories/`, categoryData, {
+    axios.post(`${baseURL}/categories/`, categoryData, {
       headers: { 'Authorization': 'token ' + token }
     })
       .then(response => {

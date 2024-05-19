@@ -10,7 +10,7 @@ import { AuthContext } from '../../Providers/AuthProvider';
 const LogIn = () => {
 
   let [errorMessage, setErrorMessage] = useState(null)
-  const { accountURL, setUser, setLoading } = useContext(AuthContext)
+  const { baseURL, setUser, setLoading } = useContext(AuthContext)
   const navigate = useNavigate();
 
 
@@ -21,7 +21,7 @@ const LogIn = () => {
     const password = form.password.value;
     const formData = { email, password };
     try {
-      const response = await axios.post(`https://rpos.pythonanywhere.com/api/v1/login/`, formData);
+      const response = await axios.post(`${baseURL}/login/`, formData);
 
       if (response.status === 200) {
         setLoading(true)

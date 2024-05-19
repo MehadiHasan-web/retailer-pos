@@ -1,8 +1,9 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { FaTrash } from "react-icons/fa";
+import { AuthContext } from './../Providers/AuthProvider';
 
 function AddInventoryProduct() {
   const [category, setCategory] = useState([]);
@@ -22,6 +23,7 @@ function AddInventoryProduct() {
   });
   const [singleProductCost, setSingleProductCost] = useState(0);
   const [size, setSize] = useState([])
+  const {baseURL} = useContext(AuthContext)
 
   // custom size and add quantity
   function addNameQuantity() {
@@ -51,7 +53,7 @@ function AddInventoryProduct() {
   // get category
   function getCategory() {
     axios
-      .get(`https://rpos.pythonanywhere.com/api/v1/categories/`, {
+      .get(`${baseURL}/categories/`, {
         headers: { Authorization: "token " + token },
       })
       .then((response) => {
@@ -111,7 +113,7 @@ function AddInventoryProduct() {
     console.log(totalSize);
 
     axios
-      .post(`https://rpos.pythonanywhere.com/api/v1/inventory/`, formData, {
+      .post(`${baseURL}/inventory/`, formData, {
         headers: { Authorization: "token " + token },
         "Content-Type": "multipart/form-data",
       })
@@ -155,7 +157,7 @@ function AddInventoryProduct() {
   console.log(totalSize);
   
   function getSizeData() {
-    axios.get(`https://rpos.pythonanywhere.com/api/v1/variant-settings/`, {
+    axios.get(`${baseURL}/variant-settings/`, {
       headers: { 'Authorization': 'token' + token }
     })
       .then(response => {

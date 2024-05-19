@@ -61,7 +61,7 @@ const SalesRequest = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get(`https://rpos.pythonanywhere.com/api/v1/sales/`, {
+      .get(`${baseURL}/sales/`, {
         headers: { 'Authorization': 'token ' + token }
       })
       .then((res) => res.data)
