@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useZxing } from "react-zxing";
 import useSound from "use-sound";
@@ -6,9 +6,8 @@ import bipSound from "../../public/scanner-beep.mp3";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import blank_img from '../../public/bottol.png'
+import { AuthContext } from "../Providers/AuthProvider";
 import { FaCheck } from "react-icons/fa";
-
-
 
 
 const Scanner = () => {
@@ -18,6 +17,7 @@ const Scanner = () => {
   const location = useLocation();
   const [selected, setSelected] = useState([])
   const [responseData, setResponseData] = useState();
+  const { baseURL } = useContext(AuthContext)
 
 
   // barcode
@@ -51,9 +51,9 @@ const Scanner = () => {
 
   //get request from server
   useEffect(() => {
-    const baseUrl = `${window.location.protocol}//${window.location.host}`;
-    const url = `${baseUrl}/sales/sales-request/`;
-    console.log(baseUrl)
+    const getBaseUrl = `${window.location.protocol}//${window.location.host}`;
+    const url = `${getBaseUrl}/sales/sales-request/`;
+    console.log(getBaseUrl)
 
     if (result) {
       if (result.includes(url)) {
@@ -61,7 +61,7 @@ const Scanner = () => {
         console.log("get id: " + get_sale)
         const id = { sale_id: get_sale };
         axios
-          .get(`https://rpos.pythonanywhere.com/api/v1/sales/${get_sale}/`, {
+          .get(`${baseURL}/sales/${get_sale}/`, {
             headers: { Authorization: "token " + token },
           })
           .then((res) => res.data)
@@ -79,7 +79,7 @@ const Scanner = () => {
         const id = { sale_id: result };
         const get_sale = result.replace(url, "");
         axios
-          .get(`https://rpos.pythonanywhere.com/api/v1/sales/${get_sale}/`, {
+          .get(`${baseURL}/sales/${get_sale}/`, {
             headers: { Authorization: "token " + token },
           })
           .then((res) => res.data)
@@ -115,12 +115,13 @@ const Scanner = () => {
       }
     }
   }
-  console.log(selected);
+
+
 
   // return back 
   function returnBack() {
-    const baseUrl = `${window.location.protocol}//${window.location.host}`;
-    const url = `${baseUrl}/sales/sales-request/`;
+    const makeBaseUrl = `${window.location.protocol}//${window.location.host}`;
+    const url = `${makeBaseUrl}/sales/sales-request/`;
 
     if (result.includes(url)) {
       const get_sale = result.replace(url, "");
@@ -129,7 +130,7 @@ const Scanner = () => {
         items: selected
       };
       axios
-        .post(`https://rpos.pythonanywhere.com/api/v1/salesReturn/`, data, {
+        .post(`${baseURL}/salesReturn/`, data, {
           headers: { Authorization: "token " + token },
         })
         .then((res) => res.data)
@@ -149,7 +150,7 @@ const Scanner = () => {
         items: selected
       };
       axios
-        .post(`https://rpos.pythonanywhere.com/api/v1/salesReturn/`, data, {
+        .post(`${baseURL}/salesReturn/`, data, {
           headers: { Authorization: "token " + token },
         })
         .then((res) => res.data)

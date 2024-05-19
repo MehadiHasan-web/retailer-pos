@@ -1,9 +1,13 @@
 import  axios  from 'axios';
+import { useContext } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AuthContext } from '../../Providers/AuthProvider';
 
 
 const UserCreate = () => {
+
+  const {baseURL} = useContext(AuthContext)
 
   const userSettingsData = (event) => {
     event.preventDefault();
@@ -15,7 +19,7 @@ const UserCreate = () => {
     const userDetails = {email, username, user_type, password};
     console.log(userDetails)
 
-    axios.post('https://rpos.pythonanywhere.com/api/v1/register/', userDetails)
+    axios.post(`${baseURL}/register/`, userDetails)
     .then(function (response) {
       console.log(response);
       toast("Wow, User Created")

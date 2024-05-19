@@ -15,7 +15,7 @@ const Invoice = () => {
 
   useEffect(() => {
     axios
-      .get(`https://rpos.pythonanywhere.com/api/v1/sales/${id}/`)
+      .get(`${baseURL}/sales/${id}/`)
       .then((res) => res.data)
       .then((data) => {
         console.log(data);

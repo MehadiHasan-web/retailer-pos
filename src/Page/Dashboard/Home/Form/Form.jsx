@@ -26,7 +26,7 @@ const Form = ({ wishlist, clearData }) => {
   // send data to server
   async function sendData(finalArray) {
     try {
-      const response = await axios.post(`https://rpos.pythonanywhere.com/api/v1/sales/`, finalArray, {
+      const response = await axios.post(`${baseURL}/sales/`, finalArray, {
         headers: { 'Authorization': 'token ' + token }
       });
       toast.success("Successfully Sold");

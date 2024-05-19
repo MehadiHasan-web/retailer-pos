@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import ManComCard from '../Components/ManComCard';
 import { ToastContainer, toast } from "react-toastify";
 import { FaChevronRight } from "react-icons/fa6";
+import { AuthContext } from "../Providers/AuthProvider";
 
 const Management = () => {
   const [position, setPosition] = useState({ x: 0 });
@@ -17,6 +18,7 @@ const Management = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage, setPostPerPage] = useState(20);
   const [searchText, setSearchText] = useState("");
+  const {baseURL} = useContext(AuthContext)
 
   console.log(open)
   const lastPostIndex = currentPage * postPerPage;
@@ -25,7 +27,7 @@ const Management = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get(`https://rpos.pythonanywhere.com/api/v1/inventory/`, {
+      .get(`${baseURL}/inventory/`, {
         headers: { Authorization: "token " + token },
       })
       .then((res) => res.data)
@@ -129,7 +131,7 @@ const Management = () => {
       additionalInfo: additionalInfo,
     }
     console.log(categoryData)
-    axios.post(`https://rpos.pythonanywhere.com/api/v1/categories/`, categoryData, {
+    axios.post(`${baseURL}/categories/`, categoryData, {
       headers: { 'Authorization': 'token ' + token }
     })
       .then(response => {

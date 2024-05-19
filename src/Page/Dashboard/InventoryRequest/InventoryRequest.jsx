@@ -48,7 +48,7 @@ function InventoryRequest() {
     useEffect(() => {
         const token = localStorage.getItem('token');
 
-        axios.get(`https://rpos.pythonanywhere.com/api/v1/salesReturn/`, {
+        axios.get(`${baseURL}/salesReturn/`, {
             headers: { 'Authorization': 'token ' + token }
         })
             .then((res) => res.data)

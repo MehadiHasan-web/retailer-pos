@@ -1,6 +1,6 @@
 
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { FaTrash } from "react-icons/fa";
 import { LuArrowLeft } from "react-icons/lu";
 import { Link } from "react-router-dom";
@@ -8,19 +8,21 @@ import { ToastContainer, toast } from "react-toastify";
 import { VscCloseAll } from "react-icons/vsc";
 import { TfiSave } from "react-icons/tfi";
 import Swal from 'sweetalert2'
+import { AuthContext } from "../../Providers/AuthProvider";
 
 
 const Settings = () => {
 
   const token = localStorage.getItem("token");
   const [size, setSize] = useState([])
+  const {baseURL} = useContext(AuthContext)
 
 
   const passChgFun = (event) => {
     event.preventDefault();
     const form = event.target;
     const password = { password: form.password.value }
-    axios.put(`https://rpos.pythonanywhere.com/api/v1/change-password/`, password,
+    axios.put(`${baseURL}/change-password/`, password,
       {
         headers: { 'Authorization': 'token ' + token }
       })
@@ -162,7 +164,7 @@ const Settings = () => {
 
     if (transformedData) {
       // send backend
-      axios.post(`https://rpos.pythonanywhere.com/api/v1/variant-settings/`, transformedData, {
+      axios.post(`${baseURL}/variant-settings/`, transformedData, {
         headers: { 'Authorization': 'token ' + token }
       })
         .then(response => {
@@ -180,7 +182,7 @@ const Settings = () => {
 
   // get size data from backend 
   function getSizeData() {
-    axios.get(`https://rpos.pythonanywhere.com/api/v1/variant-settings/`, {
+    axios.get(`${baseURL}/variant-settings/`, {
       headers: { 'Authorization': 'token' + token }
     })
       .then(response => {
