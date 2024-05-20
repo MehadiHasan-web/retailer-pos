@@ -35,7 +35,8 @@ export const AuthProvider = ({ children }) => {
         navigate('/login');
         setLoading(false)
     }
-    const baseURL = "https://rpos.pythonanywhere.com/api/v1"
+    // const baseURL = "https://rpos.pythonanywhere.com/api/v1"
+    const baseURL = "https://demo-rpos.xcode.com.bd/api/v1"
     const accountURL = "https://inv.xcode.com.bd/api/v1/account"
     const authInfo = {
         user,
