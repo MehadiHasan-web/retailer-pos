@@ -50,7 +50,7 @@ const DesktopSidebar = ({ open, setOpen }) => {
             <li>
               <FaPlusSquare className="text-green-500"></FaPlusSquare>
             </li>
-            <li className="lg:text-xl font-semibold text-slate-200">Ara Creation</li>
+            <li className="lg:text-xl font-semibold text-slate-200">Demo</li>
           </Link>
         }
       </ul>
@@ -167,7 +167,7 @@ const DesktopSidebar = ({ open, setOpen }) => {
                 >
                 <IoPersonCircleSharp className="text-green-500"></IoPersonCircleSharp>
                 <span className=" font-semibold text-slate-200">
-                  Management2
+                  Management
                 </span>
               </Link>
             }

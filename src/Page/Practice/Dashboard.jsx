@@ -10,10 +10,10 @@ const Dashboard = () => {
 
   // get Dashboard data 
   const [data, setData] = useState([])
-  const { accountURL } = useContext(AuthContext)
+  const { baseURL, accountURL } = useContext(AuthContext)
   const token = localStorage.getItem('token');
   useEffect(() => {
-    axios.get(`https://rpos.pythonanywhere.com/api/v1/dashboard/`, {
+    axios.get(`${baseURL}/dashboard/`, {
       headers: { 'Authorization': 'token ' + token }
     })
       .then((res) => {
@@ -33,7 +33,7 @@ const Dashboard = () => {
           <MemberCard data={data} ></MemberCard>
         </div>
       </div>
-     
+
 
     </div>
   );
