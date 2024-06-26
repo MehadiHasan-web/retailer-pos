@@ -167,7 +167,7 @@ const DesktopSidebar = ({ open, setOpen }) => {
                 >
                 <IoPersonCircleSharp className="text-green-500"></IoPersonCircleSharp>
                 <span className=" font-semibold text-slate-200">
-                  Management2
+                  Management
                 </span>
               </Link>
             }

@@ -3,8 +3,9 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useState,useEffect } from "react";
+import { useState,useEffect, useContext } from "react";
 import { FaTrash } from "react-icons/fa";
+import { AuthContext } from "../Providers/AuthProvider";
 
 /* eslint-disable react/prop-types */
 const ManComCard = ({ item }) => {
@@ -15,6 +16,7 @@ const ManComCard = ({ item }) => {
   const [totalSize, setTotalSize] = useState();
   const token = localStorage.getItem("token");
   const [size, setSize] = useState([])
+  const {baseURL} = useContext(AuthContext)
 
   const addStockData = (event) => {
     event.preventDefault();
@@ -37,7 +39,7 @@ const ManComCard = ({ item }) => {
     console.log(updateData);
     axios
       .put(
-        `https://rpos.pythonanywhere.com/api/v1/inventory/${id}/`,
+        `${baseURL}/${id}/`,
         updateData,
         {
           headers: { Authorization: "token " + token },
@@ -85,7 +87,7 @@ const ManComCard = ({ item }) => {
         if (result.isConfirmed) {
           axios
             .delete(
-              `https://rpos.pythonanywhere.com/api/v1/inventory/${item?.id}/`,
+              `${baseURL}/inventory/${item?.id}/`,
               {
                 headers: { Authorization: "token " + token },
               }

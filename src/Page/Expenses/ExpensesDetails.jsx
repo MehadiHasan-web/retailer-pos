@@ -1,18 +1,20 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {  useNavigate, useParams } from "react-router-dom";
 import { IoIosArrowRoundBack } from "react-icons/io";
+import { AuthContext } from "../../Providers/AuthProvider";
 
 const ExpensesDetails = () => {
   const [expensesDetails, setExpensesDetails] = useState([]);
   const { id } = useParams();
   const token = localStorage.getItem("token");
+  const {baseURL} = useContext(AuthContext)
   console.log(id);
   const navigate = useNavigate();
   // get Expenses data
   useEffect(() => {
     axios
-      .get(`https://rpos.pythonanywhere.com/api/v1/expenses/`, {
+      .get(`${baseURL}/expenses/`, {
         headers: { Authorization: "token " + token },
       })
       .then((res) => res.data)

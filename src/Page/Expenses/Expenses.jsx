@@ -40,7 +40,7 @@ const Expenses = () => {
   useEffect(() => {
     const user_id = localStorage.getItem("user_id");
     axios
-      .get(`https://rpos.pythonanywhere.com/api/v1/expenses/`, {
+      .get(`${baseURL}/expenses/`, {
         headers: { 'Authorization': 'token ' + token }
       })
       .then((res) => res.data)
@@ -51,7 +51,7 @@ const Expenses = () => {
 
   // category get 
   useEffect(() => {
-    axios.get(`https://rpos.pythonanywhere.com/api/v1/expense-categories/`, {
+    axios.get(`${baseURL}/expense-categories/`, {
       headers: { 'Authorization': 'token ' + token }
     })
       .then(response => {
@@ -76,7 +76,7 @@ const Expenses = () => {
       additionalInfo: additionalInfo,
     }
     console.log(categoryData)
-    axios.post(`https://rpos.pythonanywhere.com/api/v1/expense-categories/`, categoryData, {
+    axios.post(`${baseURL}/expense-categories/`, categoryData, {
       headers: { 'Authorization': 'token ' + token }
     })
       .then(response => {
@@ -104,7 +104,7 @@ const Expenses = () => {
       amount: parseInt(price),
       date: new Date().toISOString().split('T')[0]
     }
-    axios.post(`https://rpos.pythonanywhere.com/api/v1/expenses/`, expensesData, {
+    axios.post(`${baseURL}/expenses/`, expensesData, {
       headers: { 'Authorization': 'token ' + token }
     })
       .then(response => {

@@ -4,7 +4,7 @@ const Title = ({ pageName }) => {
   return (
     <>
       <Helmet>
-        <title>Xcode | {pageName}</title>
+        <title>Demo | {pageName}</title>
       </Helmet>
     </>
   );

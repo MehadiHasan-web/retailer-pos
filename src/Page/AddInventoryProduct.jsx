@@ -1,8 +1,9 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { FaTrash } from "react-icons/fa";
+import { AuthContext } from './../Providers/AuthProvider';
 
 function AddInventoryProduct() {
   const [category, setCategory] = useState([]);
@@ -21,7 +22,8 @@ function AddInventoryProduct() {
     otherCost: 0,
   });
   const [singleProductCost, setSingleProductCost] = useState(0);
-  const [size, setSize] = useState([]);
+  const [size, setSize] = useState([])
+  const { baseURL } = useContext(AuthContext)
 
   // custom size and add quantity
   function addNameQuantity() {
@@ -51,7 +53,7 @@ function AddInventoryProduct() {
   // get category
   function getCategory() {
     axios
-      .get(`https://rpos.pythonanywhere.com/api/v1/categories/`, {
+      .get(`${baseURL}/categories/`, {
         headers: { Authorization: "token " + token },
       })
       .then((response) => {
@@ -113,7 +115,7 @@ function AddInventoryProduct() {
     console.log(totalSize);
 
     axios
-      .post(`https://rpos.pythonanywhere.com/api/v1/inventory/`, formData, {
+      .post(`${baseURL}/inventory/`, formData, {
         headers: { Authorization: "token " + token },
         "Content-Type": "multipart/form-data",
       })
@@ -157,12 +159,11 @@ function AddInventoryProduct() {
   console.log(totalSize);
 
   function getSizeData() {
-    axios
-      .get(`https://rpos.pythonanywhere.com/api/v1/variant-settings/`, {
-        headers: { Authorization: "token" + token },
-      })
-      .then((response) => {
-        console.log("Response:", response.data);
+    axios.get(`${baseURL}/variant-settings/`, {
+      headers: { 'Authorization': 'token' + token }
+    })
+      .then(response => {
+        console.log('Response:', response.data);
         setSize(response.data);
         console.log(response.data);
       })
@@ -316,15 +317,13 @@ function AddInventoryProduct() {
 
             {/* Product Size & Quantity */}
             <div
-              className={`w-full md:mt-8 md:mb-5 border-[1px] ${
-                toggleBtn === true ? "border-green-400" : "border-gray-200"
-              }  rounded-md p-2`}
+              className={`w-full md:mt-8 md:mb-5 border-[1px] ${toggleBtn === true ? "border-green-400" : "border-gray-200"
+                }  rounded-md p-2`}
             >
               <div className="flex justify-between items-center w-full my-2">
                 <p
-                  className={`${
-                    toggleBtn === true ? "text-black-500" : "text-slate-400"
-                  }`}
+                  className={`${toggleBtn === true ? "text-black-500" : "text-slate-400"
+                    }`}
                 >
                   Product Size & Quantity
                 </p>
@@ -337,17 +336,15 @@ function AddInventoryProduct() {
               {filterSize.map((item) => (
                 <div
                   key={item.id}
-                  className={`w-full md:mt-5 md:mb-5 border-[1px] ${
-                    customBtn === true ? "border-green-400" : "border-gray-200"
-                  } rounded-md p-2 ${toggleBtn === true ? "block" : "hidden"}`}
+                  className={`w-full md:mt-5 md:mb-5 border-[1px] ${customBtn === true ? "border-green-400" : "border-gray-200"
+                    } rounded-md p-2 ${toggleBtn === true ? "block" : "hidden"}`}
                 >
                   <div className="flex justify-between items-center w-full my-2 ">
                     <p
-                      className={`text-sm ${
-                        customBtn[0] === item.id && customBtn[1] === true
-                          ? "text-black-500"
-                          : "text-slate-400"
-                      }`}
+                      className={`text-sm ${customBtn[0] === item.id && customBtn[1] === true
+                        ? "text-black-500"
+                        : "text-slate-400"
+                        }`}
                     >
                       {item.title}
                     </p>
@@ -358,11 +355,10 @@ function AddInventoryProduct() {
                     />
                   </div>
                   <div
-                    className={`w-full ${
-                      customBtn[0] === item.id && customBtn[1] === true
-                        ? "block"
-                        : "hidden"
-                    }`}
+                    className={`w-full ${customBtn[0] === item.id && customBtn[1] === true
+                      ? "block"
+                      : "hidden"
+                      }`}
                   >
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 w-full">
                       {item?.sizes.map((sizeItem) => (
@@ -391,9 +387,8 @@ function AddInventoryProduct() {
                 </div>
               ))}
               <div
-                className={`grid grid-cols-1 md:grid-cols-3 gap-2 w-full ${
-                  toggleBtn === true ? "block" : "hidden"
-                }`}
+                className={`grid grid-cols-1 md:grid-cols-3 gap-2 w-full ${toggleBtn === true ? "block" : "hidden"
+                  }`}
               >
                 <div className="form-control w-full">
                   <label htmlFor="sizeName">Size Name</label>

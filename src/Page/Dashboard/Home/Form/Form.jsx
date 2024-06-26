@@ -26,7 +26,7 @@ const Form = ({ wishlist, clearData }) => {
   // send data to server
   async function sendData(finalArray) {
     try {
-      const response = await axios.post(`https://rpos.pythonanywhere.com/api/v1/sales/`, finalArray, {
+      const response = await axios.post(`${baseURL}/sales/`, finalArray, {
         headers: { 'Authorization': 'token ' + token }
       });
       toast.success("Successfully Sold");
@@ -44,9 +44,9 @@ const Form = ({ wishlist, clearData }) => {
     const name = form.name.value;
     const phone_number = form.number.value;
     const address = form.information.value;
-    const notes = form.notes.value;
+    const note = form.notes.value;
     const curierImgoice = form.curierImgoice.value;
-    const userInfo = { name, phone_number, address, curierImgoice, notes };
+    const userInfo = { name, phone_number, address, note };
 
 
     // const vat = parseInt(calculateTotalPrice) % parseInt(form.vat.value);
@@ -60,9 +60,7 @@ const Form = ({ wishlist, clearData }) => {
 
     // const finalArray = { customer: userInfo, saleitems: products, vat_percentage: parseInt(vat), tax_percentage: parseInt(tax), discount_percentage: parseInt(discount), delivery_cost: parseInt(deliveryCost), total: parseInt(total), subtotal: parseInt(0) }
     const finalArray = {
-      customer: userInfo, saleitems: products, discount_percentage: parseInt(discount), delivery_cost: parseInt(
-
-      ), total: parseInt(total), subtotal: parseInt(0)
+      customer: userInfo, saleitems: products, discount_percentage: parseInt(discount), delivery_cost: parseInt(deliveryCost), total: parseInt(total), subtotal: parseInt(0)
     }
 
     if (wishlist.length > 0) {

@@ -65,7 +65,7 @@ const Home = () => {
   //get all categories
   const getAllCategories = useCallback(() => {
     axios
-      .get(`https://rpos.pythonanywhere.com/api/v1/categories/`, {
+      .get(`${baseURL}/categories/`, {
         headers: { 'Authorization': 'token ' + token }
       })
       .then((response) => {
@@ -84,7 +84,7 @@ const Home = () => {
   //get all Products
   useEffect(() => {
     axios
-      .get(`https://rpos.pythonanywhere.com/api/v1/inventory/`, {
+      .get(`${baseURL}/inventory/`, {
         headers: { 'Authorization': 'token ' + token }
       })
       .then((response) => {

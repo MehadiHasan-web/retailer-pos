@@ -9,13 +9,13 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [searchData, setSearchData] = useState('');
     const [loading, setLoading] = useState(true)
-    const [lang, setLang]=useState(true);
+    const [lang, setLang] = useState(true);
 
 
-    const changeLanguage = () =>{
-        if (lang){
+    const changeLanguage = () => {
+        if (lang) {
             setLang(false)
-        }else(
+        } else (
             setLang(true)
         )
     }
@@ -35,7 +35,8 @@ export const AuthProvider = ({ children }) => {
         navigate('/login');
         setLoading(false)
     }
-    const baseURL = "https://inv.xcode.com.bd/api/v1/inventory"
+    const baseURL = "https://rpos.pythonanywhere.com/api/v1"
+    // const baseURL = "https://demo-rpos.xcode.com.bd/api/v1"
     const accountURL = "https://inv.xcode.com.bd/api/v1/account"
     const authInfo = {
         user,
