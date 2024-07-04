@@ -98,24 +98,49 @@ const Scanner = () => {
 
   }, [result, location, play, token]);
 
-  //selected product
-  function selectedFun(id) {
-    const exists = selected.includes(id);
-    console.log(exists)
+  // //selected product
+  // function selectedFun(id) {
+  //   const exists = selected.includes(id);
+  //   console.log(exists)
+
+  //   if (exists) {
+  //     const index = selected.indexOf(id);
+  //     const updatedSelected = [...selected];
+  //     updatedSelected.splice(index, 1);
+  //     setSelected(updatedSelected);
+  //   } else {
+  //     const previousId = selected.filter((data) => data.id !== id);
+  //     if (!previousId.find(data => data.id === id)) {
+  //       setSelected([...previousId, id]);
+  //     }
+  //   }
+  // }
+
+  const handleSelect = (id, quantity) => {
+    selectedFun(id, quantity);
+  };
+
+  const selectedFun = (id, quantity) => {
+    const exists = selected.some(item => item.id === id);
+    console.log(exists);
 
     if (exists) {
-      const index = selected.indexOf(id);
-      const updatedSelected = [...selected];
-      updatedSelected.splice(index, 1);
+      const updatedSelected = selected.filter(item => item.id !== id);
       setSelected(updatedSelected);
     } else {
-      const previousId = selected.filter((data) => data.id !== id);
-      if (!previousId.find(data => data.id === id)) {
-        setSelected([...previousId, id]);
-      }
+      setSelected([...selected, { id, quantity }]);
     }
-  }
+  };
+  // update quantity 
+  const handleQuantityChange = (id, newQuantity) => {
+    const updatedSelected = selected.map(item =>
+      item.id === id ? { ...item, quantity: newQuantity } : item
+    );
+    setSelected(updatedSelected);
+  };
 
+
+  console.log(selected)
 
 
   // return back 
@@ -189,25 +214,32 @@ const Scanner = () => {
           Back to Home Page
         </Link>
         {/* scanner section end */}
+        {/* input number  */}
+
+        {/* onClick={() => selectedFun(item?.id)} */}
         {/* card section start */}
         <div className="grid grid-cols-3 sm:grid-cols-5 md:flex mt-10 sm:mt-2 gap-2   ">
           {/* products  */}
           {responseData?.saleitems?.map((item, index) => (
-            <div key={index} onClick={() => selectedFun(item?.id)} className={`w-[100%] overflow-hidden ${selected.find((product => product === item.id)) ? ' shadow-md   bg-white  border-[3px]  border-rose-300' : 'bg-white'}  rounded-lg h-44  `}>
+            <div key={index} onClick={() => handleSelect(item.id, item?.quantity)} className={`w-[100%] overflow-hidden ${selected.find((product => product === item.id)) ? ' shadow-md   bg-white  border-[3px]  border-rose-300' : 'bg-white'}  rounded-lg h-44  `}>
               <div className=" h-full relative  ">
                 <img src={blank_img} className="w-28 h-28"></img>
-                <div className={` ${selected.find((product => product === item.id)) ? 'activeClass' : ''} absolute top-0 right-0 bg flex justify-center items-center ps-2 pb-2 shadow-sm `}>
+                <div className={` ${selected.find(product => product.id === item.id) ? 'activeClass' : ''} absolute top-0 right-0 bg flex justify-center items-center ps-2 pb-2 shadow-sm `}>
                   <FaCheck className="text-white " />
                 </div>
                 <p className="text-center font-bold">{item?.item_name}</p>
+                <span className="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-md font-medium text-green-700 ring-1 ring-inset ring-green-600/20  ms-1 mt-1 absolute top-0 left-0"> {item?.quantity} </span>
+                <input type="number" placeholder="Type here" className={`input input-bordered input-sm   max-w-xs px-1 w-28 mt-1 mx-1 ${item?.quantity <= 1 ? 'hidden' : ''} `} min={1} onChange={(e) => handleQuantityChange(item.id, parseInt(e.target.value, 10))} />
               </div>
             </div>
           ))
           }
+
+
         </div>
         {/* card section end */}
         <div className="flex justify-center my-6">
-          <button onClick={returnBack} className="btn btn-active btn-neutral">Return</button>
+          <button onClick={returnBack} className="btn btn-active btn-neutral ">Return</button>
         </div>
       </div>
 
