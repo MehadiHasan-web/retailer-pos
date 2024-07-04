@@ -56,10 +56,10 @@ const LogIn = () => {
       <div className='container mx-auto w-full h-screen'>
         <div className='flex justify-center items-center w-full h-full'>
           <div className='bg-slate-100 rounded-md p-5 lg:w-[450px] lg:h-80'>
-            <h1 className='text-center lg:text-3xl mb-4 font-bold'>Demo</h1>
+            <h1 className='text-center lg:text-3xl mb-4 font-bold'>Ignite Fashion</h1>
             <form onSubmit={submitData} className=' space-y-5'>
-              <input type='text' className='w-full border-[1px] border-blue-600 p-3 rounded-md' placeholder='please enter your email' name="email" defaultValue={"kminchelle"}></input>
-              <input type='password' className='w-full border-[1px] border-blue-600 p-3 rounded-md' placeholder='please enter your password' name="password" defaultValue={"0lelplR"}></input>
+              <input type='text' className='w-full border-[1px] border-blue-600 p-3 rounded-md' placeholder='please enter your email' name="email"></input>
+              <input type='password' className='w-full border-[1px] border-blue-600 p-3 rounded-md' placeholder='please enter your password' name="password" ></input>
               <input type='submit' value="Login" className='btn w-full bg-gray-500 p-1 text-white text-lg hover:text-black'></input>
               <p className='my-4 text-red-600 text-center'>{errorMessage}</p>
             </form>

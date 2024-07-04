@@ -549,7 +549,7 @@ const Home = () => {
               </div>
               <p className="text-bold font-medium my-2">
                 Detail Prescription
-                <span className="text-green-500">{wishlist.length}</span>
+                <span className="text-green-500 ms-2">{wishlist.length}</span>
               </p>
               <div className="bg-slate-100 rounded-lg p-4 w-full h-32 overflow-auto touch-auto">
                 <ul className=" max-w-none h-auto">
@@ -563,7 +563,7 @@ const Home = () => {
                     >
                       <h5>{item.name}</h5>
                       <span className="text-slate-500 text-sm">
-                        ${item.price}
+                        TK {item.price}
                       </span>
                     </li>
                   ))}
@@ -602,7 +602,7 @@ const Home = () => {
                           </p>
                           <p className="flex justify-between items-center mt-7">
                             <h4 className="font-bold">
-                              <span className="text-green-500">$</span>
+                              <span className="text-green-500">Tk </span>
                               {item.price * item.quantity}
                             </h4>
                             {item?.size && <span  > Size: <strong>{item.size}</strong></span>}
