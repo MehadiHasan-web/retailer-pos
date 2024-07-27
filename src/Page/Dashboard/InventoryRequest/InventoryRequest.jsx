@@ -17,7 +17,9 @@ function InventoryRequest() {
     const [endDate, setEndDate] = useState(new Date());
     const [adminData, setAdminData] = useState([]);
     const { baseURL } = useContext(AuthContext)
+
     const [searchText, setSearchText] = useState("");
+    
     const [filteredData, setFilteredData] = useState([]);
 
     const [currentPage, setCurrentPage] = useState(1);

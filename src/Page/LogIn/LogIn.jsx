@@ -22,7 +22,6 @@ const LogIn = () => {
     const formData = { email, password };
     try {
       const response = await axios.post(`${baseURL}/login/`, formData);
-
       if (response.status === 200) {
         setLoading(true)
         setUser(response.data)
@@ -35,7 +34,6 @@ const LogIn = () => {
         navigate('/dashboard')
       }
     } catch (error) {
-
       if (error.response.status === 400) {
         setErrorMessage(error.response.data.non_field_errors[0])
       } else if (error.response.status === 404) {

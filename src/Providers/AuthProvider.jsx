@@ -2,16 +2,12 @@ import { createContext, useState } from "react"
 
 
 export const AuthContext = createContext(null);
-
 // eslint-disable-next-line react/prop-types
 export const AuthProvider = ({ children }) => {
-
     const [user, setUser] = useState(null)
     const [searchData, setSearchData] = useState('');
     const [loading, setLoading] = useState(true)
     const [lang, setLang]=useState(true);
-
-
     const changeLanguage = () =>{
         if (lang){
             setLang(false)
@@ -19,11 +15,9 @@ export const AuthProvider = ({ children }) => {
             setLang(true)
         )
     }
-
     const searchFun = (value) => {
         setSearchData(value)
     }
-
     const logOut = () => {
         localStorage.removeItem('token')
         localStorage.removeItem('is_admin')
@@ -49,7 +43,6 @@ export const AuthProvider = ({ children }) => {
         lang,
         loading,
         setLoading
-
     }
     return (
         <AuthContext.Provider value={authInfo}>
